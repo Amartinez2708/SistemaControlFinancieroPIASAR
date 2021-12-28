@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ViewFrame.cshtml";
+}
+@Html.Hidden("hdnIdUsuario")
+<div class="row">
+    <div class="col-sm-12 col-lg-12">
+        <div class="card border-danger card-hover">
+            <div class="card-block text-dark">
+                <div class="sub-title"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Exportar</div>
+                <div class="form-group">
+                    <button class="btn btn-success" onclick="ExportarExcel()"><i class="fa fa-file-excel-o"></i>Excel</button>
+                    <button class="btn btn-info" onclick="ExportarFormatoBID()"><i class="fa fa-file-excel-o"></i>Formato BID</button>
+                    <a class="btn btn-danger" href="@Url.Action("rptMensualPDF", "ReporteMensualProgreso", new { IdUsuario =ViewBag.IdUsuario})"><i class="fa fa-file-pdf-o"></i>&nbsp;PDF</a>
+                </div>
+                <div id="Export">
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="card border-primary card-hover">
+            <div class="card-block text-dark p-b-0">
+                <div class="sub-title">
+                    <i class="fa fa-book" aria-hidden="true"></i>&nbsp;Componente I: Proyectos de Agua Potable y Saneamiento 
+                    <select name="cboAnioC1" id="cboAnioC1">
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                    </select>
+                    <div class="float-right">Fecha Ultima Actualización:&nbsp;<span id="spnFecActComponente1" class="f-w-400">20/10/2021</span></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow-x:auto;">
+                        <table id="tblComponente1" class="table table-bordered table-hover" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Nro.</th>
+                                    <th style="text-align: center;">Producto</th>
+                                    <th style="text-align: center;">Indicador</th>
+                                    <th style="text-align: center;">P</th>
+                                    <th style="text-align: center;">P(A)</th>
+                                    <th style="text-align: center;">A</th>
+                                    <th colspan="2" style="text-align: center;">Progreso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row0">
+                                    <td style="text-align: center;" colspan="8">
+                                        Sin Información
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center p-t-0">
+                <button class="btn btn-primary pull-right" onclick="GuardarComponente(1)"><i class="fa fa-save"></i>Guardar</button>
+            </div>
+        </div>
+        <div class="card border-info card-hover">
+            <div class="card-block text-dark p-b-0">
+                <div class="sub-title"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Componente II: Gestión de la Sostenibilidad de los Servicios y Fortalecimiento de las Entidades del Sector
+                    <select name="cboAnioC2" id="cboAnioC2">
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                    </select>
+                    <div class="float-right">Fecha Ultima Actualización:&nbsp;<span id="spnFecActComponente2" class="f-w-400">20/10/2021</span></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow-x:auto;">
+                        <table id="tblComponente2" class="table table-bordered table-hover" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Nro.</th>
+                                    <th style="text-align: center;">Producto</th>
+                                    <th style="text-align: center;">Indicador</th>
+                                    <th style="text-align: center;">P</th>
+                                    <th style="text-align: center;">P(A)</th>
+                                    <th style="text-align: center;">A</th>
+                                    <th colspan="2" style="text-align: center;">Progreso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row0">
+                                    <td style="text-align: center;" colspan="8">
+                                        Sin Información
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center p-t-0">
+                <button class="btn btn-primary pull-right" onclick="GuardarComponente(2)"><i class="fa fa-save"></i>Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsReporteMensualProgreso.js"></script>
+}

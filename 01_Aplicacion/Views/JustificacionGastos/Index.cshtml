@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+        <div class="breadcrumb-header">
+            <h4 style="color: #bf0909;">
+                <i class="fa fa-line-chart"></i> &nbsp; Justificación de Gastos
+            </h4>
+            <span></span>
+        </div>
+        <div class="page-header-breadcrumb">
+            <span id="SpanFechaInicio"></span>
+        </div>
+    </div>
+</div>
+<script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+</script>
+<div class="col-sm-12 col-lg-12">
+    <div class="col-sm-12 col-lg-8" style="margin:auto;">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <div class="row col-sm-12 col-xl-12 text-center">
+                    <h4 style="margin:auto">
+                        <i class="fa fa-line-chart"></i> Estado Situacional de la Justificación de Gastos (30.11.2021)
+                    </h4>
+                </div>
+            </div>
+            <div class="card-block text-dark">
+                <div class="form-group">
+                    <button class="btn btn-success" onclick="ExportarExcel('dtJustificacion', 'rpt_EstadoSituacionalJustificacionGastos_')"><i class="fa fa-file-excel-o"></i>Exportar</button>
+                </div>
+                <div class="form-group">
+                    <table id="dtJustificacion" class="table table-bordered table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,192,0);font-size:20px" colspan="3"><strong>DESEMBOLSOS</strong></th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(244,176,132);font-size:18px">Descripción</th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(244,176,132);font-size:18px">(En US $)</th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(244,176,132);font-size:18px">%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="font-size:16px">
+                                <td><strong>A)</strong> Saldo acumulado de desembolsos al 14.07.2021 (T/C 3.758)</td>
+                                <td style="text-align:center;">11,277,279.48</td>
+                                <td style="text-align:center;">100.00 %</td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td><strong>B)</strong> Segundo Desembolso del 02.08.2021 (T/C 4.061)</td>
+                                <td style="text-align:center;">13,073,277.00</td>
+                                <td style="text-align:center;">100.00 %</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:18px;background-color:rgb(244,176,132)"><strong>Total por Justificar</strong></td>
+                                <td style="text-align:center;font-size:18px;background-color:rgb(244,176,132)"><strong>24,350,556.48</strong></td>
+                                <td style="text-align:center;font-size:18px;background-color:rgb(244,176,132)"><strong>100.00 %</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:20px;background-color:rgb(146,208,80);text-align:center" colspan="2"><strong>Ejecución de Gastos</strong></td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td>Núcleos Ejecutores (Girados/Transferidos)</td>
+                                <td style="text-align:center;">6,404,179.43</td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td>Proveedores/Consultores (Girados)</td>
+                                <td style="text-align:center;">9,995,878.42</td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td>Expedientes Pendientes por Girar</td>
+                                <td style="text-align:center;">-</td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td>Expedientes Pendientes por Devengar</td>
+                                <td style="text-align:center;">-</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:18px;background-color:rgb(146,208,80);"><strong>Total Ejecución de Gastos</strong></td>
+                                <td style="text-align:center;font-size:18px;background-color:rgb(146,208,80);"><strong>16,400,057.85</strong></td>
+                                <td style="text-align:center;font-size:18px;background-color:rgb(146,208,80);"><strong>67.35%</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:20px;background-color:rgb(248,203,173);text-align:center"><strong>Saldos Financiero</strong></td>
+                                <td style="font-size:20px;background-color:rgb(248,203,173);text-align:center"><strong>7,950,498.63</strong></td>
+                                <td style="font-size:20px;background-color:rgb(248,203,173);text-align:center"><strong>32.65%</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:20px;background-color:rgb(255,255,0);text-align:center" colspan="2"><strong>Justificación de Gastos al (30.11.2021)</strong></td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td>Núcleos Ejecutores (Rendidos F22 y F23)</td>
+                                <td style="text-align:center;">3,571,735.16</td>
+                            </tr>
+                            <tr style="font-size:16px">
+                                <td>Proveedores/Consultores (Pagados)</td>
+                                <td style="text-align:center;">9,557,778.56</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:18px;background-color:rgb(255,255,0);"><strong>Total Justificación de Gastos</strong></td>
+                                <td style="text-align:center;font-size:18px;background-color:rgb(255,255,0);"><strong>13,129,513.72</strong></td>
+                                <td style="text-align:center;font-size:18px;background-color:rgb(255,255,0);"><strong>53.92%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsJustificacionGastos.js"></script>
+}

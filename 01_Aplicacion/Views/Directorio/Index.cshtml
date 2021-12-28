@@ -1,0 +1,175 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="es-pe">
+
+<head>
+    <title>SCM-UGP-PIASAR</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="~/Content/directorio/img/logos/logo-shortcut.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/directorio/css/rev-settings.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/slider.css">
+    <link rel="stylesheet" href="~/Content/directorio/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/switcher.css">
+    <link rel="stylesheet" href="~/Content/directorio/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/directorio/css/styles.css" id="colors">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+</head>
+<body>
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <div id="top-bar" class="hidden-sm-down">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-12">
+                    <div class="top-bar-welcome">
+                        <ul>
+                            <li style="padding-top:15px;">
+                                ©@DateTime.Now.Year.ToString() Programa Integral de Saneamiento Rural - PIASAR - PNSR
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-12">
+                    <ul class="social-icons hidden-md-down">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header></header>
+    <div class="page-title-section" style="background-image: url(../Content/directorio/img/bg/pagetitle.jpg);">
+        <div class="container">
+            <h1>Sistema de Control de Monitoreo de la UGP-PIASAR</h1>
+        </div>
+    </div>
+    <div class="section-block" style="background-image: url('../Content/directorio/img/bg/bg13.jpg'); height: 100vh;">
+        <div class="container">
+            <div class="section-heading center-holder">
+                @*<span>Explore Our Services</span>
+                <h3>Let your business to grow with us</h3>*@
+                <div class="section-heading-line"></div>
+            </div>
+            <div class="row mt-50">
+                <div class="col-md-3 col-sm-3 col-12" onclick="window.open('/MonitoreoPIASAR', '_blank');" style="cursor:pointer">
+                    <div class="feature-box-long">
+                        <img src="~/Content/directorio/img/el-ahorro-de-agua.png" style="width: 100px;"/>
+                        <h3>Núcleos Ejecutores</h3>
+                        <p>Monitoreo de Obras por Nucleo Ejecutor (Autorizaciones, rendiciones y transferencias) de la UGP-PIASAR</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-12" onclick="window.open('/MonitoreoObrasContrataPIASAR', '_blank');" style="cursor:pointer">
+                    <div class="feature-box-long">
+                        <img src="~/Content/directorio/img/hombre-de-trabajo.png" style="width: 100px;"/>
+                        <h3>Contrata</h3>
+                        <p>Seguimiento de las Obras por Contrata (Programación y seguimiento de ejecución ) de la UGP-PIASAR</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-12" onclick="window.open('/JustificacionGastos', '_blank');" style="cursor:pointer">
+                    <div class="feature-box-long">
+                        <img src="~/Content/directorio/img/cuenta.png"  style="width: 100px;"/>
+                        <h3>Justificación de Gastos</h3>
+                        <p>Reportes de Justificación de Gastos de Tesoreria de la UGP-PIASAR <br />&nbsp;<br />&nbsp;</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-12" onclick="window.open('/EstadoSituacional', '_blank');" style="cursor:pointer">
+                    <div class="feature-box-long">
+                        <img src="~/Content/directorio/img/lista-de-verificacion.png" style="width: 100px;" />
+                        <h3>Estado Situacional de Obras</h3>
+                        <p>Reportes del estado situacional de las obras de la UGP-PIASAR <br />&nbsp;<br />&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="position:fixed;left:0px;right:0px;bottom:0px;height:50px;z-index:0;">
+        <div class="container">
+            <div class="footer-bar" style="margin-top: -53px;padding-top:0px;border-top:0px;">
+                <div class="row">
+                    <div class="col-md-9 col-12">
+                        <p class="m-t-10">
+                            ©@DateTime.Now.Year.ToString() Programa Integral de Saneamiento Rural - PIASAR - PNSR
+                        </p>
+
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="footer-social-icons">
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook-square"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-youtube"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <script src="~/Content/directorio/js/jquery.min.js"></script>
+    <script src="~/Content/directorio/js/popper.min.js"></script>
+    <script src="~/Content/directorio/js/bootstrap.min.js"></script>
+    <script src="~/Content/directorio/js/owl.carousel.js"></script>
+    <script src="~/Content/directorio/js/navigation.js"></script>
+    <script src="~/Content/directorio/js/navigation.fixed.js"></script>
+    <script src="~/Content/directorio/js/wow.min.js"></script>
+    <script src="~/Content/directorio/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/directorio/js/waypoints.min.js"></script>
+    <script src="~/Content/directorio/js/tabs.min.js"></script>
+    <script src="~/Content/directorio/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="~/Content/directorio/js/swiper.min.js"></script>
+    <script src="~/Content/directorio/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/directorio/js/switcher.js"></script>
+    <script src="~/Content/directorio/js/modernizr.js"></script>
+    <script src="~/Content/directorio/js/map.js"></script>
+    <script src="~/Content/directorio/js/Chart.bundle.js"></script>
+    <script src="~/Content/directorio/js/utils.js"></script>
+    <script src="~/Content/directorio/js/revolution/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Content/directorio/js/revolution/jquery.themepunch.revolution.min.js"></script>
+    <script src='~/Content/directorio/js/revolution/revolution.addon.slicey.min8a54.js?ver=1.0.0'></script>
+    <script src="~/Content/directorio/js/revolution/revolution.extension.actions.min.js"></script>
+    <script src="~/Content/directorio/js/revolution/revolution.extension.kenburn.min.js"></script>
+    <script src="~/Content/directorio/js/revolution/revolution.extension.layeranimation.min.js"></script>
+    <script src="~/Content/directorio/js/revolution/revolution.extension.migration.min.js"></script>
+    <script src="~/Content/directorio/js/revolution/revolution.extension.slideanims.min.js"></script>
+    <script src="~/Content/directorio/js/main.js"></script>
+</body>
+<!-- Mirrored from specthemes.com/redbiz/redbiz-5/home-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 Oct 2021 20:17:22 GMT -->
+</html>

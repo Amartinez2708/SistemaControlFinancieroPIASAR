@@ -1,0 +1,662 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+            <div class="breadcrumb-header">
+                <h5 style="color: #bf0909;">
+                    <i class="fa fa-home"></i> &nbsp; Monitoreo de Proyectos de Núcleo Ejecutor PIASAR
+                </h5>
+                <span></span>
+            </div>
+            <div class="page-header-breadcrumb">
+                <span id="SpanFechaInicio"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+    </script>
+    
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+            <div class="row">
+                <div class="col-md-6 col-xl-6">
+                    <div class="card border-primary">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/obragua.png" style="width:90px">
+                            </div>
+                            <span id="nroObras" class="f-36 text-c-blue">0</span>
+                            <p>Nro. Total de Proyectos<br />&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-6">
+                    <div class="card border-primary">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/money.png" style="width:90px">
+                            </div>
+                            <span id="mtoObras" class="f-36 text-c-blue">0</span>
+                            <p><span id="mtoObrasNum" style="font-size: 18px;font-weight: 600;">0</span><br />Costo Total de Inversión</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card border-success">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/desembolso.png" style="width:90px">
+                            </div>
+                            <span id="mtoDesembolso" class="f-36 text-c-green">0</span>
+                            <table class="table table-bordered" width="100%">
+                                <tr>
+                                    <td style="width:100%;" colspan="2"><span class="f-16 text-c-green">Monto Total Transferido</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50%;"><span id="mtoDesembolsoAnterior" style="font-size: 16px;font-weight: 600;">0</span></td>
+                                    <td style="width:50%;"><span id="mtoDesembolsoNum" style="font-size: 16px;font-weight: 600;">0</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">Anterior<br /><span id="fechaAnteriorDesembolso">0</span></td>
+                                    <td style="vertical-align:middle">Actual<br /><span id="fechaActualDesembolso">0</span><br /><span class="f-20" id="porcentageDesembolso">0</span>&nbsp;<i id="iEstadoDesembolso" class="fa" aria-hidden="true"></i><br /><span class="f-18" id="diferenciaDesembolso">0</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card border-warning">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/autorizacion.png" style="width:90px">
+                            </div>
+                            <span id="mtoAutorizacion" class="f-36 text-c-yellow">0</span>
+                            <table class="table table-bordered" width="100%">
+                                <tr>
+                                    <td style="width:100%;" colspan="2"><span class="f-16 text-c-yellow">Monto Total de Autorizaciones</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50%;"><span id="mtoAutorizacionAnterior" style="font-size: 16px;font-weight: 600;">0</span></td>
+                                    <td style="width:50%;"><span id="mtoAutorizacionNum" style="font-size: 16px;font-weight: 600;">0</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">Anterior<br /><span id="fechaAnteriorAutorizacion">0</span></td>
+                                    <td style="vertical-align:middle">Actual<br /><span id="fechaActualAutorizacion">0</span><br /><span class="f-20" id="porcentageAutorizacion">0</span>&nbsp;<i id="iEstadoAutorizacion" class="fa text-c-blue" aria-hidden="true"></i><br /><span class="f-18" id="diferenciaAutorizacion">0</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card border-danger">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/justificacion.png" style="width:90px">
+                            </div>
+                            <span id="mtoManifiesto" class="f-36 text-c-pink">0</span>
+                            <table class="table table-bordered" width="100%">
+                                <tr>
+                                    <td style="width:100%;" colspan="2"><span class="f-16 text-c-pink">Monto Total de Rendiciones</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50%;"><span id="mtoManifiestoAnterior" style="font-size: 16px;font-weight: 600;">0</span></td>
+                                    <td style="width:50%;"><span id="mtoManifiestoNum" style="font-size: 16px;font-weight: 600;">0</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">Anterior<br /><span id="fechaAnteriorManifiesto">0</span></td>
+                                    <td style="vertical-align:middle">Actual<br /><span id="fechaActualRendicion">0</span><br /><span class="f-20" id="porcentageRendicion">0</span>&nbsp;<i id="iEstadoManifiesto" class="fa" aria-hidden="true"></i><br /><span class="f-18" id="diferenciaRendicion">0</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card border-info">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/porcentajejustificado.png" style="width:90px">
+                            </div>
+                            <span id="porcentajeJustificado" class="f-36 text-c-lite-green">0</span>
+                            <p>% Total Rendido <br />(Total Rendido/ Total Transferido)<br />&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card border-info">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/pendienteautorizacion.png" style="width:90px">
+                            </div>
+                            <span id="PorcentajePendienteAutorizacion" class="f-36 text-c-lite-green">0</span>
+                            <p><span id="mtoPorcentajePendienteAutorizacionNum" style="font-size: 18px;font-weight: 600;">0</span><br />% Pendiente de Autorización<br />(Total Autorizado/ Total Transferido)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card border-info">
+                        <div class="card-body user-radial-card text-dark">
+                            <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                <img src="../Content/Images/pendienterendicion.png" style="width:90px">
+                            </div>
+                            <span id="PorcentajePendienteRendicion" class="f-36 text-c-lite-green">0</span>
+                            <p><span id="mtoPorcentajePendienteRendicionNum" style="font-size: 18px;font-weight: 600;">0</span><br />% Pendiente de Rendición<br />(Total Rendido/ Total Autorizado)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-12">
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-sm-12 text-center">
+                            <button class="btn btn-mat btn-primary btn-lg" onclick="VerMontoProyectoVSPresupuesto()"><i class="fa fa-search" aria-hidden="true"></i>Ver Cuadro de Detalles</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-3">
+            <div class="card border-primary">
+                <div class="card-header text-dark">
+                    <h4 style="font-size: 18px;">
+                        <i class="fa fa-pie-chart"></i> Saldos por Gestionar(Por Autorizar y Por Rendir)
+                    </h4>
+                </div>
+                <div class="card-block text-dark" style="padding:10px;">
+                    <div id="chartEstadoFinanciero" style="height:516px;">
+                    </div>
+                    <div class="form-group row" style="margin-bottom:0px;">
+                        <div class="col-lg-12 col-sm-12 text-center">
+                            <button class="btn btn-mat btn-primary btn-md" onclick="VerEstadoFinanciero()"><i class="fa fa-search" aria-hidden="true"></i>Ver Detalle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-9">
+            <div class="card border-primary">
+                <div class="card-header text-dark">
+                    <div class="row col-sm-12 col-xl-12">
+                        <h4 style="font-size: 18px;">
+                            <i class="fa fa-line-chart"></i> Comparativo de Transferencias vs Autorizaciones vs Rendiciones en Valores Absolutos del Año 2021
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-block text-dark">
+                    <div id="chartHistorial" style="height:570px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-6">
+            <div class="card border-success">
+                <div class="card-header text-dark">
+                    <div class="row col-sm-12 col-xl-12">
+                        <h4 style="font-size: 18px;">
+                            <i class="fa fa-line-chart"></i> Pendiente de Autorización
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-block text-dark">
+                    <div id="chartPendienteAutorizacion" style="height:570px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-6">
+            <div class="card border-success">
+                <div class="card-header text-dark">
+                    <div class="row col-sm-12 col-xl-12">
+                        <h4 style="font-size: 18px;">
+                            <i class="fa fa-line-chart"></i> Pendiente de Rendición
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-block text-dark">
+                    <div id="chartPendienteRendicion" style="height:570px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-12 d-none">
+            <div class="card border-primary">
+                <div class="card-header text-dark">
+                    <div class="row col-sm-12 col-xl-12">
+                        <h4 style="font-size: 18px;">
+                            <i class="fa fa-line-chart"></i> Comparativo de Transferencias vs Autorizaciones vs Rendiciones en Valores Relativos del Año 2021
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-block text-dark">
+                    <div id="chartHistorialPorcentual" style="height:570px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divFiltro" class="alert alert-primary icons-filter d-none">
+        <div class="row">
+            <div class="col-sm-12 col-xl-2">
+                <div class="form-group row m-b-0">
+                    <div class="col-sm-12 col-xl-12">
+                        @Html.DropDownList("ddlDepartamento", new SelectList(ViewBag.ddlDepartamento, "IdText", "text"), new { @class = "form-control form-control-bold" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-2">
+                <div class="form-group row m-b-0">
+                    <div class="col-sm-12 col-xl-12">
+                        @Html.DropDownList("ddlProvincia", new SelectList(string.Empty, "IdText", "text"), "Provincia - Todos", new { @class = "form-control form-control-bold" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-2">
+                <div class="form-group row m-b-0">
+                    <div class="col-sm-12 col-xl-12">
+                        @Html.DropDownList("ddlDistrito", new SelectList(string.Empty, "IdText", "text"), "Distrito - Todos", new { @class = "form-control form-control-bold" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-2">
+                <div class="form-group row m-b-0">
+                    <div class="col-sm-12 col-lg-12">
+                        @Html.TextBox("txtSnip", null, new { @class = "form-control form-control-bold", @placeholder = "Ingrese SNIP" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-2">
+                <div class="form-group row m-b-0">
+                    <div class="col-sm-12 col-lg-12">
+                        @Html.TextBox("txtCUI", null, new { @class = "form-control form-control-bold", @placeholder = "Ingrese CUI" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-2">
+                <div class="form-group row m-b-0">
+                    <div class="col-sm-12 col-lg-12">
+                        <select name="ddlAnio" id="ddlAnio" class="form-control form-control-bold">
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xl-3 d-none">
+            <div class="row">
+                
+                <div class="col-xl-12 col-md-12 d-none">
+                    <div class="card comp-card border-success">
+                        <div class="card-body text-dark">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-b-20">Monto Transferido el Año <span class="anio">0</span></h6>
+                                    <h3 id="mtoDesembolsoFiltro" class="text-c-green">0</h3>
+                                    <p class="m-b-0">&nbsp;</p>
+                                </div>
+                                <div class="col-auto">
+                                    <img src="../Content/Images/money.png" style="width:70px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 d-none">
+                    <div class="card comp-card border-warning">
+                        <div class="card-body text-dark">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-b-20">Monto Total de Autorizaciones Aprobadas el Año <span class="anio">0</span></h6>
+                                    <h3 id="mtoAutorizacionFiltro" class="text-c-yellow">0</h3>
+                                    <p class="m-b-0">Autorizaciones Gestionadas<span id="mtoAutorizacionGestionadaFiltro" class="float-right">0</span></p>
+                                </div>
+                                <div class="col-auto">
+                                    <img src="../Content/Images/autorizacion.png" style="width:70px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 d-none">
+                    <div class="card comp-card border-danger">
+                        <div class="card-body text-dark">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-b-20">Monto Total de Rendiciones Aprobadas el Año <span class="anio">0</span></h6>
+                                    <h3 id="mtoManifiestoFiltro" class="text-c-pink">0</h3>
+                                    <p class="m-b-0">Rendiciones Gestionadas<span id="mtoManifiestoGestionadaFiltro" class="float-right">0</span></p>
+                                </div>
+                                <div class="col-auto">
+                                    <img src="../Content/Images/justificacion.png" style="width:70px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 d-none">
+                    <div class="card comp-card border-info">
+                        <div class="card-body text-dark">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-b-20">% Total Rendido el Año <span class="anio">0</span></h6>
+                                    <h3 id="porcentajeJustificadoFiltro" class="text-info">0</h3>
+                                    <p class="m-b-0">&nbsp;</p>
+                                </div>
+                                <div class="col-auto">
+                                    <img src="../Content/Images/porcentajejustificado.png" style="width:70px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-12 d-none">
+            <div class="card border-primary">
+                <div class="card-header text-dark">
+                    <div class="row col-sm-12 col-xl-12">
+                        <h5 style="font-size: 18px;">
+                            <i class="fa fa-bar-chart-o"></i> Autorizaciones VS Rendiciones por Mes del Año <span style="display:initial" class="anio">0</span>
+                        </h5>
+                    </div>
+                </div>
+                <div class="card-block text-dark">
+                    <div id="chartDiv1" style="height:555px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-none">
+        <div class="col-sm-12 col-xl-6 d-none">
+            <div class="row">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="card review-project border-warning">
+                        <div class="card-header">
+                            <div class="card-header-left">
+                                <h5 style="font-size:18px;">
+                                    <i class="fa fa-info-circle"></i> Estado de Información de Proyectos
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-block p-t-0 p-b-0 w-100 text-dark">
+                            <div class="table-responsive" style="height: 600px;">
+                                <table id="tblEstadoInformacion" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Proyecto</th>
+                                            <th colspan="2" style="text-align:center">Estado</th>
+                                            <th>Ult. Actualización</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-sm-12 text-center">
+                                    <button class="btn btn-mat btn-primary" onclick="VerEstadoInformacion()"><i class="fa fa-search" aria-hidden="true"></i>Ver Detalle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-12">
+                    <div class="card project-task border-info">
+                        <div class="card-header">
+                            <div class="card-header-left ">
+                                <h5 style="font-size:18px;"><i class="fa fa-certificate" aria-hidden="true"></i> Estado de Presupuestos de Proyecto</h5>
+                            </div>
+                        </div>
+                        <div class="card-block p-b-10 text-dark">
+                            <div class="table-responsive" style="height: 590px;">
+                                <table id="tblEstadoPresupuesto" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Proyecto</th>
+                                            <th>Porcentaje de Avance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-sm-12 text-center">
+                                    <button class="btn btn-mat btn-primary" onclick="VerEstadoPresupuesto()"><i class="fa fa-search" aria-hidden="true"></i>Ver Detalle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-12">
+            <div class="card project-task border-danger">
+                <div class="card-header">
+                    <div class="card-header-left ">
+                        <h5 style="font-size:18px;"><i class="fa fa-warning" aria-hidden="true"></i> Estado de Actividad de Proyectos</h5>
+                    </div>
+                </div>
+                <div class="card-block p-b-10 text-dark">
+                    <div class="table-responsive" style="height: 1348px;">
+                        <table id="tblEstadoActividad" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Proyecto</th>
+                                    <th style="text-align:center">Ult. Actualización</th>
+                                    <th style="text-align:center">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-sm-12 text-center">
+                            <button class="btn btn-mat btn-primary" onclick="VerEstadoActividad()"><i class="fa fa-search" aria-hidden="true"></i>Ver Detalle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="modal fade" id="modal-proyectovspresupuesto" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-info-circle"></i> Cuadro de detalle de Obras PIASAR por Nucleo Ejecutor
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group text-right d-none">
+                    <h6>Fecha Ultima Actulización: 13/08/2021</h6>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-6 row">
+                        <label class="col-sm-12 col-lg-2 col-form-label">Año de Ejecución:</label>
+                        <div class="col-sm-12 col-lg-10">
+                            <select name="ddlAnioJustificacion" id="ddlAnioJustificacion" class="form-control form-control-bold">
+                                <option value="0">Todos los Años</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                            </select>
+                        </div>
+                    </div>                 
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;" >
+                        <table id="dtMtoProyectoVSPresupuesto" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-estadoinformacionproyecto" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-info-circle"></i> Estado de Información de Proyecto
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtEstadoInfo" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-estadopresupuesto" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-certificate"></i> Estado de Presupuesto de Proyecto
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtEstadoPre" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-estadoactividad" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-search"></i> Estado de Actividad de Proyecto
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtEstadoActividadList" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-autorizacionvsmanifiesto" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">
+                    <i class="fa fa-search">&nbsp;</i><span id="lblEstadoAutorizacionvsManifiesto">-</span>
+                </h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtAutorizacionJustificacion" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-estadofinanciero" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-certificate"></i> Saldo por Gestionar de las Obras por Núcleo Ejecutor(por autorizar y por rendir) 
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtEstadoFinanciero" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-proyectosestadofinanciero" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-certificate"></i> Estado Financiero de Obras por Núcleo Ejecutor PIASAR
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtProyectosEstadoFinanciero" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsMonitoreoPiasar.js"></script>
+}
+

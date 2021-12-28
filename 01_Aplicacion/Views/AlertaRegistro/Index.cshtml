@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Hidden("hdnTipo")
+@Html.Hidden("hdnFecha")
+@Html.Hidden("hdnFecha2")
+
+<div id="divLiquidadores" class="d-none">
+    <div class="card">
+        <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+            <div class="breadcrumb-header">
+                <h5 style="color: #bf0909;">
+                    <i class="fa fa-info-circle"></i> &nbsp; Reporte de Registro de Trabajo de los Proyectos bajo la Modalidad de Núcleo Ejecutor
+                </h5>
+                <span></span>
+            </div>
+            <div class="page-header-breadcrumb">
+                <span id="SpanFechaInicio2"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let dia = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let dates = new Date();
+        let fechaNums = dates.getUTCDate();
+        let mes_names = dates.getMonth();
+        document.getElementById("SpanFechaInicio2").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dia[dates.getDay()] + ", " + fechaNums + " de " + mes[mes_names] + " del " + dates.getFullYear();
+    </script>
+
+    <div class="card border-primary">
+        <div class="card-header text-dark">
+            <div class="row col-sm-12 col-xl-12">
+                <h5 style="font-size: 18px;">
+                    <i class="fa fa-bar-chart-o"></i> Lista de Registro de Trabajo 
+                </h5>
+            </div>
+        </div>
+        <div class="card-block text-dark">
+            <div class="form-group row">
+                <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                    <table id="dtLiquidadores" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="divAlerta" class="d-none">
+    <div class="card">
+        <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+            <div class="breadcrumb-header">
+                <h5 style="color: #bf0909;">
+                    <i class="fa fa-info-circle"></i> &nbsp; Alerta de Registro de Información de los Proyectos bajo la Modalidad de Núcleo Ejecutor
+                </h5>
+                <span></span>
+            </div>
+            <div class="page-header-breadcrumb">
+                <span id="SpanFechaInicio"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+    </script>
+
+
+    <div class="col-lg-12 col-sm-12">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="card border-primary">
+                    <div class="card-header text-dark">
+                        <div class="row col-sm-12 col-xl-12">
+                            <h5 style="font-size: 18px;">
+                                <i class="fa fa-bar-chart-o"></i> Autorizaciones Con Registro en los Ultimos 30 dias
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block text-dark">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                                <table id="dtAg30" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="card border-primary">
+                    <div class="card-header text-dark">
+                        <div class="row col-sm-12 col-xl-12">
+                            <h5 style="font-size: 18px;">
+                                <i class="fa fa-bar-chart-o"></i> Rendiciones Con Registro en los Ultimos 30 dias
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block text-dark">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                                <table id="dtMg30" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-12 d-none">
+                <div class="card border-primary">
+                    <div class="card-header text-dark">
+                        <div class="row col-sm-12 col-xl-12">
+                            <h5 style="font-size: 18px;">
+                                <i class="fa fa-bar-chart-o"></i> Autorizaciones Sin Registro por mas de 30 días
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block text-dark">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                                <table id="dtAg3090" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 d-none">
+                <div class="card border-primary">
+                    <div class="card-header text-dark">
+                        <div class="row col-sm-12 col-xl-12">
+                            <h5 style="font-size: 18px;">
+                                <i class="fa fa-bar-chart-o"></i> Rendiciones Sin Registro por mas de 30 días
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block text-dark">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                                <table id="dtMg3090" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-12 d-none">
+                <div class="card border-primary">
+                    <div class="card-header text-dark">
+                        <div class="row col-sm-12 col-xl-12">
+                            <h5 style="font-size: 18px;">
+                                <i class="fa fa-bar-chart-o"></i> Sin Actividad o Nuevo
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block text-dark">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                                <table id="dtAg90" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 d-none">
+                <div class="card border-primary">
+                    <div class="card-header text-dark">
+                        <div class="row col-sm-12 col-xl-12">
+                            <h5 style="font-size: 18px;">
+                                <i class="fa fa-bar-chart-o"></i> Sin Actividad o Nuevo
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block text-dark">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                                <table id="dtMg90" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsAlerta.js"></script>
+}

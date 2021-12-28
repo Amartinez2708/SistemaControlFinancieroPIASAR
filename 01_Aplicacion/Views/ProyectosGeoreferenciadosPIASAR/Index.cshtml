@@ -1,0 +1,582 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Georefenciado.cshtml";
+}
+@Html.Hidden("hdnDep")
+<div id="weathermap">@*<div id="map" style="position: static;z-index: 0;outline: none;height: 100vh;"></div>*@</div>
+<div id="divBtnFiltro" class="btn-float-left">
+    <button id="btnOcultar" class="btn btn-trasnparent p-0 btn-transparent-background">
+        <i class="fa fa-bars" aria-hidden="true" style="font-size: 21px;margin: 11px;"></i>
+    </button>
+</div>
+<div id="divFiltro" class="card card-background-transparent toggled-element" style="box-shadow: 0 0 25px -5px #9e9c9e;position:absolute; top:30px; left:15px;width: 344px;">
+    <div class="card-header">
+        <h5 style="font-size:18px;color:#2c3e50"><i class="fa fa-filter" aria-hidden="true"></i>&nbsp;Proyectos PIASAR</h5>
+    </div>
+    <div class="col-lg-12" style="padding:0;">
+        <ul class="nav nav-tabs md-tabs " role="tablist">
+            <li class="nav-item" style="width:50%">
+                <a class="nav-link active f-16" data-toggle="tab" href="#inicio" role="tab" aria-expanded="true" id="0" onclick="tab(0)"><i class="fa fa-home"></i>&nbsp; Inicio</a>
+                <div class="slide" style="width:50%;background:#9E9E9E"></div>
+            </li>
+            <li class="nav-item" style="width:50%">
+                <a class="nav-link f-16" data-toggle="tab" href="#buscar" role="tab" aria-expanded="false" id="1" onclick="tab(1)"><i class="fa fa-search"></i>&nbsp; Buscar</a>
+                <div class="slide" style="width:50%;background:#9E9E9E"></div>
+            </li>
+        </ul>
+        <div class="tab-content card-block" style="overflow-x: hidden;padding: 10px;">
+            <div class="tab-pane active" id="inicio" role="tabpanel" aria-expanded="true">
+                <div class="form-group text-center">
+                    <label>Modalidad:</label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="rdbModalidad" value="0" autocomplete="off" checked> Todos
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="rdbModalidad" value="190" autocomplete="off"> Contrata
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="rdbModalidad" value="22" autocomplete="off"> Nucleos
+                        </label>
+                    </div>
+                </div>
+                <div id="divDep" class="scrollbar" style="height: 450px;overflow-y:auto;">
+                    <div class="form-group d-none">
+                        <div class="text-center">
+                            <a href="#" class="profile-image">
+                                <img id="imgRegionSelect" class="user-img" src="~/Content/Images/Regiones/01.jpg" style="width:300px; height:200px" />
+                            </a>
+                            <label id="lblRegionSelect"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Departamento:</label>
+                        @Html.DropDownList("ddlDepartamento", new SelectList(ViewBag.ddlDepartamento, "IdText", "Text"), new { @class = "form-control dropdown-pnsr" })
+                    </div>
+                    <div class="form-group">
+                        <label>Provincia:</label>
+                        <select name="ddlProvincia" id="ddlProvincia" class="form-control dropdown-pnsr">
+                            <option value="00">[--Seleccione--]</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Distrito:</label>
+                        <select name="ddlDistrito" id="ddlDistrito" class="form-control dropdown-pnsr">
+                            <option value="00">[--Seleccione--]</option>
+                        </select>
+                    </div>
+                    <div class="form-group text-center d-none">
+                        <button class="btn p-0 btn-transparent-background" title="Volver" onclick="volver()"><i class="fa fa-hand-o-left f-36"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="buscar" role="tabpanel" aria-expanded="false">
+                <div id="CuadroBusqueda" class="input-group">
+                    <span class="input-group-append bg-white border-left-0">
+                        <span class="input-group-text bg-transparent">
+                            <i class="icon fa fa-search" style="color:#9e9c9e !important;cursor: auto;padding:10px;"></i>
+                        </span>
+                    </span>
+                    @Html.TextBox("txtBuscarProyecto", null, new { @class = "form-control border-left-0", @placeholder = "Buscar por CUI, SNIP, Proyecto, Departamento, Provincia, Distrito", style = "border: 0px solid #cccccc;" })
+                </div>
+                <div class="form-group">
+                    <div class="" style="width:100%; display:table;">
+                        <ul id="listResults" class="media-list scrollbar" style="height:350px; overflow-y:auto;padding: 5px;">
+                            <li><p class="text-muted f-16" style="text-align:center; vertical-align: middle; display:table-cell;width: 323px;height: 120px;"><i class="fa fa-thumbs-o-down f-34" aria-hidden="true" style="color:#919aa3 !important"></i><br /><br />Sin Resultados</p></li>
+                        </ul>
+                        <div id="divInfoObra" class="scrollbar d-none" style="height:350px; overflow-y:auto;width: 328px;overflow-x: hidden;">
+                            <table class="table-proy">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><i class="fa fa-building-o" aria-hidden="true"></i> &nbsp;Proyecto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center;"><div class="radius-icon"><h5 id="lblSNIP" class="bg-c-blue d-inline-block text-center" style="width: 80px;height: 80px;line-height: 1.5;padding-top: 30px;">-<br />SNIP</h5></div></td>
+                                        <td style="text-align: center;"><div class="radius-icon"><h5 id="lblCUI" class="bg-c-blue d-inline-block text-center" style="width: 80px;height: 80px;line-height: 1.5;padding-top: 30px;">-<br />CUI</h5></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><p id="lblNombreProyecto">-</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modalidad:</td>
+                                        <td><p id="lblModalidad"></p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table-proy">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><i class="fa fa-map-pin" aria-hidden="true"></i> &nbsp;Ubicación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Departamento:</td>
+                                        <td><p id="lblDep">-</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Provincia:</td>
+                                        <td><p id="lblProv">-</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Distrito:</td>
+                                        <td><p id="lblDist">-</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Localidad:</td>
+                                        <td><p id="lblLocalidad">-</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Latitud:</td>
+                                        <td><p id="lblLat">0</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Longitud:</td>
+                                        <td><p id="lblLon">0</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de Inicio:</td>
+                                        <td><p id="lblFecInicio">-</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de Fin:</td>
+                                        <td><p id="lblFecFin">-</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table-proy">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><i class="fa fa-money" aria-hidden="true"></i> &nbsp;Financiamiento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="radius-icon" style="width: 320px;">
+                                                <h5 id="lblCostoInversion" class="bg-c-green d-inline-block text-center" style="width: 80px;height: 80px;">0</h5>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Costo de Inversión</td>
+                                    </tr>
+                                    <tr id="trGrafico">
+                                        <td colspan="2">
+                                            <div id="grfProyAutMan" style="height:200px"></div>
+                                        </td>
+                                    </tr>
+                                    <tr id="trAutorizacion1">
+                                        <td>Total Autorizaciones:</td>
+                                        <td><p id="lblAutorizacion">0</p></td>
+                                    </tr>
+                                    <tr id="trAutorizacion2">
+                                        <td>Total Rendiciones:</td>
+                                        <td><p id="lblManifiesto">0</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Desembolsado:</td>
+                                        <td><p id="lblDesembolso">0</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table-proy">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;Beneficiarios</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="radius-icon" style="width: 320px;">
+                                                <h5 id="lblNroBeneficiarios" class="bg-c-orenge d-inline-block text-center" style="width: 80px;height: 80px;">0</h5>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Beneficiarios</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nro. Conexiones de Agua:</td>
+                                        <td><p id="lblConeAgua">0</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nro. Conexiones de Saneamiento:</td>
+                                        <td><p id="lblConexSanea">0</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="btnVolverListaProyectos" class="form-group text-center d-none">
+                    <button class="btn p-0 btn-transparent-background" title="Volver" onclick="VolverListaProyectos()"><i class="fa fa-hand-o-left f-28"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divBtnInfo" class="btn-float-right">
+    <button id="btnOcultarInfo" class="btn btn-trasnparent btn-transparent-background p-0">
+        <i class="fa fa-bars" aria-hidden="true" style="font-size: 21px;margin: 11px;"></i>
+    </button>
+</div>
+<div id="divInfo" class="card right-div card-background-transparent toggled-element" style="box-shadow: 0 0 25px -5px #9e9c9e;position:absolute; top:30px; width: 600px;">
+    <div class="card-header">
+        <div class="card-header-right">
+            <h5 style="font-size:18px;color:#2c3e50"><i class="fa fa-info-circle" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>Estado Situacional de Proyectos</h5>
+        </div>
+    </div>
+    <div class="card-block services accordion-block" style="padding-top:25px">
+        <div class="form-group">
+            <div class="table-responsive">
+                <table class="table table-hover table-informacion">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp; Región:
+                            </td>
+                            <td style="font-weight: 500;" id="Region">
+                                PERÚ
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa fa-building-o" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp; Nro. Total de Obras:
+                            </td>
+                            <td style="font-weight: 500;" id="nroObrasG">
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa fa-male" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp; Nro. de Beneficiarios:
+                            </td>
+                            <td style="font-weight: 500;" id="nroBeneficiariosG">
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa fa-money" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Costo Total de Inversión:
+                            </td>
+                            <td style="font-weight: 500;" id="montoTotalG">
+                                S/. 0.00
+                            </td>
+                        </tr>
+                        <tr class="contrata d-none">
+                            <td>
+                                <i class="fa fa-shopping-bag" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Total de Desembolsado:
+                            </td>
+                            <td style="font-weight: 500;" id="mtoDesembolso">
+                                0
+                            </td>
+                        </tr>
+                        
+                        <tr class="contrata d-none">
+                            <td>
+                                <i class="fa fa-sitemap" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Total de Autorizaciones de Gasto:
+                            </td>
+                            <td style="font-weight: 500;" id="mtoAutorizaciones">
+                                0
+                            </td>
+                        </tr>
+                        <tr class="contrata d-none">
+                            <td>
+                                <i class="fa fa-sitemap" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Total de Rendiciones de Gasto:
+                            </td>
+                            <td style="font-weight: 500;" id="mtoManifiesto">
+                                0
+                            </td>
+                        </tr>
+                        
+                        <tr class="contrata d-none">
+                            <td>
+                                <i class="fa fa-sitemap" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Porcentaje de Rendición:
+                            </td>
+                            <td style="font-weight: 500;" id="mtoPorcentaje">
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa fa-shower" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Nro. Conexiones de Agua:
+                            </td>
+                            <td style="font-weight: 500;" id="nroConexionesAguaG">
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa fa-sitemap" aria-hidden="true" style="font-size: 18px;color:#2c3e50"></i>&nbsp;Nro. de Conexiones de Saneamiento:
+                            </td>
+                            <td style="font-weight: 500;" id="nroConexionesSaneamientoG">
+                                0
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="sub-title d-none" style="font-size:18px"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Indicadores</div>
+        <div id="accordion" role="tablist" aria-multiselectable="true" style="height:435px; overflow-y:auto;" class="scrollbar d-none">
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="headingOne">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Proyectos por Tipo de Inversión
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <div id="chartProyectosporTipodeInversion" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ProyectosporTipodeInversion"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="headingTwo">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;Proyectos por Tipo de Contratación
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartdivProyectosporTipodeContratacion" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ProyectosporTipodeContratacion"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class=" accordion-heading" role="tab" id="headingThree">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp;Proyectos por Etapa
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartProyectosporEtapa" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ProyectosporEtapa"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="heading4">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;Emergencias PNSR
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartEmergenciasPNSR" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-EmergenciasPNSR"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="heading5">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                            <i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp;Situación de Proyectos del PNSR
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartSituacióndeProyectosdelPNSR" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-SituacióndeProyectosdelPNSR"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="heading6">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp;Obras Culminadas por Situación
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartObrasCulminadasporSituacion" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ObrasCulminadasporSituación"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class=" accordion-heading" role="tab" id="heading7">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                            <i class="fa fa-history" aria-hidden="true"></i>&nbsp;Obras Culminadas por Periodo de Culminación
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartObrasCulminadasporPeriododeCulminacion" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ObrasCulminadasporPeriododeCulminacion"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="heading8">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                            <i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;Obras No Culminadas por Situación
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartObrasNoCulminadasporSituacion" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ObrasNoCulminadasporSituación"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="heading9">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                            <i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp;Aporte al Cierre de Brechas de las Obras No Culminadas
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartAportealCierredeBrechasdelasObrasNoCulminadas" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-AportealCierredeBrechasdelasObrasNoCulminadas"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-panel">
+                <div class="accordion-heading" role="tab" id="heading10">
+                    <h3 class="card-title accordion-title">
+                        <a class="accordion-msg f-16" data-toggle="collapse" data-parent="#accordion" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                            <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp;Proyectos de Transferencia en PNSR
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+                    <div class="accordion-content accordion-desc">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div id="chartProyectosdeTransferenciaenPNSR" style="height:400px;background-color: #fff;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-sm btn-primary btn-mat" data-toggle="modal" data-target="#modal-ProyectosdeTransferenciaenPNSR"><i class="fa fa-search" aria-hidden="true"></i>Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section _ScriptCode {
+    <script src="~/Content/js/GeoJSON/dep.js"></script>
+    <link href="~/Content/js/leaflet.js/leaflet.css" rel="stylesheet" />
+    <script src="~/Content/js/leaflet.js/leaflet.js"></script>
+
+    <script src="~/Content/js/jsPDF/jspdf.js"></script>
+    <script src="~/Content/js/jsPDF/from_html.js"></script>
+    <script src="~/Content/js/jsPDF/png_support.js"></script>
+    <script src="~/Content/js/jsPDF/png.js"></script>
+    <script src="~/Content/js/jsPDF/zlib.js"></script>
+    <script src="~/Content/js/jsPDF/addimage.js"></script>
+    <script src="~/Content/js/jsPDF/FileSaver.js"></script>
+    <script src="~/Content/js/jsPDF/standard_fonts_metrics.js"></script>
+
+    <script src="~/Content/js/html2canvas.min.js"></script>
+    <script src="~/Content/js/leaflet.js/easyprint.js"></script>
+
+    <script src="~/Content/js/jsObras.js"></script>
+
+}

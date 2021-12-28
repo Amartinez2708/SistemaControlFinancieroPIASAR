@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B2A81DC-3087-4C72-9570-037906350107}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_02_Entidades</RootNamespace>
+    <AssemblyName>02_Entidades</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EnAlertaRegistro.cs" />
+    <Compile Include="EnAutorizacionVSManifiesto.cs" />
+    <Compile Include="EnAutorizacion_Gasto.cs" />
+    <Compile Include="EnAUTORIZACION_GASTO_DETALLE.cs" />
+    <Compile Include="EnCentroPoblado.cs" />
+    <Compile Include="EnComponente.cs" />
+    <Compile Include="EnComponenteRPT.cs" />
+    <Compile Include="EnComprobante.cs" />
+    <Compile Include="EnComprobanteDetalle.cs" />
+    <Compile Include="EnDepartamento.cs" />
+    <Compile Include="EnDesembolsoVSJustificado.cs" />
+    <Compile Include="EnDevengadoMensual.cs" />
+    <Compile Include="EnDistrito.cs" />
+    <Compile Include="EnDropDowList.cs" />
+    <Compile Include="EnDropDownList.cs" />
+    <Compile Include="EnEstadoFinanciero.cs" />
+    <Compile Include="EnHistoricoMonitoreo.cs" />
+    <Compile Include="EnIndicadores.cs" />
+    <Compile Include="EnListDepa.cs" />
+    <Compile Include="EnListDist.cs" />
+    <Compile Include="EnListEstadoActividad.cs" />
+    <Compile Include="EnListEstadoPresupuesto.cs" />
+    <Compile Include="EnListEstadoProyecto.cs" />
+    <Compile Include="EnListMontoProyectoVSPresupuesto.cs" />
+    <Compile Include="EnListProv.cs" />
+    <Compile Include="EnListSeguimientoProgramadoEjecutadoMensual.cs" />
+    <Compile Include="EnMANIFIESTO_GASTO.cs" />
+    <Compile Include="EnMANIFIESTO_GASTO_DETALLE.cs" />
+    <Compile Include="EnMonitoreoGeneral.cs" />
+    <Compile Include="EnMonitoreoObras.cs" />
+    <Compile Include="EnMovimiento_Documento.cs" />
+    <Compile Include="EnMovimiento_Documento_Detalle.cs" />
+    <Compile Include="EnProgramadoEjecutadoMensual.cs" />
+    <Compile Include="EnProgresoSubComponente.cs" />
+    <Compile Include="EnProvincia.cs" />
+    <Compile Include="EnProyecto.cs" />
+    <Compile Include="EnProyectosSeguimiento.cs" />
+    <Compile Include="EnReporteBID.cs" />
+    <Compile Include="EnRespuesta.cs" />
+    <Compile Include="EnSeguimientoEjecucionProyectosInversion.cs" />
+    <Compile Include="EnSubComponente.cs" />
+    <Compile Include="EnTituloSubComponente.cs" />
+    <Compile Include="EnPersonal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReporteObras.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

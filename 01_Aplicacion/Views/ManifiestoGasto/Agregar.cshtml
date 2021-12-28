@@ -1,0 +1,316 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Hidden("hdnSnip")
+@Html.Hidden("hdnIdUsuario")
+@Html.Hidden("hdnIdMedioPago")
+<div class="card card-hover">
+    <div class="card-block caption-breadcrumb">
+        <div class="breadcrumb-header">
+            <h5>Rendición de Gasto</h5>
+        </div>
+        <div class="page-header-breadcrumb">
+            <ul class="breadcrumb-title">
+                <li class="breadcrumb-item">
+                    <a href="/Inicio"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Inicio</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/ManifiestoGasto">Rendición de Gasto</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/ManifiestoGasto/Agregar">Registro de Rendición de Gasto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="card border-primary card-hover">
+    <div class="card-block text-dark">
+        <div class="sub-title"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Datos de la Rendición</div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-xl-2 col-form-label">Nombre de Obra:</label>
+            <div class="col-sm-12 col-xl-10">
+                <textarea class = "form-control" readonly="readonly" row="4">@ViewBag.NombreObra</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-xl-2 col-form-label">Concepto:</label>
+            <div class="col-sm-12 col-xl-10">
+                @Html.TextBox("txtConcepto", null, new { @class = "form-control", maxlength = "250" })
+                @*@Html.DropDownList("ddlRubro", new SelectList(ViewBag.ddlRubro, "id", "text"), new { @class = "form-control" })*@
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-xl-2 col-form-label">Observación:</label>
+            <div class="col-sm-12 col-xl-10">
+                @Html.TextBox("txtObservacion", null, new { @class = "form-control", maxlength = "250" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-xl-4">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-6 col-form-label">Fecha Presentación:</label>
+                    <div class="col-sm-12 col-xl-6">
+                        @Html.TextBox("txtFechaPresentacion", null, new { @class = "form-control date-pick" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-4">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-4 col-form-label">Mes Correspondiente:</label>
+                    <div class="col-sm-12 col-xl-8">
+                        <select name="cboMes" id="cboMes" class="form-control">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-4">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-4 col-form-label">Año:</label>
+                    <div class="col-sm-12 col-xl-8">
+                        @Html.TextBox("txtAnio", null, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>
+<div class="card border-success card-hover d-none">
+    <div class="card-block text-dark">
+        <div class="sub-title"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Datos del Comprobante</div>
+        
+    </div>
+</div>
+<div class="card border-warning card-hover">
+    <div class="card-block text-dark">
+        <div class="sub-title"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Comprobante</div>
+        <div class="row">
+            <div class="col-sm-12 col-xl-6">
+                <div class="form-group row">
+                    <div class="col-xl-12 col-sm-12">
+                        <button id="btnComprobante" class="btn btn-mat btn-primary" onclick="popUpComprobante()"><i class="fa fa-plus" aria-hidden="true"></i>Agregar Comprobante</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-6 col-form-label text-right">Monto de Rendición:</label>
+                    <div class="col-xl-6 col-sm-12">
+                        @Html.TextBox("txtMontoTotal", 0.00, new { @class = "form-control" , @readonly= "readonly"})
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <div class="col-sm-12 col-lg-12" style="overflow-x:auto;">
+                <table id="dtComprobante" class="table table-bordered table-hover" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Nro. Comprobante</th>
+                            <th style="text-align: center;">Clase</th>
+                            <th style="text-align: center;">Razón Social</th>
+                            <th style="text-align: center;">Tipo</th>
+                            <th style="text-align: center;">Total</th>
+                            <th style="text-align: center;">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row0">
+                            <td style="text-align: center;" colspan="6">
+                                Sin Información
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <button class="btn btn-mat btn-primary" onclick="ValidarManifiesto()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-comprobante" role="dialog">
+    <div class="modal-dialog modal-all-resizes" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Datos del Comprobante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Rubro:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.DropDownList("ddlRubro", new SelectList(ViewBag.ddlRubro, "id", "text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Clase:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.DropDownList("ddlClase", new SelectList(ViewBag.ddlClase, "id", "text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Nro. Comprobante:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtNroMedioPago", null, new { @class = "form-control", maxlength = "50" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Razón Social:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtRazonSocial", null, new { @class = "form-control", maxlength = "250" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Fecha de Comprobante:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtFechaMedioPago", null, new { @class = "form-control date-pick" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Observación:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtObservacionMedio", null, new { @class = "form-control", maxlength = "500" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Autorización a Rendir:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <select id="ddlAutorizacion" name="Autorizaciones[]" multiple="multiple" class="js-example-basic-multiple form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row d-none">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Comprobante:</label>
+                    <div class="col-sm-12 col-lg-10 form-radio">
+                        <form>
+                            <div class="radio radio-inline">
+                                <label>
+                                    <input type="radio" name="rdbMedioPago" value="1" checked="checked">
+                                    <i class="helper"></i>Detallado
+                                </label>
+                            </div>
+                            <div class="radio radio-inline">
+                                <label>
+                                    <input type="radio" value="2" name="rdbMedioPago">
+                                    <i class="helper"></i>Por Rubro
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="divDetalle" class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow-x:auto;">
+                        <table id="dtDetalle" class="table table-bordered table-hover" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Seleccionar</th>
+                                    <th style="text-align: center;">Item Rubro</th>
+                                    <th style="text-align: center;">Rubro</th>
+                                    <th style="text-align: center;">Codigo Item</th>
+                                    <th style="text-align: center;">Insumo Servicio</th>
+                                    <th style="text-align: center;">Unidad</th>
+                                    <th style="text-align: center;">Cantidad</th>
+                                    <th style="text-align: center;">Precio Unitario</th>
+                                    <th style="text-align: center;">Total</th>
+                                    <th style="text-align: center;">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;" colspan="9">
+                                        Sin Información
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="divRubro" class="form-group row d-none">
+                    <div class="col-sm-12 col-lg-12" style="overflow-x:auto;">
+                        <table id="dtRubro" class="table table-bordered table-hover" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Seleccionar</th>
+                                    <th>Item Rubro</th>
+                                    <th style="text-align: center;">Rubro</th>
+                                    <th style="text-align: center;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;" colspan="4">
+                                        Sin Información
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn btn-mat btn-primary" onclick="ValidarComprobante()"><i class="fa fa-save" aria-hidden="true"></i>Guardar Comprobante</button>
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-manifiesto" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adjuntar Informe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Informe:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtInforme", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Observaciones:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextArea("txtObservacionDocumento", null, new { @class = "form-control", rows="4" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Adjuntar Informe:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <input id="FileUpload" type="file" class="upload" value="Seleccionar Informe" />
+                        @Html.TextBox("txtRutaDocumento", null, new { @class = "form-control d-none", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn btn-mat btn-primary" onclick="ValidarInforme()"><i class="fa fa-save" aria-hidden="true"></i>Guardar Rendición</button>
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsManifiesto.js"></script>
+}

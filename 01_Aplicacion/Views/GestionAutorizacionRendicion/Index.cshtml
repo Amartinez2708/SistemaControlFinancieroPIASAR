@@ -1,0 +1,245 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ViewFrame.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12 col-lg-4">
+        <div class="card border-primary card-hover">
+            <div class="card-block text-dark">
+                <div class="form-group row">
+                    <label>Proyecto:</label>
+                    <select id="ddlProyecto" name="Proyectos[]" class="js-example-basic-multiple form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Nombre del proyecto:</label>
+                    @Html.TextArea("txtNombreProyecto", null, new { @class = "form-control", @readonly = "readonly", rows = "4" })
+                </div>
+                <div class="form-group">
+                    <label>Costo de Inversión:</label>
+                        @Html.TextBox("txtCostoInversion", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    <label>Total Autorizaciones Aprobadas:</label>
+                        @Html.TextBox("txtTotalAutorizadoAprobado", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    <label>Total Autorizaciones Gestionadas:</label>
+                     @Html.TextBox("txtTotalAutorizadoGestionado", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    <label>Total Rendiciones Aprobadas:</label>
+                        @Html.TextBox("txtTotalRendidoAprobado", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    <label>Total Rendiciones Gestionadas:</label>
+                    @Html.TextBox("txtTotalRendidoGestionado", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-8">
+        <div class="card border-primary card-hover p-15">
+            <ul class="nav nav-tabs tabs m-t-20" role="tablist">
+                <li class="nav-item">
+                    <a id="tab1" class="nav-link active" data-toggle="tab" href="#panel1" role="tab" onclick="Tab(0);"><i class="fa fa-book" aria-hidden="true"></i>&nbsp; Autorización de Gasto</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tab2" class="nav-link" data-toggle="tab" href="#panel2" role="tab" onclick="Tab(1);"><i class="fa fa-book" aria-hidden="true"></i>&nbsp; Rendición de Gastos</a>
+                </li>
+            </ul>
+            <div class="tab-content card-block text-dark">
+                <div class="tab-pane active" id="panel1" role="tabpanel">
+                    <div class="form-group row">
+                        <div class="col-xl-12 col-sm-12">
+                            <button id="btnAgregarAutorizacion" class="btn btn-mat btn-primary" onclick="popUpAgregarAutorizacion()"><i class="fa fa-plus" aria-hidden="true"></i>Agregar Autorización</button>
+                            <div name="Alerta" class="alert alert-info icons-alert d-none">
+                                <p><strong>Info!</strong> Esta función solo está <strong>habilitada todos los Viernes desde las 00:00 hasta las 23:59</strong>, despues de ello se generara un reporte de trabajo derivado a los coordinadores.<br /><strong>Si no pudo registrar el día indicado, sirvase a solicitar el acceso mediante correo al Coordinador General</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                            <table id="dtAutorizacion" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="panel2" role="tabpanel">
+                    <div class="form-group row">
+                        <div class="col-xl-12 col-sm-12">
+                            <button id="btnAgregarRendicion" class="btn btn-mat btn-primary" onclick="popUpAgregarRendicion()"><i class="fa fa-plus" aria-hidden="true"></i>Agregar Rendición</button>
+                            <div name="Alerta" class="alert alert-info icons-alert d-none">
+                                <p><strong>Info!</strong> Esta función solo está <strong>habilitada todos los Viernes desde las 00:00 hasta las 23:59</strong>, despues de ello se generara un reporte de trabajo derivado a los coordinadores.<br /><strong>Si no pudo registrar el día indicado, sirvase a solicitar el acceso mediante correo al Coordinador General</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                            <table id="dtRendicion" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>    
+    </div>
+</div>
+<div class="modal fade" id="modal-autorizacion" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Autorización de Gasto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Hidden("hdnIdAutorizacion")
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Nro:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtNroAutorizacion", null, new { @class = "form-control", maxlength = "3", placeholder = "001" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Fecha:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtFechaAutorizacion", null, new { @class = "form-control date-pick" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Concepto:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtConceptoAutorizacion", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Monto:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtMontoAutorizacion", null, new { @class = "form-control autonumber" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Estado:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <select name="cboEstadoAutorizacion" id="cboEstadoAutorizacion" class="form-control">
+                            <option value="0">Pendiente</option>
+                            <option value="1">En Evaluacion</option>
+                            <option value="23">Aprobado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Observación:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextArea("txtObservacionAutorizacion", null, new { @class = "form-control", rows = "4" })
+                    </div>
+                </div>
+                <div class="form-group row d-none">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Adjuntar Informe:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <input id="FileUpload" type="file" class="upload" value="Seleccionar Informe" />
+                        @Html.TextBox("txtRutaDocumentoAutorizacion", null, new { @class = "form-control d-none", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn btn-mat btn-primary" onclick="ValidarAutorizacion()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-rendicion" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rendición de Gastos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Hidden("hdnIdManifiesto")
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Nro:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtNroRendicion", null, new { @class = "form-control", maxlength = "3", placeholder = "001" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Concepto:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtConceptoRendicion", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Corresponde al Mes:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <select name="cboMes" id="cboMes" class="form-control">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Corresponde al Anio:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtCorrespondeAlAnio", null, new { @class = "form-control", maxlength = "4" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Fecha:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtFechaRendicion", null, new { @class = "form-control date-pick" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Monto:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextBox("txtMontoRendicion", null, new { @class = "form-control autonumber" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Estado:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <select name="cboEstadoRendicion" id="cboEstadoRendicion" class="form-control">
+                            <option value="0">Pendiente</option>
+                            <option value="1">En Evaluacion</option>
+                            <option value="23">Aprobado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Observación:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        @Html.TextArea("txtObservacionRendicion", null, new { @class = "form-control", rows = "4" })
+                    </div>
+                </div>
+                <div class="form-group row d-none">
+                    <label class="col-sm-12 col-xl-2 col-form-label">Adjuntar Informe:</label>
+                    <div class="col-sm-12 col-xl-10">
+                        <input id="FileUpload" type="file" class="upload" value="Seleccionar Informe" />
+                        @Html.TextBox("txtRutaDocumentoRendicion", null, new { @class = "form-control d-none", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn btn-mat btn-primary" onclick="ValidarManifiesto()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsGestionAutorizacionRendicion.js"></script>
+}

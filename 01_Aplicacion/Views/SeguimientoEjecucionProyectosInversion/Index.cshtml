@@ -1,0 +1,802 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ViewFrame.cshtml";
+}
+
+@Html.Hidden("hdnIdUsuario")
+<div class="card">
+    <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+        <div class="breadcrumb-header">
+            <h5 style="color: #bf0909;">
+                <i class="fa fa-search"></i> &nbsp; Seguimiento Semanal de Ejecución de Proyectos de Inversión - PIASAR
+            </h5>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-xl-12">
+        <div class="card review-project border-success">
+            <div class="card-block text-dark">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Año:</label>
+                            <select name="cboAnio" id="cboAnio" class="form-control">
+                                <option value="0">[--Seleccione--]</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Mes:</label>
+                            <select name="cboMes" id="cboMes" class="form-control">
+                                <option value="0">[--Seleccione--]</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Fecha:</label>
+                            <input type="text" id="txtAcumuladoalFecha" value="" class="form-control date-pick" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 m-t-20">
+                        <div class="form-group">
+                            <button class="btn btn-success" onclick="ExportarExcel()"><i class="fa fa-file-excel-o"></i>Exportar</button>
+                        </div>
+                        <div id="Export" class="d-none">
+                            <table id="dtExportar" class="table table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)" rowspan="3">N°</th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)" rowspan="3">DGPP</th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)" rowspan="3">Proyectos de Inversión</th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242); width:180px;" rowspan="3">
+                                            PIM <br /><span id="spnAnioExport"></span>
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)" rowspan="2">
+                                            Programación <br /><span id="spnMesExport"></span>
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" colspan="11">
+                                            Programado vs Ejecutado - Semanal (<span id="spnAnioMesPEExport">Septiembre 2021</span>)
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)" colspan="3">
+                                            Devengado Acumulado (<span id="spnAnioMesDAExport">Septiembre 2021</span>)
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)" rowspan="3">
+                                            Detalles del Gasto Mensual
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                            Programado <br />1ra <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                            Ejecutado <br />1ra <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                            Programado <br />2da <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                            Ejecutado <br />2da <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                            Programado <br />3ra <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                            Ejecutado <br />3ra <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                            Programado <br />4ta <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                            Ejecutado <br />4ta <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                            Programado <br />5ta <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                            Ejecutado <br />5ta <br />Semana
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)">
+                                            Total <br />Programado
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153);width:130px;">
+                                            Al&nbsp;<span id="spnFechaExport"></span>
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)">
+                                            Dif. Gasto
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)">
+                                            % av. Gasto
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                            a
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)">
+                                            b
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                            c
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                            d=c-a
+                                        </th>
+                                        <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                            e=c/a
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="vertical-align:middle;background-color:rgb(255,204,255);font-size:18px;" colspan="20">
+                                            <strong>PROYECTOS A CARGO DE LA COORDINACIÓN TÉCNICA</strong>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:rgb(255,255,197); color:rgb(0,112,192);vertical-align:middle;">
+                                        <td style="vertical-align:middle;" colspan="4">
+                                            <strong>PROYECTOS DE CONTINUIDAD 2019</strong>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,197)">
+                                            <span id="spnTotalProgramacion_PC2019_0">0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2019_1" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2019_1" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2019_2" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2019_2" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2019_3" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2019_3" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2019_4" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2019_4" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2019_5" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2019_5" >0.00</span>
+                                        </td>
+                                        <td><span id="spnTotalProgramado_PC2019_6" >0.00</span></td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr style="background-color:rgb(255,255,197); color:rgb(0,112,192);vertical-align:middle;">
+                                        <td style="vertical-align:middle;" colspan="4">
+                                            <strong>PROYECTOS DE CONTINUIDAD 2020</strong>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,197)">
+                                            <span id="spnTotalProgramacion_PC2020_0" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2020_1" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2020_1" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2020_2" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2020_2" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2020_3" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2020_3" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2020_4" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2020_4" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_PC2020_5" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_PC2020_5" >0.00</span>
+                                        </td>
+                                        <td><span id="spnTotalProgramado_PC2020_6" >0.00</span></td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr style="background-color:rgb(255,255,197); color:rgb(0,112,192);vertical-align:middle;">
+                                        <td style="vertical-align:middle;" colspan="4">
+                                            <strong>COMPONENTE 2</strong>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,197)">
+                                            <span id="spnTotalProgramacion_C2_0" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_C2_1" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_C2_1" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_C2_2" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_C2_2" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_C2_3" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_C2_3" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_C2_4" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_C2_4" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalProgramadoSemana_C2_5" >0.00</span>
+                                        </td>
+                                        <td>
+                                            <span id="spnTotalEjecutadoSemana_C2_5" >0.00</span>
+                                        </td>
+                                        <td><span id="spnTotalProgramado_C2_6" >0.00</span></td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="color:rgb(0,0,204);vertical-align:middle;text-align:right;">
+                                            <strong>SUB TOTAL - COORDINACIÓN TÉCNICA</strong>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramacion_STCT_0" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCT_1" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCT_1" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCT_2" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCT_2" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCT_3" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCT_3" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCT_4" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCT_4" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCT_5" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCT_5" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalProgramado_STCT_6" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalAl_STCT_7" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalDiferenciaGasto_STCT_8" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalPorcentajeAvanceGasto_STCT_9" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:middle;background-color:rgb(255,204,255);font-size:18px;" colspan="20">
+                                            <strong>GASTOS DE LA COORDINACIÓN ADMINISTRATIVA</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="color:rgb(0,0,204);vertical-align:middle;text-align:right;">
+                                            <strong>SUB TOTAL - COORDINACIÓN ADMINISTRATIVA</strong>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramacion_STCA_0" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCA_1" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCA_1" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCA_2" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCA_2" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCA_3" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCA_3" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCA_4" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCA_4" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalProgramadoSemana_STCA_5" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                            <span id="spnTotalEjecutadoSemana_STCA_5" >0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalProgramado_STCA_6" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalAl_STCA_7" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalDiferenciaGasto_STCA_8" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"><span id="spnTotalPorcentajeAvanceGasto_STCA_9" >0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(255,255,0)"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" style="background-color:rgb(183,216,160);vertical-align:middle;text-align:center;">
+                                            <strong>TOTAL</strong>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalPIM_F_0" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalProgramacion_F_1" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalProgramadoSemana_F_1" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalEjecutadoSemana_F_1" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalProgramadoSemana_F_2" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalEjecutadoSemana_F_2" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalProgramadoSemana_F_3" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalEjecutadoSemana_F_3" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalProgramadoSemana_F_4" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalEjecutadoSemana_F_4" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalProgramadoSemana_F_5" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                            <span id="spnTotalEjecutadoSemana_F_5" value="0.00">0.00</span>
+                                        </td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)"><span id="spnTotalProgramado_F_6" value="0.00">0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)"><span id="spnTotalAl_F_7" value="0.00">0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)"><span id="spnTotalDiferenciaGasto_F_7" value="0.00">0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)"><span id="spnTotalPorcentajeAvanceGasto_F_8" value="0.00">0.00</span></td>
+                                        <td style="vertical-align:middle;background-color:rgb(183,216,160)"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-block fix-width tableFixHead scroll-inner">
+                    <table id="dtProyecto" class="table table-bordered table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)" rowspan="3">N°</th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)" rowspan="3">DGPP</th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)" rowspan="3">Proyectos de Inversión</th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242); width:180px;" rowspan="3">
+                                    PIM <br /><span id="spnAnio"></span>
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)" rowspan="2">
+                                    Programación <br /><span id="spnMes"></span>
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" colspan="11">
+                                    Programado vs Ejecutado - Semanal (<span id="spnAnioMesPE">Septiembre 2021</span>)
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)" colspan="3">
+                                    Devengado Acumulado (<span id="spnAnioMesDA">Septiembre 2021</span>)
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)" rowspan="3">
+                                    Detalles del Gasto Mensual
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                    Programado <br />1ra <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                    Ejecutado <br />1ra <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                    Programado <br />2da <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                    Ejecutado <br />2da <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                    Programado <br />3ra <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                    Ejecutado <br />3ra <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                    Programado <br />4ta <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                    Ejecutado <br />4ta <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)" rowspan="2">
+                                    Programado <br />5ta <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(147,196,114)" rowspan="2">
+                                    Ejecutado <br />5ta <br />Semana
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)">
+                                   Total <br />Programado
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153);width:130px;">
+                                    Al&nbsp;<span id="spnFecha"></span>
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)">
+                                    Dif. Gasto
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(255,230,153)">
+                                    % av. Gasto
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                    a
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(198,224,180)">
+                                    b
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                    c
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                    d=c-a
+                                </th>
+                                <th style="text-align:center; vertical-align:middle;background-color:rgb(217,225,242)">
+                                    e=c/a
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align:middle;background-color:rgb(255,204,255);font-size:18px;" colspan="20">
+                                    <strong>PROYECTOS A CARGO DE LA COORDINACIÓN TÉCNICA</strong>
+                                </td>
+                            </tr>
+                            <tr style="background-color:rgb(255,255,197); color:rgb(0,112,192);vertical-align:middle;">
+                                <td style="vertical-align:middle;" colspan="4">
+                                    <strong>PROYECTOS DE CONTINUIDAD 2019</strong>
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,197)">
+                                    <input type="text" id="txtTotalProgramacion_PC2019_0" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2019_1" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2019_1" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2019_2" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2019_2" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2019_3" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2019_3" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2019_4" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2019_4" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2019_5" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2019_5" value="0.00" readonly="readonly" class="form-control"/>
+                                </td>
+                                <td><input type="text" id="txtTotalProgramado_PC2019_6" value="0.00" readonly="readonly" class="form-control"/></td>
+                                <td colspan="3"></td>
+                                <td></td>
+                            </tr>
+
+                            <tr style="background-color:rgb(255,255,197); color:rgb(0,112,192);vertical-align:middle;">
+                                <td style="vertical-align:middle;" colspan="4">
+                                    <strong>PROYECTOS DE CONTINUIDAD 2020</strong>
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,197)">
+                                    <input type="text" id="txtTotalProgramacion_PC2020_0" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2020_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2020_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2020_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2020_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2020_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2020_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2020_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2020_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_PC2020_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_PC2020_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td><input type="text" id="txtTotalProgramado_PC2020_6" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td colspan="3"></td>
+                                <td></td>
+                            </tr>
+                            <tr style="background-color:rgb(255,255,197); color:rgb(0,112,192);vertical-align:middle;">
+                                <td style="vertical-align:middle;" colspan="4">
+                                    <strong>COMPONENTE 2</strong>
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,197)">
+                                    <input type="text" id="txtTotalProgramacion_C2_0" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_C2_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_C2_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_C2_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_C2_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_C2_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_C2_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_C2_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_C2_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalProgramadoSemana_C2_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTotalEjecutadoSemana_C2_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td><input type="text" id="txtTotalProgramado_C2_6" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td colspan="3"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="color:rgb(0,0,204);vertical-align:middle;text-align:right;">
+                                    <strong>SUB TOTAL - COORDINACIÓN TÉCNICA</strong>
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramacion_STCT_0" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCT_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCT_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCT_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCT_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCT_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCT_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCT_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCT_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCT_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCT_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalProgramado_STCT_6" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalAl_STCT_7" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalDiferenciaGasto_STCT_8" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalPorcentajeAvanceGasto_STCT_9" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"></td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle;background-color:rgb(255,204,255);font-size:18px;" colspan="20">
+                                    <strong>GASTOS DE LA COORDINACIÓN ADMINISTRATIVA</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="color:rgb(0,0,204);vertical-align:middle;text-align:right;">
+                                    <strong>SUB TOTAL - COORDINACIÓN ADMINISTRATIVA</strong>
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramacion_STCA_0" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCA_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCA_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCA_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCA_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCA_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCA_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCA_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCA_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalProgramadoSemana_STCA_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_STCA_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalProgramado_STCA_6" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalAl_STCA_7" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalDiferenciaGasto_STCA_8" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"><input type="text" id="txtTotalPorcentajeAvanceGasto_STCA_9" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(255,255,0)"></td>
+                            </tr>
+                           
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="background-color:rgb(183,216,160);vertical-align:middle;text-align:center;">
+                                    <strong>TOTAL</strong>
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalPIM_F_0" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalProgramacion_F_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalProgramadoSemana_F_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_F_1" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalProgramadoSemana_F_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_F_2" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalProgramadoSemana_F_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_F_3" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalProgramadoSemana_F_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_F_4" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalProgramadoSemana_F_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)">
+                                    <input type="text" id="txtTotalEjecutadoSemana_F_5" value="0.00" readonly="readonly" class="form-control" />
+                                </td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)"><input type="text" id="txtTotalProgramado_F_6" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)"><input type="text" id="txtTotalAl_F_7" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)"><input type="text" id="txtTotalDiferenciaGasto_F_7" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)"><input type="text" id="txtTotalPorcentajeAvanceGasto_F_8" value="0.00" readonly="readonly" class="form-control" /></td>
+                                <td style="vertical-align:middle;background-color:rgb(183,216,160)"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 text-right m-t-20">
+                        <div class="form-group">
+                            <button class="btn btn-primary" onclick="Guardar()"><i class="fa fa-save"></i>Guardar</button>
+                            @*<button class="btn btn-success" onclick="ExportarFormatoBID()"><i class="fa fa-file-excel-o"></i>Exportar Excel</button>*@
+                        </div>
+                        <div id="Export">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsSeguimientoEjecucionProyectosInversion.js"></script>
+}
+

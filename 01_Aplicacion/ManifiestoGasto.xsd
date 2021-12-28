@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ManifiestoGasto" targetNamespace="http://tempuri.org/ManifiestoGasto.xsd" xmlns:mstns="http://tempuri.org/ManifiestoGasto.xsd" xmlns="http://tempuri.org/ManifiestoGasto.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ManifiestoGasto" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ManifiestoGasto" msprop:Generator_UserDSName="ManifiestoGasto">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Manifiesto" msprop:Generator_TableClassName="ManifiestoDataTable" msprop:Generator_TableVarName="tableManifiesto" msprop:Generator_TablePropName="Manifiesto" msprop:Generator_RowDeletingName="ManifiestoRowDeleting" msprop:Generator_RowChangingName="ManifiestoRowChanging" msprop:Generator_RowEvHandlerName="ManifiestoRowChangeEventHandler" msprop:Generator_RowDeletedName="ManifiestoRowDeleted" msprop:Generator_UserTableName="Manifiesto" msprop:Generator_RowChangedName="ManifiestoRowChanged" msprop:Generator_RowEvArgName="ManifiestoRowChangeEvent" msprop:Generator_RowClassName="ManifiestoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NroManifiesto" msprop:Generator_ColumnVarNameInTable="columnNroManifiesto" msprop:Generator_ColumnPropNameInRow="NroManifiesto" msprop:Generator_ColumnPropNameInTable="NroManifiestoColumn" msprop:Generator_UserColumnName="NroManifiesto" type="xs:string" minOccurs="0" />
+              <xs:element name="Proyecto" msprop:Generator_ColumnVarNameInTable="columnProyecto" msprop:Generator_ColumnPropNameInRow="Proyecto" msprop:Generator_ColumnPropNameInTable="ProyectoColumn" msprop:Generator_UserColumnName="Proyecto" type="xs:string" minOccurs="0" />
+              <xs:element name="NroConvenio" msprop:Generator_ColumnVarNameInTable="columnNroConvenio" msprop:Generator_ColumnPropNameInRow="NroConvenio" msprop:Generator_ColumnPropNameInTable="NroConvenioColumn" msprop:Generator_UserColumnName="NroConvenio" type="xs:string" minOccurs="0" />
+              <xs:element name="Corresponde" msprop:Generator_ColumnVarNameInTable="columnCorresponde" msprop:Generator_ColumnPropNameInRow="Corresponde" msprop:Generator_ColumnPropNameInTable="CorrespondeColumn" msprop:Generator_UserColumnName="Corresponde" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
+              <xs:element name="Concepto" msprop:Generator_ColumnVarNameInTable="columnConcepto" msprop:Generator_ColumnPropNameInRow="Concepto" msprop:Generator_ColumnPropNameInTable="ConceptoColumn" msprop:Generator_UserColumnName="Concepto" type="xs:string" minOccurs="0" />
+              <xs:element name="IdManifiesto" msprop:Generator_ColumnVarNameInTable="columnIdManifiesto" msprop:Generator_ColumnPropNameInRow="IdManifiesto" msprop:Generator_ColumnPropNameInTable="IdManifiestoColumn" msprop:Generator_UserColumnName="IdManifiesto" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Rubro" msprop:Generator_TableClassName="RubroDataTable" msprop:Generator_TableVarName="tableRubro" msprop:Generator_TablePropName="Rubro" msprop:Generator_RowDeletingName="RubroRowDeleting" msprop:Generator_RowChangingName="RubroRowChanging" msprop:Generator_RowEvHandlerName="RubroRowChangeEventHandler" msprop:Generator_RowDeletedName="RubroRowDeleted" msprop:Generator_UserTableName="Rubro" msprop:Generator_RowChangedName="RubroRowChanged" msprop:Generator_RowEvArgName="RubroRowChangeEvent" msprop:Generator_RowClassName="RubroRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IdRubro" msprop:Generator_ColumnVarNameInTable="columnIdRubro" msprop:Generator_ColumnPropNameInRow="IdRubro" msprop:Generator_ColumnPropNameInTable="IdRubroColumn" msprop:Generator_UserColumnName="IdRubro" type="xs:string" minOccurs="0" />
+              <xs:element name="Rubro" msprop:Generator_ColumnVarNameInTable="columnRubro" msprop:Generator_ColumnPropNameInRow="Rubro" msprop:Generator_ColumnPropNameInTable="RubroColumn" msprop:Generator_UserColumnName="Rubro" type="xs:string" minOccurs="0" />
+              <xs:element name="IdManifiesto" msprop:Generator_ColumnVarNameInTable="columnIdManifiesto" msprop:Generator_ColumnPropNameInRow="IdManifiesto" msprop:Generator_ColumnPropNameInTable="IdManifiestoColumn" msprop:Generator_UserColumnName="IdManifiesto" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ManifiestoDetalle" msprop:Generator_TableClassName="ManifiestoDetalleDataTable" msprop:Generator_TableVarName="tableManifiestoDetalle" msprop:Generator_TablePropName="ManifiestoDetalle" msprop:Generator_RowDeletingName="ManifiestoDetalleRowDeleting" msprop:Generator_RowChangingName="ManifiestoDetalleRowChanging" msprop:Generator_RowEvHandlerName="ManifiestoDetalleRowChangeEventHandler" msprop:Generator_RowDeletedName="ManifiestoDetalleRowDeleted" msprop:Generator_UserTableName="ManifiestoDetalle" msprop:Generator_RowChangedName="ManifiestoDetalleRowChanged" msprop:Generator_RowEvArgName="ManifiestoDetalleRowChangeEvent" msprop:Generator_RowClassName="ManifiestoDetalleRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IdRubro" msprop:Generator_ColumnVarNameInTable="columnIdRubro" msprop:Generator_ColumnPropNameInRow="IdRubro" msprop:Generator_ColumnPropNameInTable="IdRubroColumn" msprop:Generator_UserColumnName="IdRubro" type="xs:string" minOccurs="0" />
+              <xs:element name="Orden" msprop:Generator_ColumnVarNameInTable="columnOrden" msprop:Generator_ColumnPropNameInRow="Orden" msprop:Generator_ColumnPropNameInTable="OrdenColumn" msprop:Generator_UserColumnName="Orden" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
+              <xs:element name="Clase" msprop:Generator_ColumnVarNameInTable="columnClase" msprop:Generator_ColumnPropNameInRow="Clase" msprop:Generator_ColumnPropNameInTable="ClaseColumn" msprop:Generator_UserColumnName="Clase" type="xs:string" minOccurs="0" />
+              <xs:element name="NroComprobante" msprop:Generator_ColumnVarNameInTable="columnNroComprobante" msprop:Generator_ColumnPropNameInRow="NroComprobante" msprop:Generator_ColumnPropNameInTable="NroComprobanteColumn" msprop:Generator_UserColumnName="NroComprobante" type="xs:string" minOccurs="0" />
+              <xs:element name="RazonSocial" msprop:Generator_ColumnVarNameInTable="columnRazonSocial" msprop:Generator_ColumnPropNameInRow="RazonSocial" msprop:Generator_ColumnPropNameInTable="RazonSocialColumn" msprop:Generator_UserColumnName="RazonSocial" type="xs:string" minOccurs="0" />
+              <xs:element name="Concepto" msprop:Generator_ColumnVarNameInTable="columnConcepto" msprop:Generator_ColumnPropNameInRow="Concepto" msprop:Generator_ColumnPropNameInTable="ConceptoColumn" msprop:Generator_UserColumnName="Concepto" type="xs:string" minOccurs="0" />
+              <xs:element name="Importe" msprop:Generator_ColumnVarNameInTable="columnImporte" msprop:Generator_ColumnPropNameInRow="Importe" msprop:Generator_ColumnPropNameInTable="ImporteColumn" msprop:Generator_UserColumnName="Importe" type="xs:string" minOccurs="0" />
+              <xs:element name="Observaciones" msprop:Generator_ColumnVarNameInTable="columnObservaciones" msprop:Generator_ColumnPropNameInRow="Observaciones" msprop:Generator_ColumnPropNameInTable="ObservacionesColumn" msprop:Generator_UserColumnName="Observaciones" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

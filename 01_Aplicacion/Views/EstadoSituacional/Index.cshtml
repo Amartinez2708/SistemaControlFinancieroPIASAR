@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+        <div class="breadcrumb-header">
+            <h4 style="color: #bf0909;">
+                <i class="fa fa-tags"></i> &nbsp; Estado Situacional de Obras PIASAR
+            </h4>
+            <span></span>
+        </div>
+        <div class="page-header-breadcrumb">
+            <span id="SpanFechaInicio"></span>
+        </div>
+    </div>
+</div>
+<script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+</script>
+
+<div class="row">
+    <div class="col-sm-12 col-lg-5">
+        <div class="col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="sub-title"><h4>Proyecto tipo: Expediente Técnico</h4></div>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card bg-c-lite-green order-card" onclick="VerProyectos(1,4)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/pages.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroElaboracionET" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">En Elaboración<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card bg-c-pink order-card" onclick="VerProyectos(1,1)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/corte-de-cinta.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroActosPreviosET" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Actos Previos<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card bg-c-green order-card" onclick="VerProyectos(1,2)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/finish-line.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroConcluidosET" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Concluidos<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="sub-title"><h4>Proyecto tipo: Obra</h4></div>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-4 d-none">
+                            <div class="card bg-c-lite-green order-card" onclick="VerProyectos(2,4)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/pages.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroElaboracion" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">En Elaboración<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card bg-c-pink order-card" onclick="VerProyectos(2,1)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/corte-de-cinta.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroActosPrevios" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Por Iniciar<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card bg-c-blue order-card" onclick="VerProyectos(2,3)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/workers.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroEjecucion" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">En Ejecución<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-6 d-none">
+                            <div class="card bg-c-yellow order-card" onclick="VerProyectos(2,5)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/lavado.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroPostEjecucion" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">En Post-Ejecución<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card bg-c-green order-card" onclick="VerProyectos(2,2)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="">
+                                        <img src="../Content/Images/finish-line.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroConcluido" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Concluidos<br />&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-7">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-pie-chart"></i> Obras Concluidas: Sub-Estado
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+                <div id="chartCulminadas" style="height:736px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-6 d-none">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-pie-chart"></i> Estado Situacional
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+                <div id="chartEstado" style="height:381px;">
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-lg-6">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-line-chart"></i> Seguimiento de Proyectos PIASAR - Núcleo Ejecutor
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+                <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                    <table id="dtNucleo" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-line-chart"></i> Seguimiento de Proyectos PIASAR - Contrata
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+                <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                    <table id="dtContrata" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-estadoinformacionproyecto" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-info-circle"></i> Estado de Información de Proyecto
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtEstadoInfo" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsEstadoSituacional.js"></script>
+}
