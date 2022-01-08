@@ -2,43 +2,44 @@
     $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
     Indicadores();
     //GrfMontoVSPresupuesto();
-    IndicadoresFiltro()
-    ListAutorizacionVSManifiesto();
+    //IndicadoresFiltro()
+    //ListAutorizacionVSManifiesto();
     GraficoHistorial();
-    GraficoHistorialPorcentual();
+    //GraficoHistorialPorcentual();
     EstadoFinanciero();
     GraficoPendienteAutorizacion();
     GraficoPendienteRendicion();
+    GraficoDesembolsoProgramado();
     //ResumenEstadoActividad();
-    $("#ddlDepartamento").change(function () {
-        ddlProvincia($("#ddlDepartamento").val())
-        IndicadoresFiltro();
-        ListAutorizacionVSManifiesto();
-    });
-    $("#ddlProvincia").change(function () {
-        ddlDistrito($("#ddlDepartamento").val() + $("#ddlProvincia").val())
-        IndicadoresFiltro();
-        ListAutorizacionVSManifiesto();
-    });
-    $("#ddlDistrito").change(function () {
-        IndicadoresFiltro();
-        ListAutorizacionVSManifiesto();
-    });
-    $("#txtSnip").change(function () {
-        IndicadoresFiltro();
-        ListAutorizacionVSManifiesto();
-    });
-    $("#txtCUI").change(function () {
-        IndicadoresFiltro();
-        ListAutorizacionVSManifiesto();
-    });
-    $("#ddlAnio").change(function () {
-        IndicadoresFiltro();
-        ListAutorizacionVSManifiesto();
-    });
-    $("#ddlAnioJustificacion").change(function () {
-        ListMontoProyectoVSPresupuesto()
-    });
+    //$("#ddlDepartamento").change(function () {
+    //    ddlProvincia($("#ddlDepartamento").val())
+    //    IndicadoresFiltro();
+    //    ListAutorizacionVSManifiesto();
+    //});
+    //$("#ddlProvincia").change(function () {
+    //    ddlDistrito($("#ddlDepartamento").val() + $("#ddlProvincia").val())
+    //    IndicadoresFiltro();
+    //    ListAutorizacionVSManifiesto();
+    //});
+    //$("#ddlDistrito").change(function () {
+    //    IndicadoresFiltro();
+    //    ListAutorizacionVSManifiesto();
+    //});
+    //$("#txtSnip").change(function () {
+    //    IndicadoresFiltro();
+    //    ListAutorizacionVSManifiesto();
+    //});
+    //$("#txtCUI").change(function () {
+    //    IndicadoresFiltro();
+    //    ListAutorizacionVSManifiesto();
+    //});
+    //$("#ddlAnio").change(function () {
+    //    IndicadoresFiltro();
+    //    ListAutorizacionVSManifiesto();
+    //});
+    //$("#ddlAnioJustificacion").change(function () {
+    //    //ListMontoProyectoVSPresupuesto()
+    //});
     $('#dtMtoProyectoVSPresupuesto').on('column-sizing.dt', function (e, settings) {
         $("#dtMtoProyectoVSPresupuesto thead tr").css({ 'height': "0" });
     });
@@ -1990,6 +1991,224 @@ function GraficoPendienteRendicion() {
             chart.cursor.lineY.disabled = true;
 
         }); // end am4core.ready()
+    });
+}
+
+function GraficoDesembolsoProgramado() {
+    $.get("/MonitoreoPIASAR/GraficoDesembolsoProgramado?anio=" + 2021, function (data, status) {//$("#ddlAnioPMD").val()
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            // Create chart instance
+            var chart = am4core.create("chartProgramacionMensualDesembolsos", am4charts.XYChart);
+            chart.language.locale = am4lang_es_ES;
+            chart.language.locale["_decimalSeparator"] = ".";
+            chart.language.locale["_thousandSeparator"] = ",";
+            chart.language.locale["_date_month"] = "MMMM";
+            chart.numberFormatter.numberFormat = "###,###,###.##";
+
+            chart.legend = new am4charts.Legend()
+            chart.legend.position = 'top'
+            chart.legend.paddingBottom = 20
+            chart.legend.labels.template.maxWidth = 95
+            // Increase contrast by taking evey second color
+            chart.colors.step = 2;
+            // Add data
+            chart.data = data;
+
+            
+            // Create axes
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "MesNombre";
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.minGridDistance = 50;
+
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.title.text = "Total";
+            valueAxis.title.fontWeight = 800;
+            //valueAxis.min = 0;
+            //valueAxis.max = 100;
+            valueAxis.strictMinMax = true;
+            //valueAxis.renderer.labels.template.adapter.add("text", (text, label) => { return label.dataItem.value + "%"; })
+
+            function CallDetalle(ev) {
+                debugger;
+                VerDesembolsoProgramado(ev.target.dataItem.dataContext.Mes)
+            }
+
+            var series = chart.series.push(new am4charts.ColumnSeries())
+            series.dataFields.valueY = 'TotalProgramado'
+            series.dataFields.categoryX = 'MesNombre'
+            series.name = 'Total Programado'
+
+            series.tooltipText = "Total Programado en {categoryX}: [bold]{valueY}[/]";
+            series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+            series.columns.template.stroke = am4core.color("#333");
+            series.columns.template.strokeWidth = 2;
+            series.columns.template.events.on("hit", CallDetalle, this);
+
+            var series2 = chart.series.push(new am4charts.ColumnSeries())
+            series2.dataFields.valueY = 'TotalEjecutado'
+            series2.dataFields.categoryX = 'MesNombre'
+            series2.name = 'Total Ejecutado'
+
+            series2.tooltipText = "Total Ejecutado en {categoryX}: [bold]{valueY}[/]";
+            series2.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+            series2.columns.template.stroke = am4core.color("#333");
+            series2.columns.template.strokeWidth = 2;
+            series2.columns.template.events.on("hit", CallDetalle, this);
+
+            chart.cursor = new am4charts.XYCursor();
+            chart.cursor.lineX.disabled = true;
+            chart.cursor.lineY.disabled = true;
+
+        }); // end am4core.ready()
+    });
+}
+
+function VerDesembolsoProgramado(mes) {
+    $("#modal-ProgramacionMensualDesembolsos").modal({ backdrop: 'static', keyboard: true, show: true });
+    var tabla = $("#dtProgramacionMensualDesembolsos").DataTable({
+        processing: true,
+        filter: true,
+        destroy: true,
+        searching: true,
+        oSearch: { "bSmart": false, "bRegex": true },
+        //responsive: true,
+        fixedColumns: true,
+        scrollCollapse: true,
+        scrollX: true,
+        paging: false,
+        info: false,
+        ordering: true,
+        paging: false,
+        //pageLength: 12,
+        //order: [[4, "desc"]],
+        ajax: {
+            url: "/MonitoreoPIASAR/ListDesembolsoProgramado?anio=2021&mes=" + mes,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: "json"
+        },
+        dom: 'Bfrtip',
+        buttons: [
+             {
+                 text: '<span class="fa fa-file-excel-o"></span> Excel',
+                 className: 'btn btn-mat btn-success mr-1 mb-2',
+                 extend: 'excelHtml5',
+                 title: getNombreFile('rpt_ProgramacionMensual_')
+             },
+             {
+                 text: '<span class="fa fa-clipboard"></span> Copiar',
+                 className: 'btn btn-mat btn-warning mr-1 mb-2',
+                 extend: 'copy',
+                 title: getNombreFile('rpt_ProgramacionMensual_')
+             }
+        ],
+        columns: [
+                    { "name": "", "title": "CUI", "data": "CUI", "autowidth": true },
+                    { "name": "", "title": "SNIP", "data": "SNIP", "autowidth": true },
+                    { "name": "", "title": "Localidad", "data": "Localidad", "autowidth": true },
+                    { "name": "", "title": "Mes", "data": "MesNombre", "autowidth": true },
+                    { "name": "", "title": "RO </br>Programado", "data": "ROProgramado", "autowidth": true },
+                    { "name": "", "title": "ROOC </br>Programado", "data": "ROOCProgramado", "autowidth": true },
+                    { "name": "", "title": "RO </br>Ejecutado", "data": "RO", "autowidth": true },
+                    { "name": "", "title": "ROOC </br>Ejecutado", "data": "ROOC", "autowidth": true },
+                    { "name": "", "title": "Total </br>Programado", "data": "TotalProgramado", "autowidth": true },
+                    { "name": "", "title": "Total </br>Ejecutado", "data": "TotalEjecutado", "autowidth": true },
+                    { "name": "", "title": "Diferencia", "data": "Diferencia", "autowidth": true },
+        ],
+        columnDefs: [
+            {
+                "targets": 4,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.ROProgramado);
+                }
+            },
+            {
+                "targets":5,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.ROOCProgramado);
+                }
+            },
+            {
+                "targets": 6,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.RO);
+                }
+            },
+            {
+                "targets": 7,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.ROOC);
+                }
+            },
+             {
+                 "targets": 8,
+                 "data": null,
+                 "className": "align-middle text-center",
+                 "mRender": function (data, type, full) {
+                     return formatMoney(full.TotalProgramado);
+                 }
+             },
+             {
+                 "targets": 9,
+                 "data": null,
+                 "className": "align-middle text-center",
+                 "mRender": function (data, type, full) {
+                     return formatMoney(full.TotalEjecutado);
+                 }
+             },
+             {
+                 "targets": 10,
+                 "data": null,
+                 "className": "align-middle text-center",
+                 "mRender": function (data, type, full) {
+                     return formatMoney(full.Diferencia);
+                 }
+             },
+            {
+                "targets": "_all",
+                "className": "align-middle",
+            }
+        ],
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        fnDrawCallback: function () {
+            $("#dtProgramacionMensualDesembolsos thead tr").css({ 'height': "0" });
+        },
+        initComplete: function (settings, json) {
+            $("#dtProgramacionMensualDesembolsos thead tr").css({ 'height': "0" });
+        },
     });
 }
 

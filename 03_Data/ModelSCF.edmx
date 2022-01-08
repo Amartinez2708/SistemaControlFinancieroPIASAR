@@ -157,6 +157,38 @@
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
+        <EntityType Name="DesembolsoProgramadoAnual">
+          <Key>
+            <PropertyRef Name="IdProgramadoAnual" />
+          </Key>
+          <Property Name="IdProgramadoAnual" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" />
+          <Property Name="Anio" Type="int" />
+          <Property Name="RO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ROOC" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DesembolsoProgramadoMensual">
+          <Key>
+            <PropertyRef Name="IdDesembolsoProgramadoMensual" />
+          </Key>
+          <Property Name="IdDesembolsoProgramadoMensual" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProgramadoAnual" Type="int" />
+          <Property Name="Mes" Type="int" />
+          <Property Name="ROProgramado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ROOCProgramado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ROOC" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="DevengadoMensual">
           <Key>
             <PropertyRef Name="IdDevengadoMensual" />
@@ -849,6 +881,30 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Desembols__Fecha__4E1E9780">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="0..1" />
+          <End Role="DesembolsoProgramadoAnual" Type="Self.DesembolsoProgramadoAnual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="DesembolsoProgramadoAnual">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Desembols__Fecha__54CB950F">
+          <End Role="DesembolsoProgramadoAnual" Type="Self.DesembolsoProgramadoAnual" Multiplicity="0..1" />
+          <End Role="DesembolsoProgramadoMensual" Type="Self.DesembolsoProgramadoMensual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesembolsoProgramadoAnual">
+              <PropertyRef Name="IdProgramadoAnual" />
+            </Principal>
+            <Dependent Role="DesembolsoProgramadoMensual">
+              <PropertyRef Name="IdProgramadoAnual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Devengado__Fecha__2334397B">
           <End Role="SeguimientoEjecucionProyectosInversion" Type="Self.SeguimientoEjecucionProyectosInversion" Multiplicity="1" />
           <End Role="DevengadoMensual" Type="Self.DevengadoMensual" Multiplicity="*" />
@@ -1041,6 +1097,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="ComprobanteDetalle" EntityType="Self.ComprobanteDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Desembolso" EntityType="Self.Desembolso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesembolsoProgramadoAnual" EntityType="Self.DesembolsoProgramadoAnual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesembolsoProgramadoMensual" EntityType="Self.DesembolsoProgramadoMensual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DevengadoMensual" EntityType="Self.DevengadoMensual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoricoMonitoreo" EntityType="Self.HistoricoMonitoreo" Schema="dbo" store:Type="Tables" />
@@ -1225,6 +1283,14 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
     [ListProv].[TotalManifiesto] AS [TotalManifiesto]
     FROM [dbo].[ListProv] AS [ListProv]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Desembols__Fecha__4E1E9780" Association="Self.FK__Desembols__Fecha__4E1E9780">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="DesembolsoProgramadoAnual" EntitySet="DesembolsoProgramadoAnual" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Desembols__Fecha__54CB950F" Association="Self.FK__Desembols__Fecha__54CB950F">
+            <End Role="DesembolsoProgramadoAnual" EntitySet="DesembolsoProgramadoAnual" />
+            <End Role="DesembolsoProgramadoMensual" EntitySet="DesembolsoProgramadoMensual" />
+          </AssociationSet>
           <AssociationSet Name="FK__Devengado__Fecha__2334397B" Association="Self.FK__Devengado__Fecha__2334397B">
             <End Role="SeguimientoEjecucionProyectosInversion" EntitySet="SeguimientoEjecucionProyectosInversion" />
             <End Role="DevengadoMensual" EntitySet="DevengadoMensual" />
@@ -1590,6 +1656,16 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK__Monitoreo__Fecha__13F1F5EB" Association="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB">
             <End Role="Proyecto" EntitySet="Proyecto" />
             <End Role="MonitoreoObras" EntitySet="MonitoreoObras" />
+          </AssociationSet>
+          <EntitySet Name="DesembolsoProgramadoAnual" EntityType="BD_NucleosEjecutoresModel.DesembolsoProgramadoAnual" />
+          <AssociationSet Name="FK__Desembols__Fecha__4E1E9780" Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__4E1E9780">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="DesembolsoProgramadoAnual" EntitySet="DesembolsoProgramadoAnual" />
+          </AssociationSet>
+          <EntitySet Name="DesembolsoProgramadoMensual" EntityType="BD_NucleosEjecutoresModel.DesembolsoProgramadoMensual" />
+          <AssociationSet Name="FK__Desembols__Fecha__54CB950F" Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__54CB950F">
+            <End Role="DesembolsoProgramadoAnual" EntitySet="DesembolsoProgramadoAnual" />
+            <End Role="DesembolsoProgramadoMensual" EntitySet="DesembolsoProgramadoMensual" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MANIFIESTO_GASTO_DETALLE">
@@ -2105,6 +2181,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <NavigationProperty Name="Desembolso" Relationship="BD_NucleosEjecutoresModel.FK_DesembolsoProyecto" FromRole="Proyecto" ToRole="Desembolso" />
           <NavigationProperty Name="MANIFIESTO_GASTO" Relationship="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_Proyecto" FromRole="Proyecto" ToRole="MANIFIESTO_GASTO" />
           <NavigationProperty Name="MonitoreoObras" Relationship="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB" FromRole="Proyecto" ToRole="MonitoreoObras" />
+          <NavigationProperty Name="DesembolsoProgramadoAnual" Relationship="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__4E1E9780" FromRole="Proyecto" ToRole="DesembolsoProgramadoAnual" />
         </EntityType>
         <Association Name="FK_Autorizacion_Gasto_Proyecto">
           <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="0..1" />
@@ -2434,6 +2511,65 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="MonitoreoObras">
               <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DesembolsoProgramadoAnual">
+          <Key>
+            <PropertyRef Name="IdProgramadoAnual" />
+          </Key>
+          <Property Name="IdProgramadoAnual" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProyecto" Type="Int32" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="RO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ROOC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Proyecto" Relationship="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__4E1E9780" FromRole="DesembolsoProgramadoAnual" ToRole="Proyecto" />
+          <NavigationProperty Name="DesembolsoProgramadoMensual" Relationship="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__54CB950F" FromRole="DesembolsoProgramadoAnual" ToRole="DesembolsoProgramadoMensual" />
+        </EntityType>
+        <Association Name="FK__Desembols__Fecha__4E1E9780">
+          <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.DesembolsoProgramadoAnual" Role="DesembolsoProgramadoAnual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="DesembolsoProgramadoAnual">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DesembolsoProgramadoMensual">
+          <Key>
+            <PropertyRef Name="IdDesembolsoProgramadoMensual" />
+          </Key>
+          <Property Name="IdDesembolsoProgramadoMensual" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProgramadoAnual" Type="Int32" />
+          <Property Name="Mes" Type="Int32" />
+          <Property Name="ROProgramado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ROOCProgramado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ROOC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DesembolsoProgramadoAnual" Relationship="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__54CB950F" FromRole="DesembolsoProgramadoMensual" ToRole="DesembolsoProgramadoAnual" />
+        </EntityType>
+        <Association Name="FK__Desembols__Fecha__54CB950F">
+          <End Type="BD_NucleosEjecutoresModel.DesembolsoProgramadoAnual" Role="DesembolsoProgramadoAnual" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.DesembolsoProgramadoMensual" Role="DesembolsoProgramadoMensual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesembolsoProgramadoAnual">
+              <PropertyRef Name="IdProgramadoAnual" />
+            </Principal>
+            <Dependent Role="DesembolsoProgramadoMensual">
+              <PropertyRef Name="IdProgramadoAnual" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3271,6 +3407,40 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="PoblacionSNIP" ColumnName="PoblacionSNIP" />
                 <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
                 <ScalarProperty Name="IdMonitoreoObras" ColumnName="IdMonitoreoObras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesembolsoProgramadoAnual">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.DesembolsoProgramadoAnual">
+              <MappingFragment StoreEntitySet="DesembolsoProgramadoAnual">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="ROOC" ColumnName="ROOC" />
+                <ScalarProperty Name="RO" ColumnName="RO" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdProgramadoAnual" ColumnName="IdProgramadoAnual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesembolsoProgramadoMensual">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.DesembolsoProgramadoMensual">
+              <MappingFragment StoreEntitySet="DesembolsoProgramadoMensual">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="ROOC" ColumnName="ROOC" />
+                <ScalarProperty Name="RO" ColumnName="RO" />
+                <ScalarProperty Name="ROOCProgramado" ColumnName="ROOCProgramado" />
+                <ScalarProperty Name="ROProgramado" ColumnName="ROProgramado" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="IdProgramadoAnual" ColumnName="IdProgramadoAnual" />
+                <ScalarProperty Name="IdDesembolsoProgramadoMensual" ColumnName="IdDesembolsoProgramadoMensual" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -21,6 +21,7 @@ namespace _03_Data
             this.Desembolso = new HashSet<Desembolso>();
             this.MANIFIESTO_GASTO = new HashSet<MANIFIESTO_GASTO>();
             this.MonitoreoObras = new HashSet<MonitoreoObras>();
+            this.DesembolsoProgramadoAnual = new HashSet<DesembolsoProgramadoAnual>();
         }
     
         public int IdProyecto { get; set; }
@@ -88,5 +89,7 @@ namespace _03_Data
         public virtual ICollection<MANIFIESTO_GASTO> MANIFIESTO_GASTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonitoreoObras> MonitoreoObras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DesembolsoProgramadoAnual> DesembolsoProgramadoAnual { get; set; }
     }
 }

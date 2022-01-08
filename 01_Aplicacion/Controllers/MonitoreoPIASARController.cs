@@ -222,5 +222,26 @@ namespace _01_Aplicacion.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult GraficoDesembolsoProgramado(int anio)
+        {
+            List<EnDesembolsoProgramadoMensual> result = new List<EnDesembolsoProgramadoMensual>();
+            result = objMonitoreoPIASAR.GraficoDesembolsoProgramado(anio);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListDesembolsoProgramado(int anio, int mes)
+        {
+            List<EnDesembolsoProgramadoMensual> result = new List<EnDesembolsoProgramadoMensual>();
+            result = objMonitoreoPIASAR.ListDesembolsoProgramado(anio, mes);
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            serializer.MaxJsonLength = 500000000;
+
+            object json = new { data = result.ToList() };
+            var jsonData = Json(json, JsonRequestBehavior.AllowGet);
+            jsonData.MaxJsonLength = 500000000;
+            return jsonData;
+        }
     }
 }

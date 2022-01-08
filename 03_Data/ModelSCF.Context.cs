@@ -67,6 +67,8 @@ namespace _03_Data
         public virtual DbSet<DevengadoMensual> DevengadoMensual { get; set; }
         public virtual DbSet<ProgramadoEjecutadoMensual> ProgramadoEjecutadoMensual { get; set; }
         public virtual DbSet<MonitoreoObras> MonitoreoObras { get; set; }
+        public virtual DbSet<DesembolsoProgramadoAnual> DesembolsoProgramadoAnual { get; set; }
+        public virtual DbSet<DesembolsoProgramadoMensual> DesembolsoProgramadoMensual { get; set; }
     
         public virtual ObjectResult<sp_ListAutorizacionRubro_Result> sp_ListAutorizacionRubro(string ids)
         {

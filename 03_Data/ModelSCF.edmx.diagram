@@ -60,6 +60,10 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Programad__Fecha__73501C2F" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.MonitoreoObras" Width="1.5" PointX="3" PointY="26.25" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DesembolsoProgramadoAnual" Width="1.5" PointX="3" PointY="33.875" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__4E1E9780" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DesembolsoProgramadoMensual" Width="1.5" PointX="5.25" PointY="33.75" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__54CB950F" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     Indicadores();
     Nucleos();
     Contrata();
@@ -9,12 +11,26 @@ function Indicadores() {
         $("#NroActosPrevios").html(data.NroActosPrevios);
         $("#NroConcluido").html(data.NroConcluido);
         $("#NroEjecucion").html(data.NroEjecucion);
+        $("#nroContrataConcluidoO").html(data.nroContrataConcluidoO);
+        $("#nroNucleoConcluidoO").html(data.nroNucleoConcluidoO);
+
+        $("#nroContrataElaboracionET").html(data.nroContrataElaboracionET);
+        $("#nroNucleoElaboracionET").html(data.nroNucleoElaboracionET);
+        $("#nroContrataActosPreviosET").html(data.nroContrataActosPreviosET);
+        $("#nroNucleoActosPreviosET").html(data.nroNucleoActosPreviosET);
+        $("#nroContrataIniciarO").html(data.nroContrataIniciarO);
+        $("#nroNucleoIniciarO").html(data.nroNucleoIniciarO);
+        $("#nroContrataEjecucionO").html(data.nroContrataEjecucionO);
+        $("#nroNucleoEjecucionO").html(data.nroNucleoEjecucionO);
+
         //$("#NroElaboracion").html(data.NroElaboracion);
         //$("#NroPostEjecucion").html(data.NroPostEjecucion);
 
         $("#NroActosPreviosET").html(data.NroActosPreviosET);
         $("#NroConcluidosET").html(data.NroConcluidoET);
         $("#NroElaboracionET").html(data.NroElaboracionET);
+        $("#nroContrataConcluidoET").html(data.nroContrataConcluidoET);
+        $("#nroNucleoConcluidoET").html(data.nroNucleoConcluidoET);
 
         am4core.ready(function () {
 
@@ -556,8 +572,23 @@ function VerProyectos(tipo, estado) {
             return nRow;
         },
         initComplete: function (settings, json) {
+            var nucleos = 0;
+            var contrata = 0;
             $("#dtEstadoInfo thead tr").css({ 'height': "0" });
+            var table = $("#dtEstadoInfo").DataTable();
+            table.rows().data().each(function (value) {
+                debugger;
 
+
+                if (value.Modalidad == "NÚCLEO EJECUTOR") {
+                    nucleos = nucleos + 1;
+
+                } else if (value.Modalidad == "CONTRATA") {
+                    contrata = contrata + 1;
+                }
+                $("#spnNroContrata").html(contrata);
+                $("#spnNroNucleo").html(nucleos);
+            });
             //$('#dtEstadoFinanciero tr:last').addClass("f-w-600")
             //$('#dtEstadoFinanciero tr:last td:eq(5)').addClass("d-none")
         },
@@ -667,6 +698,21 @@ function VerProyectosConcluidos(concluido) {
                    { "name": "", "title": "Comentario", "data": "Comentarios", "autowidth": true },
         ],
         columnDefs: [
+            //{
+            //    "targets": 6,
+            //    "data": null,
+            //    "className": "align-middle",
+            //    "mRender": function (data, type, full) {
+            //        debugger;
+            //        if (full.Modalidad == "NÚCLEO EJECUTOR") {
+            //            nucleos = nucleos + 1;
+                        
+            //        } else if(full.Modalidad == "CONTRATA") {
+            //            contrata = contrata + 1;
+            //        }
+            //        return full.Modalidad;
+            //    }
+            //},
             {
                 "targets": 8,
                 "data": null,
@@ -733,8 +779,25 @@ function VerProyectosConcluidos(concluido) {
             return nRow;
         },
         initComplete: function (settings, json) {
+
+            var nucleos = 0;
+            var contrata = 0;
             $("#dtEstadoInfo thead tr").css({ 'height': "0" });
-        },
+            var table = $("#dtEstadoInfo").DataTable();
+            table.rows().data().each(function (value) {
+                debugger;
+                
+
+                if (value.Modalidad == "NÚCLEO EJECUTOR") {
+                    nucleos = nucleos + 1;
+
+                } else if (value.Modalidad == "CONTRATA") {
+                    contrata = contrata + 1;
+                }
+                $("#spnNroContrata").html(contrata);
+                $("#spnNroNucleo").html(nucleos);
+            });
+        }
     });
 }
 

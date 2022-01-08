@@ -75,6 +75,12 @@
     <Compile Include="Desembolso.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="DesembolsoProgramadoAnual.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DesembolsoProgramadoMensual.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="DesembolsoVSJustificado.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>

@@ -1176,5 +1176,71 @@ namespace _04_Servicios
 
             return result;
         }
+
+        public List<EnDesembolsoProgramadoMensual> GraficoDesembolsoProgramado(int anio)
+        {
+            List<EnDesembolsoProgramadoMensual> result = new List<EnDesembolsoProgramadoMensual>();
+
+            var obj = context.DesembolsoProgramadoAnual.Where(x =>x.Anio==anio && x.Activo == true).ToList();
+
+            string[] meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+            if (obj != null && obj.Count() > 0)
+            {
+                
+
+                for (int i = 1; i <= 12; i++)
+                {
+                    decimal? Programado = 0;
+                    decimal? Ejecutado = 0;
+
+                    foreach (var item in obj)
+                    {
+                        var objMensual = context.DesembolsoProgramadoMensual.Where(x => x.IdProgramadoAnual == item.IdProgramadoAnual && x.Mes == i).OrderByDescending(x => x.Fecha_add).FirstOrDefault();
+                        Programado = Programado + (objMensual.ROProgramado + objMensual.ROOCProgramado);
+                        Ejecutado = Ejecutado + (objMensual.RO + objMensual.ROOC);
+                    }
+
+                    EnDesembolsoProgramadoMensual model = new EnDesembolsoProgramadoMensual();
+                    model.Mes = i;
+                    model.MesNombre = meses[i - 1];
+                    model.TotalProgramado = Programado;
+                    model.TotalEjecutado = Ejecutado;
+                    result.Add(model);
+                }
+
+            }
+            return result.ToList();
+        }
+        public List<EnDesembolsoProgramadoMensual> ListDesembolsoProgramado(int anio, int mes)
+        {
+            List<EnDesembolsoProgramadoMensual> result = new List<EnDesembolsoProgramadoMensual>();
+
+            var obj = context.DesembolsoProgramadoAnual.Where(x => x.Anio == anio && x.Activo == true).ToList();
+
+            string[] meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+            if (obj != null && obj.Count() > 0)
+            {
+                foreach (var item in obj)
+                {
+                    var Proyecto = context.Proyecto.SingleOrDefault(x => x.IdProyecto == item.IdProyecto);
+                    var objMensual = context.DesembolsoProgramadoMensual.Where(x => x.IdProgramadoAnual == item.IdProgramadoAnual && x.Mes == mes).OrderByDescending(x => x.Fecha_add).FirstOrDefault();
+
+                    EnDesembolsoProgramadoMensual model = new EnDesembolsoProgramadoMensual();
+                    model.CUI = Proyecto.CUI;
+                    model.SNIP = Proyecto.Snip;
+                    model.Localidad = Proyecto.Localidad;
+                    model.MesNombre = meses[mes - 1];
+                    model.ROProgramado = objMensual.ROProgramado;
+                    model.ROOCProgramado = objMensual.ROOCProgramado;
+                    model.RO = objMensual.RO;
+                    model.ROOC = objMensual.ROOC;
+                    model.TotalProgramado = model.ROProgramado + model.ROOCProgramado;
+                    model.TotalEjecutado = model.RO + model.ROOC;
+                    model.Diferencia = model.TotalProgramado - model.TotalEjecutado;
+                    result.Add(model);
+                }
+            }
+            return result.ToList();
+        }
     }
 }

@@ -43,5 +43,21 @@ namespace _02_Entidades
         public int NroOtaConcluida { get; set; }
         public int NroOtaLiquidada { get; set; }
         public int NroEnLiquidacion { get; set; }
+
+        public int nroContrataConcluidoO { get; set; }
+        public int nroNucleoConcluidoO { get; set; }
+        public int nroContrataConcluidoET { get; set; }
+        public int nroNucleoConcluidoET { get; set; }
+
+        public int nroContrataElaboracionET { get; set; }
+        public int nroNucleoElaboracionET { get; set; }
+        public int nroContrataActosPreviosET { get; set; }
+        public int nroNucleoActosPreviosET { get; set; }
+
+        public int nroContrataIniciarO { get; set; }
+        public int nroNucleoIniciarO { get; set; }
+        public int nroContrataEjecucionO { get; set; }
+        public int nroNucleoEjecucionO { get; set; }
+
     }
 }

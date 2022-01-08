@@ -43,6 +43,12 @@
                                     </div>
                                     <span id="NroElaboracionET" class="f-36 f-w-600">0</span>
                                     <p class="f-18 f-w-600">En Elaboración<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataElaboracionET">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoElaboracionET">0</span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -54,6 +60,12 @@
                                     </div>
                                     <span id="NroActosPreviosET" class="f-36 f-w-600">0</span>
                                     <p class="f-18 f-w-600">Actos Previos<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataActosPreviosET">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoActosPreviosET">0</span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -65,6 +77,12 @@
                                     </div>
                                     <span id="NroConcluidosET" class="f-36 f-w-600">0</span>
                                     <p class="f-18 f-w-600">Concluidos<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataConcluidoET">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoConcluidoET">0</span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -79,17 +97,6 @@
                 </div>
                 <div class="card-block">
                     <div class="row">
-                        <div class="col-md-6 col-xl-4 d-none">
-                            <div class="card bg-c-lite-green order-card" onclick="VerProyectos(2,4)">
-                                <div class="card-body user-radial-card">
-                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
-                                        <img src="../Content/Images/pages.png" style="width:90px;box-shadow: 0 0;">
-                                    </div>
-                                    <span id="NroElaboracion" class="f-36 f-w-600">0</span>
-                                    <p class="f-18 f-w-600">En Elaboración<br />&nbsp;</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-md-6 col-xl-4">
                             <div class="card bg-c-pink order-card" onclick="VerProyectos(2,1)">
                                 <div class="card-body user-radial-card">
@@ -98,6 +105,12 @@
                                     </div>
                                     <span id="NroActosPrevios" class="f-36 f-w-600">0</span>
                                     <p class="f-18 f-w-600">Por Iniciar<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataIniciarO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoIniciarO">0</span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -109,17 +122,12 @@
                                     </div>
                                     <span id="NroEjecucion" class="f-36 f-w-600">0</span>
                                     <p class="f-18 f-w-600">En Ejecución<br />&nbsp;</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-6 d-none">
-                            <div class="card bg-c-yellow order-card" onclick="VerProyectos(2,5)">
-                                <div class="card-body user-radial-card">
-                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
-                                        <img src="../Content/Images/lavado.png" style="width:90px;box-shadow: 0 0;">
-                                    </div>
-                                    <span id="NroPostEjecucion" class="f-36 f-w-600">0</span>
-                                    <p class="f-18 f-w-600">En Post-Ejecución<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataEjecucionO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoEjecucionO">0</span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +139,12 @@
                                     </div>
                                     <span id="NroConcluido" class="f-36 f-w-600">0</span>
                                     <p class="f-18 f-w-600">Concluidos<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataConcluidoO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoConcluidoO">0</span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -143,11 +157,11 @@
         <div class="card border-primary">
             <div class="card-header text-dark">
                 <h4 style="font-size: 18px;">
-                    <i class="fa fa-pie-chart"></i> Obras Concluidas: Sub-Estado
+                    <i class="fa fa-pie-chart"></i> Proyecto Tipo: Obra - Estado: Concluidos - Sub-Estado:
                 </h4>
             </div>
             <div class="card-block text-dark" style="padding:10px;">
-                <div id="chartCulminadas" style="height:736px;">
+                <div id="chartCulminadas" style="height:902px;">
                 </div>
             </div>
         </div>
@@ -210,7 +224,26 @@
             </div>
             <div class="modal-body">
                 <div class="form-group row">
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="alert alert-primary border-primary">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="icofont icofont-close-line-circled"></i>
+                            </button>
+                            <strong>Nro. Contrata:</strong>&nbsp;&nbsp;<span id="spnNroContrata">0</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="alert alert-primary border-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="icofont icofont-close-line-circled"></i>
+                            </button>
+                            <strong>Nro. Nucleos:</strong>&nbsp;&nbsp;<span id="spnNroNucleo">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        
                         <table id="dtEstadoInfo" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
                     </div>
                 </div>

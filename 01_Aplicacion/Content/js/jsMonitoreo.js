@@ -148,6 +148,7 @@ function AbrirMonitoreo(Id) {
         $("#Usuario").html(data.Usuario);
         $("#txtPoblacion").val(data.PoblacionSNIP);
         $("#ddlTipoProyecto").val(data.TipoProyecto);
+        $("#hdnModalidad").val(data.Modalidad);
         $("#ddlTipoEmpresa").val(data.TipoEmpresa);
         $("#txtConsorcioContrastista").val(data.ConsorcioContratista);
         $("#txtMontoContratado").val(data.MontoContratado);
@@ -191,6 +192,7 @@ function GuardarMonitoreo() {
         ConexionesRehabilitadasAlcantarillado: $("#txtCRU").val(),
         IdUsuario: $("#hdnIdUsuario").val(),
         DevengadoAcumulado: $("#txtDevengado").val(),
+        Modalidad: $("#hdnModalidad").val(),
     }
 
     $.ajax({

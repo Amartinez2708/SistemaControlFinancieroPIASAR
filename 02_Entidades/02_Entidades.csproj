@@ -50,6 +50,8 @@
     <Compile Include="EnComprobante.cs" />
     <Compile Include="EnComprobanteDetalle.cs" />
     <Compile Include="EnDepartamento.cs" />
+    <Compile Include="EnDesembolsoProgramadoAnual.cs" />
+    <Compile Include="EnDesembolsoProgramadoMensual.cs" />
     <Compile Include="EnDesembolsoVSJustificado.cs" />
     <Compile Include="EnDevengadoMensual.cs" />
     <Compile Include="EnDistrito.cs" />
