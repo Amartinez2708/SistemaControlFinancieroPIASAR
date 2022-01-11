@@ -980,6 +980,10 @@ function Indicadores() {
         if (data.PorcentajePendienteAutorizacion == "") { $("#PorcentajePendienteAutorizacion").html("% 0.00"); } else { $("#PorcentajePendienteAutorizacion").html("% " + AbreviarNumero(data.PorcentajePendienteAutorizacion)); $('#PorcentajePendienteAutorizacion').prop('title', "S/." + formatMoney(data.PendienteAutorizacion)); $('#mtoPorcentajePendienteAutorizacionNum').html("S/." + formatMoney(data.PendienteAutorizacion)) }
         if (data.PorcentajePendienteRendicion == "") { $("#PorcentajePendienteRendicion").html("% 0.00"); } else { $("#PorcentajePendienteRendicion").html("% " + AbreviarNumero(data.PorcentajePendienteRendicion)); $('#PorcentajePendienteRendicion').prop('title', "S/." + formatMoney(data.PendienteRendicion)); $('#mtoPorcentajePendienteRendicionNum').html("S/." + formatMoney(data.PendienteRendicion)) }
 
+        /**/
+        $("#spnMtoGirado").html("S/." + formatMoney(data.MtoDesembolso));
+        $("#spnPorGirar").html("S/." + formatMoney(data.MontoObras-data.MtoDesembolso));
+        /**/
         if (data.MtoAutorizacionAnterior < data.MtoAutorizacion)
         {
             var diferencia = (data.MtoAutorizacion - data.MtoAutorizacionAnterior);

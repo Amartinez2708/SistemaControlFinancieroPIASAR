@@ -564,6 +564,8 @@
     <Content Include="Content\Images\excel.png" />
     <Content Include="Content\Images\favico.ico" />
     <Content Include="Content\Images\finish-line.png" />
+    <Content Include="Content\Images\FondoCorreo.jpg" />
+    <Content Include="Content\Images\fondocorreo_grande.jpg" />
     <Content Include="Content\Images\HTML.png" />
     <Content Include="Content\Images\JPG.png" />
     <Content Include="Content\Images\justificacion.png" />
@@ -604,6 +606,7 @@
     <Content Include="Content\Images\Regiones\23.jpg" />
     <Content Include="Content\Images\Regiones\24.jpg" />
     <Content Include="Content\Images\Regiones\25.jpg" />
+    <Content Include="Content\Images\retorno-de-la-inversion.png" />
     <Content Include="Content\Images\search.png" />
     <Content Include="Content\Images\user-f.png" />
     <Content Include="Content\Images\user-m.png" />
