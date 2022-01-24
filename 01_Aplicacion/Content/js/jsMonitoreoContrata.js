@@ -1,4 +1,8 @@
 ﻿$(document).ready(function () {
+    if (getUrlParameter('Anio') != "") {
+        $('#hdnAnio').val(getUrlParameter('Anio'))
+        $('#AnioEjecucion').html(getUrlParameter('Anio'));
+    };
     ListSeguimiento();
 });
 
@@ -6,7 +10,7 @@
 function ListSeguimiento() {
     $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
 
-    $.get("/MonitoreoObrasContrataPIASAR/ListMonitoreoGeneralPorEquipos?anio=" + 2021, function (data, status) {
+    $.get("/MonitoreoObrasContrataPIASAR/ListMonitoreoGeneralPorEquipos?anio=" + $('#hdnAnio').val(), function (data, status) {
 
         var seguimiento = [];
 
@@ -226,7 +230,89 @@ function ListSeguimiento() {
 
         }); // end am4core.ready()
 
+        am4core.ready(function () {
 
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            // Create chart instance
+            var chart2 = am4core.create("chartComparativo", am4charts.XYChart);
+            chart2.language.locale = am4lang_es_ES;
+            chart2.language.locale["_decimalSeparator"] = ".";
+            chart2.language.locale["_thousandSeparator"] = ",";
+            chart2.language.locale["_date_month"] = "MMMM";
+            chart2.numberFormatter.numberFormat = "###,###,###.##";
+
+            chart2.legend = new am4charts.Legend()
+            chart2.legend.position = 'top'
+            chart2.legend.paddingBottom = 20
+            chart2.legend.labels.template.maxWidth = 95
+            // Increase contrast by taking evey second color
+            //chart.colors.step = 8;
+            // Add data
+            chart2.data = [{
+                "componente": "C1(Coordinación Técnica)",
+                "porcentage": PorcentajeMes_CT,
+                "monto": ResultadoMes_CT,
+                "fill": "#dc3545"
+            }, {
+                "componente": "C2(CT-CA)",
+                "porcentage": PorcentajeMes_C2,
+                "monto": ResultadoMes_C2,
+                "fill": "#4099ff"
+            }, {
+                "componente": "C3(Coordinación Administrativa)",
+                "porcentage": PorcentajeMes_CA,
+                "monto": ResultadoMes_CA,
+                "fill": "#28a745"
+            }];
+
+
+            // Create axes
+            var categoryAxis = chart2.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "componente";
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.minGridDistance = 50;
+
+            var valueAxis = chart2.yAxes.push(new am4charts.ValueAxis());
+            //valueAxis.title.text = "Total";
+            valueAxis.title.fontWeight = 800;
+            valueAxis.min = 0;
+            valueAxis.max = 200;
+            valueAxis.strictMinMax = true;
+            valueAxis.renderer.labels.template.adapter.add("text", (text, label) => { return label.dataItem.value + "%"; })
+
+
+            var series = chart2.series.push(new am4charts.ColumnSeries());
+            series.dataFields.valueY = 'porcentage';
+            series.dataFields.categoryX = 'componente';
+            series.name = '% Total Ejecutado';
+            series.tooltipText = "{categoryX}: [bold]{valueY}% (S/.{monto})[/]";
+            series.columns.template.propertyFields.fill = "fill";
+
+            //series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+            //series.columns.template.stroke = am4core.color("#333");
+            //series.columns.template.strokeWidth = 2;
+            //series.propertyFields.fill = "fill";
+
+            // Add a guide
+            let range = valueAxis.axisRanges.create();
+            range.value = 100;
+            range.grid.stroke = am4core.color("#396478");
+            range.grid.strokeWidth = 2;
+            range.grid.strokeOpacity = 1;
+            range.grid.strokeDasharray = "3,3";
+            range.label.inside = true;
+            range.label.text = "100%";
+            range.label.fill = range.grid.stroke;
+            range.label.verticalCenter = "bottom";
+
+            chart2.cursor = new am4charts.XYCursor();
+            chart2.cursor.lineX.disabled = true;
+            chart2.cursor.lineY.disabled = true;
+
+        }); // end am4core.ready()
 
         $.unblockUI();
     });
@@ -236,7 +322,7 @@ function ListSeguimiento() {
 function Ver(mes,fecha) {
     $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
 
-    $.get("/SeguimientoEjecucionProyectosInversion/ListSeguimiento?Anio=2021&Mes=" + mes + "&fecha=" + fecha, function (data, status) {
+    $.get("/SeguimientoEjecucionProyectosInversion/ListSeguimiento?Anio=" + $('#hdnAnio').val() + "&Mes=" + mes + "&fecha=" + fecha, function (data, status) {
         var first = data[0];
 
         if (first.AnioEjecucion != 0) {

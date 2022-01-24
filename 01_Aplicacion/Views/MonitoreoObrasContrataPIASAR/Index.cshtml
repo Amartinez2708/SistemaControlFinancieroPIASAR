@@ -7,7 +7,7 @@
     <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
         <div class="breadcrumb-header">
             <h5 style="color: #bf0909;">
-                <i class="fa fa-home"></i> &nbsp; Seguimiento de Obras por Contrata PIASAR
+                <i class="fa fa-home"></i> &nbsp; Ejecución de Inversión
             </h5>
             <span></span>
         </div>
@@ -24,12 +24,12 @@
         let mes_name = date.getMonth();
         document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
 </script>
-
+@Html.Hidden("hdnAnio")
 <div class="card border-primary">
     <div class="card-header text-dark">
         <div class="row col-sm-12 col-xl-12 text-center">
             <h4>
-                <i class="fa fa-edit"></i> Monitoreo General de la Ejecución de Inversiones por Componentes - PIASAR
+                <i class="fa fa-edit"></i> Monitoreo General de la Ejecución de Inversiones por Componentes - PIASAR <span style="display:inline;font-size:22px;margin-top:0px;" id="AnioEjecucion">0</span>
             </h4>
         </div>
     </div>
@@ -73,6 +73,14 @@
             </div>
 
             <div id="chartSeguimiento" style="height:700px;">
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-12">
+            <div class="form-group text-center m-t-50">
+                <h4>Total Ejecutado por Componentes</h4>
+            </div>
+
+            <div id="chartComparativo" style="height:700px;">
             </div>
         </div>
     </div>

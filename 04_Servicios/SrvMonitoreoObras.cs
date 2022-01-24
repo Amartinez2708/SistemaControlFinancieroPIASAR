@@ -33,7 +33,7 @@ namespace _04_Servicios
                     model.Snip = data.Snip;
                     model.CUI = data.CUI;
                     model.Modalidad = data.Cod_modalidad == 22 ? "NÚCLEO EJECUTOR" :"CONTRATA";
-                    model.TipoProyecto = objMonitoreo == null ? "" : objMonitoreo.TipoProyecto == 1 ? "ET" : "OBRA";
+                    model.TipoProyecto = objMonitoreo == null ? "" : objMonitoreo.TipoProyecto == 1 ? "ET" : objMonitoreo.TipoProyecto == 2 ? "OBRA" : "REEMPLAZO";
                     model.IdUbigeo = data.IdUbigeo;
                     model.Departamento = departamento;
                     model.Provincia = Provincia;
@@ -170,6 +170,26 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "Post Ejecución";
             }
+            else if (id == 6)
+            {
+                result.ValorDevolucion = "En Proceso de Suscripción de Contrato";
+            }
+            else if (id == 7)
+            {
+                result.ValorDevolucion = "Por Convocar";
+            }
+            else if (id == 8)
+            {
+                result.ValorDevolucion = "Actualización de Presupuestos";
+            }
+            else if (id == 9)
+            {
+                result.ValorDevolucion = "Por Reemplazar";
+            }
+            else if (id == 10)
+            {
+                result.ValorDevolucion = "En Tramite de Firma de Convenio";
+            }
 
             return result;
         }
@@ -244,6 +264,10 @@ namespace _04_Servicios
             else if (id == 17)
             {
                 result.ValorDevolucion = "Liquidada";
+            }
+            else if (id == 18)
+            {
+                result.ValorDevolucion = "En Ejecución";
             }
 
             return result;

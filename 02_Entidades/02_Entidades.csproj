@@ -80,6 +80,7 @@
     <Compile Include="EnProyecto.cs" />
     <Compile Include="EnProyectosSeguimiento.cs" />
     <Compile Include="EnReporteBID.cs" />
+    <Compile Include="EnReporteEstados.cs" />
     <Compile Include="EnRespuesta.cs" />
     <Compile Include="EnSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="EnSubComponente.cs" />

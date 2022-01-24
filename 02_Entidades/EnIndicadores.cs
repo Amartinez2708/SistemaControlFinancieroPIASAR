@@ -59,5 +59,16 @@ namespace _02_Entidades
         public int nroContrataEjecucionO { get; set; }
         public int nroNucleoEjecucionO { get; set; }
 
+
+        public int NroEnProcesoReemplazo { get; set; }
+        public int nroContrataEnProcesoReemplazo { get; set; }
+        public int nroNucleoEnProcesoReemplazo { get; set; }
+        public int NroConcluidoReemplazo { get; set; }
+        public int nroContrataConcluidoReemplazo { get; set; }
+        public int nroNucleoConcluidoReemplazo { get; set; }
+        public int NroPorConvocarO { get; set; }
+        public int nroContrataPorConvocarO { get; set; }
+        public int nroNucleoPorConvocarO { get; set; }
+
     }
 }

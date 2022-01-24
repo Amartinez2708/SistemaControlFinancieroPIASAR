@@ -42,5 +42,8 @@ namespace _02_Entidades
         public decimal PorcentajePendienteRendicion { get; set; }
         public string PorcentajeAvanceFisico { get; set; }
 
+        public Nullable<decimal> MontoPendienteTransferir { get; set; }
+        public Nullable<decimal> PorcentajePendienteTransferir { get; set; }
+
     }
 }

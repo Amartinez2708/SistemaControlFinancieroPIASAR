@@ -31,18 +31,97 @@
         <div class="col-sm-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="sub-title"><h4>Proyecto tipo: Expediente Técnico</h4></div>
+                    <div class="sub-title"><h4>Gestión de Proyecto Obra</h4></div>
                 </div>
                 <div class="card-block">
                     <div class="row">
-                        <div class="col-md-6 col-xl-4">
-                            <div class="card bg-c-lite-green order-card" onclick="VerProyectos(1,4)">
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-pink order-card" onclick="VerProyectos(2,1)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/corte-de-cinta.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroActosPrevios" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Por Iniciar<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataIniciarO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoIniciarO">0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-yellow order-card" onclick="VerProyectos(2,7)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/corte-de-cinta.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroPorConvocarO" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Por Convocar<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataPorConvocarO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoPorConvocarO">0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-blue order-card" onclick="VerProyectos(2,3)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/workers.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroEjecucion" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">En Ejecución<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataEjecucionO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoEjecucionO">0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-green order-card" onclick="VerProyectos(2,2)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="">
+                                        <img src="../Content/Images/finish-line.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroConcluido" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Concluidos<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataConcluidoO">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoConcluidoO">0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="sub-title"><h4>Gestión de Expediente Técnico - Actualización de Presupuesto</h4></div>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-blue order-card" onclick="VerProyectos(1,4)">
                                 <div class="card-body user-radial-card">
                                     <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
                                         <img src="../Content/Images/pages.png" style="width:90px;box-shadow: 0 0;">
                                     </div>
                                     <span id="NroElaboracionET" class="f-36 f-w-600">0</span>
-                                    <p class="f-18 f-w-600">En Elaboración<br />&nbsp;</p>
+                                    <p class="f-18 f-w-600">En Proceso<br />&nbsp;</p>
                                     <table class="table table-bordered" width="100%">
                                         <tr>
                                             <td style="vertical-align:middle">Contrata<br /><span id="nroContrataElaboracionET">0</span></td>
@@ -52,7 +131,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-4">
+                        <div class="col-md-6 col-xl-4 d-none">
                             <div class="card bg-c-pink order-card" onclick="VerProyectos(1,1)">
                                 <div class="card-body user-radial-card">
                                     <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
@@ -69,7 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-4">
+                        <div class="col-md-6 col-xl-6">
                             <div class="card bg-c-green order-card" onclick="VerProyectos(1,2)">
                                 <div class="card-body user-radial-card">
                                     <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
@@ -93,56 +172,39 @@
         <div class="col-sm-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="sub-title"><h4>Proyecto tipo: Obra</h4></div>
+                    <div class="sub-title"><h4>Gestión de Proyecto en Reemplazo - Actualización de Presupuesto</h4></div>
                 </div>
                 <div class="card-block">
                     <div class="row">
-                        <div class="col-md-6 col-xl-4">
-                            <div class="card bg-c-pink order-card" onclick="VerProyectos(2,1)">
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-blue order-card" onclick="VerProyectos(3,4)">
+                                <div class="card-body user-radial-card">
+                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
+                                        <img src="../Content/Images/pages.png" style="width:90px;box-shadow: 0 0;">
+                                    </div>
+                                    <span id="NroEnProcesoReemplazo" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">En Proceso<br />&nbsp;</p>
+                                    <table class="table table-bordered" width="100%">
+                                        <tr>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataEnProcesoReemplazo">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoEnProcesoReemplazo">0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card bg-c-pink order-card" onclick="VerProyectos(3,2)">
                                 <div class="card-body user-radial-card">
                                     <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
                                         <img src="../Content/Images/corte-de-cinta.png" style="width:90px;box-shadow: 0 0;">
                                     </div>
-                                    <span id="NroActosPrevios" class="f-36 f-w-600">0</span>
-                                    <p class="f-18 f-w-600">Por Iniciar<br />&nbsp;</p>
+                                    <span id="NroConcluidoReemplazo" class="f-36 f-w-600">0</span>
+                                    <p class="f-18 f-w-600">Concluido<br />&nbsp;</p>
                                     <table class="table table-bordered" width="100%">
                                         <tr>
-                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataIniciarO">0</span></td>
-                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoIniciarO">0</span></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-4">
-                            <div class="card bg-c-blue order-card" onclick="VerProyectos(2,3)">
-                                <div class="card-body user-radial-card">
-                                    <div data-label="50%" class="radial-bar radial-bar-90 radial-bar-lg radial-bar-danger">
-                                        <img src="../Content/Images/workers.png" style="width:90px;box-shadow: 0 0;">
-                                    </div>
-                                    <span id="NroEjecucion" class="f-36 f-w-600">0</span>
-                                    <p class="f-18 f-w-600">En Ejecución<br />&nbsp;</p>
-                                    <table class="table table-bordered" width="100%">
-                                        <tr>
-                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataEjecucionO">0</span></td>
-                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoEjecucionO">0</span></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-4">
-                            <div class="card bg-c-green order-card" onclick="VerProyectos(2,2)">
-                                <div class="card-body user-radial-card">
-                                    <div data-label="50%" class="">
-                                        <img src="../Content/Images/finish-line.png" style="width:90px;box-shadow: 0 0;">
-                                    </div>
-                                    <span id="NroConcluido" class="f-36 f-w-600">0</span>
-                                    <p class="f-18 f-w-600">Concluidos<br />&nbsp;</p>
-                                    <table class="table table-bordered" width="100%">
-                                        <tr>
-                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataConcluidoO">0</span></td>
-                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoConcluidoO">0</span></td>
+                                            <td style="vertical-align:middle">Contrata<br /><span id="nroContrataConcluidoReemplazo">0</span></td>
+                                            <td style="vertical-align:middle">Núcleos<br /><span id="nroNucleoConcluidoReemplazo">0</span></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -161,21 +223,153 @@
                 </h4>
             </div>
             <div class="card-block text-dark" style="padding:10px;">
-                <div id="chartCulminadas" style="height:902px;">
+                <div id="chartCulminadas" style="height:1420px;">
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-6 d-none">
+    <div class="col-sm-12 col-lg-4 d-none">
         <div class="card border-primary">
             <div class="card-header text-dark">
                 <h4 style="font-size: 18px;">
-                    <i class="fa fa-pie-chart"></i> Estado Situacional
+                    <i class="fa fa-pie-chart"></i> Cuadro Resumen por Estado: CONTRATA - 52 PIP
                 </h4>
             </div>
             <div class="card-block text-dark" style="padding:10px;">
-                <div id="chartEstado" style="height:381px;">
-                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;vertical-align:middle;">N°</th>
+                            <th style="text-align:center;vertical-align:middle;">ESTADO</th>
+                            <th style="text-align:center;vertical-align:middle;">N° DE <br />PROYECTOS</th>
+                            <th style="text-align:center;vertical-align:middle;">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;" rowspan="6"><strong>1</strong></td>
+                            <td style="vertical-align:middle;" colspan="3"><strong>CONCLUIDOS (<span id="NroConcluidosCCR">0</span>)</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">1.1 POR RECEPCIONAR</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroPorRecepcionarCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentagePorRecepcionarCCR">0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">1.2 OTA POR INICIAR</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroOTAPorIniciarCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageOTAPorIniciarCCR">0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">1.3 OTA EN PROCESO</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroOTAEnProcesoCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageOTAPorIniciarCCR">0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">1.4 OTA CONCLUIDA</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroOTAConcluidaCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageOTAPorIniciarCCR">0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">1.5 EN LIQUIDACIÓN</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroOTAEnLiquidacionCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageOTAPorIniciarCCR">0</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;" rowspan="4"><strong>2</strong></td>
+                            <td style="vertical-align:middle;" colspan="3"><strong>EN EJECUCIÓN (<span id="NroEnEjecucionCCR">0</span>)</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">2.1 POR INICIAR</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroPorIniciarCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentagePorIniciarCCR">0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">2.2 EN EJECUCIÓN</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroEnEjecucionCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageEnEjecucionCCR">0</span></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle;">2.3 EN SUSPENSIÓN DE PLAZOS</td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroEnSuspensionCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageEnSuspensionCCR">0</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;"><strong>3</strong></td>
+                            <td style="vertical-align:middle;"><strong>EN PROCESO DE SUSCRIPCIÓN DE CONTRATO</strong></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroEnProcesoSuscripcionCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageEnProcesoSuscripcionCCR">0</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;"><strong>4</strong></td>
+                            <td style="vertical-align:middle;"><strong>POR CONVOCAR</strong></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroPorConvocarCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentagePorConvocarCCR">0</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;"><strong>5</strong></td>
+                            <td style="vertical-align:middle;"><strong>ACTUALIZACIÓN DE PRESUPUESTOS</strong></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroActualizacionPresupuestoCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentageActualizacionPresupuestoCCR">0</span></td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;"><strong>6</strong></td>
+                            <td style="vertical-align:middle;"><strong>POR REEMPLAZAR</strong></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="NroPorReemplazarCCR">0</span></td>
+                            <td style="text-align:center;vertical-align:middle;"><span id="PorcentagePorReemplazarCCR">0</span></td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td style="text-align:center;vertical-align:middle;" colspan="2"><strong>TOTAL DE PROYECTOS</strong></td>
+                            <td style="text-align:center;vertical-align:middle;"><strong><span id="NroTotalProyectosCCR">0</span></strong></td>
+                            <td style="text-align:center;vertical-align:middle;"><strong><span id="PorcentageTotalProyectosCCR">0</span></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-8 d-none">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-pie-chart"></i> Cuadro Resumen por Región: CONTRATA - 52 PIP
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+                
+            </div>
+        </div>
+    </div> 
+    <div class="col-sm-12 col-lg-4 d-none">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-pie-chart"></i> Cuadro Resumen por Estado: NUCLEO EJECUTOR - 48 PIP
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-8 d-none">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <h4 style="font-size: 18px;">
+                    <i class="fa fa-pie-chart"></i> Cuadro Resumen por Región: NUCLEO EJECUTOR - 48 PIP
+                </h4>
+            </div>
+            <div class="card-block text-dark" style="padding:10px;">
+
             </div>
         </div>
     </div> 

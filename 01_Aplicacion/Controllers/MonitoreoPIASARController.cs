@@ -243,5 +243,19 @@ namespace _01_Aplicacion.Controllers
             jsonData.MaxJsonLength = 500000000;
             return jsonData;
         }
+        [HttpGet]
+        public JsonResult ListMontoGiradoPendiente()
+        {
+            List<EnDesembolsoVSJustificado> result = new List<EnDesembolsoVSJustificado>();
+            result = objMonitoreoPIASAR.ListMontoGiradoPendiente();
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            serializer.MaxJsonLength = 500000000;
+
+            object json = new { data = result.ToList() };
+            var jsonData = Json(json, JsonRequestBehavior.AllowGet);
+            jsonData.MaxJsonLength = 500000000;
+            return jsonData;
+        }
     }
 }

@@ -2216,6 +2216,138 @@ function VerDesembolsoProgramado(mes) {
     });
 }
 
+function VerObrasPendientesGiro() {
+    $("#modal-PendientesGiro").modal({ backdrop: 'static', keyboard: true, show: true });
+    $($.fn.dataTable.tables(true)).DataTable()
+        .columns.adjust();
+    ListPendientesGiro();
+}
+function ListPendientesGiro() {
+    var tabla = $("#dtPendientesGiro").DataTable({
+        processing: true,
+        filter: false,
+        destroy: true,
+        searching: false,
+        //oSearch: { "bSmart": false, "bRegex": true },
+        //responsive: true,
+        fixedColumns: true,
+        scrollCollapse: true,
+        scrollX: true,
+        paging: false,
+        info: false,
+        ordering: false,
+        paging: false,
+        //pageLength: 12,
+        //order: [[4, "desc"]],
+        ajax: {
+            url: "/MonitoreoPIASAR/ListMontoGiradoPendiente",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: "json"
+        },
+        dom: 'Bfrtip',
+        buttons: [
+             {
+                 text: '<span class="fa fa-file-excel-o"></span> Excel',
+                 className: 'btn btn-mat btn-success mr-1 mb-2',
+                 extend: 'excelHtml5',
+                 title: getNombreFile('rpt_PendienteGiro_')
+             },
+             {
+                 text: '<span class="fa fa-clipboard"></span> Copiar',
+                 className: 'btn btn-mat btn-warning mr-1 mb-2',
+                 extend: 'copy',
+                 title: getNombreFile('rpt_PendienteGiro_')
+             }
+        ],
+        columns: [
+                   { "name": "", "title": "Nro.", "data": "Nro", "autowidth": true },
+                   { "name": "", "title": "SNIP", "data": "Snip", "autowidth": true },
+                   { "name": "", "title": "CUI", "data": "CUI", "autowidth": true },
+                   { "name": "", "title": "Departamento", "data": "Departamento", "autowidth": true },
+                   { "name": "", "title": "Localidad", "data": "Localidad", "autowidth": true },
+                   { "name": "", "title": "Costo de Inversión", "data": "Mto_proyecto", "autowidth": true },
+                   { "name": "", "title": "Total </br>Transferido", "data": "Desembolso", "autowidth": true },
+                   { "name": "", "title": "Monto Pendiente </br> de Transferir", "data": "MontoPendienteTransferir", "autowidth": true },
+                   { "name": "", "title": "% Pendiente </br>de Transferir", "data": "PorcentajePendienteTransferir", "autowidth": true },
+                   { "name": "", "title": "Liquidador", "data": "Liquidador", "autowidth": true },
+        ],
+        columnDefs: [
+
+            {
+                "targets": 5,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.Mto_proyecto);
+                }
+            },
+            {
+                "targets": 6,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.Desembolso);
+                }
+            },
+            {
+                "targets": 7,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.MontoPendienteTransferir);
+                }
+            },
+            {
+                "targets": 8,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    return formatMoney(full.PorcentajePendienteTransferir) + "%";
+                }
+            },
+
+            {
+                "targets": "_all",
+                "className": "align-middle text-center",
+            }
+        ],
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        fnDrawCallback: function () {
+            $("#dtPendientesGiro thead tr").css({ 'height': "0" });
+        },
+        fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            //var index = iDisplayIndex + 1;
+            //$('td:eq(0)', nRow).html(index);
+            //return nRow;
+        },
+        initComplete: function (settings, json) {
+            $("#dtPendientesGiro thead tr").css({ 'height': "0" });
+            $(".dataTables_scrollHeadInner").css("width", "100%");
+            $(".table").css("width", "100%");
+        },
+    });
+}
+
 function formatMoney(amount, decimalCount, decimal, thousands) {
     try {
         decimalCount = Math.abs(2);

@@ -1242,5 +1242,54 @@ namespace _04_Servicios
             }
             return result.ToList();
         }
+
+        public List<EnDesembolsoVSJustificado> ListMontoGiradoPendiente()
+        {
+            List<DesembolsoVSJustificado> obj = new List<DesembolsoVSJustificado>();
+            List<EnDesembolsoVSJustificado> result = new List<EnDesembolsoVSJustificado>();
+
+            obj = context.DesembolsoVSJustificado.Where(x=>x.Mto_proyecto>x.Desembolso).OrderByDescending(x => x.Desembolso).ToList();
+
+            if (obj != null && obj.Count() > 0)
+            {
+                var count = 0;
+                //var obj1 = obj.OrderBy(x => x.Porcentaje).GroupBy(x => x.AnioEjecucion).ToList();
+                //var obj2 = obj
+                foreach (var data in obj)
+                {
+                    var objMonitoreo = context.MonitoreoObras.Where(x => x.IdProyecto == data.IdProyecto && x.Activo == true).OrderByDescending(x => x.Fecha_add).FirstOrDefault();
+
+                    EnDesembolsoVSJustificado model = new EnDesembolsoVSJustificado();
+                    model.Nro = count + 1;
+                    model.Programa = data.Programa;
+                    model.Departamento = data.Departamento;
+                    model.Provincia = data.Provincia;
+                    model.Distrito = data.Distrito;
+                    model.Localidad = data.Localidad;
+                    model.Snip = data.Snip;
+                    model.CUI = data.CUI;
+                    model.Nom_proyecto = data.Nom_proyecto;
+                    model.Mto_proyecto = data.Mto_proyecto;
+                    model.Manifiesto = data.Manifiesto;
+                    model.Autorizacion = data.Autorizacion;
+                    model.ManifiestoGestionado = data.ManifiestoGestionado;
+                    model.AutorizacionGestionada = data.AutorizacionGestionada;
+                    model.Desembolso = data.Desembolso;
+                    model.Porcentaje = data.Porcentaje;
+                    model.Liquidador = data.Liquidador;
+                    model.Anio = Convert.ToInt32(data.AnioEjecucion);
+                    model.Grupo = data.Grupo;
+                    model.PorcentajeAvanceFisico = objMonitoreo == null ? "0.00 %" : objMonitoreo.PorcentajeAvanceObra.ToString() + " %";
+                    model.MontoPendienteTransferir = model.Mto_proyecto - model.Desembolso;
+                    model.PorcentajePendienteTransferir = (model.MontoPendienteTransferir / model.Mto_proyecto) * 100;
+
+
+                    result.Add(model);
+                    count++;
+                }
+            }
+            return result.OrderBy(x => x.Nro).ToList();
+
+        }
     }
 }

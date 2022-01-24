@@ -32,6 +32,16 @@ function Indicadores() {
         $("#nroContrataConcluidoET").html(data.nroContrataConcluidoET);
         $("#nroNucleoConcluidoET").html(data.nroNucleoConcluidoET);
 
+        $("#NroConcluidoReemplazo").html(data.NroConcluidoReemplazo);
+        $("#nroContrataConcluidoReemplazo").html(data.nroContrataConcluidoReemplazo);
+        $("#nroNucleoConcluidoReemplazo").html(data.nroNucleoConcluidoReemplazo);
+        $("#NroEnProcesoReemplazo").html(data.NroEnProcesoReemplazo);
+        $("#nroContrataEnProcesoReemplazo").html(data.nroContrataEnProcesoReemplazo);
+        $("#nroNucleoEnProcesoReemplazo").html(data.nroNucleoEnProcesoReemplazo);
+        $("#NroPorConvocarO").html(data.NroPorConvocarO);
+        $("#nroContrataPorConvocarO").html(data.nroContrataPorConvocarO);
+        $("#nroNucleoPorConvocarO").html(data.nroNucleoPorConvocarO);
+
         am4core.ready(function () {
 
             // Themes begin

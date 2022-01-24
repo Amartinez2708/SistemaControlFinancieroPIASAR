@@ -227,6 +227,7 @@
     <Compile Include="Controllers\MonitoreoPIASARController.cs" />
     <Compile Include="Controllers\ProyectosGeoreferenciadosPIASARController.cs" />
     <Compile Include="Controllers\ReporteMensualProgresoController.cs" />
+    <Compile Include="Controllers\ResumenController.cs" />
     <Compile Include="Controllers\SeguimientoEjecucionProyectosInversionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -878,6 +879,7 @@
     <Content Include="Views\JustificacionGastos\Index.cshtml" />
     <Content Include="Views\EstadoSituacional\Index.cshtml" />
     <Content Include="Views\AlertaRegistro\Index.cshtml" />
+    <Content Include="Views\Resumen\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

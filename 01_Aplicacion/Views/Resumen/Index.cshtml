@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+        <div class="breadcrumb-header">
+            <h4 style="color: #bf0909;">
+                <i class="fa fa-tags"></i> &nbsp; Estado Situacional de Obras PIASAR
+            </h4>
+            <span></span>
+        </div>
+        <div class="page-header-breadcrumb">
+            <span id="SpanFechaInicio"></span>
+        </div>
+    </div>
+</div>
+<script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+</script>
+
