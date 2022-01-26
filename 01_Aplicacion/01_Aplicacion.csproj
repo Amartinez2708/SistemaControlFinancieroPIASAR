@@ -221,6 +221,7 @@
     <Compile Include="Controllers\EstadoSituacionalController.cs" />
     <Compile Include="Controllers\GestionAutorizacionRendicionController.cs" />
     <Compile Include="Controllers\JustificacionGastosController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManifiestoGastoController.cs" />
     <Compile Include="Controllers\MonitoreoObrasContrataPIASARController.cs" />
     <Compile Include="Controllers\MonitoreoObrasController.cs" />
@@ -880,6 +881,7 @@
     <Content Include="Views\EstadoSituacional\Index.cshtml" />
     <Content Include="Views\AlertaRegistro\Index.cshtml" />
     <Content Include="Views\Resumen\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

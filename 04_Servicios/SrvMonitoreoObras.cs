@@ -190,6 +190,10 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "En Tramite de Firma de Convenio";
             }
+            else if (id == 11)
+            {
+                result.ValorDevolucion = "Paralizada";
+            }
 
             return result;
         }
@@ -269,6 +273,10 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "En Ejecución";
             }
+            else if (id == 19)
+            {
+                result.ValorDevolucion = "Permanente";
+            }
 
             return result;
         }
@@ -303,6 +311,10 @@ namespace _04_Servicios
             else if (id == 6)
             {
                 result.ValorDevolucion = "Problemas con Autorizaciones y Permisos";
+            }
+            else if (id == 7)
+            {
+                result.ValorDevolucion = "Por conflictos sociales";
             }
             return result;
         }

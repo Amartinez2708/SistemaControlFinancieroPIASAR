@@ -951,7 +951,7 @@ namespace _04_Servicios
                         model.MontoTotalTransferido = mes.MontoTotalTransferido;
                         model.MontoTotalRendiciones = mes.MontoTotalRendiciones;
                         model.FechaActualizacion = mes.FechaActualizacion;
-                        model.StringFechaActualizacion = "2021-" + i + "-" + ultimoDia.Day.ToString();//Convert.ToDateTime(data.FechaActualizacion).ToString("yyyy-MM-ddTHH:mm:ss");
+                        model.StringFechaActualizacion = mes.FechaActualizacion.Value.Year.ToString()+ "-" + i + "-" + ultimoDia.Day.ToString();//Convert.ToDateTime(data.FechaActualizacion).ToString("yyyy-MM-ddTHH:mm:ss");
 
                         model.Mes = meses[i - 1];
                         model.MontoTransferidoPorcentaje = 100;
@@ -963,7 +963,7 @@ namespace _04_Servicios
 
                 }
             }
-            return result.ToList();
+            return result.OrderBy(x=>x.FechaActualizacion).ToList();
         }
 
         public List<EnEstadoFinanciero> ListResumenEstadoFinanciero()
