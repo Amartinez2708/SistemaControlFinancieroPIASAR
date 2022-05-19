@@ -34,5 +34,7 @@ namespace _02_Entidades
         public string Usuario { get; set; }
         public int IdUsuario { get; set; }
         public Nullable<decimal> DevengadoAcumulado { get; set; }
+        public decimal PorcentajeAvanceObraProgramado { get; set; }
+        public string EstrategiaAccion { get; set; }
     }
 }

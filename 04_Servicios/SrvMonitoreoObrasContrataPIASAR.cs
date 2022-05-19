@@ -65,7 +65,11 @@ namespace _04_Servicios
                 m.MetaMes_CT = meta;
                 m.ResultadoMes_CT = resultado;
 
-                if (m.MetaMes_CT == 0)
+                if (m.MetaMes_CT == 0 && m.ResultadoMes_CT >0)
+                {
+                    m.PorcentajeMes_CT = 100;
+                }
+                else if (m.MetaMes_CT == 0)
                 {
                     m.PorcentajeMes_CT = 0;
                 }
@@ -93,7 +97,11 @@ namespace _04_Servicios
                 m.MetaMes_CA = meta;
                 m.ResultadoMes_CA = resultado;
 
-                if (m.MetaMes_CA == 0)
+                if (m.MetaMes_CA == 0 && m.ResultadoMes_CA > 0)
+                {
+                    m.PorcentajeMes_CA = 100;
+                }
+                else if (m.MetaMes_CA == 0)
                 {
                     m.PorcentajeMes_CA = 0;
                 }
@@ -122,7 +130,11 @@ namespace _04_Servicios
                 m.MetaMes_C2 = meta;
                 m.ResultadoMes_C2 = resultado;
 
-                if (m.MetaMes_C2 == 0)
+                if (m.MetaMes_C2 == 0 && m.ResultadoMes_C2 > 0)
+                {
+                    m.PorcentajeMes_C2 = 100;
+                }
+                else if (m.MetaMes_C2 == 0)
                 {
                     m.PorcentajeMes_C2 = 0;
                 }

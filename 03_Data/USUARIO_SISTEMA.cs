@@ -26,5 +26,6 @@ namespace _03_Data
         public Nullable<System.DateTime> FECHA_ADD { get; set; }
         public Nullable<int> IDUSUARIO_UPD { get; set; }
         public Nullable<System.DateTime> FECHA_UPD { get; set; }
+        public string Password { get; set; }
     }
 }

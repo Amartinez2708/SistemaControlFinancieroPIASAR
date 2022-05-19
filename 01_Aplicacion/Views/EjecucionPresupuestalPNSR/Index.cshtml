@@ -1,0 +1,739 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+        <div class="breadcrumb-header">
+            <h5 style="color: #bf0909;">
+                <i class="fa fa-home"></i> &nbsp; Reporte de Ejecución de Inversiones
+            </h5>
+            <span></span>
+        </div>
+        <div class="page-header-breadcrumb">
+            <span id="SpanFechaInicio"></span>
+        </div>
+    </div>
+</div>
+<script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+</script>
+<div class="row">
+    <div class="col-md-6 col-xl-2" onclick="VerProcesos('Todo','')" style="cursor:pointer">
+        <div class="card border-primary">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/money.png" style="width:90px">
+                </div>
+                <span id="mtoTotalPIM" class="f-36 text-c-blue">0</span>
+                <p>
+                   Monto Total PIM
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-2">
+        <div class="card border-success">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/proceso-de-trabajo.png" style="width:90px">
+                </div>
+                <span id="mtoTotalGastosCorrientes" class="f-36 text-c-green">0</span>
+                <p>
+                    Monto Total Gastos Corrientes
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-2">
+        <div class="card border-warning">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/presupuesto.png" style="width:90px">
+                </div>
+                <span id="mtoTotalGastosCapital" class="f-36 text-c-yellow">0</span>
+                <p>
+                    Monto Total Gastos Capital
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-2">
+        <div class="card border-danger">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/tdr.png" style="width:90px">
+                </div>
+                <span id="mtoTotalCertificado" class="f-36 text-c-pink">0</span>
+                <p>
+                    Monto Total Certificado
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-2">
+        <div class="card border-primary">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/contrato.png" style="width:90px">
+                </div>
+                <span id="mtoTotalComprometido" class="f-36 text-c-pink">0</span>
+                <p>
+                    Monto Total Comprometido
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-2">
+        <div class="card border-success">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/autorizacion.png" style="width:90px">
+                </div>
+                <span id="mtoTotalDevengado" class="f-36 text-c-pink">0</span>
+                <p>
+                    Monto Total Devengado
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-xl-12">
+    <div class="form-group row">
+        <div class="col-lg-12 col-sm-12 text-center">
+            <button class="btn btn-mat btn-primary btn-lg" onclick="VerCuadroDetalle()"><i class="fa fa-search" aria-hidden="true"></i>Ver Cuadro de Detalles</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card border-success">
+            <div class="card-body text-dark">
+                <div class="form-group text-center m-t-50">
+                    <h4>Reporte de Ejecución de Inversiones por Mes</h4>
+                </div>
+                <div id="chartSeguimiento" style="height:700px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-detalle" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-certificate"></i>Avance de Ejecución Presupuestal de Actividades y Proyectos
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <style type="text/css">
+                            .tg {
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                margin: 0px auto;
+                            }
+
+                                .tg td {
+                                    border-color: black;
+                                    border-style: solid;
+                                    border-width: 1px;
+                                    font-family: Arial, sans-serif;
+                                    font-size: 14px;
+                                    overflow: hidden;
+                                    padding: 10px 5px;
+                                    word-break: normal;
+                                }
+
+                                .tg th {
+                                    border-color: black;
+                                    border-style: solid;
+                                    border-width: 1px;
+                                    font-family: Arial, sans-serif;
+                                    font-size: 14px;
+                                    font-weight: normal;
+                                    overflow: hidden;
+                                    padding: 10px 5px;
+                                    word-break: normal;
+                                }
+
+                                .tg .tg-7ryv {
+                                    background-color: #ecf4ff;
+                                    font-weight: bold;
+                                    text-align: left;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-ntck {
+                                    background-color: #ffffff;
+                                    border-color: inherit;
+                                    font-weight: bold;
+                                    text-align: left;
+                                    vertical-align: bottom;
+                                }
+
+                                .tg .tg-zv36 {
+                                    background-color: #ffffff;
+                                    border-color: inherit;
+                                    font-weight: bold;
+                                    text-align: left;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-1tiv {
+                                    background-color: #ecf4ff;
+                                    font-weight: bold;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                }
+
+                                .tg .tg-2dfk {
+                                    background-color: #ecf4ff;
+                                    border-color: inherit;
+                                    font-weight: bold;
+                                    text-align: center;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-rq5v {
+                                    background-color: #ffffff;
+                                    border-color: inherit;
+                                    text-align: center;
+                                    vertical-align: bottom;
+                                }
+
+                                .tg .tg-e7kw {
+                                    background-color: #ecf4ff;
+                                    border-color: inherit;
+                                    font-weight: bold;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                }
+
+                                .tg .tg-fgdu {
+                                    background-color: #ecf4ff;
+                                    border-color: inherit;
+                                    font-weight: bold;
+                                    text-align: left;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-71nf {
+                                    background-color: #ffffff;
+                                    border-color: inherit;
+                                    text-align: left;
+                                    vertical-align: bottom;
+                                }
+
+                                .tg .tg-calz {
+                                    background-color: #ecf4ff;
+                                    font-weight: bold;
+                                    text-align: center;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-pdeq {
+                                    background-color: #FFF;
+                                    border-color: inherit;
+                                    font-weight: bold;
+                                    text-align: left;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-c6of {
+                                    background-color: #ffffff;
+                                    border-color: inherit;
+                                    text-align: left;
+                                    vertical-align: top;
+                                }
+
+                                .tg .tg-im72 {
+                                    background-color: #ffffff;
+                                    text-align: left;
+                                    vertical-align: bottom;
+                                }
+
+                                .tg .tg-oo9c {
+                                    background-color: #ffffff;
+                                    text-align: center;
+                                    vertical-align: bottom;
+                                }
+                        </style>
+                        <table class="tg">
+                            <thead>
+                                <tr>
+                                    <th class="tg-e7kw" rowspan="2">CATEGORIA GASTO</th>
+                                    <th class="tg-e7kw" rowspan="2">GENÉRICA DEL GASTO</th>
+                                    <th class="tg-e7kw" rowspan="2">PIM</th>
+                                    <th class="tg-2dfk" colspan="6">EJECUCIÓN ACUMULADA</th>
+                                    <th class="tg-2dfk" colspan="4">ABRIL</th>
+                                </tr>
+                                <tr>
+                                    <th class="tg-e7kw">CERTIFICADO</th>
+                                    <th class="tg-e7kw">AVANCE<br>CERTIFICADO %</th>
+                                    <th class="tg-e7kw">COMPROMETIDO</th>
+                                    <th class="tg-e7kw">AVANCE<br>COMPROMETIDO %</th>
+                                    <th class="tg-e7kw">DEVENGADO</th>
+                                    <th class="tg-e7kw">AVANCE<br>DEVENGADO %</th>
+                                    <th class="tg-e7kw">PROGRAMADO</th>
+                                    <th class="tg-e7kw">EJECUTADO</th>
+                                    <th class="tg-e7kw">%</th>
+                                    <th class="tg-e7kw">POR EJECUTAR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tg-e7kw" rowspan="16">5. Gastos Corrientes</td>
+                                    <td class="tg-fgdu">Gastos Corrientes</td>
+                                    <td class="tg-2dfk">100,714,130</td>
+                                    <td class="tg-2dfk">55,637,701</td>
+                                    <td class="tg-2dfk">55.2</td>
+                                    <td class="tg-2dfk">44,340,441</td>
+                                    <td class="tg-2dfk">44.0</td>
+                                    <td class="tg-2dfk">15,349,312</td>
+                                    <td class="tg-2dfk">15.24</td>
+                                    <td class="tg-2dfk">4,514,488</td>
+                                    <td class="tg-2dfk">4,011,105</td>
+                                    <td class="tg-2dfk">88.85</td>
+                                    <td class="tg-2dfk">503,383</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-zv36">2.3 Bienes y Servicios</td>
+                                    <td class="tg-rq5v">68,090,216</td>
+                                    <td class="tg-rq5v">55,619,355</td>
+                                    <td class="tg-rq5v">81.7</td>
+                                    <td class="tg-rq5v">44,322,096.00</td>
+                                    <td class="tg-rq5v">65.1</td>
+                                    <td class="tg-rq5v">15,330,967.00</td>
+                                    <td class="tg-rq5v">22.5</td>
+                                    <td class="tg-rq5v">4,514,488.00</td>
+                                    <td class="tg-rq5v">4,011,105.00</td>
+                                    <td class="tg-rq5v">88.85</td>
+                                    <td class="tg-rq5v">503,383.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - DE</td>
+                                    <td class="tg-rq5v">832,936</td>
+                                    <td class="tg-rq5v">609,626</td>
+                                    <td class="tg-rq5v">73.2</td>
+                                    <td class="tg-rq5v">599,417.00</td>
+                                    <td class="tg-rq5v">72.0</td>
+                                    <td class="tg-rq5v">233,776.00</td>
+                                    <td class="tg-rq5v">28.1</td>
+                                    <td class="tg-rq5v">60,378.00</td>
+                                    <td class="tg-rq5v">60,905.00</td>
+                                    <td class="tg-rq5v">100.87</td>
+                                    <td class="tg-rq5v">-527.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UA</td>
+                                    <td class="tg-rq5v">9,179,143</td>
+                                    <td class="tg-rq5v">7,854,084</td>
+                                    <td class="tg-rq5v">85.6</td>
+                                    <td class="tg-rq5v">7,281,938.00</td>
+                                    <td class="tg-rq5v">79.3</td>
+                                    <td class="tg-rq5v">2,697,310.00</td>
+                                    <td class="tg-rq5v">29.4</td>
+                                    <td class="tg-rq5v">843,962.00</td>
+                                    <td class="tg-rq5v">614,898.00</td>
+                                    <td class="tg-rq5v">72.86</td>
+                                    <td class="tg-rq5v">229,064.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UAL</td>
+                                    <td class="tg-rq5v">1,208,933</td>
+                                    <td class="tg-rq5v">1,166,264</td>
+                                    <td class="tg-rq5v">96.5</td>
+                                    <td class="tg-rq5v">1,164,214.00</td>
+                                    <td class="tg-rq5v">96.3</td>
+                                    <td class="tg-rq5v">377,270.00</td>
+                                    <td class="tg-rq5v">31.2</td>
+                                    <td class="tg-rq5v">103,177.00</td>
+                                    <td class="tg-rq5v">95,940.00</td>
+                                    <td class="tg-rq5v">92.99</td>
+                                    <td class="tg-rq5v">7,237.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UCT</td>
+                                    <td class="tg-rq5v">707,922</td>
+                                    <td class="tg-rq5v">647,010</td>
+                                    <td class="tg-rq5v">91.4</td>
+                                    <td class="tg-rq5v">645,010.00</td>
+                                    <td class="tg-rq5v">91.1</td>
+                                    <td class="tg-rq5v">212,450.00</td>
+                                    <td class="tg-rq5v">30.0</td>
+                                    <td class="tg-rq5v">57,745.00</td>
+                                    <td class="tg-rq5v">48,239.00</td>
+                                    <td class="tg-rq5v">83.54</td>
+                                    <td class="tg-rq5v">9,506.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UPP e IMP. PPI 0083</td>
+                                    <td class="tg-rq5v">4,394,430</td>
+                                    <td class="tg-rq5v">2,771,363</td>
+                                    <td class="tg-rq5v">63.1</td>
+                                    <td class="tg-rq5v">1,685,979.00</td>
+                                    <td class="tg-rq5v">38.4</td>
+                                    <td class="tg-rq5v">587,371.00</td>
+                                    <td class="tg-rq5v">13.4</td>
+                                    <td class="tg-rq5v">137,422.00</td>
+                                    <td class="tg-rq5v">143,619.00</td>
+                                    <td class="tg-rq5v">104.51</td>
+                                    <td class="tg-rq5v">-6,197.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTGT</td>
+                                    <td class="tg-rq5v">15,375,928</td>
+                                    <td class="tg-rq5v">13,818,936</td>
+                                    <td class="tg-rq5v">89.9</td>
+                                    <td class="tg-rq5v">13,765,082.00</td>
+                                    <td class="tg-rq5v">89.5</td>
+                                    <td class="tg-rq5v">4,820,679.00</td>
+                                    <td class="tg-rq5v">31.4</td>
+                                    <td class="tg-rq5v">1,420,282.00</td>
+                                    <td class="tg-rq5v">1,291,391.00</td>
+                                    <td class="tg-rq5v">90.92</td>
+                                    <td class="tg-rq5v">128,891.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTP (Incl. AMSAT y   FONDES)</td>
+                                    <td class="tg-rq5v">7,617,330</td>
+                                    <td class="tg-rq5v">6,478,105</td>
+                                    <td class="tg-rq5v">85.0</td>
+                                    <td class="tg-rq5v">6,028,752.00</td>
+                                    <td class="tg-rq5v">79.1</td>
+                                    <td class="tg-rq5v">2,245,505.00</td>
+                                    <td class="tg-rq5v">29.5</td>
+                                    <td class="tg-rq5v">622,473.00</td>
+                                    <td class="tg-rq5v">588,614.00</td>
+                                    <td class="tg-rq5v">94.56</td>
+                                    <td class="tg-rq5v">33,859.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTP - APE (Emergencias)</td>
+                                    <td class="tg-rq5v">412,749</td>
+                                    <td class="tg-rq5v">367,065</td>
+                                    <td class="tg-rq5v">88.9</td>
+                                    <td class="tg-rq5v">288,062.00</td>
+                                    <td class="tg-rq5v">69.8</td>
+                                    <td class="tg-rq5v">160,359.00</td>
+                                    <td class="tg-rq5v">38.9</td>
+                                    <td class="tg-rq5v">88,415.00</td>
+                                    <td class="tg-rq5v">29,700.00</td>
+                                    <td class="tg-rq5v">33.59</td>
+                                    <td class="tg-rq5v">58,715.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTP -COATA</td>
+                                    <td class="tg-rq5v">5,577,552</td>
+                                    <td class="tg-rq5v">3,180,090</td>
+                                    <td class="tg-rq5v">57.0</td>
+                                    <td class="tg-rq5v">2,922,674.00</td>
+                                    <td class="tg-rq5v">52.4</td>
+                                    <td class="tg-rq5v">813,826.00</td>
+                                    <td class="tg-rq5v">14.6</td>
+                                    <td class="tg-rq5v">258,226.00</td>
+                                    <td class="tg-rq5v">258,226.00</td>
+                                    <td class="tg-rq5v">100.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTP - O Y M 64 PTAP Y   Saramurillo</td>
+                                    <td class="tg-rq5v">19,232,928</td>
+                                    <td class="tg-rq5v">16,712,486</td>
+                                    <td class="tg-rq5v">86.9</td>
+                                    <td class="tg-rq5v">7,977,177.00</td>
+                                    <td class="tg-rq5v">41.5</td>
+                                    <td class="tg-rq5v">2,515,073.00</td>
+                                    <td class="tg-rq5v">13.1</td>
+                                    <td class="tg-rq5v">696,285.00</td>
+                                    <td class="tg-rq5v">674,874.00</td>
+                                    <td class="tg-rq5v">96.92</td>
+                                    <td class="tg-rq5v">21,411.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTPS</td>
+                                    <td class="tg-rq5v">2,498,108</td>
+                                    <td class="tg-rq5v">2,014,326</td>
+                                    <td class="tg-rq5v">80.6</td>
+                                    <td class="tg-rq5v">1,963,792.00</td>
+                                    <td class="tg-rq5v">78.6</td>
+                                    <td class="tg-rq5v">667,347.00</td>
+                                    <td class="tg-rq5v">26.7</td>
+                                    <td class="tg-rq5v">226,122.00</td>
+                                    <td class="tg-rq5v">204,698.00</td>
+                                    <td class="tg-rq5v">90.53</td>
+                                    <td class="tg-rq5v">21,424.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">&nbsp;&nbsp;PNSR - UTPS - CLORACIÓN</td>
+                                    <td class="tg-rq5v">1,052,257</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-zv36">2.4 Donaciones y Transferencias</td>
+                                    <td class="tg-rq5v">32,605,568</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-zv36">2.5 Otros Gastos</td>
+                                    <td class="tg-rq5v">18,346</td>
+                                    <td class="tg-rq5v">18,346</td>
+                                    <td class="tg-rq5v">100</td>
+                                    <td class="tg-rq5v">18,345.00</td>
+                                    <td class="tg-rq5v">100.0</td>
+                                    <td class="tg-rq5v">18,345.00</td>
+                                    <td class="tg-rq5v">100.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-1tiv" rowspan="13">6. Gastos Capital</td>
+                                    <td class="tg-7ryv">Gastos de Capital</td>
+                                    <td class="tg-calz">507,055,854</td>
+                                    <td class="tg-calz">223,433,642</td>
+                                    <td class="tg-calz">44.1</td>
+                                    <td class="tg-calz">118,283,661</td>
+                                    <td class="tg-calz">23.3</td>
+                                    <td class="tg-calz">27,271,277</td>
+                                    <td class="tg-calz">5.38</td>
+                                    <td class="tg-calz">8,903,349</td>
+                                    <td class="tg-calz">13,780,795</td>
+                                    <td class="tg-calz">154.78</td>
+                                    <td class="tg-calz">-4,877,446</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-pdeq">2.4 Donaciones y Transferencias</td>
+                                    <td class="tg-rq5v">191,368,013</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-pdeq">2.5 Otros Gastos(NE PIASAR)</td>
+                                    <td class="tg-rq5v">3,871,920</td>
+                                    <td class="tg-rq5v">3,871,916</td>
+                                    <td class="tg-rq5v">100</td>
+                                    <td class="tg-rq5v">674,381.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">674,381.00</td>
+                                    <td class="tg-rq5v">0.0</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">674,381.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">-674,381.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-ntck">2.6 Ad. ACTIVOS NO FINANCIEROS</td>
+                                    <td class="tg-rq5v">311,815,921</td>
+                                    <td class="tg-rq5v">219,561,726</td>
+                                    <td class="tg-rq5v">70.4</td>
+                                    <td class="tg-rq5v">117,609,279.00</td>
+                                    <td class="tg-rq5v">37.7</td>
+                                    <td class="tg-rq5v">26,596,896.00</td>
+                                    <td class="tg-rq5v">8.5</td>
+                                    <td class="tg-rq5v">8,903,349.00</td>
+                                    <td class="tg-rq5v">13,106,414.00</td>
+                                    <td class="tg-rq5v">147.21</td>
+                                    <td class="tg-rq5v">-4,203,065.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-c6of">  2.6 Equipamiento</td>
+                                    <td class="tg-rq5v">4,190,547</td>
+                                    <td class="tg-rq5v">4,190,037</td>
+                                    <td class="tg-rq5v">100</td>
+                                    <td class="tg-rq5v">19,980.00</td>
+                                    <td class="tg-rq5v">0.5</td>
+                                    <td class="tg-rq5v">19,980.00</td>
+                                    <td class="tg-rq5v">0.5</td>
+                                    <td class="tg-rq5v">1,500.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                    <td class="tg-rq5v">1,500.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-c6of">  2.6 PIP - Inversiones</td>
+                                    <td class="tg-rq5v">307,625,374</td>
+                                    <td class="tg-rq5v">215,371,689</td>
+                                    <td class="tg-rq5v">70</td>
+                                    <td class="tg-rq5v">117,589,299.00</td>
+                                    <td class="tg-rq5v">38.2</td>
+                                    <td class="tg-rq5v">26,576,916.00</td>
+                                    <td class="tg-rq5v">8.6</td>
+                                    <td class="tg-rq5v">8,901,849.00</td>
+                                    <td class="tg-rq5v">13,106,414.00</td>
+                                    <td class="tg-rq5v">147.23</td>
+                                    <td class="tg-rq5v">4,204,565.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-c6of">     UTP, FONDES, EX PROCOES</td>
+                                    <td class="tg-rq5v">106,871,154</td>
+                                    <td class="tg-rq5v">66,700,280</td>
+                                    <td class="tg-rq5v">62.4</td>
+                                    <td class="tg-rq5v">24,195,838.00</td>
+                                    <td class="tg-rq5v">22.6</td>
+                                    <td class="tg-rq5v">4,749,576.00</td>
+                                    <td class="tg-rq5v">4.4</td>
+                                    <td class="tg-rq5v">2,037,381.00</td>
+                                    <td class="tg-rq5v">1,821,340.00</td>
+                                    <td class="tg-rq5v">89.40</td>
+                                    <td class="tg-rq5v">216,041.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">        Estudios</td>
+                                    <td class="tg-rq5v">8,252,776</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">211,353.00</td>
+                                    <td class="tg-rq5v">2.6</td>
+                                    <td class="tg-rq5v">200,726.00</td>
+                                    <td class="tg-rq5v">200,726.00</td>
+                                    <td class="tg-rq5v">100.00</td>
+                                    <td class="tg-rq5v">0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-71nf">        Ejecucion de Proyectos</td>
+                                    <td class="tg-rq5v">76,476,024</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">0</td>
+                                    <td class="tg-rq5v">3,892,377.00</td>
+                                    <td class="tg-rq5v">5.1</td>
+    <td class="tg-rq5v">1,695,271.00</td>
+    <td class="tg-rq5v">1,548,528.00</td>
+    <td class="tg-rq5v">91.34</td>
+    <td class="tg-rq5v">146,743.00</td>
+  </tr>
+  <tr>
+    <td class="tg-71nf">        PNSR - UTP - APE</td>
+    <td class="tg-rq5v">15,102,716</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0.00</td>
+    <td class="tg-rq5v">0.0</td>
+    <td class="tg-rq5v">0.00</td>
+    <td class="tg-rq5v">0.00</td>
+    <td class="tg-rq5v">0.00</td>
+    <td class="tg-rq5v">0.00</td>
+  </tr>
+  <tr>
+    <td class="tg-71nf">        PNSR - UTP - EXPROCOES</td>
+    <td class="tg-rq5v">7,039,638</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">0</td>
+    <td class="tg-rq5v">645,847.00</td>
+    <td class="tg-rq5v">9.2</td>
+    <td class="tg-rq5v">68,586.00</td>
+    <td class="tg-rq5v">72,086.00</td>
+    <td class="tg-rq5v">105.10</td>
+    <td class="tg-rq5v">-3,500.00</td>
+  </tr>
+  <tr>
+    <td class="tg-71nf">     Amazonia   Rural</td>
+    <td class="tg-rq5v">111,700,661</td>
+    <td class="tg-rq5v">70,984,996</td>
+    <td class="tg-rq5v">63.5</td>
+    <td class="tg-rq5v">45,726,754.00</td>
+    <td class="tg-rq5v">40.9</td>
+    <td class="tg-rq5v">9,498,720.00</td>
+    <td class="tg-rq5v">8.5</td>
+    <td class="tg-rq5v">2,668,986.00</td>
+    <td class="tg-rq5v">5,762,760.00</td>
+    <td class="tg-rq5v">215.92</td>
+    <td class="tg-rq5v">-3,093,774.00</td>
+  </tr>
+  <tr>
+    <td class="tg-im72">     PIASAR</td>
+    <td class="tg-oo9c">89,053,559</td>
+    <td class="tg-oo9c">77,686,412</td>
+    <td class="tg-oo9c">87.2</td>
+    <td class="tg-oo9c">47,666,707.00</td>
+    <td class="tg-oo9c">53.5</td>
+    <td class="tg-oo9c">12,328,620.00</td>
+    <td class="tg-oo9c">13.8</td>
+    <td class="tg-oo9c">4,195,481.00</td>
+    <td class="tg-oo9c">5,522,314.00</td>
+    <td class="tg-oo9c">131.63</td>
+    <td class="tg-oo9c">-1,326,832.00</td>
+  </tr>
+  <tr>
+    <td class="tg-calz" colspan="2">TOTAL</td>
+    <td class="tg-calz">607,769,984</td>
+    <td class="tg-calz">279,071,343</td>
+    <td class="tg-calz">45.9</td>
+    <td class="tg-calz">162,624,102</td>
+    <td class="tg-calz">26.8</td>
+    <td class="tg-calz">42,620,590</td>
+    <td class="tg-calz">7.0</td>
+    <td class="tg-calz">13,417,837</td>
+    <td class="tg-calz">17,791,901</td>
+    <td class="tg-calz">132.60</td>
+    <td class="tg-calz">-4,374,064</td>
+  </tr>
+</tbody>
+</table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsEjecucionPresupuestalPNSR.js"></script>
+}

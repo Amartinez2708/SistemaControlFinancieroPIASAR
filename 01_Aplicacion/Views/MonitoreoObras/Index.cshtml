@@ -90,6 +90,10 @@
                         @Html.TextBox("txtAvanceObra", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
                     </div>
                     <div class="form-group">
+                        <label>% Avance Fisico Programado</label>
+                        @Html.TextBox("txtAvanceObraProgramado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                    </div>
+                    <div class="form-group">
                         <label>% Avance Financiero</label>
                         @Html.TextBox("txtAvanceFinanciero", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
                     </div>
@@ -111,6 +115,8 @@
                             <option value="9">Por Reemplazar</option>
                             <option value="10">En Tramite de Firma de Convenio</option>
                             <option value="11">Paralizada</option>
+                            @*<option value="12">En Proceso de Liquidación de Convenio</option>
+                            <option value="13">Convenio Liquidado</option>*@
                         </select>
                     </div>
                     <div class="form-group">
@@ -135,10 +141,13 @@
                             <option value="17">Liquidada</option>
                             <option value="18">En Ejecución</option>
                             <option value="19">Permanente</option>
+                            <option value="20">Por Convocar</option>
+                            <option value="21">En Transferencia</option>
+                            <option value="22">Transferido</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Sub-Estado 2</label>
+                        <label>Limitante</label>
                         <select name="ddlSubEstado2" id="ddlSubEstado2" class="form-control">
                             <option value="0">[--Seleccione--]</option>
                             <option value="1">Ejecución de Proyecto Complementario</option>
@@ -175,6 +184,10 @@
                     <div class="form-group">
                         <label>Detalle Situacional</label>
                         @Html.TextArea("txtDetalleSituacional", null, new { @class = "form-control", rows = "6" })
+                    </div>
+                    <div class="form-group">
+                        <label>Estrategias y Acciones (Metas a Mediano, Corto y Largo plazo)</label>
+                        @Html.TextArea("txtEstrategiaAccion", null, new { @class = "form-control", rows = "6" })
                     </div>
                 </fieldset>
             </div>

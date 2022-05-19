@@ -69,6 +69,27 @@ namespace _02_Entidades
         public int NroPorConvocarO { get; set; }
         public int nroContrataPorConvocarO { get; set; }
         public int nroNucleoPorConvocarO { get; set; }
+        public int nroEnProcesoLiquidacionConvenio { get; set; }
+        public int nroConvenioLiquidado { get; set; }
 
+        public int nroProcesos { get; set; }
+        public decimal mtoProcesos { get; set; }
+        public int nroTDRET { get; set; }
+        public int nroCPP { get; set; }
+
+        public int nroMVCS { get; set; }
+        public int nroPIASAR { get; set; }
+        public int nroPNSR { get; set; }
+
+        public decimal mtoMVCS { get; set; }
+        public decimal mtoPIASAR { get; set; }
+        public decimal mtoPNSR { get; set; }
+
+        public decimal mtoTotalPIM { get; set; }
+        public decimal mtoTotalGastosCorrientes { get; set; }
+        public decimal mtoTotalGastosCapital { get; set; }
+        public decimal mtoTotalCertificado { get; set; }
+        public decimal mtoTotalComprometido { get; set; }
+        public decimal mtoTotalDevengado { get; set; }
     }
 }

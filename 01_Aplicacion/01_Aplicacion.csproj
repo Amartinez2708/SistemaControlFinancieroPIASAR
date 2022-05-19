@@ -218,8 +218,11 @@
     </Compile>
     <Compile Include="Controllers\AlertaRegistroController.cs" />
     <Compile Include="Controllers\DirectorioController.cs" />
+    <Compile Include="Controllers\EjecucionPresupuestalPNSRController.cs" />
     <Compile Include="Controllers\EstadoSituacionalController.cs" />
     <Compile Include="Controllers\GestionAutorizacionRendicionController.cs" />
+    <Compile Include="Controllers\GestionComponenteController.cs" />
+    <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\JustificacionGastosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManifiestoGastoController.cs" />
@@ -249,10 +252,12 @@
     <Content Include="Content\css\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\css\chartist\chartist.css" />
     <Content Include="Content\css\component.css" />
+    <Content Include="Content\css\demo.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\ionicons.css" />
     <Content Include="Content\css\jquery.mCustomScrollbar.css" />
     <Content Include="Content\css\morris.js\css\morris.css" />
+    <Content Include="Content\css\now-ui-kit.min98f3.css" />
     <Content Include="Content\css\partials\menu\pccoded-horizontal-menu.css" />
     <Content Include="Content\css\pcoded-horizontal.min.css" />
     <Content Include="Content\css\Poppins.css" />
@@ -356,6 +361,7 @@
     <Content Include="Content\directorio\img\blog\list-s-3.jpg" />
     <Content Include="Content\directorio\img\blog\user.png" />
     <Content Include="Content\directorio\img\blog\user2.png" />
+    <Content Include="Content\directorio\img\comunidad.png" />
     <Content Include="Content\directorio\img\contact\city_2.jpg" />
     <Content Include="Content\directorio\img\contact\city_4.jpg" />
     <Content Include="Content\directorio\img\contact\city_5.jpg" />
@@ -400,6 +406,7 @@
     <Content Include="Content\directorio\img\content\video2.jpg" />
     <Content Include="Content\directorio\img\content\video3.jpg" />
     <Content Include="Content\directorio\img\cuenta.png" />
+    <Content Include="Content\directorio\img\cuidado.png" />
     <Content Include="Content\directorio\img\el-ahorro-de-agua.png" />
     <Content Include="Content\directorio\img\hombre-de-trabajo.png" />
     <Content Include="Content\directorio\img\lista-de-verificacion.png" />
@@ -566,13 +573,16 @@
     <Content Include="Content\Images\excel.png" />
     <Content Include="Content\Images\favico.ico" />
     <Content Include="Content\Images\finish-line.png" />
+    <Content Include="Content\Images\fondo.png" />
     <Content Include="Content\Images\FondoCorreo.jpg" />
     <Content Include="Content\Images\fondocorreo_grande.jpg" />
     <Content Include="Content\Images\HTML.png" />
     <Content Include="Content\Images\JPG.png" />
     <Content Include="Content\Images\justificacion.png" />
     <Content Include="Content\Images\lavado.png" />
+    <Content Include="Content\Images\LOGOTIPO SIEMPRE CON EL PUEBLO.png" />
     <Content Include="Content\Images\Logo_PIASAR.jpg" />
+    <Content Include="Content\Images\Logo_PIASAR.png" />
     <Content Include="Content\Images\money.png" />
     <Content Include="Content\Images\obragua.png" />
     <Content Include="Content\Images\pages.png" />
@@ -581,6 +591,8 @@
     <Content Include="Content\Images\pendienterendicion.png" />
     <Content Include="Content\Images\pnsr_logo.png" />
     <Content Include="Content\Images\porcentajejustificado.png" />
+    <Content Include="Content\Images\presupuesto.png" />
+    <Content Include="Content\Images\proceso-de-trabajo.png" />
     <Content Include="Content\Images\RAR.png" />
     <Content Include="Content\Images\Regiones\00.jpg" />
     <Content Include="Content\Images\Regiones\01.jpg" />
@@ -610,6 +622,8 @@
     <Content Include="Content\Images\Regiones\25.jpg" />
     <Content Include="Content\Images\retorno-de-la-inversion.png" />
     <Content Include="Content\Images\search.png" />
+    <Content Include="Content\Images\tdr.png" />
+    <Content Include="Content\Images\Titulo.png" />
     <Content Include="Content\Images\user-f.png" />
     <Content Include="Content\Images\user-m.png" />
     <Content Include="Content\Images\user.png" />
@@ -637,6 +651,7 @@
     <Content Include="Content\js\bootstrap-inputmask\bootstrap-inputmask.min.js" />
     <Content Include="Content\js\bootstrap-maxlength.js" />
     <Content Include="Content\js\bootstrap-maxlength\js\bootstrap-maxlength.js" />
+    <Content Include="Content\js\bootstrap-switch.js" />
     <Content Include="Content\js\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\js\chart.js\Chart.js" />
     <Content Include="Content\js\common-pages.js" />
@@ -675,11 +690,15 @@
     <Content Include="Content\js\jquery.fileDownload.js" />
     <Content Include="Content\js\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="Content\js\jquery.mousewheel.min.js" />
+    <Content Include="Content\js\jquery.sharrre.js" />
     <Content Include="Content\js\jquery\jquery.min.js" />
     <Content Include="Content\js\jsAlerta.js" />
+    <Content Include="Content\js\jsEjecucionPresupuestalPNSR.js" />
     <Content Include="Content\js\jsEstadoSituacional.js" />
     <Content Include="Content\js\jsGestionAutorizacionRendicion.js" />
+    <Content Include="Content\js\jsGestionComponente.js" />
     <Content Include="Content\js\jsJustificacionGastos.js" />
+    <Content Include="Content\js\jsLogin.js" />
     <Content Include="Content\js\jsManifiesto.js" />
     <Content Include="Content\js\jsMonitoreo.js" />
     <Content Include="Content\js\jsMonitoreoContrata.js" />
@@ -703,6 +722,7 @@
     <Content Include="Content\js\modernizr\css-scrollbars.js" />
     <Content Include="Content\js\modernizr\modernizr.js" />
     <Content Include="Content\js\morris.js\morris.js" />
+    <Content Include="Content\js\now-ui-kit.min98f3.js" />
     <Content Include="Content\js\pcoded.min.js" />
     <Content Include="Content\js\popper.js\popper.min.js" />
     <Content Include="Content\js\raphael\raphael.min.js" />
@@ -745,6 +765,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Inicio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -855,6 +876,8 @@
     <Content Include="ManifiestoGasto.xsc">
       <DependentUpon>ManifiestoGasto.xsd</DependentUpon>
     </Content>
+    <Content Include="Content\Images\LOGOTIPO SIEMPRE CON EL PUEBLO.psd" />
+    <Content Include="Content\Images\titulo sistema.psd" />
     <None Include="ManifiestoGasto.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ManifiestoGasto.Designer.cs</LastGenOutput>
@@ -882,6 +905,11 @@
     <Content Include="Views\AlertaRegistro\Index.cshtml" />
     <Content Include="Views\Resumen\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\GestionComponente\Index.cshtml" />
+    <Content Include="Views\Shared\_PrincipalMenu.cshtml" />
+    <Content Include="Views\Shared\SideMenu.cshtml" />
+    <Content Include="Views\Shared\UserInfo.cshtml" />
+    <Content Include="Views\EjecucionPresupuestalPNSR\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

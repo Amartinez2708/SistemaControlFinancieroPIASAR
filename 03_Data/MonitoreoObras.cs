@@ -40,6 +40,8 @@ namespace _03_Data
         public Nullable<int> IdUsuario_upd { get; set; }
         public Nullable<System.DateTime> Fecha_upd { get; set; }
         public Nullable<decimal> DevengadoAcumulado { get; set; }
+        public decimal PorcentajeAvanceObraProgramado { get; set; }
+        public string EstrategiaAccion { get; set; }
     
         public virtual Proyecto Proyecto { get; set; }
     }

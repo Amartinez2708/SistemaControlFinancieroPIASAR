@@ -1,7 +1,15 @@
-﻿$(document).ready(function () {
+﻿var max = 0;
+
+$(document).ready(function () {
     if (getUrlParameter('Anio') != "") {
         $('#hdnAnio').val(getUrlParameter('Anio'))
         $('#AnioEjecucion').html(getUrlParameter('Anio'));
+
+        if (getUrlParameter('Anio') == 2022) {
+            max = 700;
+        } else {
+            max = 350;
+        }
     };
     ListSeguimiento();
 });
@@ -75,10 +83,10 @@ function ListSeguimiento() {
             seguimiento.push(s);
         }
 
-        var PorcentajeMes_CT = (ResultadoMes_CT / MetaMes_CT) * 100;
-        var PorcentajeMes_CA = (ResultadoMes_CA / MetaMes_CA) * 100;
-        var PorcentajeMes_C2 = (ResultadoMes_C2 / MetaMes_C2) * 100;
-        var PorcentajeMes_T = (ResultadoMes_T / MetaMes_T) * 100;
+        var PorcentajeMes_CT = ((ResultadoMes_CT / MetaMes_CT) * 100) == Infinity ? 100 : (ResultadoMes_CT / MetaMes_CT) * 100;
+        var PorcentajeMes_CA = ((ResultadoMes_CA / MetaMes_CA) * 100) == Infinity ? 100 : (ResultadoMes_CA / MetaMes_CA) * 100;
+        var PorcentajeMes_C2 = ((ResultadoMes_C2 / MetaMes_C2) * 100) == Infinity ? 100 : (ResultadoMes_C2 / MetaMes_C2) * 100;
+        var PorcentajeMes_T = ((ResultadoMes_T / MetaMes_T) * 100) == Infinity ? 100 : (ResultadoMes_T / MetaMes_T) * 100;
 
         var divOpcion = '<tr name="rows" style="background-color:rgb(255,242,204)">';
         /*==========labels==============*/
@@ -142,7 +150,7 @@ function ListSeguimiento() {
             valueAxis.title.text = "% de Ejecución";
             valueAxis.title.fontWeight = 800;
             valueAxis.min = 0;
-            valueAxis.max = 200;
+            valueAxis.max = max;
             valueAxis.strictMinMax = true;
             valueAxis.renderer.labels.template.adapter.add("text", (text, label) => { return label.dataItem.value + "%"; })
 
@@ -155,12 +163,12 @@ function ListSeguimiento() {
             series.tooltipText = "{name} [{categoryX}]: {valueY} %";
             series.legendSettings.valueText = "{valueY}";
             series.tooltip.getFillFromObject = false;
-            series.tooltip.background.fill = am4core.color("#dc3545");
+            series.tooltip.background.fill = am4core.color("#28a745");
 
             var bullet = series.bullets.push(new am4charts.CircleBullet());
-            series.stroke = am4core.color("#dc3545");
-            bullet.stroke = am4core.color("#dc3545");
-            bullet.fill = am4core.color("#dc3545");
+            series.stroke = am4core.color("#28a745");
+            bullet.stroke = am4core.color("#28a745");
+            bullet.fill = am4core.color("#28a745");
 
             var series2 = chart.series.push(new am4charts.LineSeries());
             series2.dataFields.valueY = "CA";
@@ -170,12 +178,12 @@ function ListSeguimiento() {
             series2.tooltipText = "{name} [{categoryX}]: {valueY} %";
             series2.legendSettings.valueText = "{valueY}";
             series2.tooltip.getFillFromObject = false;
-            series2.tooltip.background.fill = am4core.color("#28a745");
+            series2.tooltip.background.fill = am4core.color("#4099ff");
 
             var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
-            series2.stroke = am4core.color("#28a745");
-            bullet2.stroke = am4core.color("#28a745");
-            bullet2.fill = am4core.color("#28a745");
+            series2.stroke = am4core.color("#4099ff");
+            bullet2.stroke = am4core.color("#4099ff");
+            bullet2.fill = am4core.color("#4099ff");
 
             var series3 = chart.series.push(new am4charts.LineSeries());
             series3.dataFields.valueY = "C2";
@@ -185,12 +193,12 @@ function ListSeguimiento() {
             series3.tooltipText = "{name} [{categoryX}]: {valueY} %";
             series3.legendSettings.valueText = "{valueY}";
             series3.tooltip.getFillFromObject = false;
-            series3.tooltip.background.fill = am4core.color("#4099ff");
+            series3.tooltip.background.fill = am4core.color("#3f51b5");
 
             var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
-            series3.stroke = am4core.color("#4099ff");
-            bullet3.stroke = am4core.color("#4099ff");
-            bullet3.fill = am4core.color("#4099ff");
+            series3.stroke = am4core.color("#3f51b5");
+            bullet3.stroke = am4core.color("#3f51b5");
+            bullet3.fill = am4core.color("#3f51b5");
 
             // Add cursor
             chart.cursor = new am4charts.XYCursor();
@@ -255,17 +263,17 @@ function ListSeguimiento() {
                 "componente": "C1(Coordinación Técnica)",
                 "porcentage": PorcentajeMes_CT,
                 "monto": ResultadoMes_CT,
-                "fill": "#dc3545"
+                "fill": "#28a745"
             }, {
                 "componente": "C2(CT-CA)",
                 "porcentage": PorcentajeMes_C2,
                 "monto": ResultadoMes_C2,
-                "fill": "#4099ff"
+                "fill": "#3f51b5"
             }, {
                 "componente": "C3(Coordinación Administrativa)",
                 "porcentage": PorcentajeMes_CA,
                 "monto": ResultadoMes_CA,
-                "fill": "#28a745"
+                "fill": "#4099ff"
             }];
 
 
@@ -279,7 +287,7 @@ function ListSeguimiento() {
             //valueAxis.title.text = "Total";
             valueAxis.title.fontWeight = 800;
             valueAxis.min = 0;
-            valueAxis.max = 200;
+            valueAxis.max = 120;
             valueAxis.strictMinMax = true;
             valueAxis.renderer.labels.template.adapter.add("text", (text, label) => { return label.dataItem.value + "%"; })
 

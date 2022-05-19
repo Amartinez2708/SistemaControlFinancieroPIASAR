@@ -245,6 +245,8 @@ namespace _04_Servicios
                     var IdManifiesto = context.MANIFIESTO_GASTO.Max(x=>x.IDMANIFIESTO) + 1;
                     var UltimoNroManifiesto = context.MANIFIESTO_GASTO.Where(x => x.IDPROYECTO == proyecto.IdProyecto && x.ESTADO == 1).Count();
                     var NroManifiesto = string.Format("{0:0000}", UltimoNroManifiesto + 1);
+                    var Usuario = context.USUARIO_SISTEMA.FirstOrDefault(x => x.IDUSUARIO == manifiesto.IdUsuario);
+                    var Cargo = context.Personal.FirstOrDefault(x => x.IdPersonal == Usuario.IDPERSONAL).cod_cargo;
 
                     MANIFIESTO_GASTO Nuevo = new MANIFIESTO_GASTO();
                     Nuevo.IDMANIFIESTO = IdManifiesto;
@@ -264,7 +266,15 @@ namespace _04_Servicios
                     Nuevo.FECHA_ADD = DateTime.Now;
                     Nuevo.IDUSUARIO_UPD = manifiesto.IdUsuario;//SecurityManager<EnUsuario>.User.IdUsuario;
                     Nuevo.FECHA_UPD = DateTime.Now;
-                    Nuevo.TIPO_MANIFIESTO = 1;
+
+                    if (Cargo == 8)
+                    {
+                        Nuevo.TIPO_MANIFIESTO = 1;
+                    }
+                    else
+                    {
+                        Nuevo.TIPO_MANIFIESTO = 2;
+                    }                   
                     context.MANIFIESTO_GASTO.Add(Nuevo);
                     context.SaveChanges();
 

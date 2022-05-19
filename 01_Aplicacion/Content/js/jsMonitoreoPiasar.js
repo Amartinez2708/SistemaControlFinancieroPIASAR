@@ -452,13 +452,13 @@ function ListMontoProyectoVSPresupuesto() {
                  text: '<span class="fa fa-file-excel-o"></span> Excel',
                  className: 'btn btn-mat btn-success mr-1 mb-2',
                  extend: 'excelHtml5',
-                 title: getNombreFile('rpt_Justificacion_VS_Desembolsado_')
+                 title: getNombreFile('rpt_DetalladoNucleos_')
              },
              {
                  text: '<span class="fa fa-clipboard"></span> Copiar',
                  className: 'btn btn-mat btn-warning mr-1 mb-2',
                  extend: 'copy',
-                 title: getNombreFile('rpt_Justificacion_VS_Desembolsado_')
+                 title: getNombreFile('rpt_DetalladoNucleos_')
              }
         ],
         columns: [
@@ -481,10 +481,10 @@ function ListMontoProyectoVSPresupuesto() {
                     { "name": "", "title": "% Rendido </br>(Rendido/Transferido)", "data": "Porcentaje", "autowidth": true },
                     { "name": "", "title": "Fecha Ultima </br>Autorización", "data": "FechaUltAut", "autowidth": true },
                     { "name": "", "title": "Fecha Ultima </br>Rendición", "data": "FechaUltMan", "autowidth": true },
-                    { "name": "", "title": "Nro. Dias </br>Transcurridos </br>Sin Rendir", "data": "NroDias", "autowidth": true },
+                    //{ "name": "", "title": "Nro. Dias </br>Transcurridos </br>Sin Rendir", "data": "NroDias", "autowidth": true },
                     { "name": "", "title": "Liquidador", "data": "Liquidador", "autowidth": true },
                     //{ "name": "", "title": "Estado", "data": "Estado", "autowidth": true }
-                    { "name": "", "title": "Estado", "data": null, "autowidth": true },
+                    //{ "name": "", "title": "Estado", "data": null, "autowidth": true },
         ],
         columnDefs: [
             {
@@ -559,25 +559,25 @@ function ListMontoProyectoVSPresupuesto() {
                     return formatMoney(full.Porcentaje)+"%";
                 }
             },
-            {
-                "targets": 21,
-                "data": "Estado",
-                "className": "align-middle text-center",
-                "mRender": function (data, type, full) {
-                    if (full.Estado == 1) {
-                        return '<i class="fa fa-check" title="En Actividad" style="font-size: 30px;color: #4CAF50;"></i>';
-                    }
-                    else if (full.Estado == 2) {
-                        return '<i class="fa fa-exclamation-triangle" title="Sin Actividad por más de 30 días" style="font-size: 30px;color: #ffc107;"></i>';
-                    }
-                    else if (full.Estado == 3) {
-                        return '<i class="fa fa-times" title="Sin Rendir más de 7 días" style="font-size: 30px;color: #f44336;"></i>';
-                    }
-                    else if (full.Estado == 4) {
-                        return '<i class="fa fa-minus-circle" title="Sin Actividad" style="font-size: 30px;color: #9e9e9e;"></i>';
-                    }
-                }
-            },
+            //{
+            //    "targets": 21,
+            //    "data": "Estado",
+            //    "className": "align-middle text-center",
+            //    "mRender": function (data, type, full) {
+            //        if (full.Estado == 1) {
+            //            return '<i class="fa fa-check" title="En Actividad" style="font-size: 30px;color: #4CAF50;"></i>';
+            //        }
+            //        else if (full.Estado == 2) {
+            //            return '<i class="fa fa-exclamation-triangle" title="Sin Actividad por más de 30 días" style="font-size: 30px;color: #ffc107;"></i>';
+            //        }
+            //        else if (full.Estado == 3) {
+            //            return '<i class="fa fa-times" title="Sin Rendir más de 7 días" style="font-size: 30px;color: #f44336;"></i>';
+            //        }
+            //        else if (full.Estado == 4) {
+            //            return '<i class="fa fa-minus-circle" title="Sin Actividad" style="font-size: 30px;color: #9e9e9e;"></i>';
+            //        }
+            //    }
+            //},
             {
                 "targets": "_all",
                 "className": "align-middle text-center",
@@ -2063,7 +2063,7 @@ function GraficoDesembolsoProgramado() {
             series2.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
             series2.columns.template.stroke = am4core.color("#333");
             series2.columns.template.strokeWidth = 2;
-            series2.columns.template.events.on("hit", CallDetalle, this);
+            //series2.columns.template.events.on("hit", CallDetalle, this);
 
             chart.cursor = new am4charts.XYCursor();
             chart.cursor.lineX.disabled = true;

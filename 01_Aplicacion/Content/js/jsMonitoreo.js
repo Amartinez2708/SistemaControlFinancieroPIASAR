@@ -16,7 +16,7 @@ function ListEstadoPresupuesto() {
         info: true,
         ordering: false,
         paging: true,
-        pageLength: 15,
+        pageLength: 10,
         //order: [[4, "desc"]],
         ajax: {
             url: "/MonitoreoObras/ListProyectos",
@@ -53,6 +53,7 @@ function ListEstadoPresupuesto() {
                       { "name": "", "title": "Estado", "data": "Estados", "autowidth": true },
                       { "name": "", "title": "Sub-Estado", "data": "SubEstado", "autowidth": true },
                       { "name": "", "title": "Sub-Estado2", "data": "Subestado2", "autowidth": true },
+                      { "name": "", "title": "Observación", "data": "DetalleSituacional", "autowidth": true },
                     { "name": "", "title": "Monitoreo", "data": null, "autowidth": true }
         ],
         columnDefs: [
@@ -80,8 +81,16 @@ function ListEstadoPresupuesto() {
                     return "<div class='text-wrap width-200'>" + full.Subestado2 + "</div>";//full.NombreCurso; 
                 }
             },
+             {
+                 "targets": 13,
+                 "data": null,
+                 "className": "align-middle text-center",
+                 "mRender": function (data, type, full) {
+                     return "<div class='text-wrap width-200'>" + full.DetalleSituacional + "</div>";//full.NombreCurso; 
+                 }
+             },
             {
-                "targets": 13,
+                "targets": 14,
                 "data": null,
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
@@ -165,6 +174,8 @@ function AbrirMonitoreo(Id) {
         $("#txtCNU").val(data.ConexionesNuevasAlcantarillado);
         $("#txtCRU").val(data.ConexionesRehabilitadasAlcantarillado);
         $("#txtDevengado").val(data.DevengadoAcumulado);
+        $("#txtAvanceObraProgramado").val(data.PorcentajeAvanceObraProgramado),
+        $("#txtEstrategiaAccion").val(data.EstrategiaAccion),
         $.unblockUI();
     });
     $("#modal-proyectos").modal({ backdrop: 'static', keyboard: true, show: true });
@@ -193,6 +204,8 @@ function GuardarMonitoreo() {
         IdUsuario: $("#hdnIdUsuario").val(),
         DevengadoAcumulado: $("#txtDevengado").val(),
         Modalidad: $("#hdnModalidad").val(),
+        PorcentajeAvanceObraProgramado: $("#txtAvanceObraProgramado").val(),
+        EstrategiaAccion: $("#txtEstrategiaAccion").val(),
     }
 
     $.ajax({

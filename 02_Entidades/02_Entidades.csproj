@@ -57,8 +57,11 @@
     <Compile Include="EnDistrito.cs" />
     <Compile Include="EnDropDowList.cs" />
     <Compile Include="EnDropDownList.cs" />
+    <Compile Include="EnEjecucionInversion.cs" />
+    <Compile Include="EnEjecucionInversionMes.cs" />
     <Compile Include="EnEstadoFinanciero.cs" />
     <Compile Include="EnHistoricoMonitoreo.cs" />
+    <Compile Include="EnIndicador.cs" />
     <Compile Include="EnIndicadores.cs" />
     <Compile Include="EnListDepa.cs" />
     <Compile Include="EnListDist.cs" />
@@ -74,6 +77,8 @@
     <Compile Include="EnMonitoreoObras.cs" />
     <Compile Include="EnMovimiento_Documento.cs" />
     <Compile Include="EnMovimiento_Documento_Detalle.cs" />
+    <Compile Include="EnProceso.cs" />
+    <Compile Include="EnProcesoDetalle.cs" />
     <Compile Include="EnProgramadoEjecutadoMensual.cs" />
     <Compile Include="EnProgresoSubComponente.cs" />
     <Compile Include="EnProvincia.cs" />

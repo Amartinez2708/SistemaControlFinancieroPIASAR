@@ -44,7 +44,7 @@ namespace _04_Servicios
                     model.Estados = objMonitoreo == null ? "" : GetEstado(Convert.ToInt32(objMonitoreo.Estado)).ValorDevolucion;
                     model.SubEstado = objMonitoreo == null ? "" : GetSubEstado(Convert.ToInt32(objMonitoreo.SubEstado)).ValorDevolucion;
                     model.Subestado2 = objMonitoreo == null ? "" : GetSubEstado2(Convert.ToInt32(objMonitoreo.SubEstado2)).ValorDevolucion;
-                    
+                    model.DetalleSituacional = objMonitoreo == null ? "" : objMonitoreo.DetalleSituacional;
 
                     result.Add(model);
                 }
@@ -84,6 +84,8 @@ namespace _04_Servicios
                 result.FechaActualizacion = obj.Fecha_add == null ? "" : Convert.ToDateTime(obj.Fecha_add).ToString("dd/MM/yyyy hh:mm:ss");
                 result.Usuario = usuario == null ? "" : usuario.PERSONAL;
                 result.DevengadoAcumulado = obj.DevengadoAcumulado;
+                result.PorcentajeAvanceObraProgramado = obj.PorcentajeAvanceObraProgramado;
+                result.EstrategiaAccion = obj.EstrategiaAccion;
             }
             return result;
         }
@@ -125,6 +127,8 @@ namespace _04_Servicios
                     Nuevo.Fecha_add = DateTime.Now;
                     Nuevo.IdUsuario_upd = monitoreo.IdUsuario;
                     Nuevo.Fecha_upd = DateTime.Now;
+                    Nuevo.PorcentajeAvanceObraProgramado = monitoreo.PorcentajeAvanceObraProgramado;
+                    Nuevo.EstrategiaAccion = monitoreo.EstrategiaAccion;
 
                     context.MonitoreoObras.Add(Nuevo);
                     context.SaveChanges();
@@ -194,6 +198,7 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "Paralizada";
             }
+            
 
             return result;
         }
@@ -277,6 +282,22 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "Permanente";
             }
+            else if (id == 20)
+            {
+                result.ValorDevolucion = "Por Convocar";
+            }
+            else if (id == 21)
+            {
+                result.ValorDevolucion = "En Transferencia";
+            }
+            else if (id == 22)
+            {
+                result.ValorDevolucion = "Transferido";
+            }
+            //else if (id == 21)
+            //{
+            //    result.ValorDevolucion = "Convenio Liquidado";
+            //}
 
             return result;
         }

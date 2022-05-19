@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-block caption-breadcrumb" style="background-color: #fff !important;color: #bf0909;border: 3px solid #bf0909;">
+        <div class="breadcrumb-header">
+            <h5 style="color: #bf0909;">
+                <i class="fa fa-home"></i> &nbsp; Gestión del Componente 2
+            </h5>
+            <span></span>
+        </div>
+        <div class="page-header-breadcrumb">
+            <span id="SpanFechaInicio"></span>
+        </div>
+    </div>
+</div>
+<script>
+        let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+        let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        let date = new Date();
+        let fechaNum = date.getUTCDate();
+        let mes_name = date.getMonth();
+        document.getElementById("SpanFechaInicio").innerHTML = "<i class='fa fa-calendar'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear();
+</script>
+<div class="row">
+    <div class="col-md-6 col-xl-3" onclick="VerProcesos('Todo','')" style="cursor:pointer">
+        <div class="card border-primary">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/proceso-de-trabajo.png" style="width:90px">
+                </div>
+                <span id="nroProcesos" class="f-36 text-c-blue">0</span>
+                <p>
+                    Nro. de Procesos
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card border-success">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/money.png" style="width:90px">
+                </div>
+                <span id="mtoTotalProcesos" class="f-36 text-c-green">0</span>
+                <p>
+                    Monto Total de Procesos
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card border-warning">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/tdr.png" style="width:90px">
+                </div>
+                <span id="nroTDRET" class="f-36 text-c-yellow">0</span>
+                <p>
+                    Cantidad de TDR/ET
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card border-danger">
+            <div class="card-body user-radial-card text-dark">
+                <div data-label="50%" class="radial-bar">
+                    <img src="../Content/Images/presupuesto.png" style="width:90px">
+                </div>
+                <span id="nroCCP" class="f-36 text-c-pink">0</span>
+                <p>
+                    Cantidad de CCP
+                    <br />&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-xl-4">
+        <div class="card border-success">
+            <div class="card-header text-dark">
+                <div class="row col-sm-12 col-xl-12">
+                    <h4 style="font-size: 18px;">
+                        <i class="fa fa-line-chart"></i> Monto Total por Indicadores del Componente 2
+                    </h4>
+                </div>
+            </div>
+            <div class="card-block text-dark">
+                <div id="chartMontoPorIndicadores" style="height:513px;">
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12 col-sm-12 text-center">
+                        <button class="btn btn-mat btn-primary" onclick="VerMontoPorIndicadores()"><i class="fa fa-search" aria-hidden="true"></i>Ver Detalle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-8">
+        <div class="card border-primary">
+            <div class="card-header text-dark">
+                <div class="row col-sm-12 col-xl-12">
+                    <h4 style="font-size: 18px;">
+                        <i class="fa fa-line-chart"></i> Programación de Ejecución Mensual del Componente 2
+                    </h4>
+                </div>
+            </div>
+            <div class="card-block text-dark">
+                <div id="chartEjecucionMensual" style="height:570px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-8">
+        <div class="card border-warning">
+            <div class="card-header text-dark">
+                <div class="row col-sm-12 col-xl-12">
+                    <h4 style="font-size: 18px;">
+                        <i class="fa fa-line-chart"></i> Nro. de Procesos por Estado
+                    </h4>
+                </div>
+            </div>
+            <div class="card-block text-dark">
+                <div id="chartProcesoEstado" style="height:570px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-4">
+        <div class="card border-danger">
+            <div class="card-header text-dark">
+                <div class="row col-sm-12 col-xl-12">
+                    <h4 style="font-size: 18px;">
+                        <i class="fa fa-line-chart"></i> Nro. Procesos por Programa Responsable
+                    </h4>
+                </div>
+            </div>
+            <div class="card-block text-dark">
+                <div id="chartProcesosPrograma" style="height:570px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-montoxindicadores" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-certificate"></i> Monto Total por Indicadores del Componente 2
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtmontoxindicadores" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-detalle" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-certificate"></i><span id="Titulomodal"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-sm-12 col-lg-12" style="overflow:auto;">
+                        <table id="dtdetalle" class="table table-bordered table-hover" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsGestionComponente.js"></script>
+}
+
+
+

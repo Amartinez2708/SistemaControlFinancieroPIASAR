@@ -18,6 +18,8 @@ namespace _03_Data
         public Componente()
         {
             this.TituloSubComponente = new HashSet<TituloSubComponente>();
+            this.Indicador = new HashSet<Indicador>();
+            this.Proceso = new HashSet<Proceso>();
         }
     
         public int IdComponente { get; set; }
@@ -31,5 +33,9 @@ namespace _03_Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TituloSubComponente> TituloSubComponente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Indicador> Indicador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proceso> Proceso { get; set; }
     }
 }

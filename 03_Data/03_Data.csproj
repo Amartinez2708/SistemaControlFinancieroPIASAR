@@ -90,7 +90,16 @@
     <Compile Include="Distrito.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="EjecucionInversion.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EjecucionInversionMes.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="HistoricoMonitoreo.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Indicador.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ListDepa.cs">
@@ -151,6 +160,12 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Presupuesto_obra.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proceso.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcesoDetalle.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ProgramadoEjecutadoMensual.cs">

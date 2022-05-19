@@ -17,11 +17,11 @@ namespace _03_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proyecto()
         {
-            this.Autorizacion_Gasto = new HashSet<Autorizacion_Gasto>();
             this.Desembolso = new HashSet<Desembolso>();
+            this.DesembolsoProgramadoAnual = new HashSet<DesembolsoProgramadoAnual>();
+            this.Autorizacion_Gasto = new HashSet<Autorizacion_Gasto>();
             this.MANIFIESTO_GASTO = new HashSet<MANIFIESTO_GASTO>();
             this.MonitoreoObras = new HashSet<MonitoreoObras>();
-            this.DesembolsoProgramadoAnual = new HashSet<DesembolsoProgramadoAnual>();
         }
     
         public int IdProyecto { get; set; }
@@ -82,14 +82,14 @@ namespace _03_Data
         public string Grupo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Autorizacion_Gasto> Autorizacion_Gasto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Desembolso> Desembolso { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DesembolsoProgramadoAnual> DesembolsoProgramadoAnual { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Autorizacion_Gasto> Autorizacion_Gasto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MANIFIESTO_GASTO> MANIFIESTO_GASTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonitoreoObras> MonitoreoObras { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DesembolsoProgramadoAnual> DesembolsoProgramadoAnual { get; set; }
     }
 }

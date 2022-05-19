@@ -87,5 +87,10 @@ namespace _02_Entidades
         public int IdSubEstado { get; set; }
         public int IdSubestado2 { get; set; }
         public int IdTipoProyecto { get; set; }
+        public string DetalleSituacional { get; set; }
+
+        public string EstrategiaAccion { get; set; }
+        public decimal PorcentajeAvanceObraProgramado { get; set; }
+
     }
 }

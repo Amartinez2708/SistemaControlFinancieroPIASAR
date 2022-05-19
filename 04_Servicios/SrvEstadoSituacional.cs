@@ -70,7 +70,8 @@ namespace _04_Servicios
             result.nroContrataConcluidoO = obj.Where(x => x.Estado == 2 && x.TipoProyecto == 2 && x.Modalidad == 190).Count() + obj.Where(x => x.Estado == 5 && x.TipoProyecto == 2 && x.Modalidad == 190).Count();
             result.nroNucleoConcluidoO = obj.Where(x => x.Estado == 2 && x.TipoProyecto == 2 && x.Modalidad == 22).Count() + obj.Where(x => x.Estado == 5 && x.TipoProyecto == 2 && x.Modalidad == 22).Count();
 
-            
+            result.nroEnProcesoLiquidacionConvenio = obj.Count();
+            result.nroConvenioLiquidado = 0;
 
 
             return result;
@@ -114,6 +115,8 @@ namespace _04_Servicios
                     model.Comentarios = objMonitoreo.DetalleSituacional;
                     model.TipoProyecto = objMonitoreo == null ? "" : Convert.ToInt32(objMonitoreo.TipoProyecto) == 1 ? "Expediente Técnico" : "Obra";
                     model.IdTipoProyecto = objMonitoreo == null ? 0 : Convert.ToInt32(objMonitoreo.TipoProyecto);
+                    model.PorcentajeAvanceObraProgramado = objMonitoreo.PorcentajeAvanceObraProgramado;
+                    model.EstrategiaAccion = objMonitoreo.EstrategiaAccion;
                     result.Add(model);
                 }
             }
@@ -195,6 +198,10 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "En Tramite de Firma de Convenio";
             }
+            else if (id == 11)
+            {
+                result.ValorDevolucion = "Paralizada";
+            }
 
             return result;
         }
@@ -274,6 +281,30 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "En Ejecución";
             }
+            else if (id == 19)
+            {
+                result.ValorDevolucion = "Permanente";
+            }
+            else if (id == 20)
+            {
+                result.ValorDevolucion = "Por Convocar";
+            }
+            else if (id == 21)
+            {
+                result.ValorDevolucion = "En Transferencia";
+            }
+            else if (id == 22)
+            {
+                result.ValorDevolucion = "Transferido";
+            }
+            //else if (id == 20)
+            //{
+            //    result.ValorDevolucion = "En Proceso de Liquidación de Convenio";
+            //}
+            //else if (id == 21)
+            //{
+            //    result.ValorDevolucion = "Convenio Liquidado";
+            //}
 
             return result;
         }
