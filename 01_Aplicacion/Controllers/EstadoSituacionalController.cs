@@ -63,6 +63,10 @@ namespace _01_Aplicacion.Controllers
                 int[] ListEstados = { 2, 5 };
                 result = objEstadoSituacional.ListProyectos().Where(x => x.IdTipoProyecto == Tipo && ListEstados.Contains(x.IdEstado)).ToList();
             }
+            else if (Tipo == 1)
+            {
+                result = objEstadoSituacional.ListProyectos().Where(x => x.IdTipoProyecto == Tipo).ToList();
+            }
             else
             {
                 result = objEstadoSituacional.ListProyectos().Where(x => x.IdTipoProyecto == Tipo && x.IdEstado == Estado).ToList();

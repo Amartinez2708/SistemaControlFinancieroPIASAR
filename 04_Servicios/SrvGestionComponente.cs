@@ -193,6 +193,7 @@ namespace _04_Servicios
                         p.NroProceso = item.NroProceso;
                         p.NombreProceso = item.NombreProceso;
                         p.TextIndicador = "Indicador " + item.Indicador.NroIndicador.ToString();
+                        p.TextIndicadorDetalle = item.Indicador.Descripcion;
                         p.AnioProceso = item.AnioProceso;
                         p.TextAntiguedad = item.TipoAntiguedad == 1 ? "Nuevo" : "Continuidad";
                         p.MontoProceso = item.MontoProceso;
@@ -302,6 +303,7 @@ namespace _04_Servicios
                         p.NroProceso = item.NroProceso;
                         p.NombreProceso = item.NombreProceso;
                         p.TextIndicador = "Indicador " + item.Indicador.NroIndicador.ToString();
+                        p.TextIndicadorDetalle = item.Indicador.Descripcion;
                         p.AnioProceso = item.AnioProceso;
                         p.TextAntiguedad = item.TipoAntiguedad == 1 ? "Nuevo" : "Continuidad";
                         p.MontoProceso = item.MontoProceso;
@@ -359,6 +361,7 @@ namespace _04_Servicios
                         p.NroProceso = item.NroProceso;
                         p.NombreProceso = item.NombreProceso;
                         p.TextIndicador = "Indicador " + item.Indicador.NroIndicador.ToString();
+                        p.TextIndicadorDetalle = item.Indicador.Descripcion;
                         p.AnioProceso = item.AnioProceso;
                         p.TextAntiguedad = item.TipoAntiguedad == 1 ? "Nuevo" : "Continuidad";
                         p.MontoProceso = item.MontoProceso;
@@ -417,6 +420,7 @@ namespace _04_Servicios
                         p.NroProceso = item.NroProceso;
                         p.NombreProceso = item.NombreProceso;
                         p.TextIndicador = "Indicador " + item.Indicador.NroIndicador.ToString();
+                        p.TextIndicadorDetalle = item.Indicador.Descripcion;
                         p.AnioProceso = item.AnioProceso;
                         p.TextAntiguedad = item.TipoAntiguedad == 1 ? "Nuevo" : "Continuidad";
                         p.MontoProceso = item.MontoProceso;
@@ -474,6 +478,7 @@ namespace _04_Servicios
                         p.NroProceso = item.NroProceso;
                         p.NombreProceso = item.NombreProceso;
                         p.TextIndicador = "Indicador " + item.Indicador.NroIndicador.ToString();
+                        p.TextIndicadorDetalle = item.Indicador.Descripcion;
                         p.AnioProceso = item.AnioProceso;
                         p.TextAntiguedad = item.TipoAntiguedad == 1 ? "Nuevo" : "Continuidad";
                         p.MontoProceso = item.MontoProceso;
@@ -571,7 +576,18 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "Solicitud de no objecion";
             }
-
+            else if (id == 13)
+            {
+                result.ValorDevolucion = "Adjudicado";
+            }
+            else if (id == 14)
+            {
+                result.ValorDevolucion = "Pendiente de Requerimiento";
+            }
+            else if (id == 15)
+            {
+                result.ValorDevolucion = "No se Ejecutará";
+            }
             return result;
         }
         public EnRespuesta GetEstadoString(string text)
@@ -626,7 +642,18 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "12";
             }
-
+            else if (text == "Adjudicado")
+            {
+                result.ValorDevolucion = "13";
+            }
+            else if (text == "Pendiente de Requerimiento")
+            {
+                result.ValorDevolucion = "14";
+            }
+            else if (text == "No se Ejecutará")
+            {
+                result.ValorDevolucion = "15";
+            }
             return result;
         }
         public EnRespuesta GetProceso(int id)

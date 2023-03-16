@@ -53,6 +53,7 @@
     <Compile Include="EnDesembolsoProgramadoAnual.cs" />
     <Compile Include="EnDesembolsoProgramadoMensual.cs" />
     <Compile Include="EnDesembolsoVSJustificado.cs" />
+    <Compile Include="EnDetalleSeguimientoActividadesJASS.cs" />
     <Compile Include="EnDevengadoMensual.cs" />
     <Compile Include="EnDistrito.cs" />
     <Compile Include="EnDropDowList.cs" />
@@ -70,6 +71,10 @@
     <Compile Include="EnListEstadoProyecto.cs" />
     <Compile Include="EnListMontoProyectoVSPresupuesto.cs" />
     <Compile Include="EnListProv.cs" />
+    <Compile Include="EnListResultadoEsperadoAnio.cs" />
+    <Compile Include="EnListSeguimiento.cs" />
+    <Compile Include="EnListSeguimientoDetalle.cs" />
+    <Compile Include="EnListSeguimientoDetalleActividades.cs" />
     <Compile Include="EnListSeguimientoProgramadoEjecutadoMensual.cs" />
     <Compile Include="EnMANIFIESTO_GASTO.cs" />
     <Compile Include="EnMANIFIESTO_GASTO_DETALLE.cs" />
@@ -87,12 +92,30 @@
     <Compile Include="EnReporteBID.cs" />
     <Compile Include="EnReporteEstados.cs" />
     <Compile Include="EnRespuesta.cs" />
+    <Compile Include="EnSeguimientoActividadesJASS.cs" />
     <Compile Include="EnSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="EnSubComponente.cs" />
+    <Compile Include="EnTablaDinamica.cs" />
+    <Compile Include="EnTablaDinamicaColumnas.cs" />
     <Compile Include="EnTituloSubComponente.cs" />
     <Compile Include="EnPersonal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReporteObras.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

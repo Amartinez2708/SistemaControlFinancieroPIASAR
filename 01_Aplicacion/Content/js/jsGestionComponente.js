@@ -403,9 +403,9 @@ function VerProcesos(tipo, valor) {
                     { "name": "", "title": "Nro.", "data": "NroProceso", "autowidth": true },
                     { "name": "", "title": "Proceso", "data": "NombreProceso", "autowidth": true },
                     { "name": "", "title": "Indicador", "data": "TextIndicador", "autowidth": true },
+                    { "name": "", "title": "Indicador <br/> Descripción", "data": "TextIndicadorDetalle", "autowidth": true },
                     { "name": "", "title": "Año<br/> Proceso", "data": "AnioProceso", "autowidth": true },
                     { "name": "", "title": "Tipo", "data": "TextAntiguedad", "autowidth": true },
-                    { "name": "", "title": "Indicador", "data": "TextIndicador", "autowidth": true },
                     { "name": "", "title": "Unidad<br/> Responsable", "data": "TextUnidadResponsable", "autowidth": true },
                     { "name": "", "title": "Responsable", "data": "Responsable1", "autowidth": true },
                     { "name": "", "title": "Tipo<br/> Proceso", "data": "TextTipoProceso", "autowidth": true },
@@ -442,6 +442,14 @@ function VerProcesos(tipo, valor) {
                 "className": "align-middle",
                 "mRender": function (data, type, full) {
                     return "<div class='text-wrap width-340'>" + full.NombreProceso + "</div>";//full.NombreCurso; 
+                }
+            },
+            {
+                "targets": 3,
+                "data": null,
+                "className": "align-middle",
+                "mRender": function (data, type, full) {
+                    return "<div class='text-wrap width-340'>" + full.TextIndicadorDetalle + "</div>";//full.NombreCurso; 
                 }
             },
             {

@@ -65,10 +65,10 @@
     <header></header>
     <div class="page-title-section" style="background-image: url(../Content/directorio/img/bg/pagetitle.jpg);">
         <div class="container">
-            <h1>Sistema de Control de Monitoreo de la UGP-PIASAR</h1>
+            <h1>SISTEMA DE CONTROL DE MONITOREO<br />UGP-PIASAR</h1>
         </div>
     </div>
-    <div class="section-block" style="background-image: url('../Content/directorio/img/bg/bg13.jpg'); height: 100vh;">
+    <div class="section-block" style="background-image: url('../Content/directorio/img/bg/background.jpg'); height: 100vh;">
         <div class="container">
             <div class="section-heading center-holder">
                 @*<span>Explore Our Services</span>
@@ -76,7 +76,7 @@
                 <div class="section-heading-line"></div>
             </div>
             <div class="row mt-50">
-                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/MonitoreoPIASAR', '_blank');" style="cursor:pointer">
+                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/MonitoreoPIASAR', '_self');" style="cursor:pointer">
                     <div class="feature-box-long">
                         <img src="~/Content/directorio/img/el-ahorro-de-agua.png" style="width: 100px;" />
                         <h3>Núcleos Ejecutores</h3>
@@ -92,17 +92,20 @@
                             <div class="tabs tabs_animate mt-50">
                                 <ul class="tab-menu center-holder">
                                     <li class="">
-                                        <a href="/MonitoreoObrasContrataPIASAR?Anio=2021" target="_blank"><i class="fa fa-line-chart"></i> 2021</a>
+                                        <a href="/MonitoreoObrasContrataPIASAR?Anio=2021" target="_self"><i class="fa fa-line-chart"></i> 2021</a>
                                     </li>
                                     <li class="">
-                                        <a href="/MonitoreoObrasContrataPIASAR?Anio=2022" target="_blank"><i class="fa fa-line-chart"></i> 2022</a>
+                                        <a href="/MonitoreoObrasContrataPIASAR?Anio=2022" target="_self"><i class="fa fa-line-chart"></i> 2022</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="/MonitoreoObrasContrataPIASAR?Anio=2023" target="_self"><i class="fa fa-line-chart"></i> 2023</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/JustificacionGastos', '_blank');" style="cursor:pointer">
+                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/JustificacionGastos', '_self');" style="cursor:pointer">
                     <div class="feature-box-long">
                         <img src="~/Content/directorio/img/cuenta.png" style="width: 100px;" />
                         <h3>Justificación de Gastos</h3>
@@ -116,15 +119,14 @@
                 <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/EstadoSituacional', '_blank');" style="cursor:pointer">
                     <div class="feature-box-long">
                         <img src="~/Content/directorio/img/lista-de-verificacion.png" style="width: 100px;" />
-                        <h3>Estado Situacional de Obras</h3>
+                        <h3>Estado Situacional de Proyectos</h3>
                         <p>
-                            Reportes del estado situacional de las obras de la UGP-PIASAR
-                            <br />&nbsp;
+                            Reportes del estado situacional de los Proyectos de la UGP-PIASAR
                             <br />&nbsp;
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('#', '_blank');" style="cursor:pointer">
+                <div class="col-md-4 col-sm-4 col-12 d-none" onclick="window.open('#', '_self');" style="cursor:pointer">
                     <div class="feature-box-long">
                         <img src="~/Content/directorio/img/comunidad.png" style="width: 100px;" />
                         <h3>Gestión de Relaciones Comunitarias</h3>
@@ -135,7 +137,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/GestionComponente', '_blank');" style="cursor:pointer">
+                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/GestionComponente', '_self');" style="cursor:pointer">
                     <div class="feature-box-long">
                         <img src="~/Content/directorio/img/cuidado.png" style="width: 100px;" />
                         <h3>Gestión del Componente 2</h3>
@@ -146,10 +148,21 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="col-md-4 col-sm-4 col-12" onclick="window.open('/ProyectosGeoreferenciadosPIASAR', '_self');" style="cursor:pointer">
+                    <div class="feature-box-long">
+                        <img src="~/Content/directorio/img/peru.png" style="width: 100px;" />
+                        <h3>Reporte Georeferenciado de Proyectos</h3>
+                        <p>
+                            Proyectos del PIASAR referenciados geograficamente
+                            <br />&nbsp;
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <footer style="position:fixed;left:0px;right:0px;bottom:0px;height:50px;z-index:0;">
+    <footer style="position:fixed;left:0px;right:0px;bottom:0px;height:50px;z-index:0;display:none">
         <div class="container">
             <div class="footer-bar" style="margin-top: -53px;padding-top:0px;border-top:0px;">
                 <div class="row">
@@ -159,7 +172,7 @@
                         </p>
 
                     </div>
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-3 col-12 d-none">
                         <div class="footer-social-icons">
                             <ul>
                                 <li>

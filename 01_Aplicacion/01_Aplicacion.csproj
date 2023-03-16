@@ -226,6 +226,7 @@
     <Compile Include="Controllers\JustificacionGastosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManifiestoGastoController.cs" />
+    <Compile Include="Controllers\MatrizResultadosController.cs" />
     <Compile Include="Controllers\MonitoreoObrasContrataPIASARController.cs" />
     <Compile Include="Controllers\MonitoreoObrasController.cs" />
     <Compile Include="Controllers\MonitoreoPIASARController.cs" />
@@ -261,8 +262,10 @@
     <Content Include="Content\css\partials\menu\pccoded-horizontal-menu.css" />
     <Content Include="Content\css\pcoded-horizontal.min.css" />
     <Content Include="Content\css\Poppins.css" />
+    <Content Include="Content\css\radial.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\StylesGeo.css" />
+    <Content Include="Content\css\stylesPNSRMatriz.css" />
     <Content Include="Content\css\stylesPNSR.css" />
     <Content Include="Content\data-table\css\buttons.dataTables.min.css" />
     <Content Include="Content\data-table\extensions\autofill\css\autoFill.dataTables.min.css" />
@@ -563,7 +566,12 @@
     <Content Include="Content\Images\background-.jpg" />
     <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\background.png" />
+    <Content Include="Content\Images\banco.png" />
+    <Content Include="Content\Images\bg-01--.jpg" />
+    <Content Include="Content\Images\bg-01-.jpg" />
+    <Content Include="Content\Images\bg-01.jpg" />
     <Content Include="Content\Images\bid.png" />
+    <Content Include="Content\Images\contrato.png" />
     <Content Include="Content\Images\corte-de-cinta.png" />
     <Content Include="Content\Images\desembolso.png" />
     <Content Include="Content\Images\DOC.png" />
@@ -573,10 +581,17 @@
     <Content Include="Content\Images\excel.png" />
     <Content Include="Content\Images\favico.ico" />
     <Content Include="Content\Images\finish-line.png" />
+    <Content Include="Content\Images\fondo.jpg" />
     <Content Include="Content\Images\fondo.png" />
     <Content Include="Content\Images\FondoCorreo.jpg" />
     <Content Include="Content\Images\fondocorreo_grande.jpg" />
+    <Content Include="Content\Images\foto-12.jpg" />
+    <Content Include="Content\Images\foto-14.jpg" />
+    <Content Include="Content\Images\foto-2.jpg" />
+    <Content Include="Content\Images\header.jpg" />
+    <Content Include="Content\Images\hogar.png" />
     <Content Include="Content\Images\HTML.png" />
+    <Content Include="Content\Images\INAUGURACIONES.jpg" />
     <Content Include="Content\Images\JPG.png" />
     <Content Include="Content\Images\justificacion.png" />
     <Content Include="Content\Images\lavado.png" />
@@ -589,10 +604,14 @@
     <Content Include="Content\Images\PDF.png" />
     <Content Include="Content\Images\pendienteautorizacion.png" />
     <Content Include="Content\Images\pendienterendicion.png" />
+    <Content Include="Content\Images\peru.png" />
     <Content Include="Content\Images\pnsr_logo.png" />
     <Content Include="Content\Images\porcentajejustificado.png" />
+    <Content Include="Content\Images\portada_web.jpg" />
+    <Content Include="Content\Images\presentacion.png" />
     <Content Include="Content\Images\presupuesto.png" />
     <Content Include="Content\Images\proceso-de-trabajo.png" />
+    <Content Include="Content\Images\product-management.png" />
     <Content Include="Content\Images\RAR.png" />
     <Content Include="Content\Images\Regiones\00.jpg" />
     <Content Include="Content\Images\Regiones\01.jpg" />
@@ -622,8 +641,10 @@
     <Content Include="Content\Images\Regiones\25.jpg" />
     <Content Include="Content\Images\retorno-de-la-inversion.png" />
     <Content Include="Content\Images\search.png" />
+    <Content Include="Content\Images\ssi.png" />
     <Content Include="Content\Images\tdr.png" />
     <Content Include="Content\Images\Titulo.png" />
+    <Content Include="Content\Images\toilet.png" />
     <Content Include="Content\Images\user-f.png" />
     <Content Include="Content\Images\user-m.png" />
     <Content Include="Content\Images\user.png" />
@@ -700,6 +721,7 @@
     <Content Include="Content\js\jsJustificacionGastos.js" />
     <Content Include="Content\js\jsLogin.js" />
     <Content Include="Content\js\jsManifiesto.js" />
+    <Content Include="Content\js\jsMatrizResultados.js" />
     <Content Include="Content\js\jsMonitoreo.js" />
     <Content Include="Content\js\jsMonitoreoContrata.js" />
     <Content Include="Content\js\jsMonitoreoPiasar.js" />
@@ -858,6 +880,7 @@
     <Content Include="bd_Nucleos.xsc">
       <DependentUpon>bd_Nucleos.xsd</DependentUpon>
     </Content>
+    <Content Include="Archivos\Acta de Aprobacion.pdf" />
     <None Include="bd_Nucleos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -910,6 +933,8 @@
     <Content Include="Views\Shared\SideMenu.cshtml" />
     <Content Include="Views\Shared\UserInfo.cshtml" />
     <Content Include="Views\EjecucionPresupuestalPNSR\Index.cshtml" />
+    <Content Include="Views\MatrizResultados\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMatrizResultado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

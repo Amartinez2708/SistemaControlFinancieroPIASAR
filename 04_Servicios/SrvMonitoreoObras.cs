@@ -294,6 +294,10 @@ namespace _04_Servicios
             {
                 result.ValorDevolucion = "Transferido";
             }
+            else if (id == 23)
+            {
+                result.ValorDevolucion = "Cerrado (Invierte.pe)";
+            }
             //else if (id == 21)
             //{
             //    result.ValorDevolucion = "Convenio Liquidado";

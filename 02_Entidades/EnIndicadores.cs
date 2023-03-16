@@ -91,5 +91,8 @@ namespace _02_Entidades
         public decimal mtoTotalCertificado { get; set; }
         public decimal mtoTotalComprometido { get; set; }
         public decimal mtoTotalDevengado { get; set; }
+
+        public int nroEnTransferencia { get; set; }
+        public int nroTransferida { get; set; }
     }
 }

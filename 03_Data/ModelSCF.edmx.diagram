@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="000568ea3ada4d11b8d41dc65a6c085a" Name="Diagram1" ZoomLevel="101">
+      <Diagram DiagramId="000568ea3ada4d11b8d41dc65a6c085a" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Menu_Sistema" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Presupuesto_obra" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ROLES_SISTEMA" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
@@ -30,8 +30,6 @@
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ListMontoProyectoVSPresupuesto" Width="1.5" PointX="17.375" PointY="17.75" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Desembolso" Width="1.5" PointX="3" PointY="20.625" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.HistoricoMonitoreo" Width="1.5" PointX="19.375" PointY="7.75" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Proyecto" Width="1.5" PointX="0.75" PointY="7.125" />
-        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_DesembolsoProyecto" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DesembolsoVSJustificado" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Componente" Width="1.5" PointX="19.375" PointY="12.5" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ProgresoSubComponente" Width="1.5" PointX="26.125" PointY="12.125" />
@@ -48,7 +46,6 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Devengado__Fecha__762C88DA" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Programad__Fecha__73501C2F" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DesembolsoProgramadoAnual" Width="1.5" PointX="3" PointY="33.875" />
-        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__4E1E9780" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DesembolsoProgramadoMensual" Width="1.5" PointX="5.25" PointY="33.75" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__54CB950F" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.USUARIO_SISTEMA" Width="1.5" PointX="7.375" PointY="19.75" />
@@ -61,9 +58,7 @@
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Movimiento_Documento_Detalle" Width="1.5" PointX="13.625" PointY="17.375" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Personal" Width="1.5" PointX="13.375" PointY="21.75" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_AUTORIZACION_GASTO_DETALLE_Autorizacion_Gasto" />
-        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_Autorizacion_Gasto_Proyecto" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_DETALLE_MANIFIESTO_GASTO" />
-        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_Proyecto" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_Movimiento_Documento_Detalle_Movimiento_Documento" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Proceso" Width="1.5" PointX="23.875" PointY="3.75" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Proceso__Fecha_u__4EDDB18F" />
@@ -73,6 +68,56 @@
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.EjecucionInversionMes" Width="1.5" PointX="9.625" PointY="25.625" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Ejecucion__Fecha__62AFA012" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.MonitoreoObras" Width="1.5" PointX="3" PointY="26.25" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoJASS" Width="3.125" PointX="17.625" PointY="25.125" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoJASS" Width="1.875" PointX="15.375" PointY="30.75" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__6DB73E6A" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoATM" Width="1.5" PointX="18.625" PointY="32.125" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoBienArticulo" Width="1.5" PointX="12.375" PointY="32.5" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoSeguimiento" Width="1.5" PointX="12.375" PointY="28.5" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoSeguimientoBienATMJASS" Width="1.5" PointX="14.625" PointY="35.375" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdTip__457442E6" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdTip__4668671F" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdTip__3EC74557" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdTip__3FBB6990" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__TipoSegui__IdTip__4E0988E7" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__TipoSegui__Fecha__4D1564AE" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.CronogramaActividades" Width="1.5" PointX="28.625" PointY="24.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoActividadesATM" Width="1.5" PointX="30.875" PointY="29.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoActividadesFamilias" Width="1.5" PointX="30.875" PointY="24.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoActividadesJASS" Width="1.5" PointX="30.875" PointY="19.625" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoActividadesNE" Width="1.5" PointX="33.875" PointY="25" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.MatrizResultado" Width="1.5" PointX="21.625" PointY="33.75" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.MatrizResultadoProducto" Width="1.5" PointX="23.875" PointY="27.75" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Producto" Width="1.5" PointX="21.625" PointY="27.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ProductoAnio" Width="1.5" PointX="23.875" PointY="32.25" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesATM" Width="1.5" PointX="28.625" PointY="36.25" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesFamilias" Width="1.5" PointX="28.625" PointY="30.5" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesJASS" Width="1.5" PointX="28.625" PointY="19.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesNE" Width="1.5" PointX="31.625" PointY="15.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoActividad" Width="1.5" PointX="26.375" PointY="25.625" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Producto__Fecha___3943762B" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Cronogram__Fecha__7FD5EEA5" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdCro__058EC7FB" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdCro__0E240DFC" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdCro__26EFBBC6" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__IdCro__3AF6B473" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__3A02903A" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__049AA3C2" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__25FB978D" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__0D2FE9C3" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__MatrizRes__Fecha__3EFC4F81" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoATM" Width="1.625" PointX="7.375" PointY="11" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__5F691F13" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoCuotaFamiliarJASS" Width="1.5" PointX="30.625" PointY="1.25" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoCuotaFamiliarJASS" Width="1.5" PointX="28.375" PointY="1" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__4C214075" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Proyecto" Width="1.5" PointX="0.75" PointY="12.875" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_Autorizacion_Gasto_Proyecto" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_DesembolsoProyecto" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__43A1090D" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_Proyecto" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB" />
         </Diagram>
     </edmx:Diagrams>

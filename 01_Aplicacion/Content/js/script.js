@@ -1,12 +1,16 @@
 "use strict";
 $(document).ready(function () {
-    //MaxLengt
-    //$('.max-textarea').maxlength({
-    //    alwaysShow: true,
-    //    threshold: 1,
-    //    appendToParent: true,
-    //    validate: true
-    //});
+    
+    let dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    let date = new Date();
+    let fechaNum = date.getUTCDate();
+    let mes_name = date.getMonth();
+
+    if ($('#SpanFechaInicio').length) {
+        $('#SpanFechaInicio').html("<i class='fa fa-calendar' style='font-size:20px'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear());
+    }
+
     $(".autonumber").autoNumeric();
     $(".autonumber-integer").autoNumeric({ vMin: "0", vMax: "999999999" });
     $(".date-pick").datepicker({ format: "dd/mm/yyyy", todayBtn: true, clearBtn: true, todayHighlight: true, autoclose: true });

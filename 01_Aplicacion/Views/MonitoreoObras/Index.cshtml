@@ -26,168 +26,213 @@
     </div>
 </div>
 <div class="modal fade" id="modal-proyectos" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-sm" role="document" style="overflow-y: initial !important">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     <i class="fa fa-edit"></i>&nbsp;<span id="NombreProyecto"></span>
                 </h5>
+                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 900px;overflow-y: auto;">
                 <div class="form-group text-right">
                     <i class="fa fa-clock-o"></i>&nbsp;<label>Fecha Ultima Actualización:</label>&nbsp;<span id="Fecha"></span><br />
                     <i class="fa fa-user"></i>&nbsp;<label>Usuario Ultima Actualización:</label>&nbsp;<span id="Usuario"></span>
                 </div>
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Datos Generales</legend>
-                    <div class="form-group">
-                        <label>Población</label>
-                        @Html.TextBox("txtPoblacion",null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo de Proyecto</label>
-                        <select name="ddlTipoProyecto" id="ddlTipoProyecto" class="form-control">
-                            <option value="1">EXPEDIENTE TECNICO</option>
-                            <option value="2">OBRA</option>
-                            <option value="3">REEMPLAZO</option>
-                        </select>
-                    </div>
-                </fieldset>
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Proceso de Selección Perfil/Expediente Técnico/Obra</legend>
-                    <div class="form-group">
-                        <label>Tipo de Empresa</label>
-                        <select name="ddlTipoEmpresa" id="ddlTipoEmpresa" class="form-control">
-                            <option value="0">[--Seleccione--]</option>
-                            <option value="1">Consorcio</option>
-                            <option value="2">Contratista</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Consorcio/Contrastista</label>
-                        @Html.TextBox("txtConsorcioContrastista", null, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label>Monto Contratado</label>
-                        @Html.TextBox("txtMontoContratado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Población</label>
+                                @Html.TextBox("txtPoblacion", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Tipo de Proyecto</label>
+                                <select name="ddlTipoProyecto" id="ddlTipoProyecto" class="form-control">
+                                    <option value="1">EXPEDIENTE TECNICO</option>
+                                    <option value="2">OBRA</option>
+                                    <option value="3">REEMPLAZO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Tipo de Empresa</label>
+                                <select name="ddlTipoEmpresa" id="ddlTipoEmpresa" class="form-control">
+                                    <option value="0">[--Seleccione--]</option>
+                                    <option value="1">Consorcio</option>
+                                    <option value="2">Contratista</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Consorcio/Contrastista</label>
+                                @Html.TextBox("txtConsorcioContrastista", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Monto Contratado</label>
+                                @Html.TextBox("txtMontoContratado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Plazo Contractual</label>
+                                @Html.TextBox("txtPlazoContractual", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Fecha Inicio de Obra</label>
+                                @Html.TextBox("txtFechaInicioObra", null, new { @class = "form-control date-pick" })
+                            </div>
+                        </div>
+                       
                     </div>
                 </fieldset>
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Estado de Ejecución</legend>
-                    <div class="form-group">
-                        <label>Fecha Inicio de Obra</label>
-                        @Html.TextBox("txtFechaInicioObra", null, new { @class = "form-control date-pick" })
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>% Avance Fisico</label>
+                                @Html.TextBox("txtAvanceObra", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>% Avance Fisico Programado</label>
+                                @Html.TextBox("txtAvanceObraProgramado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>% Avance Financiero</label>
+                                @Html.TextBox("txtAvanceFinanciero", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Devengado Acumulado</label>
+                                @Html.TextBox("txtDevengado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <select name="ddlEstado" id="ddlEstado" class="form-control">
+                                    <option value="1">Actos Previos</option>
+                                    <option value="2">Concluido</option>
+                                    <option value="3">En Ejecución</option>
+                                    <option value="4">En Elaboración</option>
+                                    <option value="5">Post Ejecución</option>
+                                    <option value="6">En Proceso de Suscripción de Contrato</option>
+                                    <option value="7">Por Convocar</option>
+                                    <option value="8">Actualización de Presupuestos</option>
+                                    <option value="9">Por Reemplazar</option>
+                                    <option value="10">En Tramite de Firma de Convenio</option>
+                                    <option value="11">Paralizada</option>
+                                    @*<option value="12">En Proceso de Liquidación de Convenio</option>
+                <option value="13">Convenio Liquidado</option>*@
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Sub-Estado</label>
+                                <select name="ddlSubEstado" id="ddlSubEstado" class="form-control">
+                                    <option value="1">Adelantada</option>
+                                    <option value="2">Aprobada con RD</option>
+                                    <option value="3">Atrasada</option>
+                                    <option value="4">Con Aprobación Técnica</option>
+                                    <option value="5">Concluida</option>
+                                    <option value="6">En Liquidación</option>
+                                    <option value="7">En Proceso</option>
+                                    <option value="8">Normal</option>
+                                    <option value="9">Obra Reiniciada</option>
+                                    <option value="10">Paralizado</option>
+                                    <option value="11">Por Iniciar</option>
+                                    <option value="12">Por recepcionar</option>
+                                    <option value="13">Proceso de Selección</option>
+                                    <option value="14">Recepción Observada</option>
+                                    <option value="15">Recepcionada</option>
+                                    <option value="16">Suspensión del plazo de ejecución</option>
+                                    <option value="17">Liquidada</option>
+                                    <option value="18">En Ejecución</option>
+                                    <option value="19">Permanente</option>
+                                    <option value="20">Por Convocar</option>
+                                    <option value="21">En Transferencia</option>
+                                    <option value="22">Transferido</option>
+                                    <option value="23">Cerrado (Invierte.pe)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Limitante</label>
+                                <select name="ddlSubEstado2" id="ddlSubEstado2" class="form-control">
+                                    <option value="0">[--Seleccione--]</option>
+                                    <option value="1">Ejecución de Proyecto Complementario</option>
+                                    <option value="2">Falta de Recursos</option>
+                                    <option value="3">Incremento de Actividades y Plazos al Cronograma</option>
+                                    <option value="4">Por eventos no atribuibles a las partes</option>
+                                    <option value="5">Problemas Climatológicos</option>
+                                    <option value="6">Problemas con Autorizaciones y Permisos</option>
+                                    <option value="7">Por conflictos sociales</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Detalle Situacional</label>
+                                @Html.TextArea("txtDetalleSituacional", null, new { @class = "form-control", rows = "6" })
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Estrategias y Acciones (Metas a Mediano, Corto y Largo plazo)</label>
+                                @Html.TextArea("txtEstrategiaAccion", null, new { @class = "form-control", rows = "6" })
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Plazo Contractual</label>
-                        @Html.TextBox("txtPlazoContractual", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
-                    </div>
-                    <div class="form-group">
-                        <label>% Avance Fisico</label>
-                        @Html.TextBox("txtAvanceObra", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
-                    </div>
-                    <div class="form-group">
-                        <label>% Avance Fisico Programado</label>
-                        @Html.TextBox("txtAvanceObraProgramado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
-                    </div>
-                    <div class="form-group">
-                        <label>% Avance Financiero</label>
-                        @Html.TextBox("txtAvanceFinanciero", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
-                    </div>
-                    <div class="form-group">
-                        <label>Devengado Acumulado</label>
-                        @Html.TextBox("txtDevengado", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
-                    </div>
-                    <div class="form-group">
-                        <label>Estado</label>
-                        <select name="ddlEstado" id="ddlEstado" class="form-control">
-                            <option value="1">Actos Previos</option>
-                            <option value="2">Concluido</option>
-                            <option value="3">En Ejecución</option>
-                            <option value="4">En Elaboración</option>
-                            <option value="5">Post Ejecución</option>
-                            <option value="6">En Proceso de Suscripción de Contrato</option>
-                            <option value="7">Por Convocar</option>
-                            <option value="8">Actualización de Presupuestos</option>
-                            <option value="9">Por Reemplazar</option>
-                            <option value="10">En Tramite de Firma de Convenio</option>
-                            <option value="11">Paralizada</option>
-                            @*<option value="12">En Proceso de Liquidación de Convenio</option>
-                            <option value="13">Convenio Liquidado</option>*@
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Sub-Estado</label>
-                        <select name="ddlSubEstado" id="ddlSubEstado" class="form-control">
-                            <option value="1">Adelantada</option>
-                            <option value="2">Aprobada con RD</option>
-                            <option value="3">Atrasada</option>
-                            <option value="4">Con Aprobación Técnica</option>
-                            <option value="5">Concluida</option>
-                            <option value="6">En Liquidación</option>
-                            <option value="7">En Proceso</option>
-                            <option value="8">Normal</option>
-                            <option value="9">Obra Reiniciada</option>
-                            <option value="10">Paralizado</option>
-                            <option value="11">Por Iniciar</option>
-                            <option value="12">Por recepcionar</option>
-                            <option value="13">Proceso de Selección</option>
-                            <option value="14">Recepción Observada</option>
-                            <option value="15">Recepcionada</option>
-                            <option value="16">Suspensión del plazo de ejecución</option>
-                            <option value="17">Liquidada</option>
-                            <option value="18">En Ejecución</option>
-                            <option value="19">Permanente</option>
-                            <option value="20">Por Convocar</option>
-                            <option value="21">En Transferencia</option>
-                            <option value="22">Transferido</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Limitante</label>
-                        <select name="ddlSubEstado2" id="ddlSubEstado2" class="form-control">
-                            <option value="0">[--Seleccione--]</option>
-                            <option value="1">Ejecución de Proyecto Complementario</option>
-                            <option value="2">Falta de Recursos</option>
-                            <option value="3">Incremento de Actividades y Plazos al Cronograma</option>
-                            <option value="4">Por eventos no atribuibles a las partes</option>
-                            <option value="5">Problemas Climatológicos</option>
-                            <option value="6">Problemas con Autorizaciones y Permisos</option>
-                            <option value="7">Por conflictos sociales</option>
-                        </select>
-                    </div>
+
+                    
                 </fieldset>
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Metas de Saneamiento</legend>
-                    <div class="form-group">
-                        <label>Conexiones Nuevas de Agua</label>
-                        @Html.TextBox("txtCNA", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
-                    </div>
-                    <div class="form-group">
-                        <label>Conexiones Rehabilitadas de Agua</label>
-                        @Html.TextBox("txtCRA", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
-                    </div>
-                    <div class="form-group">
-                        <label>Conexiones Nuevas de Alcantarillado/UBS</label>
-                        @Html.TextBox("txtCNU", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
-                    </div>
-                    <div class="form-group">
-                        <label>Conexiones Rehabilitadas de Alcantarillado/UBS</label>
-                        @Html.TextBox("txtCRU", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
-                    </div>
-                </fieldset>
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Observaciones y Recomendaciones</legend>
-                    <div class="form-group">
-                        <label>Detalle Situacional</label>
-                        @Html.TextArea("txtDetalleSituacional", null, new { @class = "form-control", rows = "6" })
-                    </div>
-                    <div class="form-group">
-                        <label>Estrategias y Acciones (Metas a Mediano, Corto y Largo plazo)</label>
-                        @Html.TextArea("txtEstrategiaAccion", null, new { @class = "form-control", rows = "6" })
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Conexiones Nuevas de Agua</label>
+                                @Html.TextBox("txtCNA", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Conexiones Rehabilitadas de Agua</label>
+                                @Html.TextBox("txtCRA", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Conexiones Nuevas de Alcantarillado/UBS</label>
+                                @Html.TextBox("txtCNU", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Conexiones Rehabilitadas de Alcantarillado/UBS</label>
+                                @Html.TextBox("txtCRU", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
             </div>

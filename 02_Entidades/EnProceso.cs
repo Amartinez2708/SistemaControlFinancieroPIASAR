@@ -57,5 +57,6 @@ namespace _02_Entidades
         public decimal Diciembre { get; set; }
         public Nullable<int> Semestre { get; set; }
         public string TextSemestre { get; set; }
+        public string TextIndicadorDetalle { get; set; }
     }
 }

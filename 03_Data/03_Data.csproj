@@ -69,6 +69,9 @@
     <Compile Include="ComprobanteDetalle.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="CronogramaActividades.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Departamento.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -82,6 +85,27 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="DesembolsoVSJustificado.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoActividadesATM.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoActividadesFamilias.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoActividadesJASS.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoActividadesNE.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoATM.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoCuotaFamiliarJASS.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSeguimientoJASS.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="DevengadoMensual.cs">
@@ -129,6 +153,12 @@
     <Compile Include="MANIFIESTO_GASTO_DETALLE.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="MatrizResultado.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MatrizResultadoProducto.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Menu_Sistema.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -168,6 +198,12 @@
     <Compile Include="ProcesoDetalle.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Producto.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoAnio.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProgramadoEjecutadoMensual.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -187,7 +223,28 @@
     <Compile Include="ROLES_SISTEMA.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="SeguimientoActividadesATM.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeguimientoActividadesFamilias.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeguimientoActividadesJASS.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeguimientoActividadesNE.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeguimientoATM.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeguimientoCuotaFamiliarJASS.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="SeguimientoEjecucionProyectosInversion.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeguimientoJASS.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ListAutorizacionRubro_Result.cs">
@@ -200,6 +257,18 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="TABLA_DETALLE.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoActividad.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoBienArticulo.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoSeguimiento.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoSeguimientoBienATMJASS.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="TituloSubComponente.cs">

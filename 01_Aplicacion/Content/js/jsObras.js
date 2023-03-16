@@ -69,7 +69,7 @@ $(document).ready(function () {
 
     $("input[name=rdbModalidad]").change(function () {
         ListReporteObras();
-        debugger;
+
         if ($("input[name=rdbModalidad]:checked").val() == 0)
         {
             $(".contrata").addClass("d-none");
@@ -270,22 +270,26 @@ function GeneraPopUp(color, region, nroproyectos, costoinversion, autorizacion, 
    return PopUp;
 }
 
-function GenerarPopUpCP(color,localidad,nrobeneficiarios,costoinversion,autorizacion,manifiesto) {
-    var PopUp = '<div class="tooltip-app" style="border-left: solid 3px ' + color + '"><p>' +
-                    '<i class="fa fa-map-pin" aria-hidden="true"></i>&nbsp;' + localidad + '</p><p>' +
-                    '<i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;Nro. Beneficiarios: <b>' + nrobeneficiarios + '</b></p><p>' +
-                    '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Costo de Inversión: <b> S/.' + costoinversion + '</b></p><p>';
+function GenerarPopUpCP(color, localidad, nrobeneficiarios, costoinversion, autorizacion, manifiesto, cui) {
+    debugger;
+    var PopUp = '<div class="tooltip-app" style="border-left: solid 3px ' + color + '">' +
+                    '<p><i class="fa fa-map-pin" aria-hidden="true"></i>&nbsp;' + localidad + '</p>' +
+                    '<p><i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;Nro. Beneficiarios: <b>' + nrobeneficiarios + '</b></p>' +
+                    '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Costo de Inversión: <b>' + costoinversion + '</b></p>';
+                    
 
     if ($("input[name=rdbModalidad]:checked").val() == 0) {
-        PopUp = PopUp + '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Autorización de Gasto: <b> S/.' + autorizacion + '</b></p><p>' +
-                        '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Justificación de Gasto: <b> S/.' + manifiesto + '</b></p></div>';
+        PopUp = PopUp + '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Autorización de Gasto: <b> S/.' + autorizacion + '</b></p>' +
+                        '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Rendición de Gasto: <b> S/.' + manifiesto + '</b></p>'+
+                        '<p><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Link SSI: <b> <a href="https://ofi5.mef.gob.pe/ssi/ssi/Index?codigo=' + cui + '&amp;tipo=2" target="_blank" title="Sistema de Seguimiento de Inversiones"><img src="/Content/Images/ssi.png"width=90" height="30"></a></b></p></div>';
     }
     else if ($("input[name=rdbModalidad]:checked").val() == 190) {
-        PopUp = PopUp + '</div>';
+        PopUp = PopUp + '<p><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Link SSI: <b> <a href="https://ofi5.mef.gob.pe/ssi/ssi/Index?codigo=' + cui + '&amp;tipo=2" target="_blank" title="Sistema de Seguimiento de Inversiones"><img src="/Content/Images/ssi.png"width=90" height="30"></a></b></p></div>';
     }
     else if ($("input[name=rdbModalidad]:checked").val() == 22) {
-        PopUp = PopUp + '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Autorización de Gasto: <b> S/.' + autorizacion + '</b></p><p>' +
-                        '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Justificación de Gasto: <b> S/.' + manifiesto + '</b></p></div>';
+        PopUp = PopUp + '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Autorización de Gasto: <b> S/.' + autorizacion + '</b></p>' +
+                        '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Rendición de Gasto: <b> S/.' + manifiesto + '</b></p>' +
+                        '<p><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Link SSI: <b> <a href="https://ofi5.mef.gob.pe/ssi/ssi/Index?codigo=' + cui + '&amp;tipo=2" target="_blank" title="Sistema de Seguimiento de Inversiones"><img src="/Content/Images/ssi.png"width=90" height="30"></a></b></p></div>';
     }
 
                     
@@ -999,7 +1003,7 @@ function AbrirDistritoUnico(e, capa) {
         function onEachDistrito(feature, layer) {
             //var dist = data.find(x=>x.cod_depa + x.cod_prov + x.cod_dist == feature.properties.ubigeo);
             for (var i = 0; i < data.length ; i++) {
-                var PopUp = GenerarPopUpCP(getColor(data[i].Nro_beneficiarios_et), data[i].Localidad, formatInt(data[i].Nro_beneficiarios_et), formatMoney(data[i].Mto_proyecto), formatMoney(data[i].Monto_acumulado_autorizacion), formatMoney(data[i].Monto_acumulado_manifiesto_gasto));
+                var PopUp = GenerarPopUpCP(getColor(data[i].Nro_beneficiarios_et), data[i].Localidad, formatInt(data[i].Nro_beneficiarios_et), formatMoney(data[i].Mto_proyecto), formatMoney(data[i].Monto_acumulado_autorizacion), formatMoney(data[i].Monto_acumulado_manifiesto_gasto), data[i].CUI);
 
                 var html = '<div class="content-mark-map">' +
                             '<span class="circle-icon" style="background: #607D8B;animation: pulse 2s infinite;">' + formatInt(data[i].Nro_beneficiarios_et) + '</span>' +
@@ -1098,7 +1102,7 @@ function AbrirDistritoUnicoSelect(dep, prov, dist) {
                 function onEachDistrito(feature, layer) {
                     //var dist = data.find(x=>x.cod_depa + x.cod_prov + x.cod_dist == feature.properties.ubigeo);
                     for (var i = 0; i < data.length ; i++) {
-                        var PopUp = GenerarPopUpCP(getColor(data[i].Nro_beneficiarios_et), data[i].Localidad, formatInt(data[i].Nro_beneficiarios_et), formatMoney(data[i].Mto_proyecto), formatMoney(data[i].Monto_acumulado_autorizacion), formatMoney(data[i].Monto_acumulado_manifiesto_gasto));
+                        var PopUp = GenerarPopUpCP(getColor(data[i].Nro_beneficiarios_et), data[i].Localidad, formatInt(data[i].Nro_beneficiarios_et), formatMoney(data[i].Mto_proyecto), formatMoney(data[i].Monto_acumulado_autorizacion), formatMoney(data[i].Monto_acumulado_manifiesto_gasto), data[i].CUI);
 
                         var html = '<div class="content-mark-map">' +
                                     '<span class="circle-icon" style="background: #607D8B;animation: pulse 2s infinite;">' + formatInt(data[i].Nro_beneficiarios_et) + '</span>' +
@@ -1322,17 +1326,18 @@ function getProyecto(IdObra) {
 
                     var customOptions = { 'className': 'custom-popup-map' }
 
-                    var PopUpCP = '<div class="tooltip-app" style="border-left: solid 3px ' + getColor(data[0].Nro_beneficiarios_et) + '"><p>' +
-                    '<i class="fa fa-map-pin" aria-hidden="true"></i>&nbsp;' + data[0].Localidad + '</p><p>' +
-                    '<i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;Nro. Beneficiarios: <b>' + formatInt(data[0].Nro_beneficiarios_et) + '</b></p><p>' +
-                    '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Costo de Inversión: <b> S/.' + formatMoney(data[0].Mto_proyecto) + '</b></p><p>';
-
+                    var PopUpCP = '<div class="tooltip-app" style="border-left: solid 3px ' + getColor(data[0].Nro_beneficiarios_et) + '">' +
+                    '<p><i class="fa fa-map-pin" aria-hidden="true"></i>&nbsp;' + data[0].Localidad + '</p>' +
+                    '<p><i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;Nro. Beneficiarios: <b>' + formatInt(data[0].Nro_beneficiarios_et) + '</b></p>' +
+                    '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Costo de Inversión: <b> S/.' + formatMoney(data[0].Mto_proyecto) + '</b></p>';
+                    
                     
                     if (datas.Cod_modalidad == 22) {
-                        PopUpCP = PopUpCP + '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Autorización de Gasto: <b> S/.' + formatMoney(data[0].Monto_acumulado_autorizacion) + '</b></p><p>' +
-                                        '<i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Justificación de Gasto: <b> S/.' + formatMoney(data[0].Monto_acumulado_manifiesto_gasto) + '</b></p></div>';
+                        PopUpCP = PopUpCP + '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Autorización de Gasto: <b> S/.' + formatMoney(data[0].Monto_acumulado_autorizacion) + '</b></p>' +
+                                        '<p><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Total de Rendiciones de Gasto: <b> S/.' + formatMoney(data[0].Monto_acumulado_manifiesto_gasto) + '</b></p>' +
+                                        '<p><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Link SSI: <b> <a href="https://ofi5.mef.gob.pe/ssi/ssi/Index?codigo=' + data[0].CUI + '&amp;tipo=2" target="_blank" title="Sistema de Seguimiento de Inversiones"><img src="/Content/Images/ssi.png"width=90" height="30"></a></b></p></div>';
                     } else {
-                        PopUpCP = PopUpCP + '</div>';
+                        PopUpCP = PopUpCP + '<p><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Link SSI: <b> <a href="https://ofi5.mef.gob.pe/ssi/ssi/Index?codigo=' + data[0].CUI + '&amp;tipo=2" target="_blank" title="Sistema de Seguimiento de Inversiones"><img src="/Content/Images/ssi.png"width=90" height="30"></a></b></p></div>';
                     }
 
                     var htmlCP = '<div class="content-mark-map">' +

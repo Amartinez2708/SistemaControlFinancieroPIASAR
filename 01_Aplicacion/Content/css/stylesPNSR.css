@@ -280,3 +280,125 @@ legend.scheduler-border {
     position: absolute;
     top: 13px;
 }
+.pcoded .pcoded-header[header-theme="theme5"]::before {
+    content: "";
+    background: rgba(255, 0, 0, 0.5) !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.pcoded .pcoded-header[header-theme="theme5"] {
+    background-image: url(../images/header.jpg) !important;
+    background-size: cover !important;
+}
+.img-fluid {
+    max-width: 260px;
+}
+/*.radial-bar-lg {
+    width: 180px;
+    height: 180px;
+    font-size: 20px;
+}
+.radial-bar-lg:after, .radial-bar-lg > img {
+    width: 150px;
+    height: 150px;
+    margin-left: 15px;
+    margin-top: 15px;
+    line-height: 150px;
+}
+.radial-bar:after {
+    background-color: #ffffff;
+    color: #333;
+}*/
+/*.gauge {
+    position: relative;
+    border-radius: 50%/100% 100% 0 0;
+    background-color: var(--color, #a22);
+    overflow: hidden;
+}
+.gauge:before{
+    content: "";
+    display: block;
+    padding-top: 50%;   /* ratio of 2:1*/
+}
+/*
+.gauge .chart {
+  overflow: hidden;
+}
+.gauge .mask {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  top: 40%;
+  background-color: #fff;
+  border-radius: 50%/100% 100% 0 0;
+}
+
+.gauge .percentage {
+    position:  absolute;
+    top: -1px;
+    left: -1px;
+    bottom: 0;
+    right: -1px;
+    background-color: var(--background, #aaa);
+    transform:rotate(var(--rotation)); 
+    transform-origin: bottom center; 
+    transition-duration: 600;
+}
+.gauge:hover {
+  --rotation: 100deg;
+}
+.gauge .value {
+  position:absolute; bottom:0%; left:0;   
+  width:100%; 
+  text-align: center;
+}
+
+.gauge .min {
+  position:absolute; 
+  bottom:0; left:5%;   
+}
+.gauge .max {
+  position:absolute; 
+  bottom:0; right:5%;   
+ }*/
+.footer {
+    z-index: 999;
+}
+.card .card-header h5 {
+   font-size: 1.25rem;
+}
+@media only screen and (min-width: 1400px) {
+    a {
+        font-size: 20px;
+    }
+}
+
+.btn.btn-icon {
+    border-radius: 50%;
+    width: 60px;
+    line-height: 50px;
+    height: 60px;
+    padding: 3px;
+    text-align: center;
+    font-size:30px;
+}
+.card-dashed{
+    box-shadow: none;
+    border: 6px dashed rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+.card-groove{
+    box-shadow: none;
+    border: 3px groove rgba(0,0,0,0.15);
+}
+.card-solid{
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+.card .card-block .sub-title {
+    letter-spacing: 0px;
+}

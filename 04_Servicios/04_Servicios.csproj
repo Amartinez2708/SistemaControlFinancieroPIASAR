@@ -58,6 +58,7 @@
     <Compile Include="SrvGestionAutorizacionRendicion.cs" />
     <Compile Include="SrvGestionComponente.cs" />
     <Compile Include="SrvManifiestoGasto.cs" />
+    <Compile Include="SrvMatrizResultados.cs" />
     <Compile Include="SrvMonitoreoObras.cs" />
     <Compile Include="SrvMonitoreoObrasContrataPIASAR.cs" />
     <Compile Include="SrvMonitoreoPIASAR.cs" />

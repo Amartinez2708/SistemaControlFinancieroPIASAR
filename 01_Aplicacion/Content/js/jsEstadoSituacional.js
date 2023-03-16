@@ -16,10 +16,13 @@ function Indicadores() {
 
         $("#nroContrataElaboracionET").html(data.nroContrataElaboracionET);
         $("#nroNucleoElaboracionET").html(data.nroNucleoElaboracionET);
+
         $("#nroContrataActosPreviosET").html(data.nroContrataActosPreviosET);
         $("#nroNucleoActosPreviosET").html(data.nroNucleoActosPreviosET);
+
         $("#nroContrataIniciarO").html(data.nroContrataIniciarO);
         $("#nroNucleoIniciarO").html(data.nroNucleoIniciarO);
+
         $("#nroContrataEjecucionO").html(data.nroContrataEjecucionO);
         $("#nroNucleoEjecucionO").html(data.nroNucleoEjecucionO);
 
@@ -83,6 +86,14 @@ function Indicadores() {
             }, {
                 "country": "Liquidada con R.D.",
                 "litres": data.NroOtaLiquidada,
+                "fill": "#dedede"
+            }, {
+                "country": "En Transferencia",
+                "litres": data.nroEnTransferencia,
+                "fill": "#dedede"
+            }, {
+                "country": "Transferida",
+                "litres": data.nroTransferida,
                 "fill": "#dedede"
             }
             ];
@@ -159,11 +170,11 @@ function Indicadores() {
             // Add data
             chart.data = [{
                 "country": "En Proceso de Liquidación de Convenio",
-                "litres": data.nroEnProcesoLiquidacionConvenio,
+                "litres": 81,
                 "fill": "#4099ff"
             }, {
-                "country": "Convenio Liquidado",
-                "litres": data.nroConvenioLiquidado,
+                "country": "Transferidas",
+                "litres": 29,
                 "fill": "#dedede"
             }];
 

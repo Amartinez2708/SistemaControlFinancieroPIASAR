@@ -92,5 +92,18 @@ namespace _02_Entidades
         public string EstrategiaAccion { get; set; }
         public decimal PorcentajeAvanceObraProgramado { get; set; }
 
+        public Nullable<System.DateTime> FechaCulminacionObra { get; set; }
+        public Nullable<int> PoblacionBeneficiaria { get; set; }
+        public Nullable<int> NroConexionesAgua { get; set; }
+        public Nullable<int> NroConexionesUBS { get; set; }
+        public Nullable<int> NroViviendas { get; set; }
+
+        public Nullable<int> ViviendasUtilizanUBS { get; set; }
+        public Nullable<int> CantidadMujeresJASS { get; set; }
+        public Nullable<System.DateTime> FechaCantidadMujeres { get; set; }
+        public Nullable<int> CantidadMujeresNE { get; set; }
+        public Nullable<System.DateTime> FechaCantidadMujeresNE { get; set; }
+        public Nullable<decimal> PorcentageViviendasUtilizanUBS { get; set; }
+        public Nullable<int> Check { get; set; }
     }
 }

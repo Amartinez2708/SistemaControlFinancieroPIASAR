@@ -291,18 +291,12 @@ function ListSeguimiento() {
             valueAxis.strictMinMax = true;
             valueAxis.renderer.labels.template.adapter.add("text", (text, label) => { return label.dataItem.value + "%"; })
 
-
             var series = chart2.series.push(new am4charts.ColumnSeries());
             series.dataFields.valueY = 'porcentage';
             series.dataFields.categoryX = 'componente';
             series.name = '% Total Ejecutado';
             series.tooltipText = "{categoryX}: [bold]{valueY}% (S/.{monto})[/]";
             series.columns.template.propertyFields.fill = "fill";
-
-            //series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
-            //series.columns.template.stroke = am4core.color("#333");
-            //series.columns.template.strokeWidth = 2;
-            //series.propertyFields.fill = "fill";
 
             // Add a guide
             let range = valueAxis.axisRanges.create();

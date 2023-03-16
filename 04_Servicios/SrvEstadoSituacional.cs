@@ -30,6 +30,8 @@ namespace _04_Servicios
             result.NroEnLiquidacion = obj.Where(x => x.TipoProyecto == 2 && (x.Estado == 5 || x.Estado == 2) && x.SubEstado == 6).Count();
             result.NroOtaPorIniciar = obj.Where(x => x.TipoProyecto == 2 && x.Estado == 5 && x.SubEstado == 11).Count();
 
+            result.nroEnTransferencia = obj.Where(x => x.TipoProyecto == 2 && x.Estado == 5 && x.SubEstado == 21).Count();
+            result.nroTransferida = obj.Where(x => x.TipoProyecto == 2 && x.Estado == 5 && x.SubEstado == 22).Count();
 
             //Proyecto Reemplazo
             result.NroEnProcesoReemplazo = obj.Where(x => x.TipoProyecto == 3 && x.Estado == 4 && x.SubEstado == 7).Count();
@@ -45,9 +47,9 @@ namespace _04_Servicios
             //result.nroContrataActosPreviosET = obj.Where(x => x.Estado == 1 && x.TipoProyecto == 1 && x.Modalidad == 190).Count();
             //result.nroNucleoActosPreviosET = obj.Where(x => x.Estado == 1 && x.TipoProyecto == 1 && x.Modalidad == 22).Count();
 
-            result.NroElaboracionET = obj.Where(x => x.Estado == 4 && x.TipoProyecto == 1).Count();
-            result.nroContrataElaboracionET = obj.Where(x => x.Estado == 4 && x.TipoProyecto == 1 && x.Modalidad == 190).Count();
-            result.nroNucleoElaboracionET = obj.Where(x => x.Estado == 4 && x.TipoProyecto == 1 && x.Modalidad == 22).Count();
+            result.NroElaboracionET = obj.Where(x => x.TipoProyecto == 1).Count();
+            result.nroContrataElaboracionET = obj.Where(x => x.TipoProyecto == 1 && x.Modalidad == 190).Count();
+            result.nroNucleoElaboracionET = obj.Where(x => x.TipoProyecto == 1 && x.Modalidad == 22).Count();
 
             result.NroConcluidoET = obj.Where(x => x.Estado == 2 && x.TipoProyecto == 1).Count();
             result.nroContrataConcluidoET = obj.Where(x => x.Estado == 2 && x.TipoProyecto == 1 && x.Modalidad == 190).Count();
@@ -58,9 +60,9 @@ namespace _04_Servicios
             result.nroContrataIniciarO = obj.Where(x => x.Estado == 1 && x.TipoProyecto == 2 && x.Modalidad == 190).Count();
             result.nroNucleoIniciarO = obj.Where(x => x.Estado == 1 && x.TipoProyecto == 2 && x.Modalidad == 22).Count();
 
-            result.NroPorConvocarO = obj.Where(x => x.Estado == 7 && x.TipoProyecto == 2).Count();
-            result.nroContrataPorConvocarO = obj.Where(x => x.Estado == 7 && x.TipoProyecto == 2 && x.Modalidad == 190).Count();
-            result.nroNucleoPorConvocarO = obj.Where(x => x.Estado == 7 && x.TipoProyecto == 2 && x.Modalidad == 22).Count();
+            result.NroPorConvocarO = obj.Where(x => x.Estado == 1 && x.SubEstado==20 && x.TipoProyecto == 2).Count();
+            result.nroContrataPorConvocarO = obj.Where(x => x.Estado == 1 && x.SubEstado == 20 && x.TipoProyecto == 2 && x.Modalidad == 190).Count();
+            result.nroNucleoPorConvocarO = obj.Where(x => x.Estado == 1 && x.SubEstado == 20 && x.TipoProyecto == 2 && x.Modalidad == 22).Count();
 
             result.NroEjecucion = obj.Where(x => x.Estado == 3 && x.TipoProyecto == 2).Count();
             result.nroContrataEjecucionO = obj.Where(x => x.Estado == 3 && x.TipoProyecto == 2 && x.Modalidad == 190).Count();
