@@ -605,3 +605,15 @@ legend.scheduler-border {
 .pcoded-main-container {
     min-height: calc(100vh - 113px);
 }
+.card-dashboard{
+    box-shadow: none;
+    padding:20px;
+    color: #0056ac;
+    background-color: #fff;
+    border: 4px solid #0056ac;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 4px rgb(191 203 222 / 70%);
+}
+.card-dashboard:hover {
+   box-shadow: none;
+}

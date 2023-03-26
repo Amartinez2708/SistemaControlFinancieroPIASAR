@@ -1,9 +1,5 @@
 ﻿$(document).ready(function () {
-    $('.list-group-item').click(function (e) {
-        e.preventDefault();
-        $('.list-group-item').removeClass('active');
-        $(this).addClass('active');
-    });
+    dashboard()
 });
 
 
@@ -2397,4 +2393,622 @@ function getNombreFile(nom) {
     var f = new Date();
     var title = nom + f.getDate() + "_" + (f.getMonth() + 1) + "_" + f.getFullYear() + "_" + f.getHours() + "_" + f.getMinutes();
     return title;
+}
+
+/****************************************************************DASHBOARD********************************************************************/
+
+function dashboard() {
+   
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart instance
+        var chart = am4core.create("chartdiv_resultadoesperado1", am4charts.PieChart);
+
+        // Add data
+        chart.data = [
+          { "sector": "Hogares en centros poblados rurales con acceso a agua segura", "size": 7252 },
+          { "sector": "Pendiente", "size": 2748 },
+        ];
+
+        // Add label
+        chart.innerRadius = 100;
+        var label = chart.seriesContainer.createChild(am4core.Label);
+        label.text = "72.52%";
+        label.horizontalCenter = "middle";
+        label.verticalCenter = "middle";
+        label.fontSize = 50;
+
+        // Add and configure Series
+        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "size";
+        pieSeries.dataFields.category = "sector";
+        pieSeries.ticks.template.disabled = true;
+        pieSeries.labels.template.disabled = true;
+
+    }); // end am4core.ready()
+    
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv_producto1", am4charts.RadarChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+         {
+             "region": "Componente 1",
+             "Abreviatura":"P1",
+             "state": "Estudios definitivos \nde proyectos de AyS elaborados",
+             "sales": 0
+         },
+         {
+             "region": "Componente 1",
+             "Abreviatura": "P2",
+             "state": "Sistemas de agua potable \nen centros poblados rurales \nconstruidos o mejorados",
+             "sales": 0
+         },
+         {
+             "region": "Componente 2",
+             "Abreviatura": "P3",
+             "state": "Sistemas de agua potable \ncon operación técnica \nasistida concluida",
+             "sales": 65.45
+         },
+         {
+             "region": "Componente 2",
+             "Abreviatura": "P4",
+             "state": "Sistemas de agua potable \ncon reforzamiento de la AOM \npost construcción",
+             "sales": 0
+         }
+        ];
+        /* Create axes */
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "Abreviatura";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.tooltipLocation = 0.5;
+        categoryAxis.renderer.cellStartLocation = 0.2;
+        categoryAxis.renderer.cellEndLocation = 0.8;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.labels.template.horizontalCenter = "left";
+        valueAxis.min = 0;
+
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.columns.template.tooltipText = "{state}: [bold]{valueY.value}[/]";
+        series1.columns.template.width = am4core.percent(100);
+        series1.dataFields.categoryX = "Abreviatura";
+        series1.dataFields.valueY = "sales";
+
+        chart.seriesContainer.zIndex = -1;
+
+        chart.cursor = new am4charts.RadarCursor();
+        chart.cursor.xAxis = categoryAxis;
+        chart.cursor.fullWidthXLine = true;
+        chart.cursor.lineX.strokeOpacity = 0;
+        chart.cursor.lineX.fillOpacity = 0.1;
+        chart.cursor.lineX.fill = am4core.color("#000000");
+
+        var TablaInicio = '<table class="table table-hover" id="tblSeguimiento">';
+        var TablaFin = '</table>';
+
+        var Body = '';
+        var BodyInicio = '<tbody>';
+        var BodyFin = '</tbody>';
+
+        var Header = '';
+        var HeaderInicio = '<thead>';
+        var HeaderFin = '</thead>';
+
+        var Fila = '';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P1</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Estudios definitivos de proyectos <br/>de AyS elaborados</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P2</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Sistemas de agua potable <br/>en centros poblados rurales <br/>construidos o mejorados</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P3</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Sistemas de agua potable <br/>con operación técnica <br/>asistida concluida</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">65.45%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P4</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Sistemas de agua potable <br/>con reforzamiento de <br/>la AOM post construcción</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0%</td>';
+        Fila = Fila + '</tr>';
+
+        Body = Fila;
+
+        Body = BodyInicio + Body + BodyFin;
+
+        $("#tbl_producto1").append(TablaInicio + Body + TablaFin);
+
+    }); // end am4core.ready()
+
+    //****************************************************************RESULTADO 2****************************************************************************//
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv_resultadoesperado2", am4charts.RadarChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+         {
+             "Abreviatura": "RE1",
+             "state": "Hogares en centros poblados \nrurales con acceso a \nsaneamiento seguro",
+             "sales": 72.52
+         },
+         {
+             "Abreviatura": "RE2",
+             "state": "Hogares en centros poblados \nrurales que utilizan \nlas UBS construidas por el programa",
+             "sales": 86.24
+         }
+        ];
+        /* Create axes */
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "Abreviatura";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.tooltipLocation = 0.5;
+        categoryAxis.renderer.cellStartLocation = 0.2;
+        categoryAxis.renderer.cellEndLocation = 0.8;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.labels.template.horizontalCenter = "left";
+        valueAxis.min = 0;
+
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.columns.template.tooltipText = "{state}: [bold]{valueY.value}[/]";
+        series1.columns.template.width = am4core.percent(100);
+        series1.dataFields.categoryX = "Abreviatura";
+        series1.dataFields.valueY = "sales";
+
+        chart.seriesContainer.zIndex = -1;
+
+        chart.cursor = new am4charts.RadarCursor();
+        chart.cursor.xAxis = categoryAxis;
+        chart.cursor.fullWidthXLine = true;
+        chart.cursor.lineX.strokeOpacity = 0;
+        chart.cursor.lineX.fillOpacity = 0.1;
+        chart.cursor.lineX.fill = am4core.color("#000000");
+
+        var TablaInicio = '<table class="table table-hover" id="tblSeguimiento">';
+        var TablaFin = '</table>';
+
+        var Body = '';
+        var BodyInicio = '<tbody>';
+        var BodyFin = '</tbody>';
+
+        var Header = '';
+        var HeaderInicio = '<thead>';
+        var HeaderFin = '</thead>';
+
+        var Fila = '';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE1</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Hogares en centros poblados <br/>rurales con acceso a <br/>saneamiento seguro</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">72.52%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE2</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Hogares en centros poblados <br/>rurales que utilizan las UBS <br/>construidas por el programa</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">86.24%</td>';
+        Fila = Fila + '</tr>';
+
+        Body = Fila;
+
+        Body = BodyInicio + Body + BodyFin;
+
+        $("#tbl_resultadoesperado2").append(TablaInicio + Body + TablaFin);
+
+    }); // end am4core.ready()
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv_producto2", am4charts.RadarChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+         {
+             "Abreviatura": "P1",
+             "state": "Estudios definitivos de proyectos de AyS elaborados",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P2",
+             "state": "Unidades Básicas Sanitarias (UBS) en centros poblados rurales construidas",
+             "sales": 0.00
+         }];
+        /* Create axes */
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "Abreviatura";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.tooltipLocation = 0.5;
+        categoryAxis.renderer.cellStartLocation = 0.2;
+        categoryAxis.renderer.cellEndLocation = 0.8;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.labels.template.horizontalCenter = "left";
+        valueAxis.min = 0;
+
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.columns.template.tooltipText = "{state}: [bold]{valueY.value}[/]";
+        series1.columns.template.width = am4core.percent(100);
+        series1.dataFields.categoryX = "Abreviatura";
+        series1.dataFields.valueY = "sales";
+
+        chart.seriesContainer.zIndex = -1;
+
+        chart.cursor = new am4charts.RadarCursor();
+        chart.cursor.xAxis = categoryAxis;
+        chart.cursor.fullWidthXLine = true;
+        chart.cursor.lineX.strokeOpacity = 0;
+        chart.cursor.lineX.fillOpacity = 0.1;
+        chart.cursor.lineX.fill = am4core.color("#000000");
+
+        var TablaInicio = '<table class="table table-hover" id="tblSeguimiento">';
+        var TablaFin = '</table>';
+
+        var Body = '';
+        var BodyInicio = '<tbody>';
+        var BodyFin = '</tbody>';
+
+        var Header = '';
+        var HeaderInicio = '<thead>';
+        var HeaderFin = '</thead>';
+
+        var Fila = '';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P1</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Estudios definitivos de <br/>proyectos de AyS <br/>elaborados</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P2</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Unidades Básicas <br/>Sanitarias (UBS) en <br/>centros poblados rurales <br/>construidas</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Body = Fila;
+
+        Body = BodyInicio + Body + BodyFin;
+
+        $("#tbl_producto2").append(TablaInicio + Body + TablaFin);
+
+    }); // end am4core.ready()
+
+    //****************************************************************RESULTADO 3****************************************************************************//
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv_resultadoesperado3", am4charts.RadarChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+         {
+             "Abreviatura": "RE1",
+             "state": "Sistemas de agua \nfuncionando según \nespecificaciones técnicas \nde diseño",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "RE2",
+             "state": "JASS cuyos ingresos \noperativos cubren \nlos costos de AOM",
+             "sales": 47.27
+         },
+         {
+             "Abreviatura": "RE3",
+             "state": "Sistemas rurales construidos \npor el programa con seguimiento \nanual de indicadores de prestación \npor parte del MVCS",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "RE4",
+             "state": "JASS con al menos \ndos mujeres en su \nconsejo directivo",
+             "sales": 77.45
+         },
+         {
+             "Abreviatura": "RE5",
+             "state": "Núcleos Ejecutores con \nal menos una mujer en su \nestructura organizativa",
+             "sales": 81.25
+         }
+        ];
+        /* Create axes */
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "Abreviatura";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.tooltipLocation = 0.5;
+        categoryAxis.renderer.cellStartLocation = 0.2;
+        categoryAxis.renderer.cellEndLocation = 0.8;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.labels.template.horizontalCenter = "left";
+        valueAxis.min = 0;
+
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.columns.template.tooltipText = "{state}: [bold]{valueY.value}[/]";
+        series1.columns.template.width = am4core.percent(100);
+        series1.dataFields.categoryX = "Abreviatura";
+        series1.dataFields.valueY = "sales";
+
+        chart.seriesContainer.zIndex = -1;
+
+        chart.cursor = new am4charts.RadarCursor();
+        chart.cursor.xAxis = categoryAxis;
+        chart.cursor.fullWidthXLine = true;
+        chart.cursor.lineX.strokeOpacity = 0;
+        chart.cursor.lineX.fillOpacity = 0.1;
+        chart.cursor.lineX.fill = am4core.color("#000000");
+
+        var TablaInicio = '<table class="table table-hover" id="tblSeguimiento">';
+        var TablaFin = '</table>';
+
+        var Body = '';
+        var BodyInicio = '<tbody>';
+        var BodyFin = '</tbody>';
+
+        var Header = '';
+        var HeaderInicio = '<thead>';
+        var HeaderFin = '</thead>';
+
+        var Fila = '';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE1</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Sistemas de agua <br/>funcionando según <br/>especificaciones técnicas <br/>de diseño</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE2</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">JASS cuyos ingresos <br/>operativos cubren los <br/>costos de AOM</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">47.27%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE3</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Sistemas rurales <br/>construidos por el <br/>programa con seguimiento <br/>anual de indicadores <br/>de prestación por <br/>parte del MVCS</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE4</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">JASS con al menos <br/>dos mujeres en su consejo <br/>directivo</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">77.45%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">RE5</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Núcleos Ejecutores <br/>con al menos una mujer <br/>en su estructura organizativa</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">81.25%</td>';
+        Fila = Fila + '</tr>';
+
+        Body = Fila;
+
+        Body = BodyInicio + Body + BodyFin;
+
+        $("#tbl_resultadoesperado3").append(TablaInicio + Body + TablaFin);
+
+    }); // end am4core.ready()
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv_producto3", am4charts.RadarChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+         {
+             "Abreviatura": "P1",
+             "state": "JASS capacitadas para administrar, operar y mantener los servicios de AyS",
+             "sales": 57.27
+         },
+         {
+             "Abreviatura": "P2",
+             "state": "Hito. Talleres de capacitación a la JASS en AOM y aspectos legales realizados",
+             "sales": 74.90
+         },
+         {
+             "Abreviatura": "P3",
+             "state": "Hito. Talleres de liderazgo y participación dirigidos a mujeres realizados",
+             "sales": 87.27
+         },
+         {
+             "Abreviatura": "P4",
+             "state": "ATM capacitadas para brindar asistencia técnica a las JASS",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P5",
+             "state": "Personas capacitadas en educación sanitaria y uso de los servicios de AyS",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P6",
+             "state": "Núcleos Ejecutores capacitados en gestión y administración de proyectos",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P7",
+             "state": "JASS equipadas para la adecuada AOM",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P8",
+             "state": "ATM's fortalecidas para brindar asistencia técnica a las JASS",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P9",
+             "state": "DRVCS fortalecidas para brindar asistencia técnica a las ATM's",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P10",
+             "state": "PNSR fortalecido para brindar asistencia técnica a las DRVCS y ATM's",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P11",
+             "state": "Personal del PNSR capacitado para brindar asistencia técnica a ñas ATM´s y las DRVCS",
+             "sales": 0.00
+         },
+         {
+             "Abreviatura": "P12",
+             "state": "Diseño e implementación del plan de comunicación del programa",
+             "sales": 0.00
+         }];
+        /* Create axes */
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "Abreviatura";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.tooltipLocation = 0.5;
+        categoryAxis.renderer.cellStartLocation = 0.2;
+        categoryAxis.renderer.cellEndLocation = 0.8;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.labels.template.horizontalCenter = "left";
+        valueAxis.min = 0;
+
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.columns.template.tooltipText = "{state}: [bold]{valueY.value}[/]";
+        series1.columns.template.width = am4core.percent(100);
+        series1.dataFields.categoryX = "Abreviatura";
+        series1.dataFields.valueY = "sales";
+
+        chart.seriesContainer.zIndex = -1;
+
+        chart.cursor = new am4charts.RadarCursor();
+        chart.cursor.xAxis = categoryAxis;
+        chart.cursor.fullWidthXLine = true;
+        chart.cursor.lineX.strokeOpacity = 0;
+        chart.cursor.lineX.fillOpacity = 0.1;
+        chart.cursor.lineX.fill = am4core.color("#000000");
+
+        var TablaInicio = '<table class="table table-hover" id="tblSeguimiento">';
+        var TablaFin = '</table>';
+
+        var Body = '';
+        var BodyInicio = '<tbody>';
+        var BodyFin = '</tbody>';
+
+        var Header = '';
+        var HeaderInicio = '<thead>';
+        var HeaderFin = '</thead>';
+
+        var Fila = '';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P1</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">JASS capacitadas <br/>para administrar, operar <br/>y mantener los <br/>servicios de AyS</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">57.27%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P2</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Hito. Talleres de <br/>capacitación a la JASS <br/>en AOM y aspectos <br/>legales realizados</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">74.90%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P3</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Hito. Talleres de <br/>liderazgo y participación <br/>dirigidos a mujeres <br/>realizados</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">87.27%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P4</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">ATM capacitadas <br/>para brindar asistencia <br/>técnica a las JASS</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P5</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Personas capacitadas <br/>en educación sanitaria <br/>y uso de los servicios <br/>de AyS</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P6</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Núcleos Ejecutores <br/>capacitados en gestión <br/>y administración de <br/>proyectos</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P7</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">JASS equipadas <br/>para la adecuada AOM</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P8</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">ATMs fortalecidas <br/>para brindar asistencia <br/>técnica a las JASS</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P9</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">DRVCS fortalecidas <br/>para brindar asistencia <br/>técnica a las ATMs</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P10</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">PNSR fortalecido <br/>para brindar asistencia <br/>técnica a las DRVCS <br/>y ATMs</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P11</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Personal del PNSR <br/>capacitado para brindar <br/>asistencia técnica a <br/>las ATMs y las DRVCS</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Fila = Fila + '<tr>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">P12</td>';
+        Fila = Fila + '<td style="vertical-align: middle;">Diseño e implementación <br/>del plan de comunicación <br/>del programa</td>';
+        Fila = Fila + '<td style="vertical-align: middle;text-align: center">0.00%</td>';
+        Fila = Fila + '</tr>';
+
+        Body = Fila;
+
+        Body = BodyInicio + Body + BodyFin;
+
+        $("#tbl_producto3").append(TablaInicio + Body + TablaFin);
+
+    }); // end am4core.ready()
 }
