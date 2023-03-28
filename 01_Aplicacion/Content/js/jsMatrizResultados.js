@@ -476,36 +476,55 @@ function ver(id) {
             $("#r1").removeClass("active");
             $("#r2").removeClass("active");
             $("#r3").removeClass("active");
+            $("#r4").removeClass("active");
             break;
         case 1:
             $("#Inicio").addClass("d-none");
             $("#Resultado1").removeClass("d-none");
             $("#Resultado2").addClass("d-none");
             $("#Resultado3").addClass("d-none");
+            $("#Resumen").addClass("d-none");
             $("#r0").removeClass("active");
             $("#r1").addClass("active");
             $("#r2").removeClass("active");
             $("#r3").removeClass("active");
+            $("#r4").removeClass("active");
             break;
         case 2:
             $("#Inicio").addClass("d-none");
             $("#Resultado1").addClass("d-none");
             $("#Resultado2").removeClass("d-none");
             $("#Resultado3").addClass("d-none");
+            $("#Resumen").addClass("d-none");
             $("#r0").removeClass("active");
             $("#r1").removeClass("active");
             $("#r2").addClass("active");
             $("#r3").removeClass("active");
+            $("#r4").removeClass("active");
             break;
         case 3:
             $("#Inicio").addClass("d-none");
             $("#Resultado1").addClass("d-none");
             $("#Resultado2").addClass("d-none");
             $("#Resultado3").removeClass("d-none");
+            $("#Resumen").addClass("d-none");
             $("#r0").removeClass("active");
             $("#r1").removeClass("active");
             $("#r2").removeClass("active");
             $("#r3").addClass("active");
+            $("#r4").removeClass("active");
+            break;
+        case 4:
+            $("#Inicio").addClass("d-none");
+            $("#Resultado1").addClass("d-none");
+            $("#Resultado2").addClass("d-none");
+            $("#Resultado3").addClass("d-none");
+            $("#Resumen").removeClass("d-none");
+            $("#r0").removeClass("active");
+            $("#r1").removeClass("active");
+            $("#r2").removeClass("active");
+            $("#r3").removeClass("active");
+            $("#r4").addClass("active");
             break;
     }
 }
