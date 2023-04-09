@@ -119,6 +119,10 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__43A1090D" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_Proyecto" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ResultadoEsperado" Width="1.5" PointX="23.875" PointY="37.125" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ResultadoEsperadoAnio" Width="1.5" PointX="26.125" PointY="37.5" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__338A9CD5" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__36670980" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

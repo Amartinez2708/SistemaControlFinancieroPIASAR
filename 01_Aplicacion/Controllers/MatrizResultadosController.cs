@@ -166,5 +166,19 @@ namespace _01_Aplicacion.Controllers
             result = objMR.ListProductoSeguimientoNEDetalles(Etapa);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult ListMatrizResumenRE()
+        {
+            List<EnMatrizResumen> result = new List<EnMatrizResumen>();
+            result = objMR.ListMatrizResumenRE();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListMatrizResumenP()
+        {
+            List<EnMatrizResumen> result = new List<EnMatrizResumen>();
+            result = objMR.ListMatrizResumenP();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

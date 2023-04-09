@@ -210,6 +210,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>bd_Nucleos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Content\Reportes\MatrizResultados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MatrizResultados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Content\Reportes\rptReporteMensual.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -241,6 +247,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ManifiestoGasto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MatrizResultados.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MatrizResultados.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -570,6 +581,7 @@
     <Content Include="Content\Images\bg-01--.jpg" />
     <Content Include="Content\Images\bg-01-.jpg" />
     <Content Include="Content\Images\bg-01.jpg" />
+    <Content Include="Content\Images\bg_banner.jpg" />
     <Content Include="Content\Images\bid.png" />
     <Content Include="Content\Images\contrato.png" />
     <Content Include="Content\Images\corte-de-cinta.png" />
@@ -639,6 +651,7 @@
     <Content Include="Content\Images\Regiones\23.jpg" />
     <Content Include="Content\Images\Regiones\24.jpg" />
     <Content Include="Content\Images\Regiones\25.jpg" />
+    <Content Include="Content\Images\reporte.png" />
     <Content Include="Content\Images\retorno-de-la-inversion.png" />
     <Content Include="Content\Images\search.png" />
     <Content Include="Content\Images\ssi.png" />
@@ -746,6 +759,7 @@
     <Content Include="Content\js\morris.js\morris.js" />
     <Content Include="Content\js\now-ui-kit.min98f3.js" />
     <Content Include="Content\js\pcoded.min.js" />
+    <Content Include="Content\js\pdfmake.min.js" />
     <Content Include="Content\js\popper.js\popper.min.js" />
     <Content Include="Content\js\raphael\raphael.min.js" />
     <Content Include="Content\js\script.js" />
@@ -909,6 +923,17 @@
     <Content Include="ManifiestoGasto.xss">
       <DependentUpon>ManifiestoGasto.xsd</DependentUpon>
     </Content>
+    <Content Include="MatrizResultados.xsc">
+      <DependentUpon>MatrizResultados.xsd</DependentUpon>
+    </Content>
+    <None Include="MatrizResultados.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MatrizResultados.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="MatrizResultados.xss">
+      <DependentUpon>MatrizResultados.xsd</DependentUpon>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Views\MonitoreoPIASAR\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SCF.pubxml" />
@@ -959,6 +984,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Content\Reportes\MatrizResultados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MatrizResultados.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\Reportes\rptReporteMensual.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptReporteMensual.cs</LastGenOutput>

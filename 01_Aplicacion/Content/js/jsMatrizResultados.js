@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
-    dashboard()
+    dashboard();
+    MatrizResumenRE();
+    MatrizResumenP();
 });
 
 
@@ -3030,4 +3032,174 @@ function dashboard() {
         $("#tbl_producto3").append(TablaInicio + Body + TablaFin);
 
     }); // end am4core.ready()
+}
+
+/****************************************************************RESUMEN********************************************************************/
+
+function MatrizResumenRE()
+{
+    $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
+
+    $.get("/MatrizResultados/ListMatrizResumenRE", function (data, status) {
+
+        var Body = '';
+        var Fila = '';
+
+        /*********************************************Crear Body******************************************************/
+
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].Nivel == 1) {
+                Fila = Fila + '<tr>';
+                Fila = Fila + '<td style="font-weight: bold;" colspan="18">Resultado ' + data[i].NroResultado +'. '+ data[i].Resultado + '</td>';
+                Fila = Fila + '</tr>';
+
+                Fila = Fila + '<tr>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Resultados Esperados</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Unidad de<br />Medida</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Linea<br />de<br />base</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Año<br />Linea de<br />base</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 1</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 2</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 3</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 4</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 5</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Meta</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Medio de verificación</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Observaciones</td>';
+                Fila = Fila + '</tr>';
+
+                Body = Body + Fila;
+                Fila = "";
+            }
+            else if (data[i].Nivel == 2) {
+
+                Fila = Fila + '<tr>';
+                Fila = Fila + '<td style="word-wrap: break-word;white-space: normal;width:220px;vertical-align: middle;">' + data[i].ResultadoEsperado + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + data[i].UnidadMedida + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + data[i].LineaBase + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + data[i].AnioLineaBase + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio1_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio1_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio2_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio2_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio3_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio3_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio4_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio4_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio5_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio5_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Meta_A )+ '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Meta_P )+ '</td>';
+                Fila = Fila + '<td style="word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">' + data[i].MedioVerificacion + '</td>';
+                Fila = Fila + '<td style="word-wrap: break-word;white-space: normal;width:120px;vertical-align: middle;">' + data[i].Observaciones + '</td>';
+                Fila = Fila + '</tr>';
+
+                Body = Body + Fila;
+                Fila = "";
+            }
+        }
+
+        /*********************************************Fin Crear Body******************************************************/
+
+        $.unblockUI();
+        $("#dtMatrizResumenRE").find('tbody').append(Body);
+    });
+}
+
+function MatrizResumenP() {
+    $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
+
+    $.get("/MatrizResultados/ListMatrizResumenP", function (data, status) {
+
+        var Body = '';
+        var Fila = '';
+
+        /*********************************************Crear Body******************************************************/
+
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].Nivel == 1) {
+                Fila = Fila + '<tr>';
+                Fila = Fila + '<td style="font-weight: bold;" colspan="19">' + data[i].Componente + '</td>';
+                Fila = Fila + '</tr>';
+
+                Fila = Fila + '<tr>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Productos</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Costo<br />estimados<br />(US$)</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Resultado<br />al que<br />contribuye</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Unidad de<br />medida</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Línea <br />de base</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 1</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 2</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 3</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 4</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 5</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Meta<br />final</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Medio de verificación</td>';
+                Fila = Fila + '<td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Observaciones</td>';
+                Fila = Fila + '</tr>';
+
+                Body = Body + Fila;
+                Fila = "";
+            }
+            else if (data[i].Nivel == 2) {
+
+                Fila = Fila + '<tr>';
+                Fila = Fila + '<td style="word-wrap: break-word;white-space: normal;width:220px;vertical-align: middle;">' + data[i].Producto + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + formatMoney(data[i].CostoEstimado) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + data[i].ResultadoContribuye + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + data[i].UnidadMedida + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;">' + data[i].LineaBase + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio1_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio1_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio2_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio2_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio3_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio3_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio4_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio4_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio5_A) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Anio5_P) + '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Meta_A )+ '</td>';
+                Fila = Fila + '<td style="vertical-align: middle;text-align: center;width:50px;">' + formatMoney(data[i].Meta_P )+ '</td>';
+                Fila = Fila + '<td style="word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">' + data[i].MedioVerificacion + '</td>';
+                Fila = Fila + '<td style="word-wrap: break-word;white-space: normal;width:120px;vertical-align: middle;">' + data[i].Observaciones + '</td>';
+                Fila = Fila + '</tr>';
+
+                Body = Body + Fila;
+                Fila = "";
+            }
+        }
+
+        /*********************************************Fin Crear Body******************************************************/
+
+        $.unblockUI();
+        $("#dtMatrizResumenP").find('tbody').append(Body);
+    });
+}
+
+function exportarTablaAPDF() {
+
+    $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
+
+    var tabla = document.querySelector("#pdfMatriz");
+    var contenidoTabla = tabla.innerHTML;
+    html2pdf().from(contenidoTabla).save('tabla.pdf');
+
+    //var elemento = document.querySelector("#pdfMatriz");
+    //var contenido = elemento.innerHTML;
+    //var documento = {
+    //    content: [
+    //        { text: 'Matriz de Resultados', style: 'titulo' },
+    //        { text: contenido, style: 'contenido' }
+    //    ],
+    //    styles: {
+    //        titulo: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+    //        contenido: { fontSize: 12, margin: [0, 0, 0, 10] }
+    //    }
+    //};
+    //pdfMake.createPdf(documento).download(getNombreFile("MatrizResultados_") + '.pdf');
+    
+    $.unblockUI();
 }

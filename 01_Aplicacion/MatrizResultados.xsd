@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MatrizResultados" targetNamespace="http://tempuri.org/MatrizResultados.xsd" xmlns:mstns="http://tempuri.org/MatrizResultados.xsd" xmlns="http://tempuri.org/MatrizResultados.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MatrizResultados" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MatrizResultados" msprop:Generator_UserDSName="MatrizResultados">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="MatrizResultados" msprop:Generator_TableClassName="MatrizResultadosDataTable" msprop:Generator_TableVarName="tableMatrizResultados" msprop:Generator_TablePropName="_MatrizResultados" msprop:Generator_RowDeletingName="MatrizResultadosRowDeleting" msprop:Generator_RowChangingName="MatrizResultadosRowChanging" msprop:Generator_RowEvHandlerName="MatrizResultadosRowChangeEventHandler" msprop:Generator_RowDeletedName="MatrizResultadosRowDeleted" msprop:Generator_UserTableName="MatrizResultados" msprop:Generator_RowChangedName="MatrizResultadosRowChanged" msprop:Generator_RowEvArgName="MatrizResultadosRowChangeEvent" msprop:Generator_RowClassName="MatrizResultadosRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

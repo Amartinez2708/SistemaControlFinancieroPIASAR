@@ -5,8 +5,8 @@
 }
 <div class="card">
     <div class="card-block p-0">
-        @*<div class="bg-inicio bg-image.bg-parallax bg-image overlay">background-image: url('/Content/Images/INAUGURACIONES.jpg');background-color:#edf0f4;</div>*@
-        <div class="caption-breadcrumb" style="position:relative;color: #fff;padding: 25px;background-color:#222;">
+        @*<div class="bg-inicio bg-image.bg-parallax bg-image overlay">background-image: url('/Content/Images/INAUGURACIONES.jpg');background-color:#edf0f4;background-color:#333;</div>*@
+        <div class="caption-breadcrumb" style="position:relative;color: #fff;padding: 25px;background-image: url(/Content/Images/black-texture.jpg);background-repeat: repeat;background-size: contain;">
             <div class="breadcrumb-header">
                 <h4 class="m-b-15">
                     <i class="fa fa-home"></i> &nbsp; Matriz de Resultados
@@ -16,7 +16,7 @@
             <div class="breadcrumb-title b-t-default p-t-10"></div>
         </div>
         <div class="row m-l-0 m-r-0">
-            <div class="col-lg-2 col-sm-12 p-l-0 p-r-0" style="background-color:#222;color:#fff;">
+            <div class="col-lg-2 col-sm-12 p-l-0 p-r-0" style="color:#fff;background-image: url(/Content/Images/black-texture.jpg);background-repeat: repeat;background-size: contain;">
                 <table class="table tabla-menu-matriz table-hover">
                     <tbody>
                         <tr id="r0" onclick="ver(0)" class="active">
@@ -62,7 +62,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-10 col-sm-12 p-t-40 p-l-40 p-r-40" style="height: calc(100vh - 310px);overflow: auto;background-color:#e9ecef;-webkit-box-shadow: inset 0px 10px 6px -7px rgb(0 0 0 / 60%);-moz-box-shadow: inset 0px 10px 6px -7px rgba(0,0,0,0.6);box-shadow: inset 0px 10px 6px -7px rgb(0 0 0 / 60%);">
+            <div class="col-lg-10 col-sm-12 p-t-40 p-l-20 p-r-20" style="height: calc(100vh - 310px);overflow: auto;background-color:#f1f1f1;-webkit-box-shadow: inset 0px 10px 6px -7px rgb(0 0 0 / 60%);-moz-box-shadow: inset 0px 10px 6px -7px rgba(0,0,0,0.6);box-shadow: inset 0px 10px 6px -7px rgb(0 0 0 / 60%);">
                 <div id="Inicio">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 m-b-15">
@@ -3878,7 +3878,41 @@
                 </div>
 
                 <div id="Resumen" class="d-none">
+                    <div class="col-lg-12 col-sm-12">
 
+                        <div class="card card-solid">
+                            <div class="card-block" style="overflow:auto;">
+                                <div class="form-group">
+                                    <button class="btn btn-success" onclick="ExportarExcel('dtMatrizResumenRE', 'ResultadosEsperados_')"><i class="fa fa-file-excel-o"></i>Exportar Resultados Esperados</button>
+                                    <button class="btn btn-success" onclick="ExportarExcel('dtMatrizResumenP', 'Productos_')"><i class="fa fa-file-excel-o"></i>Exportar Productos</button>
+                                </div>
+                                <div id="pdfMatriz">
+                                    <div class="form-group">
+                                        <table class="table table-bordered" id="dtMatrizResumenRE">
+                                            <tr>
+                                                <td colspan="18" style="text-align:center"> <h3>Matriz de Resultados</h3></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight: bold;vertical-align: middle !important;">Objetivo del Proyecto</td>
+                                                <td colspan="17">El objetivo general del programa es mejorar las condiciones sanitarias y ambientales de las zonas rurales priorizadas del país mediante la<br /> reducción de la brecha de cobertura de los servicios de Agua y Saneamiento (AyS)</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight: bold;" colspan="18">RESULTADOS</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="form-group">
+                                        <table class="table table-bordered" id="dtMatrizResumenP">
+                                            <tr>
+                                                <td colspan="19" style="font-weight: bold;vertical-align: middle !important;">PRODUCTOS</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
                 </div>
             </div>
         </div>

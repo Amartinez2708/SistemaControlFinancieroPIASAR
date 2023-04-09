@@ -896,6 +896,41 @@
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
+        <EntityType Name="ResultadoEsperado">
+          <Key>
+            <PropertyRef Name="IdResultadoEsperado" />
+          </Key>
+          <Property Name="IdResultadoEsperado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMatrizResultado" Type="int" Nullable="false" />
+          <Property Name="NroResultadoEsperado" Type="int" />
+          <Property Name="ResultadoEsperado" Type="varchar" MaxLength="500" />
+          <Property Name="LineaBase" Type="int" />
+          <Property Name="AnioLineaBase" Type="int" />
+          <Property Name="UnidadMedida" Type="varchar" MaxLength="250" />
+          <Property Name="MedioVerificacion" Type="varchar" MaxLength="500" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="500" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ResultadoEsperadoAnio">
+          <Key>
+            <PropertyRef Name="IdResultadoEsperadoAnio" />
+          </Key>
+          <Property Name="IdResultadoEsperadoAnio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdResultadoEsperado" Type="int" Nullable="false" />
+          <Property Name="NroAnio" Type="int" />
+          <Property Name="Anio" Type="int" />
+          <Property Name="Programado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Avanzado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="ROLES_SISTEMA">
           <Key>
             <PropertyRef Name="IDRoles" />
@@ -1152,8 +1187,8 @@
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.Ubigeo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.Ubigeo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Ubigeo">
           <Key>
             <PropertyRef Name="idUbigeo" />
@@ -1188,8 +1223,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.Ubigeo' no tiene de
           <Property Name="FECHA_UPD" Type="datetime" />
           <Property Name="Password" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DesembolsoVSJustificado">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1226,8 +1261,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.DesembolsoVSJustifi
           <Property Name="AnioEjecucion" Type="int" />
           <Property Name="Grupo" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDepa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDepa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListDepa">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1243,8 +1278,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDepa' no tiene 
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDist' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDist' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListDist">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1264,8 +1299,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDist' no tiene 
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoActividad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoActividad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListEstadoActividad">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1291,8 +1326,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoActividad
           <Property Name="fecha_ult_act" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="estado" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListEstadoPresupuesto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1315,8 +1350,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoPresupues
           <Property Name="Presupuesto" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Fecha Actualización Presupuesto" Type="varchar" MaxLength="19" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListEstadoProyecto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1354,8 +1389,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoProyecto'
           <Property Name="Fecha de Fin Real" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Fecha de Ultima Actualización" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresupuesto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListMontoProyectoVSPresupuesto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1382,8 +1417,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListMontoProyectoVS
           <Property Name="Porcentaje" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Correcto" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ListProv">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1773,6 +1808,30 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Resultado__Fecha__338A9CD5">
+          <End Role="MatrizResultado" Type="Self.MatrizResultado" Multiplicity="1" />
+          <End Role="ResultadoEsperado" Type="Self.ResultadoEsperado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatrizResultado">
+              <PropertyRef Name="IdMatrizResultado" />
+            </Principal>
+            <Dependent Role="ResultadoEsperado">
+              <PropertyRef Name="IdMatrizResultado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultado__Fecha__36670980">
+          <End Role="ResultadoEsperado" Type="Self.ResultadoEsperado" Multiplicity="1" />
+          <End Role="ResultadoEsperadoAnio" Type="Self.ResultadoEsperadoAnio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResultadoEsperado">
+              <PropertyRef Name="IdResultadoEsperado" />
+            </Principal>
+            <Dependent Role="ResultadoEsperadoAnio">
+              <PropertyRef Name="IdResultadoEsperado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Seguimien__Fecha__1D7B6025">
           <End Role="ProyectosSeguimiento" Type="Self.ProyectosSeguimiento" Multiplicity="1" />
           <End Role="SeguimientoEjecucionProyectosInversion" Type="Self.SeguimientoEjecucionProyectosInversion" Multiplicity="*" />
@@ -1976,6 +2035,8 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProyectosSeguimiento" EntityType="Self.ProyectosSeguimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultadoEsperado" EntityType="Self.ResultadoEsperado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultadoEsperadoAnio" EntityType="Self.ResultadoEsperadoAnio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLES_SISTEMA" EntityType="Self.ROLES_SISTEMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoActividadesATM" EntityType="Self.SeguimientoActividadesATM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoActividadesFamilias" EntityType="Self.SeguimientoActividadesFamilias" Schema="dbo" store:Type="Tables" />
@@ -2278,6 +2339,14 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
           <AssociationSet Name="FK__ProgresoS__IdSub__10216507" Association="Self.FK__ProgresoS__IdSub__10216507">
             <End Role="SubComponente" EntitySet="SubComponente" />
             <End Role="ProgresoSubComponente" EntitySet="ProgresoSubComponente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__Fecha__338A9CD5" Association="Self.FK__Resultado__Fecha__338A9CD5">
+            <End Role="MatrizResultado" EntitySet="MatrizResultado" />
+            <End Role="ResultadoEsperado" EntitySet="ResultadoEsperado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__Fecha__36670980" Association="Self.FK__Resultado__Fecha__36670980">
+            <End Role="ResultadoEsperado" EntitySet="ResultadoEsperado" />
+            <End Role="ResultadoEsperadoAnio" EntitySet="ResultadoEsperadoAnio" />
           </AssociationSet>
           <AssociationSet Name="FK__Seguimien__Fecha__1D7B6025" Association="Self.FK__Seguimien__Fecha__1D7B6025">
             <End Role="ProyectosSeguimiento" EntitySet="ProyectosSeguimiento" />
@@ -2685,6 +2754,16 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
           <AssociationSet Name="FK__Monitoreo__Fecha__13F1F5EB" Association="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB">
             <End Role="Proyecto" EntitySet="Proyecto" />
             <End Role="MonitoreoObras" EntitySet="MonitoreoObras" />
+          </AssociationSet>
+          <EntitySet Name="ResultadoEsperado" EntityType="BD_NucleosEjecutoresModel.ResultadoEsperado" />
+          <EntitySet Name="ResultadoEsperadoAnio" EntityType="BD_NucleosEjecutoresModel.ResultadoEsperadoAnio" />
+          <AssociationSet Name="FK__Resultado__Fecha__338A9CD5" Association="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__338A9CD5">
+            <End Role="MatrizResultado" EntitySet="MatrizResultado" />
+            <End Role="ResultadoEsperado" EntitySet="ResultadoEsperado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__Fecha__36670980" Association="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__36670980">
+            <End Role="ResultadoEsperado" EntitySet="ResultadoEsperado" />
+            <End Role="ResultadoEsperadoAnio" EntitySet="ResultadoEsperadoAnio" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MANIFIESTO_GASTO_DETALLE">
@@ -4070,6 +4149,7 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
           <Property Name="IdUsuario_upd" Type="Int32" />
           <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
           <NavigationProperty Name="MatrizResultadoProducto" Relationship="BD_NucleosEjecutoresModel.FK__MatrizRes__Fecha__3EFC4F81" FromRole="MatrizResultado" ToRole="MatrizResultadoProducto" />
+          <NavigationProperty Name="ResultadoEsperado" Relationship="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__338A9CD5" FromRole="MatrizResultado" ToRole="ResultadoEsperado" />
         </EntityType>
         <EntityType Name="MatrizResultadoProducto">
           <Key>
@@ -4584,6 +4664,68 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
             </Principal>
             <Dependent Role="MonitoreoObras">
               <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ResultadoEsperado">
+          <Key>
+            <PropertyRef Name="IdResultadoEsperado" />
+          </Key>
+          <Property Name="IdResultadoEsperado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMatrizResultado" Type="Int32" Nullable="false" />
+          <Property Name="NroResultadoEsperado" Type="Int32" />
+          <Property Name="ResultadoEsperado1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LineaBase" Type="Int32" />
+          <Property Name="AnioLineaBase" Type="Int32" />
+          <Property Name="UnidadMedida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MedioVerificacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MatrizResultado" Relationship="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__338A9CD5" FromRole="ResultadoEsperado" ToRole="MatrizResultado" />
+          <NavigationProperty Name="ResultadoEsperadoAnio" Relationship="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__36670980" FromRole="ResultadoEsperado" ToRole="ResultadoEsperadoAnio" />
+        </EntityType>
+        <EntityType Name="ResultadoEsperadoAnio">
+          <Key>
+            <PropertyRef Name="IdResultadoEsperadoAnio" />
+          </Key>
+          <Property Name="IdResultadoEsperadoAnio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdResultadoEsperado" Type="Int32" Nullable="false" />
+          <Property Name="NroAnio" Type="Int32" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="Programado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Avanzado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ResultadoEsperado" Relationship="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__36670980" FromRole="ResultadoEsperadoAnio" ToRole="ResultadoEsperado" />
+        </EntityType>
+        <Association Name="FK__Resultado__Fecha__338A9CD5">
+          <End Type="BD_NucleosEjecutoresModel.MatrizResultado" Role="MatrizResultado" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.ResultadoEsperado" Role="ResultadoEsperado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatrizResultado">
+              <PropertyRef Name="IdMatrizResultado" />
+            </Principal>
+            <Dependent Role="ResultadoEsperado">
+              <PropertyRef Name="IdMatrizResultado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultado__Fecha__36670980">
+          <End Type="BD_NucleosEjecutoresModel.ResultadoEsperado" Role="ResultadoEsperado" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.ResultadoEsperadoAnio" Role="ResultadoEsperadoAnio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResultadoEsperado">
+              <PropertyRef Name="IdResultadoEsperado" />
+            </Principal>
+            <Dependent Role="ResultadoEsperadoAnio">
+              <PropertyRef Name="IdResultadoEsperado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6003,6 +6145,43 @@ advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene 
                 <ScalarProperty Name="Cod_programa" ColumnName="Cod_programa" />
                 <ScalarProperty Name="Act_proy" ColumnName="Act_proy" />
                 <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultadoEsperado">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.ResultadoEsperado">
+              <MappingFragment StoreEntitySet="ResultadoEsperado">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="MedioVerificacion" ColumnName="MedioVerificacion" />
+                <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
+                <ScalarProperty Name="AnioLineaBase" ColumnName="AnioLineaBase" />
+                <ScalarProperty Name="LineaBase" ColumnName="LineaBase" />
+                <ScalarProperty Name="ResultadoEsperado1" ColumnName="ResultadoEsperado" />
+                <ScalarProperty Name="NroResultadoEsperado" ColumnName="NroResultadoEsperado" />
+                <ScalarProperty Name="IdMatrizResultado" ColumnName="IdMatrizResultado" />
+                <ScalarProperty Name="IdResultadoEsperado" ColumnName="IdResultadoEsperado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultadoEsperadoAnio">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.ResultadoEsperadoAnio">
+              <MappingFragment StoreEntitySet="ResultadoEsperadoAnio">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Avanzado" ColumnName="Avanzado" />
+                <ScalarProperty Name="Programado" ColumnName="Programado" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="NroAnio" ColumnName="NroAnio" />
+                <ScalarProperty Name="IdResultadoEsperado" ColumnName="IdResultadoEsperado" />
+                <ScalarProperty Name="IdResultadoEsperadoAnio" ColumnName="IdResultadoEsperadoAnio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

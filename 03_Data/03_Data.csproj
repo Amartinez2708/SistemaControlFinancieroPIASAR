@@ -220,6 +220,12 @@
     <Compile Include="ProyectosSeguimiento.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="ResultadoEsperado.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResultadoEsperadoAnio.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="ROLES_SISTEMA.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>

@@ -78,6 +78,7 @@
     <Compile Include="EnListSeguimientoProgramadoEjecutadoMensual.cs" />
     <Compile Include="EnMANIFIESTO_GASTO.cs" />
     <Compile Include="EnMANIFIESTO_GASTO_DETALLE.cs" />
+    <Compile Include="EnMatrizResumen.cs" />
     <Compile Include="EnMonitoreoGeneral.cs" />
     <Compile Include="EnMonitoreoObras.cs" />
     <Compile Include="EnMovimiento_Documento.cs" />

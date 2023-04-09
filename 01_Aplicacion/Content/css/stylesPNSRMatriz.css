@@ -291,7 +291,7 @@ legend.scheduler-border {
 }
 .pcoded .pcoded-header[header-theme="theme5"]::before {
     content: "";
-    background: #bf0909 !important; /*rgba(255, 0, 0, 0.5) !important;*/
+    /*background: #bf0909 !important; rgba(255, 0, 0, 0.5) !important;*/
     position: absolute;
     width: 100%;
     height: 100%;
@@ -302,7 +302,7 @@ legend.scheduler-border {
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
 }
 .pcoded .pcoded-header[header-theme="theme5"] {
-    background-image: url(../images/header.jpg) !important;
+    background-image: url(../images/bg_banner.jpg) !important;
     background-size: cover !important;
 }
 .img-fluid {
@@ -511,17 +511,17 @@ legend.scheduler-border {
     border-top: 0px;
 }
 .tabla-menu-matriz tbody tr:hover {
-    background-color: #fff;
-    color: #0056ac;
+    background-color: #ee4c50;
+    color: #fff;
     cursor:pointer;
 }
 
 .active {
-    background-color: #e9ecef;
-    color:#0056ac; 
-    -webkit-box-shadow: inset 10px 10px 6px -7px rgb(0 0 0 / 60%);
+    background-color: #ee4c50;
+    color:#fff; 
+    /*-webkit-box-shadow: inset 10px 10px 6px -7px rgb(0 0 0 / 60%);
     -moz-box-shadow: inset 10px 10px 6px -7px rgba(0,0,0,0.6);
-    box-shadow: inset 10px 10px 6px -7px rgb(0 0 0 / 60%)
+    box-shadow: inset 10px 10px 6px -7px rgb(0 0 0 / 60%)*/
 }
 
 
@@ -617,3 +617,32 @@ legend.scheduler-border {
 .card-dashboard:hover {
    box-shadow: none;
 }
+
+.tabla-exportar {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #828282 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #828282;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
