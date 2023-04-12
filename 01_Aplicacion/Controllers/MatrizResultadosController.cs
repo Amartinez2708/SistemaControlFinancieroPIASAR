@@ -6,12 +6,19 @@ using System.Web.Mvc;
 using _02_Entidades;
 using _03_Data;
 using _04_Servicios;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
+using System.Web.UI;
+using _05_Utilidades;
 
 namespace _01_Aplicacion.Controllers
 {
     public class MatrizResultadosController : Controller
     {
         SrvMatrizResultados objMR = new SrvMatrizResultados();
+        //ViewToStringRenderer viewToStringRenderer = new ViewToStringRenderer();
         // GET: MatrizResultados
         public ActionResult Index()
         {
@@ -179,6 +186,34 @@ namespace _01_Aplicacion.Controllers
             List<EnMatrizResumen> result = new List<EnMatrizResumen>();
             result = objMR.ListMatrizResumenP();
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult _ReporteMatrizResultados()
+        {
+            List<EnMatrizResumen> Matriz = objMR.ListMatrizResumenRE();
+
+            return View(Matriz);
+        }
+        public ActionResult GenerateReport()
+        {
+            // Obtener datos para el reporte
+            var data = objMR.ListMatrizResumenRE();
+
+            // Renderizar vista Razor como cadena de texto
+            var viewRenderer = new ViewToStringRenderer(ControllerContext);
+            var html = viewRenderer.RenderViewToString("~/Views/MatrizResultados/_ReporteMatrizResultados.cshtml", data);
+
+            // Convertir HTML a PDF
+            var document = new Document(PageSize.A4.Rotate(), 10, 10, 10, 10);
+            var memoryStream = new MemoryStream();
+            var writer = PdfWriter.GetInstance(document, memoryStream);
+
+            document.Open();
+            var xmlWorker = XMLWorkerHelper.GetInstance();
+            xmlWorker.ParseXHtml(writer, document, new StringReader(html));
+            document.Close();
+
+            // Devolver archivo PDF como respuesta
+            return File(memoryStream.ToArray(), "application/pdf", "report.pdf");
         }
     }
 }

@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model List<_02_Entidades.EnMatrizResumen>
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>_ReporteMatrizResultados</title>
+    </head>
+    <body>
+        <style>
+            .table {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 1rem;
+                background-color: transparent;
+            }
+
+            th, td {
+                padding: 0.75rem;
+                vertical-align: middle;
+                text-align: left;
+                border: 1px solid #e9ecef;
+                white-space: nowrap;
+            }
+        </style>
+        <table class="table table-bordered" id="dtMatrizResumenRE">
+            <tr>
+                <td colspan="18" style="text-align:center"> <h3>Matriz de Resultados</h3></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;vertical-align: middle !important;">Objetivo del Proyecto</td>
+                <td colspan="17">El objetivo general del programa es mejorar las condiciones sanitarias y ambientales de las zonas rurales priorizadas del país mediante la<br /> reducción de la brecha de cobertura de los servicios de Agua y Saneamiento (AyS)</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;" colspan="18">RESULTADOS</td>
+            </tr>
+            @{foreach (var mr in Model)
+              {
+                    if (mr.Nivel == 1)
+                    {
+                        <tr>
+                        <td style="font-weight: bold" colspan="19"> @mr.Componente </td>
+                        </tr>
+
+                        <tr>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Productos</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Costo<br />estimados<br />(US$)</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Resultado<br />al que<br />contribuye</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Unidad de<br />medida</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Línea <br />de base</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 1</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 2</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 3</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 4</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 5</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Meta<br />final</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Medio de verificación</td>
+                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Observaciones</td>
+                        </tr>
+                    }
+                    else if (mr.Nivel == 2)
+                    {
+                       <tr>
+                       <td style="word-wrap: break-word;white-space: normal;width:220px;vertical-align: middle;">mr.Producto</td>
+                       <td style="vertical-align: middle;text-align: center;">mr.CostoEstimado</td>
+                       <td style="vertical-align: middle;text-align: center;">mr.ResultadoContribuye</td>
+                       <td style="vertical-align: middle;text-align: center;">mr.UnidadMedida</td>
+                       <td style="vertical-align: middle;text-align: center;">mr.LineaBase</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio1_A</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio1_P</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio2_A</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio2_P</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio3_A</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio3_P</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio4_A</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio4_P</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio5_A</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio5_P</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Meta_A</td>
+                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Meta_P</td>
+                       <td style="word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">mr.MedioVerificacion</td>
+                       <td style="word-wrap: break-word;white-space: normal;width:120px;vertical-align: middle;">mr.Observaciones</td>
+                       </tr>
+                    }
+                }
+            }
+        </table>
+    </body>
+</html>
