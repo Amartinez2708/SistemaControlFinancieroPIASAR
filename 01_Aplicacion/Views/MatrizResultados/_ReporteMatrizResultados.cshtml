@@ -19,10 +19,11 @@
                 max-width: 100%;
                 margin-bottom: 1rem;
                 background-color: transparent;
+                border-collapse: collapse;
             }
 
             th, td {
-                padding: 0.75rem;
+                padding: 8px;
                 vertical-align: middle;
                 text-align: left;
                 border: 1px solid #e9ecef;
@@ -31,62 +32,60 @@
         </style>
         <table class="table table-bordered" id="dtMatrizResumenRE">
             <tr>
-                <td colspan="18" style="text-align:center"> <h3>Matriz de Resultados</h3></td>
+                <td colspan="18" style="text-align:center;"> <h3>Matriz de Resultados</h3></td>
             </tr>
             <tr>
-                <td style="font-weight: bold;vertical-align: middle !important;">Objetivo del Proyecto</td>
-                <td colspan="17">El objetivo general del programa es mejorar las condiciones sanitarias y ambientales de las zonas rurales priorizadas del país mediante la<br /> reducción de la brecha de cobertura de los servicios de Agua y Saneamiento (AyS)</td>
+                <td style="font-weight: bold;vertical-align: middle !important;font-size:14px">Objetivo del Proyecto</td>
+                <td colspan="17" style="font-size:14px">El objetivo general del programa es mejorar las condiciones sanitarias y ambientales de las zonas rurales priorizadas del país mediante la<br /> reducción de la brecha de cobertura de los servicios de Agua y Saneamiento (AyS)</td>
             </tr>
             <tr>
-                <td style="font-weight: bold;" colspan="18">RESULTADOS</td>
+                <td style="font-weight: bold;font-size:14px" colspan="18">RESULTADOS</td>
             </tr>
             @{foreach (var mr in Model)
               {
                     if (mr.Nivel == 1)
                     {
                         <tr>
-                        <td style="font-weight: bold" colspan="19"> @mr.Componente </td>
+                        <td style="font-weight: bold;font-size:14px" colspan="18"> Resultado @mr.NroResultado. @mr.Resultado </td>
                         </tr>
 
                         <tr>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Productos</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Costo<br />estimados<br />(US$)</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Resultado<br />al que<br />contribuye</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Unidad de<br />medida</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Línea <br />de base</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 1</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 2</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 3</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 4</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 5</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Meta<br />final</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Medio de verificación</td>
-                        <td style="font-weight: bold; text-align: center; vertical-align: middle !important;">Observaciones</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;">Resultados Esperados</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;">Unidad de<br />Medida</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;">Linea<br />de<br />base</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;">Año<br />Linea de<br />base</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 1</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 2</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 3</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 4</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Año 5</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;" colspan="2">Meta</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;">Medio de verificación</td>
+                        <td style="font-size:11px;font-weight: bold; text-align: center; vertical-align: middle !important;">Observaciones</td>
                         </tr>
                     }
                     else if (mr.Nivel == 2)
                     {
-                       <tr>
-                       <td style="word-wrap: break-word;white-space: normal;width:220px;vertical-align: middle;">mr.Producto</td>
-                       <td style="vertical-align: middle;text-align: center;">mr.CostoEstimado</td>
-                       <td style="vertical-align: middle;text-align: center;">mr.ResultadoContribuye</td>
-                       <td style="vertical-align: middle;text-align: center;">mr.UnidadMedida</td>
-                       <td style="vertical-align: middle;text-align: center;">mr.LineaBase</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio1_A</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio1_P</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio2_A</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio2_P</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio3_A</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio3_P</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio4_A</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio4_P</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio5_A</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Anio5_P</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Meta_A</td>
-                       <td style="vertical-align: middle;text-align: center;width:50px;">mr.Meta_P</td>
-                       <td style="word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">mr.MedioVerificacion</td>
-                       <td style="word-wrap: break-word;white-space: normal;width:120px;vertical-align: middle;">mr.Observaciones</td>
-                       </tr>
+                        <tr>
+                        <td style="font-size:10px;word-wrap: break-word;white-space: normal;width:180px;vertical-align: middle;"> @mr.ResultadoEsperado </td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:100px;">@mr.UnidadMedida </td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:80px;">@mr.LineaBase </td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:90px;">@mr.AnioLineaBase </td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>A</strong><br /><br /> @Convert.ToInt32(mr.Anio1_A)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>P</strong><br /><br /> @Convert.ToInt32(mr.Anio1_P)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>A</strong><br /><br /> @Convert.ToInt32(mr.Anio2_A)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>P</strong><br /><br /> @Convert.ToInt32(mr.Anio2_P)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>A</strong><br /><br /> @Convert.ToInt32(mr.Anio3_A)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>P</strong><br /><br /> @Convert.ToInt32(mr.Anio3_P)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>A</strong><br /><br /> @Convert.ToInt32(mr.Anio4_A)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>P</strong><br /><br /> @Convert.ToInt32(mr.Anio4_P)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>A</strong><br /><br /> @Convert.ToInt32(mr.Anio5_A)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>P</strong><br /><br /> @Convert.ToInt32(mr.Anio5_P)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>A</strong><br /><br /> @Convert.ToInt32(mr.Meta_A)</td>
+                        <td style="font-size:10px;vertical-align: middle;text-align: center;width:70px;"><strong>P</strong><br /><br /> @Convert.ToInt32(mr.Meta_P)</td>
+                        <td style="font-size:10px;word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">@mr.MedioVerificacion </td>
+                        <td style="font-size:10px;word-wrap: break-word;white-space: normal;width:160px;vertical-align: middle;">@mr.Observaciones </td>
+                        </tr>
                     }
                 }
             }

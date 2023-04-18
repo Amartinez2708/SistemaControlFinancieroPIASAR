@@ -977,6 +977,7 @@
     <Content Include="Views\MatrizResultados\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutMatrizResultado.cshtml" />
     <Content Include="Views\MatrizResultados\_ReporteMatrizResultados.cshtml" />
+    <Content Include="Views\MatrizResultados\_ReporteMatrizResultadosProductos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

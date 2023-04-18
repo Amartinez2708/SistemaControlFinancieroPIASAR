@@ -3885,7 +3885,8 @@
                                 <div class="form-group">
                                     <button class="btn btn-success" onclick="ExportarExcel('dtMatrizResumenRE', 'ResultadosEsperados_')"><i class="fa fa-file-excel-o"></i>Exportar Resultados Esperados</button>
                                     <button class="btn btn-success" onclick="ExportarExcel('dtMatrizResumenP', 'Productos_')"><i class="fa fa-file-excel-o"></i>Exportar Productos</button>
-                                    <a href="@Url.Action("GenerateReport", "MatrizResultados")">Generar reporte</a>
+                                    <a class="btn btn-danger" href="@Url.Action("GenerarReporteRE", "MatrizResultados")"><i class="fa fa-file-pdf-o"></i>Exportar Resultados Esperados</a>
+                                    <a class="btn btn-danger" href="@Url.Action("GenerarReporteP", "MatrizResultados")"><i class="fa fa-file-pdf-o"></i>Exportar Productos</a>
                                 </div>
                                 <div id="pdfMatriz">
                                     <div class="form-group">

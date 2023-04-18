@@ -193,7 +193,13 @@ namespace _01_Aplicacion.Controllers
 
             return View(Matriz);
         }
-        public ActionResult GenerateReport()
+        public ActionResult _ReporteMatrizResultadosProductos()
+        {
+            List<EnMatrizResumen> Matriz = objMR.ListMatrizResumenP();
+
+            return View(Matriz);
+        }
+        public ActionResult GenerarReporteRE()
         {
             // Obtener datos para el reporte
             var data = objMR.ListMatrizResumenRE();
@@ -203,7 +209,7 @@ namespace _01_Aplicacion.Controllers
             var html = viewRenderer.RenderViewToString("~/Views/MatrizResultados/_ReporteMatrizResultados.cshtml", data);
 
             // Convertir HTML a PDF
-            var document = new Document(PageSize.A4.Rotate(), 10, 10, 10, 10);
+            var document = new Document(PageSize.A4.Rotate(), 15, 15, 30, 30);
             var memoryStream = new MemoryStream();
             var writer = PdfWriter.GetInstance(document, memoryStream);
 
@@ -213,7 +219,29 @@ namespace _01_Aplicacion.Controllers
             document.Close();
 
             // Devolver archivo PDF como respuesta
-            return File(memoryStream.ToArray(), "application/pdf", "report.pdf");
+            return File(memoryStream.ToArray(), "application/pdf", "rptMatrizResultados_"+DateTime.Now.ToString("ddMMyyyy")+".pdf");
+        }
+        public ActionResult GenerarReporteP()
+        {
+            // Obtener datos para el reporte
+            var data = objMR.ListMatrizResumenP();
+
+            // Renderizar vista Razor como cadena de texto
+            var viewRenderer = new ViewToStringRenderer(ControllerContext);
+            var html = viewRenderer.RenderViewToString("~/Views/MatrizResultados/_ReporteMatrizResultadosProductos.cshtml", data);
+
+            // Convertir HTML a PDF
+            var document = new Document(PageSize.A4.Rotate(), 15, 15, 30, 30);
+            var memoryStream = new MemoryStream();
+            var writer = PdfWriter.GetInstance(document, memoryStream);
+
+            document.Open();
+            var xmlWorker = XMLWorkerHelper.GetInstance();
+            xmlWorker.ParseXHtml(writer, document, new StringReader(html));
+            document.Close();
+
+            // Devolver archivo PDF como respuesta
+            return File(memoryStream.ToArray(), "application/pdf", "rptMatrizResultadosProductos_" + DateTime.Now.ToString("ddMMyyyy") + ".pdf");
         }
     }
 }
