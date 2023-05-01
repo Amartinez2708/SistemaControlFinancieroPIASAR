@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "MatrizResultadosReportesPlanos";
+    Layout = "~/Views/Shared/_LayoutMatrizResultado.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        
+    </div>
+    <div class="card-block">
+        <ul class="nav nav-tabs tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#Productos" role="tab"> <i class="fa fa-cogs" aria-hidden="true"></i> &nbsp; Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#CapacitacionesJASS" role="tab"><i class="fa fa-certificate" aria-hidden="true"></i> &nbsp; Capacitaciones JASS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#CapacitacionesNE" role="tab"><i class="fa fa-certificate" aria-hidden="true"></i> &nbsp; Capacitaciones NE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#CapacitacionesFamilia" role="tab"><i class="fa fa-certificate" aria-hidden="true"></i> &nbsp; Capacitaciones Familias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#CapacitacionesATM" role="tab"><i class="fa fa-certificate" aria-hidden="true"></i> &nbsp; Capacitaciones ATM</a>
+            </li>
+        </ul>
+        <div class="tab-content tabs card-block">
+            <div class="tab-pane active" id="Productos" role="tabpanel">
+                @{ Html.RenderAction("_MatrizResultadosReportesPlanosProductos", "MatrizResultados"); }
+            </div>
+            <div class="tab-pane" id="CapacitacionesJASS" role="tabpanel">
+                @{ Html.RenderAction("_MatrizResultadosReportesPlanosCapacitacionesJASS", "MatrizResultados"); }
+            </div>
+            <div class="tab-pane" id="CapacitacionesNE" role="tabpanel">
+                @{ Html.RenderAction("_MatrizResultadosReportesPlanosCapacitacionesNE", "MatrizResultados"); }
+            </div>
+            <div class="tab-pane" id="CapacitacionesFamilia" role="tabpanel">
+                @{ Html.RenderAction("_MatrizResultadosReportesPlanosCapacitacionesFamilias", "MatrizResultados"); }
+            </div>
+            <div class="tab-pane" id="CapacitacionesATM" role="tabpanel">
+                @{ Html.RenderAction("_MatrizResultadosReportesPlanosCapacitacionesATM", "MatrizResultados"); }
+            </div>
+        </div>
+    </div>
+</div>
+@section _ScriptCode {
+    <script src="~/Content/js/jsMatrizResultados.js"></script>
+}

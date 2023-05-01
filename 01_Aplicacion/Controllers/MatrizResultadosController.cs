@@ -243,5 +243,41 @@ namespace _01_Aplicacion.Controllers
             // Devolver archivo PDF como respuesta
             return File(memoryStream.ToArray(), "application/pdf", "rptMatrizResultadosProductos_" + DateTime.Now.ToString("ddMMyyyy") + ".pdf");
         }
+        public ActionResult MatrizResultadosReportesPlanos()
+        {
+            //List<EnMatrizResumen> Matriz = objMR.ListMatrizResumenProductoReportePlano();
+
+            return View();
+        }
+        public ActionResult _MatrizResultadosReportesPlanosProductos()
+        {
+            List<EnMatrizResumen> Matriz = objMR.ListMatrizResumenProductoReportePlano();
+
+            return PartialView("_MatrizResultadosReportesPlanosProductos", Matriz);
+        }
+        public ActionResult _MatrizResultadosReportesPlanosCapacitacionesJASS()
+        {
+            return PartialView("_MatrizResultadosReportesPlanosCapacitacionesJASS");
+        }
+        public ActionResult _MatrizResultadosReportesPlanosCapacitacionesNE()
+        {
+            return PartialView("_MatrizResultadosReportesPlanosCapacitacionesNE");
+        }
+        public ActionResult _MatrizResultadosReportesPlanosCapacitacionesFamilias()
+        {
+            return PartialView("_MatrizResultadosReportesPlanosCapacitacionesFamilias");
+        }
+        public ActionResult _MatrizResultadosReportesPlanosCapacitacionesATM()
+        {
+            return PartialView("_MatrizResultadosReportesPlanosCapacitacionesATM");
+        }
+        public ActionResult ReportesActividades()
+        {
+            return View();
+        }
+        public ActionResult _CapacitacionesJASS()
+        {
+            return PartialView("_CapacitacionesJASS");
+        }
     }
 }

@@ -1,0 +1,127 @@
+﻿@using _02_Entidades;
+@using _03_Data;
+@{ BD_NucleosEjecutoresEntities context = new BD_NucleosEjecutoresEntities(); }
+@{var MesActual = DateTime.Now;}
+
+<div class="form-group">
+    <button class="btn btn-success" onclick="ExportarExcel('tblMatrizReportesPlanosActividadesJASS', 'rpt_MatrizResumenActividadesJASS_')"><i class="fa fa-file-excel-o"></i>Exportar</button>
+</div>
+<div class="form-group">
+    <h3>Capacitaciones JASS del Mes de @MesActual.ToString("MMMM")</h3>
+</div>
+<div class="form-group text-right">
+    <h6>Información al 31/12/2022</h6>
+</div>
+<div class="form-group" id="divMatrizReportesPlanosActividadesJASS" style="overflow:auto">
+    <table class="table table-bordered-black table-hover" id="tblMatrizReportesPlanosActividadesJASS">
+
+        @{
+            var objActividades = context.CronogramaActividades.Where(x => x.Tipo == "JASS" && x.Activo == true).ToList();
+
+            if (objActividades != null && objActividades.Count() > 0)
+            {
+                <tr>
+                    <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" rowspan="3">N°</td>
+                    <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" rowspan="3">CUI</td>
+                    <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" rowspan="3">Región</td>
+                    <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" rowspan="3">Localidad</td>
+                    <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" rowspan="3">Nro. Total de<br />Asociados</td>
+                    @*<td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" rowspan="3">Nro. Total de<br />Usuarios</td>*@
+                    <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" colspan="2" rowspan="2">Cantidad de<br />Capacitaciones</td>
+                    @{
+                        var NroMes = objActividades.Select(x => x.NroMes).Distinct().ToList();
+                        foreach (var item in NroMes)
+                        {
+                            var CantidadActividades = objActividades.Where(x => x.NroMes == item).Count() * 4;
+                            <td style="word-wrap: break-word;white-space: normal;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;" colspan="@CantidadActividades"> Actividades del Mes - @item</td>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @{  foreach (var item in objActividades)
+                        {
+                            <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;" colspan="4">@item.Actividad</td>
+                        }
+                    }
+                </tr>
+                <tr>
+                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;">Programado del mes de <br />@MesActual.ToString("MMMM")</td>
+                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;">Ejecutado del mes de <br />@MesActual.ToString("MMMM")</td>
+                    @{  foreach (var item in objActividades)
+                        {
+                            <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;">Fecha</td>
+                            <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;">Hombres</td>
+                            <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;">Mujeres</td>
+                            <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center;background-color:rgb(0,112,192);color:#fff;">Total<br />A</td>
+                        }
+                    }
+                </tr>
+                }
+
+                var objproy = context.Proyecto.Where(x => x.Cod_subprograma == 133 && x.Estado == 1).ToList();
+                if(objproy != null && objproy.Count() > 0)
+                {
+                    var Count = 1;
+                    foreach (var item in objproy)
+                    {
+                        var depa = context.Departamento.SingleOrDefault(x => x.cod_depa == item.IdUbigeo.Substring(0, 2));
+                        var objSeguimiento = context.SeguimientoActividadesJASS.SingleOrDefault(x => x.CUI == item.CUI && x.Activo == true);
+                        var objDetalleEjecutadas = context.DetalleSeguimientoActividadesJASS.Where(x => x.SeguimientoActividadesJASS.CUI == item.CUI && x.Fecha.Value.Year == DateTime.Now.Year && x.Fecha.Value.Month == MesActual.Month && x.Activo == true);
+                    <tr>
+                        <td style="width:30px;vertical-align: middle;text-align: center;">@(Count++)</td>
+                        <td style="width:30px;vertical-align: middle;text-align: center;">@item.CUI</td>
+                        <td style="word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">@depa.nom_depa </td>
+                        <td style="word-wrap: break-word;white-space: normal;width:150px;vertical-align: middle;">@item.Localidad </td>
+                        @{
+                                    if (objSeguimiento != null)
+                                    {
+                                        <td style="width:30px;vertical-align: middle;text-align: center;">@(objSeguimiento.NroAsociadosHombres + objSeguimiento.NroAsociadosMujeres)</td>
+                                        @*<td style="width:30px;vertical-align: middle;text-align: center;">0</td>*@
+                                    }
+                                    else
+                                    {
+                                        <td style="width:30px;vertical-align: middle;text-align: center;">0</td>
+                                        @*<td style="width:30px;vertical-align: middle;text-align: center;">0</td>*@
+                                    }
+
+                                    if (objDetalleEjecutadas != null)
+                                    {
+                                        <td style="width:30px;vertical-align: middle;text-align: center;">0</td>
+                                        <td style="width:30px;vertical-align: middle;text-align: center;">@objDetalleEjecutadas.Count()</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="width:30px;vertical-align: middle;text-align: center;">0</td>
+                                        <td style="width:30px;vertical-align: middle;text-align: center;">0</td>
+                                    }
+                        }
+                        
+                        
+                        @{
+                            foreach (var i in objActividades)
+                            {
+                                var objDet = context.DetalleSeguimientoActividadesJASS.SingleOrDefault(x => x.SeguimientoActividadesJASS.CUI == item.CUI && x.IdCronogramaActividades == i.IdCronogramaActividades && x.Activo == true);
+                                if (objDet != null)
+                                {
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center">@(objDet.Fecha==null ? "" : Convert.ToDateTime(objDet.Fecha).ToString("dd/MM/yyyy"))</td>
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center">@objDet.NroHombres</td>
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center">@objDet.NroMujeres</td>
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center">@(objDet.Fecha == null ? "" : objDet.Total.ToString())</td>
+                                }
+                                else
+                                {
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center"></td>
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center"></td>
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center"></td>
+                                    <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center"></td>
+                                }
+
+                            }
+                        }
+                        
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>

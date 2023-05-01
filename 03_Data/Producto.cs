@@ -37,6 +37,8 @@ namespace _03_Data
         public Nullable<System.DateTime> Fecha_add { get; set; }
         public Nullable<int> IdUsuario_upd { get; set; }
         public Nullable<System.DateTime> Fecha_upd { get; set; }
+        public string Id { get; set; }
+        public Nullable<decimal> MetaProgramadaAjustada { get; set; }
     
         public virtual Componente Componente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1312,6 +1312,7 @@ namespace _04_Servicios
                         b.Nivel = 2;
                         b.NroComponente = Convert.ToInt32(item.NroComponente);
                         b.NroProducto = Convert.ToInt32(re.NroProducto);
+                        b.Id = re.Id;
                         b.Producto = re.Producto1;
                         b.CostoEstimado = Convert.ToDecimal(re.CostoEstimado);
                         b.LineaBase = Convert.ToInt32(re.LineaBase);
@@ -1354,30 +1355,35 @@ namespace _04_Servicios
                                     b.Anio1 = Convert.ToInt32(reanio.Anio);
                                     b.Anio1_A = Convert.ToDecimal(reanio.Avanzado);
                                     b.Anio1_P = Convert.ToDecimal(reanio.Programado);
+                                    b.Anio1_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
                                     break;
                                 case 2:
                                     b.NroAnio2 = Convert.ToInt32(reanio.NroAnio);
                                     b.Anio2 = Convert.ToInt32(reanio.Anio);
                                     b.Anio2_A = Convert.ToDecimal(reanio.Avanzado);
                                     b.Anio2_P = Convert.ToDecimal(reanio.Programado);
+                                    b.Anio2_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
                                     break;
                                 case 3:
                                     b.NroAnio3 = Convert.ToInt32(reanio.NroAnio);
                                     b.Anio3 = Convert.ToInt32(reanio.Anio);
                                     b.Anio3_A = Convert.ToDecimal(reanio.Avanzado);
                                     b.Anio3_P = Convert.ToDecimal(reanio.Programado);
+                                    b.Anio3_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
                                     break;
                                 case 4:
                                     b.NroAnio4 = Convert.ToInt32(reanio.NroAnio);
                                     b.Anio4 = Convert.ToInt32(reanio.Anio);
                                     b.Anio4_A = Convert.ToDecimal(reanio.Avanzado);
                                     b.Anio4_P = Convert.ToDecimal(reanio.Programado);
+                                    b.Anio4_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
                                     break;
                                 case 5:
                                     b.NroAnio5 = Convert.ToInt32(reanio.NroAnio);
                                     b.Anio5 = Convert.ToInt32(reanio.Anio);
                                     b.Anio5_A = Convert.ToDecimal(reanio.Avanzado);
                                     b.Anio5_P = Convert.ToDecimal(reanio.Programado);
+                                    b.Anio5_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
                                     break;
                             }
                         }
@@ -1387,6 +1393,102 @@ namespace _04_Servicios
                         result.Add(b);
                     }
                 }
+            }
+            return result;
+        }
+
+        public List<EnMatrizResumen> ListMatrizResumenProductoReportePlano() //Matriz Resumen
+        {
+            List<EnMatrizResumen> result = new List<EnMatrizResumen>();
+
+            var objProducto = context.Producto.Where(x => x.Activo == true).ToList();
+
+            foreach (var re in objProducto)
+            {
+                EnMatrizResumen b = new EnMatrizResumen();
+                b.Nivel = 2;
+                b.NroComponente = Convert.ToInt32(re.Componente.NroComponente);
+                b.NroProducto = Convert.ToInt32(re.NroProducto);
+                b.Id = re.Id;
+                b.Producto = re.Producto1;
+                b.CostoEstimado = Convert.ToDecimal(re.CostoEstimado);
+                b.LineaBase = Convert.ToInt32(re.LineaBase);
+                b.UnidadMedida = re.UnidadMedida;
+                b.MedioVerificacion = re.MedioVerificacion;
+                b.Observaciones = re.Observaciones;
+
+                var objResultadoContri = context.MatrizResultadoProducto.Where(x => x.IdProducto == re.IdProducto && x.Activo == true).ToList();
+
+                if (objResultadoContri != null && objResultadoContri.Count() > 0)
+                {
+                    var contribuye = "";
+                    foreach (var x in objResultadoContri)
+                    {
+                        if (contribuye == "")
+                        {
+                            contribuye = x.MatrizResultado.NroResultado.ToString();
+                        }
+                        else
+                        {
+                            contribuye = contribuye + "," + x.MatrizResultado.NroResultado.ToString();
+                        }
+
+                    }
+                    b.ResultadoContribuye = contribuye;
+                }
+                else
+                {
+                    b.ResultadoContribuye = "";
+                }
+
+                var objProductoAnio = context.ProductoAnio.Where(x => x.IdProducto == re.IdProducto && x.Activo == true).ToList();
+
+                foreach (var reanio in objProductoAnio)
+                {
+                    switch (reanio.NroAnio)
+                    {
+                        case 1:
+                            b.NroAnio1 = Convert.ToInt32(reanio.NroAnio);
+                            b.Anio1 = Convert.ToInt32(reanio.Anio);
+                            b.Anio1_A = Convert.ToDecimal(reanio.Avanzado);
+                            b.Anio1_P = Convert.ToDecimal(reanio.Programado);
+                            b.Anio1_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
+                            break;
+                        case 2:
+                            b.NroAnio2 = Convert.ToInt32(reanio.NroAnio);
+                            b.Anio2 = Convert.ToInt32(reanio.Anio);
+                            b.Anio2_A = Convert.ToDecimal(reanio.Avanzado) + b.Anio1_A;
+                            b.Anio2_P = Convert.ToDecimal(reanio.Programado);
+                            b.Anio2_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
+                            break;
+                        case 3:
+                            b.NroAnio3 = Convert.ToInt32(reanio.NroAnio);
+                            b.Anio3 = Convert.ToInt32(reanio.Anio);
+                            b.Anio3_A = Convert.ToDecimal(reanio.Avanzado) + b.Anio1_A + b.Anio2_A;
+                            b.Anio3_P = Convert.ToDecimal(reanio.Programado);
+                            b.Anio3_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
+                            break;
+                        case 4:
+                            b.NroAnio4 = Convert.ToInt32(reanio.NroAnio);
+                            b.Anio4 = Convert.ToInt32(reanio.Anio);
+                            b.Anio4_A = Convert.ToDecimal(reanio.Avanzado) + b.Anio1_A + b.Anio2_A + b.Anio3_A;
+                            b.Anio4_P = Convert.ToDecimal(reanio.Programado);
+                            b.Anio4_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
+                            break;
+                        case 5:
+                            b.NroAnio5 = Convert.ToInt32(reanio.NroAnio);
+                            b.Anio5 = Convert.ToInt32(reanio.Anio);
+                            b.Anio5_A = Convert.ToDecimal(reanio.Avanzado) + b.Anio1_A + b.Anio2_A + b.Anio3_A + b.Anio4_A;
+                            b.Anio5_P = Convert.ToDecimal(reanio.Programado);
+                            b.Anio5_PA = Convert.ToDecimal(reanio.ProgramadoAjustado);
+                            break;
+                    }
+                }
+
+                b.Meta_A = b.Anio1_A + b.Anio2_A + b.Anio3_A + b.Anio4_A + b.Anio5_A;
+                b.Meta_P = Convert.ToDecimal(re.Meta);
+                b.Meta_PA = Convert.ToDecimal(re.MetaProgramadaAjustada);
+                result.Add(b);
             }
             return result;
         }

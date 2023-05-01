@@ -1,0 +1,94 @@
+﻿@model List<_02_Entidades.EnMatrizResumen>
+
+<div class="form-group">
+    <button class="btn btn-success" onclick="ExportarExcel('tblMatrizReportesPlanosProductos', 'rpt_MatrizResumenProducto_')"><i class="fa fa-file-excel-o"></i>Exportar</button>
+</div>
+<div class="form-group">
+    <table class="table table-bordered-black table-hover" id="tblMatrizReportesPlanosProductos">
+        <tr>
+            <td colspan="13" style="text-align:center;background-color:rgb(0,112,192);color:#fff;border: 0.5px solid #333;"> <h3>Matriz de Resultados</h3></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" colspan="2">Objetivo del Proyecto</td>
+            <td style="background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" colspan="11">El objetivo general del programa es mejorar las condiciones sanitarias y ambientales de las zonas rurales priorizadas del país mediante la<br /> reducción de la brecha de cobertura de los servicios de Agua y Saneamiento (AyS)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;" colspan="13">PRODUCTOS</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">ID</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Productos</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Costos<br />Estimados<br />(US$)</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Unidad de<br />Medida</td>
+            <td style="background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;"></td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Año 1<br /> 2019</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Año 2<br /> 2020</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Año 3<br /> 2021</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Año 4<br /> 2022</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Año 5<br /> 2023</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Meta<br />final</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Medio de verificación</td>
+            <td style="font-weight: bold; text-align: center; vertical-align: middle !important;background-color:rgb(0,112,192);color:#fff;font-size: 16px;border: 0.5px solid #333;">Observaciones</td>
+        </tr>
+
+        @{
+            var Modelo = Model.OrderBy(x => x.NroProducto);
+            foreach (var mr in Modelo)
+            {
+                <tr>
+                    <td style="width:30px;vertical-align: middle;text-align: center;" rowspan="3"> @mr.Id </td>
+                    <td style="word-wrap: break-word;white-space: normal;width:200px;vertical-align: middle;" rowspan="3"> @mr.Producto </td>
+                    <td style="vertical-align: middle;text-align: center;width:100px;" rowspan="3">@Convert.ToInt32(mr.CostoEstimado).ToString("N0") </td>
+                    <td style="vertical-align: middle;text-align: center;width:100px;" rowspan="3">@mr.UnidadMedida </td>
+                    <td style="vertical-align: middle;text-align: center;width:20px;"><strong>P</strong></td>
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio1_P).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio2_P).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio3_P).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio4_P).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio5_P).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Meta_P).ToString("N0")</td>
+                    <td style="word-wrap: break-word;white-space: normal;width:200px;vertical-align: middle;" rowspan="3">@mr.MedioVerificacion </td>
+                    <td style="word-wrap: break-word;white-space: normal;width:160px;vertical-align: middle;" rowspan="3">@mr.Observaciones </td>
+                </tr>
+
+                <tr>
+                    <td style="vertical-align: middle;text-align: center;width:70px;"><strong>P(A)</strong></td>
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio1_PA).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio2_PA).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio3_PA).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio4_PA).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio5_PA).ToString("N0")</td>
+
+                    <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Meta_PA).ToString("N0")</td>
+                </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;text-align: center;width:70px;"><strong>A</strong></td>
+                            <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio1_A).ToString("N0")</td>
+
+                            <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio2_A).ToString("N0")</td>
+
+                            <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio3_A).ToString("N0")</td>
+
+                            <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio4_A).ToString("N0")</td>
+
+                            <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Anio5_A).ToString("N0")</td>
+
+                            <td style="vertical-align: middle;text-align: center;width:70px;">@Convert.ToInt32(mr.Meta_A).ToString("N0")</td>
+                        </tr>
+
+            }
+        }
+    </table>
+</div>
+
+

@@ -741,6 +741,8 @@
           <Property Name="Fecha_add" Type="datetime" />
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
+          <Property Name="Id" Type="varchar" MaxLength="10" />
+          <Property Name="MetaProgramadaAjustada" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ProductoAnio">
           <Key>
@@ -757,6 +759,7 @@
           <Property Name="Fecha_add" Type="datetime" />
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
+          <Property Name="ProgramadoAjustado" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ProgramadoEjecutadoMensual">
           <Key>
@@ -2664,17 +2667,11 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="DetalleSeguimientoActividadesNE" EntityType="BD_NucleosEjecutoresModel.DetalleSeguimientoActividadesNE" />
           <EntitySet Name="MatrizResultado" EntityType="BD_NucleosEjecutoresModel.MatrizResultado" />
           <EntitySet Name="MatrizResultadoProducto" EntityType="BD_NucleosEjecutoresModel.MatrizResultadoProducto" />
-          <EntitySet Name="Producto" EntityType="BD_NucleosEjecutoresModel.Producto" />
-          <EntitySet Name="ProductoAnio" EntityType="BD_NucleosEjecutoresModel.ProductoAnio" />
           <EntitySet Name="SeguimientoActividadesATM" EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesATM" />
           <EntitySet Name="SeguimientoActividadesFamilias" EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesFamilias" />
           <EntitySet Name="SeguimientoActividadesJASS" EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesJASS" />
           <EntitySet Name="SeguimientoActividadesNE" EntityType="BD_NucleosEjecutoresModel.SeguimientoActividadesNE" />
           <EntitySet Name="TipoActividad" EntityType="BD_NucleosEjecutoresModel.TipoActividad" />
-          <AssociationSet Name="FK__Producto__Fecha___3943762B" Association="BD_NucleosEjecutoresModel.FK__Producto__Fecha___3943762B">
-            <End Role="Componente" EntitySet="Componente" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
           <AssociationSet Name="FK__Cronogram__Fecha__7FD5EEA5" Association="BD_NucleosEjecutoresModel.FK__Cronogram__Fecha__7FD5EEA5">
             <End Role="TipoActividad" EntitySet="TipoActividad" />
             <End Role="CronogramaActividades" EntitySet="CronogramaActividades" />
@@ -2714,14 +2711,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK__MatrizRes__Fecha__3EFC4F81" Association="BD_NucleosEjecutoresModel.FK__MatrizRes__Fecha__3EFC4F81">
             <End Role="MatrizResultado" EntitySet="MatrizResultado" />
             <End Role="MatrizResultadoProducto" EntitySet="MatrizResultadoProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MatrizRes__IdPro__3FF073BA" Association="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="MatrizResultadoProducto" EntitySet="MatrizResultadoProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ProductoA__Fecha__3C1FE2D6" Association="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="ProductoAnio" EntitySet="ProductoAnio" />
           </AssociationSet>
           <EntitySet Name="SeguimientoATM" EntityType="BD_NucleosEjecutoresModel.SeguimientoATM" />
           <AssociationSet Name="FK__DetalleSe__Fecha__5F691F13" Association="BD_NucleosEjecutoresModel.FK__DetalleSe__Fecha__5F691F13">
@@ -2764,6 +2753,20 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK__Resultado__Fecha__36670980" Association="BD_NucleosEjecutoresModel.FK__Resultado__Fecha__36670980">
             <End Role="ResultadoEsperado" EntitySet="ResultadoEsperado" />
             <End Role="ResultadoEsperadoAnio" EntitySet="ResultadoEsperadoAnio" />
+          </AssociationSet>
+          <EntitySet Name="ProductoAnio" EntityType="BD_NucleosEjecutoresModel.ProductoAnio" />
+          <EntitySet Name="Producto" EntityType="BD_NucleosEjecutoresModel.Producto" />
+          <AssociationSet Name="FK__Producto__Fecha___3943762B" Association="BD_NucleosEjecutoresModel.FK__Producto__Fecha___3943762B">
+            <End Role="Componente" EntitySet="Componente" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatrizRes__IdPro__3FF073BA" Association="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="MatrizResultadoProducto" EntitySet="MatrizResultadoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductoA__Fecha__3C1FE2D6" Association="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ProductoAnio" EntitySet="ProductoAnio" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MANIFIESTO_GASTO_DETALLE">
@@ -4166,47 +4169,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <NavigationProperty Name="MatrizResultado" Relationship="BD_NucleosEjecutoresModel.FK__MatrizRes__Fecha__3EFC4F81" FromRole="MatrizResultadoProducto" ToRole="MatrizResultado" />
           <NavigationProperty Name="Producto" Relationship="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA" FromRole="MatrizResultadoProducto" ToRole="Producto" />
         </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="IdProducto" />
-          </Key>
-          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NroProducto" Type="Int32" />
-          <Property Name="Producto1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdComponente" Type="Int32" Nullable="false" />
-          <Property Name="CostoEstimado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="UnidadMedida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="IconoUnidadMedida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="LineaBase" Type="Int32" />
-          <Property Name="Meta" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="MedioVerificacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario_add" Type="Int32" />
-          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario_upd" Type="Int32" />
-          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Componente" Relationship="BD_NucleosEjecutoresModel.FK__Producto__Fecha___3943762B" FromRole="Producto" ToRole="Componente" />
-          <NavigationProperty Name="MatrizResultadoProducto" Relationship="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA" FromRole="Producto" ToRole="MatrizResultadoProducto" />
-          <NavigationProperty Name="ProductoAnio" Relationship="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6" FromRole="Producto" ToRole="ProductoAnio" />
-        </EntityType>
-        <EntityType Name="ProductoAnio">
-          <Key>
-            <PropertyRef Name="IdProductoAnio" />
-          </Key>
-          <Property Name="IdProductoAnio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdProducto" Type="Int32" Nullable="false" />
-          <Property Name="NroAnio" Type="Int32" />
-          <Property Name="Anio" Type="Int32" />
-          <Property Name="Programado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Avanzado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario_add" Type="Int32" />
-          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario_upd" Type="Int32" />
-          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Producto" Relationship="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6" FromRole="ProductoAnio" ToRole="Producto" />
-        </EntityType>
         <EntityType Name="SeguimientoActividadesATM">
           <Key>
             <PropertyRef Name="IdSeguimientoActividadesATM" />
@@ -4297,18 +4259,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CronogramaActividades" Relationship="BD_NucleosEjecutoresModel.FK__Cronogram__Fecha__7FD5EEA5" FromRole="TipoActividad" ToRole="CronogramaActividades" />
         </EntityType>
-        <Association Name="FK__Producto__Fecha___3943762B">
-          <End Type="BD_NucleosEjecutoresModel.Componente" Role="Componente" Multiplicity="1" />
-          <End Type="BD_NucleosEjecutoresModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Componente">
-              <PropertyRef Name="IdComponente" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IdComponente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Cronogram__Fecha__7FD5EEA5">
           <End Type="BD_NucleosEjecutoresModel.TipoActividad" Role="TipoActividad" Multiplicity="1" />
           <End Type="BD_NucleosEjecutoresModel.CronogramaActividades" Role="CronogramaActividades" Multiplicity="*" />
@@ -4426,30 +4376,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="MatrizResultadoProducto">
               <PropertyRef Name="IdMatrizResultado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MatrizRes__IdPro__3FF073BA">
-          <End Type="BD_NucleosEjecutoresModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="BD_NucleosEjecutoresModel.MatrizResultadoProducto" Role="MatrizResultadoProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="MatrizResultadoProducto">
-              <PropertyRef Name="IdProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ProductoA__Fecha__3C1FE2D6">
-          <End Type="BD_NucleosEjecutoresModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="BD_NucleosEjecutoresModel.ProductoAnio" Role="ProductoAnio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="ProductoAnio">
-              <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4726,6 +4652,86 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="ResultadoEsperadoAnio">
               <PropertyRef Name="IdResultadoEsperado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductoAnio">
+          <Key>
+            <PropertyRef Name="IdProductoAnio" />
+          </Key>
+          <Property Name="IdProductoAnio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="NroAnio" Type="Int32" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="Programado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Avanzado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <Property Name="ProgramadoAjustado" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Producto" Relationship="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6" FromRole="ProductoAnio" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroProducto" Type="Int32" />
+          <Property Name="Producto1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdComponente" Type="Int32" Nullable="false" />
+          <Property Name="CostoEstimado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnidadMedida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IconoUnidadMedida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LineaBase" Type="Int32" />
+          <Property Name="Meta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MedioVerificacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MetaProgramadaAjustada" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Componente" Relationship="BD_NucleosEjecutoresModel.FK__Producto__Fecha___3943762B" FromRole="Producto" ToRole="Componente" />
+          <NavigationProperty Name="MatrizResultadoProducto" Relationship="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA" FromRole="Producto" ToRole="MatrizResultadoProducto" />
+          <NavigationProperty Name="ProductoAnio" Relationship="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6" FromRole="Producto" ToRole="ProductoAnio" />
+        </EntityType>
+        <Association Name="FK__Producto__Fecha___3943762B">
+          <End Type="BD_NucleosEjecutoresModel.Componente" Role="Componente" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Componente">
+              <PropertyRef Name="IdComponente" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdComponente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatrizRes__IdPro__3FF073BA">
+          <End Type="BD_NucleosEjecutoresModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.MatrizResultadoProducto" Role="MatrizResultadoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="MatrizResultadoProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductoA__Fecha__3C1FE2D6">
+          <End Type="BD_NucleosEjecutoresModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.ProductoAnio" Role="ProductoAnio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProductoAnio">
+              <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5893,45 +5899,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Producto">
-            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.Producto">
-              <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
-                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
-                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
-                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="MedioVerificacion" ColumnName="MedioVerificacion" />
-                <ScalarProperty Name="Meta" ColumnName="Meta" />
-                <ScalarProperty Name="LineaBase" ColumnName="LineaBase" />
-                <ScalarProperty Name="IconoUnidadMedida" ColumnName="IconoUnidadMedida" />
-                <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
-                <ScalarProperty Name="CostoEstimado" ColumnName="CostoEstimado" />
-                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
-                <ScalarProperty Name="Producto1" ColumnName="Producto" />
-                <ScalarProperty Name="NroProducto" ColumnName="NroProducto" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductoAnio">
-            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.ProductoAnio">
-              <MappingFragment StoreEntitySet="ProductoAnio">
-                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
-                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
-                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
-                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Avanzado" ColumnName="Avanzado" />
-                <ScalarProperty Name="Programado" ColumnName="Programado" />
-                <ScalarProperty Name="Anio" ColumnName="Anio" />
-                <ScalarProperty Name="NroAnio" ColumnName="NroAnio" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="IdProductoAnio" ColumnName="IdProductoAnio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SeguimientoActividadesATM">
             <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.SeguimientoActividadesATM">
               <MappingFragment StoreEntitySet="SeguimientoActividadesATM">
@@ -6182,6 +6149,48 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="NroAnio" ColumnName="NroAnio" />
                 <ScalarProperty Name="IdResultadoEsperado" ColumnName="IdResultadoEsperado" />
                 <ScalarProperty Name="IdResultadoEsperadoAnio" ColumnName="IdResultadoEsperadoAnio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoAnio">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.ProductoAnio">
+              <MappingFragment StoreEntitySet="ProductoAnio">
+                <ScalarProperty Name="ProgramadoAjustado" ColumnName="ProgramadoAjustado" />
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Avanzado" ColumnName="Avanzado" />
+                <ScalarProperty Name="Programado" ColumnName="Programado" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="NroAnio" ColumnName="NroAnio" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdProductoAnio" ColumnName="IdProductoAnio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="MetaProgramadaAjustada" ColumnName="MetaProgramadaAjustada" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="MedioVerificacion" ColumnName="MedioVerificacion" />
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="LineaBase" ColumnName="LineaBase" />
+                <ScalarProperty Name="IconoUnidadMedida" ColumnName="IconoUnidadMedida" />
+                <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
+                <ScalarProperty Name="CostoEstimado" ColumnName="CostoEstimado" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="Producto1" ColumnName="Producto" />
+                <ScalarProperty Name="NroProducto" ColumnName="NroProducto" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

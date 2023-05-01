@@ -86,8 +86,6 @@ namespace _03_Data
         public virtual DbSet<DetalleSeguimientoActividadesNE> DetalleSeguimientoActividadesNE { get; set; }
         public virtual DbSet<MatrizResultado> MatrizResultado { get; set; }
         public virtual DbSet<MatrizResultadoProducto> MatrizResultadoProducto { get; set; }
-        public virtual DbSet<Producto> Producto { get; set; }
-        public virtual DbSet<ProductoAnio> ProductoAnio { get; set; }
         public virtual DbSet<SeguimientoActividadesATM> SeguimientoActividadesATM { get; set; }
         public virtual DbSet<SeguimientoActividadesFamilias> SeguimientoActividadesFamilias { get; set; }
         public virtual DbSet<SeguimientoActividadesJASS> SeguimientoActividadesJASS { get; set; }
@@ -99,6 +97,8 @@ namespace _03_Data
         public virtual DbSet<Proyecto> Proyecto { get; set; }
         public virtual DbSet<ResultadoEsperado> ResultadoEsperado { get; set; }
         public virtual DbSet<ResultadoEsperadoAnio> ResultadoEsperadoAnio { get; set; }
+        public virtual DbSet<ProductoAnio> ProductoAnio { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
     
         public virtual ObjectResult<sp_ListAutorizacionRubro_Result> sp_ListAutorizacionRubro(string ids)
         {

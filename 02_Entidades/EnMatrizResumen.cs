@@ -9,6 +9,7 @@ namespace _02_Entidades
     public class EnMatrizResumen
     {
         public int Nivel { get; set; }
+        public string Id { get; set; }
         public int NroResultado { get; set; }
         public string Resultado { get; set; }
         public string ResultadoEsperado { get; set; }
@@ -25,24 +26,30 @@ namespace _02_Entidades
         public int Anio1 { get; set; }
         public decimal Anio1_A { get; set; }
         public decimal Anio1_P { get; set; }
+        public decimal Anio1_PA { get; set; }
         public int NroAnio2 { get; set; }
         public int Anio2 { get; set; }
         public decimal Anio2_A { get; set; }
         public decimal Anio2_P { get; set; }
+        public decimal Anio2_PA { get; set; }
         public int NroAnio3 { get; set; }
         public int Anio3 { get; set; }
         public decimal Anio3_A { get; set; }
         public decimal Anio3_P { get; set; }
+        public decimal Anio3_PA { get; set; }
         public int NroAnio4 { get; set; }
         public int Anio4 { get; set; }
         public decimal Anio4_A { get; set; }
         public decimal Anio4_P { get; set; }
+        public decimal Anio4_PA { get; set; }
         public int NroAnio5 { get; set; }
         public int Anio5 { get; set; }
         public decimal Anio5_A { get; set; }
         public decimal Anio5_P { get; set; }
+        public decimal Anio5_PA { get; set; }
         public decimal Meta_A { get; set; }
         public decimal Meta_P { get; set; }
+        public decimal Meta_PA { get; set; }
         public string MedioVerificacion { get; set; }
         public string Observaciones { get; set; }
     }

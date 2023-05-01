@@ -978,6 +978,14 @@
     <Content Include="Views\Shared\_LayoutMatrizResultado.cshtml" />
     <Content Include="Views\MatrizResultados\_ReporteMatrizResultados.cshtml" />
     <Content Include="Views\MatrizResultados\_ReporteMatrizResultadosProductos.cshtml" />
+    <Content Include="Views\MatrizResultados\MatrizResultadosReportesPlanos.cshtml" />
+    <Content Include="Views\MatrizResultados\_MatrizResultadosReportesPlanosProductos.cshtml" />
+    <Content Include="Views\MatrizResultados\_MatrizResultadosReportesPlanosCapacitacionesJASS.cshtml" />
+    <Content Include="Views\MatrizResultados\_MatrizResultadosReportesPlanosCapacitacionesNE.cshtml" />
+    <Content Include="Views\MatrizResultados\_MatrizResultadosReportesPlanosCapacitacionesFamilias.cshtml" />
+    <Content Include="Views\MatrizResultados\_MatrizResultadosReportesPlanosCapacitacionesATM.cshtml" />
+    <Content Include="Views\MatrizResultados\ReportesActividades.cshtml" />
+    <Content Include="Views\MatrizResultados\_CapacitacionesJASS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">
