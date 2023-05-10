@@ -1,7 +1,7 @@
 ﻿@using _02_Entidades;
 @using _03_Data;
 @{ BD_NucleosEjecutoresEntities context = new BD_NucleosEjecutoresEntities(); }
-@{var MesActual = DateTime.Now;}
+@{var MesActual = Convert.ToDateTime("01/04/2023");}
 
 <div class="form-group">
     <button class="btn btn-success" onclick="ExportarExcel('tblMatrizReportesPlanosActividadesJASS', 'rpt_MatrizResumenActividadesJASS_')"><i class="fa fa-file-excel-o"></i>Exportar</button>
@@ -10,7 +10,7 @@
     <h3>Capacitaciones Familias del Mes de @MesActual.ToString("MMMM")</h3>
 </div>
 <div class="form-group text-right">
-    <h6>Información al 31/12/2022</h6>
+    <h6>Información al 10/04/2023</h6>
 </div>
 <div class="form-group" id="divMatrizReportesPlanosActividadesJASS" style="overflow:auto">
     <table class="table table-bordered-black table-hover" id="tblMatrizReportesPlanosActividadesJASS">
@@ -84,7 +84,16 @@
                                         if (objDetalleEjecutadas != null)
                                         {
                                         <td style="width:30px;vertical-align: middle;text-align: center;">0</td>
-                                        <td style="width:30px;vertical-align: middle;text-align: center;">@objDetalleEjecutadas.Count()</td>
+
+                                            if (objDetalleEjecutadas.Count() > 0)
+                                            {
+                                                <td style="width:30px;vertical-align: middle;text-align: center; background-color:rgb(112,173,71)">@objDetalleEjecutadas.Count()</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="width:30px;vertical-align: middle;text-align: center;">@objDetalleEjecutadas.Count()</td>
+                                            }
+
                                         }
                                         else
                                         {
@@ -95,7 +104,7 @@
                                     @{
                                         foreach (var i in objActividades)
                                         {
-                                            var objDet = context.DetalleSeguimientoActividadesFamilias.SingleOrDefault(x => x.SeguimientoActividadesFamilias.CUI == item.CUI && x.IdCronogramaActividades == i.IdCronogramaActividades && x.Activo == true);
+                                            var objDet = context.DetalleSeguimientoActividadesFamilias.Where(x => x.SeguimientoActividadesFamilias.CUI == item.CUI && x.IdCronogramaActividades == i.IdCronogramaActividades && x.Activo == true).OrderByDescending(x => x.Fecha_add).FirstOrDefault();
                                             if (objDet != null)
                                             {
                                                 <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center">@(objDet.Fecha == null ? "" : Convert.ToDateTime(objDet.Fecha).ToString("dd/MM/yyyy"))</td>

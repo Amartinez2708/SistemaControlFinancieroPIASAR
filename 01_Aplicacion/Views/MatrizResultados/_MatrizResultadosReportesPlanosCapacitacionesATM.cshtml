@@ -1,7 +1,7 @@
 ﻿@using _02_Entidades;
 @using _03_Data;
 @{ BD_NucleosEjecutoresEntities context = new BD_NucleosEjecutoresEntities(); }
-@{var MesActual = DateTime.Now;}
+@{var MesActual = Convert.ToDateTime("01/04/2023");}
 
 <div class="form-group">
     <button class="btn btn-success" onclick="ExportarExcel('tblMatrizReportesPlanosActividadesATM', 'rpt_MatrizResumenActividadesJASS_')"><i class="fa fa-file-excel-o"></i>Exportar</button>
@@ -10,7 +10,7 @@
     <h3>Capacitaciones ATM del Mes de @MesActual.ToString("MMMM")</h3>
 </div>
 <div class="form-group text-right">
-    <h6>Información al 31/12/2022</h6>
+    <h6>Información al 10/04/2022</h6>
 </div>
 <div class="form-group" style="overflow:auto">
     <table class="table table-bordered-black table-hover" id="tblMatrizReportesPlanosActividadesATM">
@@ -97,7 +97,7 @@
 
                                             foreach (var i in objActividades)
                                             {
-                                                var objDet = context.DetalleSeguimientoActividadesATM.FirstOrDefault(x => x.IdSeguimientoActividadesATM == PrimeraATM.IdSeguimientoActividadesATM && x.IdCronogramaActividades == i.IdCronogramaActividades && x.Activo == true);
+                                                var objDet = context.DetalleSeguimientoActividadesATM.Where(x => x.IdSeguimientoActividadesATM == PrimeraATM.IdSeguimientoActividadesATM && x.IdCronogramaActividades == i.IdCronogramaActividades && x.Activo == true).OrderByDescending(x => x.Fecha_add).FirstOrDefault();
                                                 if (objDet != null)
                                                 {
                                             <td style="word-wrap: break-word;white-space: normal;width:300px;vertical-align: middle;text-align:center">@Convert.ToDateTime(objDet.Fecha).ToString("dd/MM/yyyy")</td>
