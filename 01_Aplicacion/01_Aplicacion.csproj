@@ -292,6 +292,7 @@
     <Content Include="Content\css\radial.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\StylesGeo.css" />
+    <Content Include="Content\css\stylesSCF.css" />
     <Content Include="Content\css\stylesPNSRMatriz.css" />
     <Content Include="Content\css\stylesPNSR.css" />
     <Content Include="Content\data-table\css\buttons.dataTables.min.css" />
@@ -787,6 +788,7 @@
     <Content Include="Content\js\SmoothScroll.js" />
     <Content Include="Content\js\tether.min.js" />
     <Content Include="Content\js\vartical-demo.js" />
+    <Content Include="Content\js\vertical-layout.min.js" />
     <Content Include="Content\js\vertical\horizontal-layout.min.js" />
     <Content Include="Content\js\vertical\menu\box-layout.js" />
     <Content Include="Content\js\vertical\menu\menu-compact.js" />
@@ -817,7 +819,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Inicio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -971,8 +972,8 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\GestionComponente\Index.cshtml" />
     <Content Include="Views\Shared\_PrincipalMenu.cshtml" />
-    <Content Include="Views\Shared\SideMenu.cshtml" />
-    <Content Include="Views\Shared\UserInfo.cshtml" />
+    <Content Include="Views\Inicio\SideMenu.cshtml" />
+    <Content Include="Views\Inicio\UserInfo.cshtml" />
     <Content Include="Views\EjecucionPresupuestalPNSR\Index.cshtml" />
     <Content Include="Views\MatrizResultados\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutMatrizResultado.cshtml" />
@@ -986,6 +987,7 @@
     <Content Include="Views\MatrizResultados\_MatrizResultadosReportesPlanosCapacitacionesATM.cshtml" />
     <Content Include="Views\MatrizResultados\ReportesActividades.cshtml" />
     <Content Include="Views\MatrizResultados\_CapacitacionesJASS.cshtml" />
+    <Content Include="Views\Inicio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

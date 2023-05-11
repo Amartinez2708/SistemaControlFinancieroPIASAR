@@ -13,5 +13,13 @@ namespace _01_Aplicacion.Controllers
         {
             return View();
         }
+        public ActionResult UserInfo()
+        {
+            return PartialView("UserInfo");
+        }
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
     }
 }
