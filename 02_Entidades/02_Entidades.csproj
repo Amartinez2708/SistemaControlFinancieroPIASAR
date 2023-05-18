@@ -79,10 +79,13 @@
     <Compile Include="EnMANIFIESTO_GASTO.cs" />
     <Compile Include="EnMANIFIESTO_GASTO_DETALLE.cs" />
     <Compile Include="EnMatrizResumen.cs" />
+    <Compile Include="EnMenuSistema.cs" />
     <Compile Include="EnMonitoreoGeneral.cs" />
     <Compile Include="EnMonitoreoObras.cs" />
     <Compile Include="EnMovimiento_Documento.cs" />
     <Compile Include="EnMovimiento_Documento_Detalle.cs" />
+    <Compile Include="EnPerfilMenu.cs" />
+    <Compile Include="EnPersona.cs" />
     <Compile Include="EnProceso.cs" />
     <Compile Include="EnProcesoDetalle.cs" />
     <Compile Include="EnProgramadoEjecutadoMensual.cs" />
@@ -100,6 +103,8 @@
     <Compile Include="EnTablaDinamicaColumnas.cs" />
     <Compile Include="EnTituloSubComponente.cs" />
     <Compile Include="EnPersonal.cs" />
+    <Compile Include="EnUsuario.cs" />
+    <Compile Include="EnUsuarioPerfil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReporteObras.cs" />
   </ItemGroup>

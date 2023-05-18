@@ -1,1 +1,73 @@
 ﻿
+@using _02_Entidades;
+@using _04_Servicios;
+@using _05_Utilidades;
+@{
+    SrvInicio inicio = new SrvInicio();
+    int IdPerfilUser = Convert.ToInt32(SecurityManager<EnUsuario>.User.IdPerfil);
+    List<EnMenuSistema> objEnMenuSistema = inicio.ListMenu(IdPerfilUser);
+}
+<div class='pcoded-navigation-label' menu-title-theme='theme1'>Menu del Sistema</div>
+<ul class='pcoded-item pcoded-left-item'>
+    <li class=''>
+        <a href="/Inicio">
+            <span class='pcoded-micon'><i class='fa fa-home' aria-hidden='true'></i></span>
+            <span class='pcoded-mtext'>Inicio</span>
+            <span class='pcoded-mcaret'></span>
+        </a>
+    </li>
+</ul>
+@foreach (EnMenuSistema Padre in objEnMenuSistema.Where(x => x.IdMenu_padre == 0).ToList().OrderBy(o => o.Menu_jerarquia))
+{
+    <ul class='pcoded-item pcoded-left-item'>
+        <li class='pcoded-hasmenu'>
+            <a class=''>
+                <span class='pcoded-micon'><i class='@Padre.Icono' aria-hidden='true'></i></span>
+                <span class='pcoded-mtext'>@Padre.Descripcion</span>
+                <span class='pcoded-mcaret'></span>
+            </a>
+            <ul class='pcoded-submenu'>
+                @{var HijosMenu = objEnMenuSistema.Where(x => x.IdMenu_padre == Padre.IdMenuSistema).ToList().OrderBy(o => o.Menu_jerarquia);
+                    foreach (var Hijo in HijosMenu)
+                    {
+                        if (Hijo.Url == "#")
+                        {
+                            <li class="pcoded-hasmenu">
+                                <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="fa fa-bar-chart"></i></span>
+                                    <span class="pcoded-mtext">@Hijo.Descripcion</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    @{ var SubHijosMenu = objEnMenuSistema.Where(x => x.IdMenu_padre == Hijo.IdMenuSistema).ToList().OrderBy(o => o.Menu_jerarquia);
+                                        foreach (var SubHijo in SubHijosMenu)
+                                        {
+                                            <li class="">
+                                                <a href="@SubHijo.Url">
+                                                    <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
+                                                    <span class="pcoded-mtext">@SubHijo.Descripcion</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="">
+                                                <a href='@Hijo.Url'>
+                                                    <span class='pcoded-micon'><i class='ti-angle-right'></i></span>
+                                                    <span class='pcoded-mtext'>@Hijo.Descripcion</span>
+                                                    <span class='pcoded-mcaret'></span>
+                                                </a>
+                                            </li>
+                                            }
+
+                                        }
+                }
+            </ul>
+        </li>
+    </ul>
+                                        }

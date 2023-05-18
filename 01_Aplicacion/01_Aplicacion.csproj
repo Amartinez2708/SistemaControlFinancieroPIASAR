@@ -284,6 +284,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\ionicons.css" />
     <Content Include="Content\css\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\css\login\style.css" />
     <Content Include="Content\css\morris.js\css\morris.css" />
     <Content Include="Content\css\now-ui-kit.min98f3.css" />
     <Content Include="Content\css\partials\menu\pccoded-horizontal-menu.css" />
@@ -771,6 +772,7 @@
     <Content Include="Content\js\leaflet.js\easyprint.js" />
     <Content Include="Content\js\leaflet.js\leaflet.css" />
     <Content Include="Content\js\leaflet.js\leaflet.js" />
+    <Content Include="Content\js\login\script.js" />
     <Content Include="Content\js\modernizr\css-scrollbars.js" />
     <Content Include="Content\js\modernizr\modernizr.js" />
     <Content Include="Content\js\morris.js\morris.js" />
@@ -932,6 +934,10 @@
     </Content>
     <Content Include="Content\Images\LOGOTIPO SIEMPRE CON EL PUEBLO.psd" />
     <Content Include="Content\Images\titulo sistema.psd" />
+    <Content Include="Content\css\login\style.css.map" />
+    <Content Include="Content\css\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Content\css\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Content\css\fontawesome\fontawesome-webfont.woff2" />
     <None Include="ManifiestoGasto.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ManifiestoGasto.Designer.cs</LastGenOutput>

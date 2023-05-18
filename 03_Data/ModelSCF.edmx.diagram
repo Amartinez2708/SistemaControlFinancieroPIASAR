@@ -123,6 +123,17 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Producto__Fecha___3943762B" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__MatrizRes__IdPro__3FF073BA" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__ProductoA__Fecha__3C1FE2D6" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.MenuSistema" Width="1.5" PointX="28.375" PointY="12" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Perfil" Width="1.5" PointX="28.375" PointY="8.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Persona" Width="1.5" PointX="29.125" PointY="40.625" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Usuario" Width="1.5" PointX="31.375" PointY="41.125" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.UsuarioPerfil" Width="1.5" PointX="33.625" PointY="8.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PerfilMenu" Width="1.5" PointX="30.625" PointY="8" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PerfilMen__IdMen__6E765879" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PerfilMen__IdPer__6F6A7CB2" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__UsuarioPe__IdPer__68BD7F23" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__UsuarioPe__IdUsu__67C95AEA" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

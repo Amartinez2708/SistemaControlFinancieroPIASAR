@@ -159,6 +159,9 @@
     <Compile Include="MatrizResultadoProducto.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="MenuSistema.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Menu_Sistema.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -184,6 +187,15 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Movimiento_Documento_Detalle.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Perfil.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilMenu.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persona.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Personal.cs">
@@ -281,6 +293,12 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Ubigeo.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioPerfil.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="USUARIO_SISTEMA.cs">

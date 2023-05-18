@@ -99,6 +99,12 @@ namespace _03_Data
         public virtual DbSet<ResultadoEsperadoAnio> ResultadoEsperadoAnio { get; set; }
         public virtual DbSet<ProductoAnio> ProductoAnio { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<MenuSistema> MenuSistema { get; set; }
+        public virtual DbSet<Perfil> Perfil { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<UsuarioPerfil> UsuarioPerfil { get; set; }
+        public virtual DbSet<PerfilMenu> PerfilMenu { get; set; }
     
         public virtual ObjectResult<sp_ListAutorizacionRubro_Result> sp_ListAutorizacionRubro(string ids)
         {
