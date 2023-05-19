@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/Poppins.css" />
     <link href="~/Content/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/js/jquery-confirm/css/jquery-confirm.css" />
     <link href="~/Content/css/login/style.css" rel="stylesheet" type="text/css"/>
 </head>
 
@@ -35,17 +36,17 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" aria-describedby="basic-addon1" id="txtLogin">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
                                     </div>
-                                    <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+                                    <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" id="txtPassword">
                                 </div>
 
                                 <div class="input-group center">
-                                    <button class="btn btn-danger btn-round">ACCEDER</button>
+                                    <button class="btn btn-danger btn-round" onclick="login()">ACCEDER</button>
                                 </div>
                                 <div class="row">
                                     <p class="forget-p">Olvidaste tu contraseña? <span>Recuperar Contraseña</span></p>
@@ -66,7 +67,7 @@
                                     </a>*@
                                 </div>
                                 <div class="foter-credit">
-                                    <a href="https://aplicacionespnsr.vivienda.gob.pe/piasar/">© Programa Integral de Saneamiento Rural</a>
+                                    <a href="https://aplicacionespnsr.vivienda.gob.pe/piasar/">©PNSR. Programa Integral de Saneamiento Rural</a>
                                 </div>
                             </div>
                         </div>
@@ -81,4 +82,7 @@
 <script src="~/Content/js/jquery/jquery.min.js"></script>
 <script src="~/Content/js/popper.js/popper.min.js"></script>
 <script src="~/Content/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/js/jquery-confirm/jquery-confirm.js"></script>
+<script src="~/Content/js/jquery.blockUI.js"></script>
 <script src="~/Content/js/login/script.js"></script>
+<script src="~/Content/js/jsLogin.js"></script>

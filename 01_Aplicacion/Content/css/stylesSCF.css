@@ -657,3 +657,16 @@ legend.scheduler-border {
     background-color: #fff;
     color:#333;
 }
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item .pcoded-hasmenu:hover > a:before {
+    border-left-color: #38a9f9 !important;
+}
+.pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item > li > a {
+    padding: 15px 10px;
+}
+.pcoded .pcoded-navbar .pcoded-item > li > a {
+    display: flex;
+    font-size: 16px;
+}
+.pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item > li > a .pcoded-mtext {
+    position: initial;
+}

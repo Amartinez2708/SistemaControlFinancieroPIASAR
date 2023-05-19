@@ -239,12 +239,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controllers\AlertaRegistroController.cs" />
+    <Compile Include="Controllers\ATMController.cs" />
     <Compile Include="Controllers\DirectorioController.cs" />
     <Compile Include="Controllers\EjecucionPresupuestalPNSRController.cs" />
     <Compile Include="Controllers\EstadoSituacionalController.cs" />
+    <Compile Include="Controllers\FamiliasController.cs" />
     <Compile Include="Controllers\GestionAutorizacionRendicionController.cs" />
     <Compile Include="Controllers\GestionComponenteController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\JASSController.cs" />
     <Compile Include="Controllers\JustificacionGastosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManifiestoGastoController.cs" />
@@ -252,6 +255,7 @@
     <Compile Include="Controllers\MonitoreoObrasContrataPIASARController.cs" />
     <Compile Include="Controllers\MonitoreoObrasController.cs" />
     <Compile Include="Controllers\MonitoreoPIASARController.cs" />
+    <Compile Include="Controllers\NucleosEjecutoresController.cs" />
     <Compile Include="Controllers\ProyectosGeoreferenciadosPIASARController.cs" />
     <Compile Include="Controllers\ReporteMensualProgresoController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
@@ -591,6 +595,12 @@
     <Content Include="Content\icon\SVG-animated\svg-weather.css" />
     <Content Include="Content\icon\themify-icons\fonts\themify.svg" />
     <Content Include="Content\icon\themify-icons\themify-icons.css" />
+    <Content Include="Content\Images\1.jpg" />
+    <Content Include="Content\Images\1.png" />
+    <Content Include="Content\Images\2.png" />
+    <Content Include="Content\Images\3.png" />
+    <Content Include="Content\Images\4.png" />
+    <Content Include="Content\Images\agua.jpg" />
     <Content Include="Content\Images\autorizacion.png" />
     <Content Include="Content\Images\background-.jpg" />
     <Content Include="Content\Images\background.jpg" />
@@ -601,6 +611,7 @@
     <Content Include="Content\Images\bg-01.jpg" />
     <Content Include="Content\Images\bg_banner.jpg" />
     <Content Include="Content\Images\bid.png" />
+    <Content Include="Content\Images\black-texture.jpg" />
     <Content Include="Content\Images\contrato.png" />
     <Content Include="Content\Images\corte-de-cinta.png" />
     <Content Include="Content\Images\desembolso.png" />
@@ -609,6 +620,7 @@
     <Content Include="Content\Images\Ellipsis-2.3s-182px.gif" />
     <Content Include="Content\Images\Ellipsis.png" />
     <Content Include="Content\Images\excel.png" />
+    <Content Include="Content\Images\f.png" />
     <Content Include="Content\Images\favico.ico" />
     <Content Include="Content\Images\finish-line.png" />
     <Content Include="Content\Images\fondo.jpg" />
@@ -628,7 +640,9 @@
     <Content Include="Content\Images\LOGOTIPO SIEMPRE CON EL PUEBLO.png" />
     <Content Include="Content\Images\Logo_PIASAR.jpg" />
     <Content Include="Content\Images\Logo_PIASAR.png" />
+    <Content Include="Content\Images\m.png" />
     <Content Include="Content\Images\money.png" />
+    <Content Include="Content\Images\navbar-img-5.jpg" />
     <Content Include="Content\Images\obragua.png" />
     <Content Include="Content\Images\pages.png" />
     <Content Include="Content\Images\PDF.png" />
@@ -676,8 +690,6 @@
     <Content Include="Content\Images\tdr.png" />
     <Content Include="Content\Images\Titulo.png" />
     <Content Include="Content\Images\toilet.png" />
-    <Content Include="Content\Images\user-f.png" />
-    <Content Include="Content\Images\user-m.png" />
     <Content Include="Content\Images\user.png" />
     <Content Include="Content\Images\workers.png" />
     <Content Include="Content\Images\XLSX.png" />
@@ -790,6 +802,7 @@
     <Content Include="Content\js\SmoothScroll.js" />
     <Content Include="Content\js\tether.min.js" />
     <Content Include="Content\js\vartical-demo.js" />
+    <Content Include="Content\js\vertical-layout-img.min.js" />
     <Content Include="Content\js\vertical-layout.min.js" />
     <Content Include="Content\js\vertical\horizontal-layout.min.js" />
     <Content Include="Content\js\vertical\menu\box-layout.js" />
@@ -994,6 +1007,10 @@
     <Content Include="Views\MatrizResultados\ReportesActividades.cshtml" />
     <Content Include="Views\MatrizResultados\_CapacitacionesJASS.cshtml" />
     <Content Include="Views\Inicio\Index.cshtml" />
+    <Content Include="Views\Familias\Index.cshtml" />
+    <Content Include="Views\NucleosEjecutores\Index.cshtml" />
+    <Content Include="Views\JASS\Index.cshtml" />
+    <Content Include="Views\ATM\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

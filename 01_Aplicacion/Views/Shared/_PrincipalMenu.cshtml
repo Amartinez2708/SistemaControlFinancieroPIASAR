@@ -22,6 +22,8 @@
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <link rel="icon" href="~/Content/Images/favico.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="~/Content/css/Poppins.css" />
@@ -83,12 +85,21 @@
             </nav>
 
             <div class="pcoded-main-container img-paper">
-                <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
+
+                <!--NavBar-->
+                <nav class="pcoded-navbar">
+                    <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                    <div class="pcoded-inner-navbar main-menu">
                         @{ Html.RenderAction("SideMenu", "Inicio");}
-                    </nav>
+                    </div>
+                </nav>
+                <!--End NavBar-->
+
+                <div class="pcoded-wrapper">
+
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
+
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <div class="page-body">
@@ -98,6 +109,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -147,9 +159,9 @@
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-    <div class="footer bg-inverse">
+    @*<div class="footer bg-inverse">
         <p class="text-center">Copyright &copy; @DateTime.Now.Year.ToString() Programa Nacional de Saneamiento Rural</p>
-    </div>
+    </div>*@
 
     <script src="~/Content/js/jquery/jquery.min.js"></script>
     <script src="~/Content/js/popper.js/popper.min.js"></script>
@@ -179,7 +191,7 @@
     <script src="~/Content/js/select2/js/select2.full.min.js"></script>
 
     <script src="~/Content/js/pcoded.min.js"></script>
-    <script src="~/Content/js/vertical-layout.min.js"></script>
+    <script src="~/Content/js/vertical-layout-img.min.js"></script>
 
     <script src="~/Content/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/Content/js/AutoNumeric/autoNumeric.min.js"></script>

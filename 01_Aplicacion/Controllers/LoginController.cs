@@ -26,90 +26,85 @@ namespace _01_Aplicacion.Controllers
             var jsonData = Json("", JsonRequestBehavior.AllowGet);
             try
             {
-                //var objUsuario = context.USUARIO_SISTEMA.Select(x => x).Where(x => x.USUARIO.Equals(Usuario) && x.ESTADO == 1).ToList();
-                //if (objUsuario != null)
-                //{
-                //    var objContrasena = objUsuario.Select(x => x).Where(x => x.CONTRASENA.ToLower().Equals(Contrasena.ToLower())).FirstOrDefault();
-                //    if (objContrasena != null)
-                //    {
-                //        EnUsuario usuario = new EnUsuario();
-                //        usuario.IdUsuario = objContrasena.IdUsuario;
-                //        usuario.Nombre = objContrasena.Nombre;
-                //        usuario.Login = objContrasena.Login;
-                //        usuario.Password = objContrasena.Password;
-                //        usuario.EMail = objContrasena.EMail;
-                //        usuario.IdPersonal = objContrasena.IdPersonal;
-                //        usuario.Sexo = objContrasena.Sexo;
-                //        usuario.Periodo = DateTime.Now.Year.ToString();
+                var objUsuario = context.Usuario.Select(x => x).Where(x => x.Usuario1.Equals(Usuario) && x.Activo == true).ToList();
+                if (objUsuario != null)
+                {
+                    var objContrasena = objUsuario.Select(x => x).Where(x => x.Password.ToLower().Equals(Contrasena.ToLower())).FirstOrDefault();
+                    if (objContrasena != null)
+                    {
+                        EnUsuario usuario = new EnUsuario();
+                        usuario.IdUsuario = objContrasena.IdUsuario;
+                        usuario.IdPersonal = objContrasena.IdPersona;
+                        usuario.Dni = objContrasena.Persona.Dni;
+                        usuario.ApePaterno = objContrasena.Persona.ApePaterno;
+                        usuario.ApeMaterno = objContrasena.Persona.ApeMaterno;
+                        usuario.Nombres = objContrasena.Persona.Nombres;
+                        usuario.Sexo = objContrasena.Persona.Sexo;
+                        usuario.IdCargo = objContrasena.Persona.IdCargo;
+                        usuario.Email1 = objContrasena.Persona.Email1;
+                        usuario.Email2 = objContrasena.Persona.Email2;
+                        usuario.Celular1 = objContrasena.Persona.Celular1;
+                        usuario.Celular2 = objContrasena.Persona.Celular2;
+
+                        usuario.Usuario1 = objContrasena.Usuario1;
+                        usuario.Password = objContrasena.Password;
+                        usuario.NombreCompleto = usuario.ApePaterno + " " + usuario.ApeMaterno + ", " + usuario.Nombres;
 
 
+                        respuesta.TipoRespuesta = 1;
+                        respuesta.Mensaje = objContrasena.Persona.Sexo;
+                        respuesta.ValorDevolucion = "";
 
-                //        var objUsuarioPerfil = context.UsuarioPerfil.Where(x => x.IdUsuario == objContrasena.IdUsuario).ToList();
+                        jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
 
-                //        if (objUsuarioPerfil != null)
-                //        {
-                //            if (objUsuarioPerfil.Count() > 1)
-                //            {
-                //                SecurityManager<string>.UserName = usuario.Nombre;
-                //                SecurityManager<EnUsuario>.User = usuario;
 
-                //                respuesta.TipoRespuesta = 1;
-                //                respuesta.Mensaje = objContrasena.Sexo;
-                //                respuesta.ValorDevolucion = "";
+                        var objUsuarioPerfil = context.UsuarioPerfil.Where(x => x.IdUsuario == objContrasena.IdUsuario).ToList();
 
-                //                jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
-                //            }
-                //            else
-                //            {
-                //                int IdPerfil = objUsuarioPerfil.FirstOrDefault().IdPerfil;
+                        if (objUsuarioPerfil != null)
+                        {
+                            if (objUsuarioPerfil.Count() > 1)
+                            {
+                                SecurityManager<string>.UserName = usuario.NombreCompleto;
+                                SecurityManager<EnUsuario>.User = usuario;
 
-                //                if (IdPerfil == 0) //Ninguno En el sistema 
-                //                {
-                //                    jsonData = Json("0", JsonRequestBehavior.AllowGet);
-                //                }
-                //                else if (IdPerfil == 1)//Administrador
-                //                {
-                //                    SecurityManager<string>.UserName = usuario.Nombre;
-                //                    SecurityManager<EnUsuario>.User = usuario;
-                //                    respuesta.TipoRespuesta = 1;
-                //                    respuesta.Mensaje = objContrasena.Sexo;
-                //                    respuesta.ValorDevolucion = "";
+                                respuesta.TipoRespuesta = 1;
+                                respuesta.Mensaje = usuario.Sexo;
+                                respuesta.ValorDevolucion = "";
 
-                //                    jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
-                //                }
-                //                else if (IdPerfil == 2)//Docente
-                //                {
-                //                    SecurityManager<string>.UserName = usuario.Nombre;
-                //                    SecurityManager<EnUsuario>.User = usuario;
-                //                    respuesta.TipoRespuesta = 2;
-                //                    respuesta.Mensaje = objContrasena.Sexo;
-                //                    respuesta.ValorDevolucion = "";
+                                jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
+                            }
+                            else
+                            {
+                                int? IdPerfil = objUsuarioPerfil.FirstOrDefault().IdPerfil;
 
-                //                    jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
-                //                }
-                //                else if (IdPerfil == 3)//Estudiante
-                //                {
-                //                    SecurityManager<string>.UserName = usuario.Nombre;
-                //                    SecurityManager<EnUsuario>.User = usuario;
-                //                    respuesta.TipoRespuesta = 3;
-                //                    respuesta.Mensaje = objContrasena.Sexo;
-                //                    respuesta.ValorDevolucion = "";
+                                if (IdPerfil == 0) //Ninguno En el sistema 
+                                {
+                                    jsonData = Json("0", JsonRequestBehavior.AllowGet);
+                                }
+                                else
+                                {
+                                    SecurityManager<string>.UserName = usuario.NombreCompleto;
+                                    SecurityManager<EnUsuario>.User = usuario;
+                                    SecurityManager<EnUsuario>.User.Perfil = objUsuarioPerfil.FirstOrDefault().Perfil.Descripcion;
+                                    SecurityManager<EnUsuario>.User.IdPerfil = Convert.ToInt32(IdPerfil);
+                                    respuesta.TipoRespuesta = 1;
+                                    respuesta.Mensaje = usuario.Sexo;
+                                    respuesta.ValorDevolucion = "";
 
-                //                    jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
-                //                }
-
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        jsonData = Json("Contraseña incorrecta", JsonRequestBehavior.AllowGet);
-                //    }
-                //}
-                //else
-                //{
-                //    jsonData = Json("Usuario incorrecto o no existe", JsonRequestBehavior.AllowGet);
-                //}
+                                    jsonData = Json(respuesta, JsonRequestBehavior.AllowGet);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        jsonData = Json("Contraseña incorrecta", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    jsonData = Json("Usuario incorrecto o no existe", JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
