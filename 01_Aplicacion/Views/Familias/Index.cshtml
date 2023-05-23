@@ -4,5 +4,38 @@
     Layout = "~/Views/Shared/_PrincipalMenu.cshtml";
 }
 
-<h2>Index</h2>
+    <div class="col-sm-12 col-xl-12">
+        <div class="page-header card">
+            <div class="card-block">
+                <h5 class="m-b-10">Familias</h5>
+                <p class="text-muted m-b-10"></p>
+                <ul class="breadcrumb-title b-t-default p-t-10">
+                    <li class="breadcrumb-item">
+                        <a href="/Inicio"> <i class="fa fa-home"></i> </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#!">Seguimiento de Actividades</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#!">Familias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="col-sm-12 col-xl-12">
+        <div class="card border-primary">
+            <div class="card-block text-dark">
+                <div class="table-responsive">
+                    <table id="dtSeguimiento" class="table table-bordered table-hover" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsFamilias.js"></script>
+}
 

@@ -105,5 +105,6 @@ namespace _02_Entidades
         public Nullable<System.DateTime> FechaCantidadMujeresNE { get; set; }
         public Nullable<decimal> PorcentageViviendasUtilizanUBS { get; set; }
         public Nullable<int> Check { get; set; }
+        public string FechaActualizacion { get; set; }
     }
 }

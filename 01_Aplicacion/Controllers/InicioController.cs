@@ -15,6 +15,11 @@ namespace _01_Aplicacion.Controllers
         // GET: Inicio
         public ActionResult Index()
         {
+            var usuario = SecurityManager<EnUsuario>.User;
+            if (usuario == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
         public ActionResult UserInfo()

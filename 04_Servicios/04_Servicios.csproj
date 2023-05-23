@@ -70,6 +70,7 @@
     <Compile Include="SrvAlertaRegistro.cs" />
     <Compile Include="SrvEjecucionPresupuestalPNSR.cs" />
     <Compile Include="SrvEstadoSituacional.cs" />
+    <Compile Include="SrvFamilias.cs" />
     <Compile Include="SrvGeoreferenciado.cs" />
     <Compile Include="SrvGestionAutorizacionRendicion.cs" />
     <Compile Include="SrvGestionComponente.cs" />

@@ -637,6 +637,7 @@
     <Content Include="Content\Images\JPG.png" />
     <Content Include="Content\Images\justificacion.png" />
     <Content Include="Content\Images\lavado.png" />
+    <Content Include="Content\Images\lista-de-verificacion.png" />
     <Content Include="Content\Images\LOGOTIPO SIEMPRE CON EL PUEBLO.png" />
     <Content Include="Content\Images\Logo_PIASAR.jpg" />
     <Content Include="Content\Images\Logo_PIASAR.png" />
@@ -759,6 +760,7 @@
     <Content Include="Content\js\jsAlerta.js" />
     <Content Include="Content\js\jsEjecucionPresupuestalPNSR.js" />
     <Content Include="Content\js\jsEstadoSituacional.js" />
+    <Content Include="Content\js\jsFamilias.js" />
     <Content Include="Content\js\jsGestionAutorizacionRendicion.js" />
     <Content Include="Content\js\jsGestionComponente.js" />
     <Content Include="Content\js\jsJustificacionGastos.js" />
