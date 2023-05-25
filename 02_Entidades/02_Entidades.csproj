@@ -53,6 +53,7 @@
     <Compile Include="EnDesembolsoProgramadoAnual.cs" />
     <Compile Include="EnDesembolsoProgramadoMensual.cs" />
     <Compile Include="EnDesembolsoVSJustificado.cs" />
+    <Compile Include="EnDetalleSeguimientoActividadesFamilias.cs" />
     <Compile Include="EnDetalleSeguimientoActividadesJASS.cs" />
     <Compile Include="EnDevengadoMensual.cs" />
     <Compile Include="EnDistrito.cs" />

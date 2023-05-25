@@ -36,5 +36,33 @@ namespace _01_Aplicacion.Controllers
             jsonData.MaxJsonLength = 500000000;
             return jsonData;
         }
+        [HttpGet]
+        public JsonResult ddlMeses(string Etapa)
+        {
+            List<EnDropDownList> result = new List<EnDropDownList>();
+            result = objFamilias.ddlMeses(Etapa);
+            return Json(new SelectList(result, "id", "text"), JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ddlActividad(string Etapa, int NroMes)
+        {
+            List<EnDropDownList> result = new List<EnDropDownList>();
+            result = objFamilias.ddlActividad(Etapa, NroMes);
+            return Json(new SelectList(result, "id", "text"), JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListDetalleSeguimiento(string cui, int IdCronogramaActividades)
+        {
+            List<EnDetalleSeguimientoActividadesFamilias> result = new List<EnDetalleSeguimientoActividadesFamilias>();
+            result = objFamilias.ListDetalleSeguimiento(cui, IdCronogramaActividades);
+
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            serializer.MaxJsonLength = 500000000;
+
+            object json = new { data = result.ToList() };
+            var jsonData = Json(json, JsonRequestBehavior.AllowGet);
+            jsonData.MaxJsonLength = 500000000;
+            return jsonData;
+        }
     }
 }

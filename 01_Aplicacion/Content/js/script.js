@@ -11,8 +11,8 @@ $(document).ready(function () {
         $('#SpanFechaInicio').html("<i class='fa fa-calendar' style='font-size:20px'></i> &nbsp;" + dias[date.getDay()] + ", " + fechaNum + " de " + meses[mes_name] + " del " + date.getFullYear());
     }
 
-    $(".autonumber").autoNumeric();
-    $(".autonumber-integer").autoNumeric({ vMin: "0", vMax: "999999999" });
+    //$(".autonumber").autoNumeric();
+    //$(".autonumber-integer").autoNumeric({ vMin: "0", vMax: "999999999" });
     $(".date-pick").datepicker({ format: "dd/mm/yyyy", todayBtn: true, clearBtn: true, todayHighlight: true, autoclose: true });
     //new AutoNumeric('.autonumber', 'dotDecimalCharCommaSeparator');
     //const anElement = AutoNumeric.multiple('.autonumber', 'dotDecimalCharCommaSeparator');

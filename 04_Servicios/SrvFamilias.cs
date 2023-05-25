@@ -44,5 +44,76 @@ namespace _04_Servicios
             }
             return result.ToList();
         }
+        public List<EnDropDownList> ddlMeses(string Etapa)
+        {
+            List<EnDropDownList> result = new List<EnDropDownList>();
+
+            var obj = context.CronogramaActividades.Where(x => x.Tipo == "Familias" && x.Etapa == Etapa).Select(x => x.NroMes).Distinct();
+            if (obj != null && obj.Count() > 0)
+            {
+                EnDropDownList ddl = new EnDropDownList();
+                ddl.id = 0;
+                ddl.text = "[--Seleccione--]";
+                result.Add(ddl);
+
+                EnDropDownList values;
+                foreach (var data in obj)
+                {
+                    values = new EnDropDownList();
+                    values.id = Convert.ToInt32(data);
+                    values.text = data.ToString();
+                    result.Add(values);
+                }
+            }
+            return result;
+        }
+
+        public List<EnDropDownList> ddlActividad(string Etapa, int NroMes)
+        {
+            List<EnDropDownList> result = new List<EnDropDownList>();
+
+            var obj = context.CronogramaActividades.Where(x => x.Tipo == "Familias" && x.Etapa == Etapa && x.NroMes== NroMes);
+            if (obj != null && obj.Count() > 0)
+            {
+                EnDropDownList ddl = new EnDropDownList();
+                ddl.id = 0;
+                ddl.text = "[--Seleccione--]";
+                result.Add(ddl);
+
+                EnDropDownList values;
+                foreach (var data in obj)
+                {
+                    values = new EnDropDownList();
+                    values.id = data.IdCronogramaActividades;
+                    values.text = data.Actividad;
+                    result.Add(values);
+                }
+            }
+            return result;
+        }
+        public List<EnDetalleSeguimientoActividadesFamilias> ListDetalleSeguimiento(string cui, int IdCronogramaActividades)
+        {
+            List<EnDetalleSeguimientoActividadesFamilias> result = new List<EnDetalleSeguimientoActividadesFamilias>();
+
+            var obj = context.SeguimientoActividadesFamilias.Where(x => x.CUI == cui && x.Activo == true).SingleOrDefault();
+            if (obj != null)
+            {
+                var objDetalle = context.DetalleSeguimientoActividadesFamilias.Where(x => x.IdSeguimientoActividades == obj.IdSeguimientoActividades && x.IdCronogramaActividades == IdCronogramaActividades && x.Activo == true).ToList();
+
+                foreach (var data in objDetalle)
+                {
+                    EnDetalleSeguimientoActividadesFamilias model = new EnDetalleSeguimientoActividadesFamilias();
+                    model.Actividades = data.CronogramaActividades.Actividad;
+                    model.FechaString = Convert.ToDateTime(data.Fecha).ToString("dd/MM/yyyy");
+                    model.NroHombres = data.NroHombres;
+                    model.NroMujeres = data.NroMujeres;
+                    model.Total = data.Total;
+                    model.PorcentageAsistencia = data.PorcentageAsistencia;
+                    
+                    result.Add(model);
+                }
+            }
+            return result.ToList();
+        }
     }
 }
