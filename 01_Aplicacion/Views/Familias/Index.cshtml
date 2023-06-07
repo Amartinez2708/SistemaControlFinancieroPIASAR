@@ -35,6 +35,8 @@
         </div>
     </div>
 @Html.Hidden("hdnCUI")
+@Html.Hidden("hdnIdSeguimientoActividades")
+@Html.Hidden("hdnIdDetalleSeguimientoActividadesFamilias")
 <div class="modal fade" id="modal-seguimiento" role="dialog">
     <div class="modal-dialog modal-sm" role="document" style="height:900px; overflow-y: initial !important">
         <div class="modal-content">
@@ -43,11 +45,116 @@
                     <i class="fa fa-edit"></i>&nbsp;<span id="lblProyecto"></span>
                 </h5>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" onclick="CerrarSeguimiento()" aria-label="Close">
                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="modal-body" >
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Datos de Seguimiento</legend>
+                    <div class="row m-b-20">
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Población</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de <br />Mujeres</label>
+                                        @Html.TextBox("txtNroPoblacionMujeres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de <br />Hombres</label>
+                                        @Html.TextBox("txtNroPoblacionHombres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de <br />Población</label>
+                                        @Html.TextBox("txtTotalPoblacion", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Usuarios</h4>
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de <br />Mujeres</label>
+                                        @Html.TextBox("txtNroUsuariosMujeres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Hombres</label>
+                                        @Html.TextBox("txtNroUsuariosHombres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Usuarios</label>
+                                        @Html.TextBox("txtTotalUsuarios", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Población Flotante</label>
+                                        @Html.TextBox("txtPoblacionFlotante", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Vivienda e Instituciones</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Viviendas Validadas</label>
+                                        @Html.TextBox("txtTotalViviendasValidadas", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Instituciones Validadas</label>
+                                        @Html.TextBox("txtTotalInstitucionesValidadas", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Instituciones + Viviendas</label>
+                                        @Html.TextBox("txtTotalInstitucionesViviendas", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Centros Educativos y de Salud</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Centros Educativos</label>
+                                        @Html.TextBox("txtNroCentrosEducativos", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nivel de Centros Educativos</label>
+                                        @Html.TextBox("txtNivelCentrosEducativos", null, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Centros de <br />Salud</label>
+                                        @Html.TextBox("txtCentrosSalud", null, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Seguimiento de Actividades</legend>
                     <div class="row">
@@ -124,7 +231,7 @@
                 </fieldset>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+                <button type="button" class="btn btn-danger waves-effect " onclick="CerrarSeguimiento()"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
             </div>
         </div>
     </div>

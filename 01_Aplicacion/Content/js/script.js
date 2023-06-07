@@ -100,7 +100,7 @@ $(document).ready(function () {
     // card js end
     $(".main-menu").mCustomScrollbar({
         setTop: "1px",
-        setHeight: "calc(100% - 90px)",
+        setHeight: "calc(100% - 56px)",
     });
     /*chatbar js start*/
     $(function() {

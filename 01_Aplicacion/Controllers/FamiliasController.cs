@@ -51,10 +51,10 @@ namespace _01_Aplicacion.Controllers
             return Json(new SelectList(result, "id", "text"), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult ListDetalleSeguimiento(string cui, int IdCronogramaActividades)
+        public JsonResult ListDetalleSeguimiento(int Id, int IdCronogramaActividades)
         {
             List<EnDetalleSeguimientoActividadesFamilias> result = new List<EnDetalleSeguimientoActividadesFamilias>();
-            result = objFamilias.ListDetalleSeguimiento(cui, IdCronogramaActividades);
+            result = objFamilias.ListDetalleSeguimiento(Id, IdCronogramaActividades);
 
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             serializer.MaxJsonLength = 500000000;
@@ -63,6 +63,33 @@ namespace _01_Aplicacion.Controllers
             var jsonData = Json(json, JsonRequestBehavior.AllowGet);
             jsonData.MaxJsonLength = 500000000;
             return jsonData;
+        }
+        [HttpGet]
+        public JsonResult ListSeguimiento(string cui)
+        {
+            EnSeguimientoActividadesFamilias result = new EnSeguimientoActividadesFamilias();
+            result = objFamilias.ListSeguimiento(cui);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GuardarSeguimiento(EnDetalleSeguimientoActividadesFamilias detalle)
+        {
+            EnRespuesta msj = objFamilias.GuardarSeguimiento(detalle);
+            return Json(msj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListDetalleSeguimientoId(int Id)
+        {
+            EnDetalleSeguimientoActividadesFamilias result = new EnDetalleSeguimientoActividadesFamilias();
+            result = objFamilias.ListDetalleSeguimientoId(Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult EliminarSeguimiento(int Id)
+        {
+            EnRespuesta msj = objFamilias.EliminarSeguimiento(Id);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
     }
 }

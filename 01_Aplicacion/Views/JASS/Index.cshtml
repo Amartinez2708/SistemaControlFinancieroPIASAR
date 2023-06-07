@@ -4,5 +4,250 @@
     Layout = "~/Views/Shared/_PrincipalMenu.cshtml";
 }
 
-<h2>Index</h2>
+<div class="col-sm-12 col-xl-12">
+    <div class="page-header card">
+        <div class="card-block">
+            <h5 class="m-b-10">JASS</h5>
+            <p class="text-muted m-b-10"></p>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="/Inicio"> <i class="fa fa-home"></i> </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">Seguimiento de Actividades</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">JASS</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-12 col-xl-12">
+    <div class="card border-primary">
+        <div class="card-block text-dark">
+            <div class="table-responsive">
+                <table id="dtSeguimiento" class="table table-bordered table-hover" width="100%"></table>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("hdnCUI")
+@Html.Hidden("hdnIdSeguimientoActividades")
+@Html.Hidden("hdnIdDetalleSeguimientoActividades")
+<div class="modal fade" id="modal-seguimiento" role="dialog">
+    <div class="modal-dialog modal-sm" role="document" style="height:900px; overflow-y: initial !important">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-edit"></i>&nbsp;<span id="lblProyecto"></span>
+                </h5>
+
+                <button type="button" class="close" onclick="CerrarSeguimiento()" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Datos de Seguimiento</legend>
+                    <div class="row m-b-20">
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Asociados</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Mujeres</label>
+                                        @Html.TextBox("txtNroAsociadosMujeres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Hombres</label>
+                                        @Html.TextBox("txtNroAsociadosHombres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Asociados</label>
+                                        @Html.TextBox("txtTotalAsociados", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Viviendas e Instituciones Validadas</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Viviendas</label>
+                                        @Html.TextBox("txtTotalViviendasValidadas", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Instituciones</label>
+                                        @Html.TextBox("txtTotalInstitucionesValidadas", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Instituciones + Viviendas</label>
+                                        @Html.TextBox("txtTotalInstitucionesViviendas", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Operadores del SAP - Autoridades y Lideres del Centro Poblado</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Mujeres</label>
+                                        @Html.TextBox("txtNroOperadoresMujeres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Hombres</label>
+                                        @Html.TextBox("txtNroOperadoresHombres", null, new { @class = "form-control", @readonly = "readonly", @onkeypress = "return soloNumeros(event);" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Operadores</label>
+                                        @Html.TextBox("txtTotalOperadores", null, new { @class = "form-control", @readonly = "readonly", @onkeypress = "return soloNumeros(event);" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <h4 class="sub-title">Autoridades - Lideres y JASS</h4>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Total de Lideres</label>
+                                        @Html.TextBox("txtLideres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Identificación de Lideres</label>
+                                        @Html.TextBox("txtLideresIdentificados", null, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Seguimiento de Actividades</legend>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Etapa</label>
+                                <select name="ddlEtapa" id="ddlEtapa" class="form-control">
+                                    <option value="">[--Seleccione--]</option>
+                                    <option value="Ejecución">Ejecución</option>
+                                    <option value="OTA">OTA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Mes</label>
+                                <select name="ddlMes" id="ddlMes" class="form-control">
+                                    <option value="0">[--Seleccione--]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Actividad</label>
+                                <select name="ddlActividad" id="ddlActividad" class="form-control">
+                                    <option value="0">[--Seleccione--]</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                @Html.TextBox("txtFecha", null, new { @class = "form-control date-pick" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Nro. Hombres</label>
+                                @Html.TextBox("txtNroHombres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Nro. Mujeres</label>
+                                @Html.TextBox("txtNroMujeres", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Total</label>
+                                @Html.TextBox("txtTotal", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>% Asistencia</label>
+                                @Html.TextBox("txtPorcentajeAsistencia", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Adicional operadores del SAP - Autoridades y Lideres</label>
+                                @Html.TextBox("txtAdicional", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="form-group">
+                                <label>Porcentage Adicional</label>
+                                @Html.TextBox("txtPorcentajeAdicional", null, new { @class = "form-control", @onkeypress = "return soloDecimales(event, this);" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Comentarios</label>
+                                @Html.TextBox("txtComentarios", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-right">
+                        <button id="btnGuardar" type="button" class="btn btn-primary waves-effect " onclick="GuardarSeguimiento()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
+                    </div>
+                </fieldset>
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Historial de Seguimiento de Actividades</legend>
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="table-responsive">
+                            <table id="dtHistorialSeguimiento" class="table table-bordered table-hover" width="100%"></table>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " onclick="CerrarSeguimiento()"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsJASS.js"></script>
+}
+
+
+
 

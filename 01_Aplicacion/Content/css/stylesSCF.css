@@ -603,7 +603,7 @@ legend.scheduler-border {
     position: relative;
 }
 .pcoded-main-container {
-    min-height: calc(100vh - 113px);
+    /*min-height: calc(100vh - 113px);*/
 }
 .card-dashboard{
     box-shadow: none;
@@ -669,4 +669,20 @@ legend.scheduler-border {
 }
 .pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item > li > a .pcoded-mtext {
     position: initial;
+}
+.panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.panel-danger {
+    border-color: #FF5370;
+}
+.panel {
+    margin-bottom: 20px;
+}
+.panel .panel-body {
+    padding: 15px;
 }

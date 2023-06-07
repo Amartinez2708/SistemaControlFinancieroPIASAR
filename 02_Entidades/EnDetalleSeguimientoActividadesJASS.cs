@@ -8,6 +8,7 @@ namespace _02_Entidades
 {
     public class EnDetalleSeguimientoActividadesJASS
     {
+        public string CUI { get; set; }
         public int IdDetalleSeguimientoActividadesJASS { get; set; }
         public int IdSeguimientoActividadesJASS { get; set; }
         public int IdCronogramaActividades { get; set; }
@@ -19,5 +20,7 @@ namespace _02_Entidades
         public Nullable<int> TotalSAP { get; set; }
         public Nullable<decimal> PorcentageSAP { get; set; }
         public string Comentarios { get; set; }
+        public string Actividades { get; set; }
+        public string FechaString { get; set; }
     }
 }

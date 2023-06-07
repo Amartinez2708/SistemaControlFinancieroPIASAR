@@ -8,6 +8,7 @@ namespace _02_Entidades
 {
     public class EnDetalleSeguimientoActividadesFamilias
     {
+        public string CUI { get; set; }
         public int IdDetalleSeguimientoActividadesFamilias { get; set; }
         public int IdSeguimientoActividades { get; set; }
         public int IdCronogramaActividades { get; set; }

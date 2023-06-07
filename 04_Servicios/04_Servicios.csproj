@@ -75,6 +75,7 @@
     <Compile Include="SrvGestionAutorizacionRendicion.cs" />
     <Compile Include="SrvGestionComponente.cs" />
     <Compile Include="SrvInicio.cs" />
+    <Compile Include="SrvJASS.cs" />
     <Compile Include="SrvManifiestoGasto.cs" />
     <Compile Include="SrvMatrizResultados.cs" />
     <Compile Include="SrvMonitoreoObras.cs" />

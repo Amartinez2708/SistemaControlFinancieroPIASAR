@@ -97,6 +97,7 @@
     <Compile Include="EnReporteBID.cs" />
     <Compile Include="EnReporteEstados.cs" />
     <Compile Include="EnRespuesta.cs" />
+    <Compile Include="EnSeguimientoActividadesFamilias.cs" />
     <Compile Include="EnSeguimientoActividadesJASS.cs" />
     <Compile Include="EnSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="EnSubComponente.cs" />

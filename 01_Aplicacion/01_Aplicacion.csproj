@@ -764,6 +764,7 @@
     <Content Include="Content\js\jsFamilias.js" />
     <Content Include="Content\js\jsGestionAutorizacionRendicion.js" />
     <Content Include="Content\js\jsGestionComponente.js" />
+    <Content Include="Content\js\jsJASS.js" />
     <Content Include="Content\js\jsJustificacionGastos.js" />
     <Content Include="Content\js\jsLogin.js" />
     <Content Include="Content\js\jsManifiesto.js" />

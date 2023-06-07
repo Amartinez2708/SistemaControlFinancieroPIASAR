@@ -371,7 +371,7 @@ function LimpiarManifiesto() {
 
 function GuardarAutorizacion() {
     $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
-    debugger;
+
     monto = $("#txtMontoAutorizacion").val();
     monto = monto.replaceAll(",", "");
 

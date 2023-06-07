@@ -9,11 +9,11 @@ using _05_Utilidades;
 
 namespace _04_Servicios
 {
-    public class SrvFamilias
+    public class SrvJASS
     {
         BD_NucleosEjecutoresEntities context = new BD_NucleosEjecutoresEntities();
 
-        public List<EnProyecto> ListProyectosFamilias()
+        public List<EnProyecto> ListProyectos()
         {
             List<EnProyecto> result = new List<EnProyecto>();
 
@@ -25,7 +25,7 @@ namespace _04_Servicios
                     var departamento = context.Departamento.FirstOrDefault(x => x.cod_depa == data.IdUbigeo.Substring(0, 2)).nom_depa;
                     var Provincia = context.Provincia.FirstOrDefault(x => x.cod_depa == data.IdUbigeo.Substring(0, 2) && x.cod_prov == data.IdUbigeo.Substring(2, 2)).nom_prov;
                     var Distrito = context.Distrito.FirstOrDefault(x => x.cod_depa == data.IdUbigeo.Substring(0, 2) && x.cod_prov == data.IdUbigeo.Substring(2, 2) && x.cod_dist == data.IdUbigeo.Substring(4, 2)).nom_dist;
-                    var o = context.SeguimientoActividadesFamilias.FirstOrDefault(x => x.CUI == data.CUI && x.Activo == true);
+                    var o = context.SeguimientoActividadesJASS.FirstOrDefault(x => x.CUI == data.CUI && x.Activo == true);
 
                     EnProyecto model = new EnProyecto();
                     model.IdProyecto = data.IdProyecto;
@@ -49,7 +49,7 @@ namespace _04_Servicios
         {
             List<EnDropDownList> result = new List<EnDropDownList>();
 
-            var obj = context.CronogramaActividades.Where(x => x.Tipo == "Familias" && x.Etapa == Etapa).Select(x => x.NroMes).Distinct();
+            var obj = context.CronogramaActividades.Where(x => x.Tipo == "JASS" && x.Etapa == Etapa).Select(x => x.NroMes).Distinct();
             if (obj != null && obj.Count() > 0)
             {
                 EnDropDownList ddl = new EnDropDownList();
@@ -72,7 +72,7 @@ namespace _04_Servicios
         {
             List<EnDropDownList> result = new List<EnDropDownList>();
 
-            var obj = context.CronogramaActividades.Where(x => x.Tipo == "Familias" && x.Etapa == Etapa && x.NroMes== NroMes);
+            var obj = context.CronogramaActividades.Where(x => x.Tipo == "JASS" && x.Etapa == Etapa && x.NroMes == NroMes);
             if (obj != null && obj.Count() > 0)
             {
                 EnDropDownList ddl = new EnDropDownList();
@@ -91,154 +91,158 @@ namespace _04_Servicios
             }
             return result;
         }
-        public EnSeguimientoActividadesFamilias ListSeguimiento(string cui)
+        public EnSeguimientoActividadesJASS ListSeguimiento(string cui)
         {
-            EnSeguimientoActividadesFamilias result = new EnSeguimientoActividadesFamilias();
+            EnSeguimientoActividadesJASS result = new EnSeguimientoActividadesJASS();
 
-            var objSeguimiento  = context.SeguimientoActividadesFamilias.Where(x => x.CUI == cui && x.Activo == true).SingleOrDefault();
-            if(objSeguimiento != null)
+            var objSeguimiento = context.SeguimientoActividadesJASS.Where(x => x.CUI == cui && x.Activo == true).SingleOrDefault();
+            if (objSeguimiento != null)
             {
-                result.IdSeguimientoActividades = objSeguimiento.IdSeguimientoActividades;
+                result.IdSeguimientoActividadesJASS = objSeguimiento.IdSeguimientoActividadesJASS;
                 result.CUI = objSeguimiento.CUI;
-                result.Paquete = objSeguimiento.Paquete;
-                result.NroPoblacionMujeres = objSeguimiento.NroPoblacionMujeres;
-                result.NroPoblaciónHombres = objSeguimiento.NroPoblaciónHombres;
-                result.TotalPoblacion = result.NroPoblacionMujeres + result.NroPoblaciónHombres;
-                result.NroUsuariosHombres = objSeguimiento.NroUsuariosHombres;
-                result.NroUsuariosMujeres = objSeguimiento.NroUsuariosMujeres;
-                result.TotalUsuarios = result.NroUsuariosHombres + result.NroUsuariosMujeres;
-                result.NroPoblacionFlotante = objSeguimiento.NroPoblacionFlotante;
-                result.NroTotalViviendasValidadas = objSeguimiento.NroTotalViviendasValidadas;
-                result.NroTotalInstitucionesValidadas = objSeguimiento.NroTotalInstitucionesValidadas;
-                result.TotalInstitucionesViviendasValidadas = result.NroTotalViviendasValidadas + result.NroTotalInstitucionesValidadas;
-                result.NroCentrosEducativos = objSeguimiento.NroCentrosEducativos;
-                result.NivelCentrosEducativos = objSeguimiento.NivelCentrosEducativos;
-                result.CentroSalud = objSeguimiento.CentroSalud;
+                result.NroAsociadosMujeres = objSeguimiento.NroAsociadosMujeres;
+                result.NroAsociadosHombres = objSeguimiento.NroAsociadosHombres;
+                result.TotalAsociados = result.NroAsociadosMujeres + result.NroAsociadosHombres;
+                result.TotalViviendasValidadas = objSeguimiento.TotalViviendasValidadas;
+                result.TotalInstitucionesValidadas = objSeguimiento.TotalInstitucionesValidadas;
+                result.TotalInstitucionesViviendasValidadas = result.TotalViviendasValidadas + result.TotalInstitucionesValidadas;
+                result.NroOperadoresSAPMujeres = objSeguimiento.NroOperadoresSAPMujeres;
+                result.NroOperadoresSAPHombres = objSeguimiento.NroOperadoresSAPHombres;
+                result.TotalOperadores = result.NroOperadoresSAPMujeres + result.NroOperadoresSAPHombres;
+                result.TotalAutoridadesLideres = objSeguimiento.TotalAutoridadesLideres;
+                result.NroIdentificacionLideres = objSeguimiento.NroIdentificacionLideres;
             }
 
             return result;
         }
-        public List<EnDetalleSeguimientoActividadesFamilias> ListDetalleSeguimiento(int IdSeguimientoActividades, int IdCronogramaActividades)
+        public List<EnDetalleSeguimientoActividadesJASS> ListDetalleSeguimiento(int IdSeguimientoActividades, int IdCronogramaActividades)
         {
-            List<EnDetalleSeguimientoActividadesFamilias> result = new List<EnDetalleSeguimientoActividadesFamilias>();
+            List<EnDetalleSeguimientoActividadesJASS> result = new List<EnDetalleSeguimientoActividadesJASS>();
 
             if (IdCronogramaActividades != 0)
             {
-                var obj = context.SeguimientoActividadesFamilias.Where(x => x.IdSeguimientoActividades == IdSeguimientoActividades && x.Activo == true).SingleOrDefault();
+                var obj = context.SeguimientoActividadesJASS.Where(x => x.IdSeguimientoActividadesJASS == IdSeguimientoActividades && x.Activo == true).SingleOrDefault();
                 if (obj != null)
                 {
-                    var objDetalle = context.DetalleSeguimientoActividadesFamilias.Where(x => x.IdSeguimientoActividades == obj.IdSeguimientoActividades && x.IdCronogramaActividades == IdCronogramaActividades && x.Activo == true).ToList();
+                    var objDetalle = context.DetalleSeguimientoActividadesJASS.Where(x => x.IdSeguimientoActividadesJASS == obj.IdSeguimientoActividadesJASS && x.IdCronogramaActividades == IdCronogramaActividades && x.Activo == true).ToList();
 
                     foreach (var data in objDetalle)
                     {
-                        EnDetalleSeguimientoActividadesFamilias model = new EnDetalleSeguimientoActividadesFamilias();
-                        model.IdSeguimientoActividades = data.IdSeguimientoActividades;
-                        model.IdDetalleSeguimientoActividadesFamilias = data.IdDetalleSeguimientoActividadesFamilias;
+                        EnDetalleSeguimientoActividadesJASS model = new EnDetalleSeguimientoActividadesJASS();
+                        model.IdDetalleSeguimientoActividadesJASS = data.IdDetalleSeguimientoActividadesJASS;
+                        model.IdSeguimientoActividadesJASS = data.IdSeguimientoActividadesJASS;
+                        model.IdCronogramaActividades = data.IdCronogramaActividades;
                         model.Actividades = data.CronogramaActividades.Actividad;
                         model.FechaString = Convert.ToDateTime(data.Fecha).ToString("dd/MM/yyyy");
                         model.NroHombres = data.NroHombres;
                         model.NroMujeres = data.NroMujeres;
                         model.Total = data.Total;
-                        model.PorcentageAsistencia = data.PorcentageAsistencia;
+                        model.PorcentageTotal = data.PorcentageTotal;
+                        model.TotalSAP = data.TotalSAP;
+                        model.PorcentageSAP = data.PorcentageSAP;
+                        model.Comentarios = data.Comentarios;
 
                         result.Add(model);
                     }
                 }
             }
 
-            
+
             return result.ToList();
         }
-        public EnRespuesta GuardarSeguimiento(EnDetalleSeguimientoActividadesFamilias detalle)
+        public EnRespuesta GuardarSeguimiento(EnDetalleSeguimientoActividadesJASS detalle)
         {
             EnRespuesta respuesta = new EnRespuesta();
             using (var dbtran = context.Database.BeginTransaction())
             {
                 try
                 {
-                    if (detalle.IdSeguimientoActividades == 0)
+                    if (detalle.IdSeguimientoActividadesJASS == 0)
                     {
                         #region Agregar Seguimiento
 
-                        SeguimientoActividadesFamilias n = new SeguimientoActividadesFamilias();
+                        SeguimientoActividadesJASS n = new SeguimientoActividadesJASS();
                         n.CUI = detalle.CUI;
-                        n.Paquete = "";
-                        n.NroPoblacionMujeres = 0;
-                        n.NroPoblaciónHombres = 0;
-                        n.NroUsuariosMujeres = 0;
-                        n.NroUsuariosHombres = 0;
-                        n.NroPoblacionFlotante = 0;
-                        n.NroTotalViviendasValidadas = 0;
-                        n.NroTotalInstitucionesValidadas = 0;
-                        n.NroCentrosEducativos = 0;
-                        n.NivelCentrosEducativos = "";
-                        n.CentroSalud = "";
+                        n.NroAsociadosMujeres = 0;
+                        n.NroAsociadosHombres = 0;
+                        n.TotalViviendasValidadas = 0;
+                        n.TotalInstitucionesValidadas = 0;
+                        n.NroOperadoresSAPMujeres = 0;
+                        n.NroOperadoresSAPHombres = 0;
+                        n.TotalAutoridadesLideres = 0;
+                        n.NroIdentificacionLideres = 0;
                         n.Activo = true;
                         n.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
                         n.Fecha_add = DateTime.Now;
                         n.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                         n.Fecha_upd = DateTime.Now;
 
-                        context.SeguimientoActividadesFamilias.Add(n);
+                        context.SeguimientoActividadesJASS.Add(n);
                         context.SaveChanges();
 
-                        var id = n.IdSeguimientoActividades;
+                        var id = n.IdSeguimientoActividadesJASS;
 
                         /*Agrega Detalle*/
-                        DetalleSeguimientoActividadesFamilias d = new DetalleSeguimientoActividadesFamilias();
-                        d.IdSeguimientoActividades = detalle.IdSeguimientoActividades;
+                        DetalleSeguimientoActividadesJASS d = new DetalleSeguimientoActividadesJASS();
+                        d.IdSeguimientoActividadesJASS = detalle.IdSeguimientoActividadesJASS;
                         d.IdCronogramaActividades = detalle.IdCronogramaActividades;
                         d.Fecha = detalle.Fecha;
                         d.NroHombres = detalle.NroHombres;
                         d.NroMujeres = detalle.NroMujeres;
                         d.Total = detalle.Total;
-                        d.PorcentageAsistencia = detalle.PorcentageAsistencia;
+                        d.PorcentageTotal = detalle.PorcentageTotal;
+                        d.TotalSAP = detalle.TotalSAP;
+                        d.PorcentageSAP = detalle.PorcentageSAP;
+                        d.Comentarios = detalle.Comentarios;
                         d.Activo = true;
                         d.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
                         d.Fecha_add = DateTime.Now;
                         d.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                         d.Fecha_upd = DateTime.Now;
 
-                        context.DetalleSeguimientoActividadesFamilias.Add(d);
+                        context.DetalleSeguimientoActividadesJASS.Add(d);
                         context.SaveChanges();
 
                         dbtran.Commit();
                         //dbtran.Rollback();
                         respuesta.TipoRespuesta = 1;
                         respuesta.Mensaje = "Seguimiento de Actividad Agregado Satisfactoriamente";
-                        respuesta.ValorDevolucion = d.IdDetalleSeguimientoActividadesFamilias.ToString();
+                        respuesta.ValorDevolucion = d.IdDetalleSeguimientoActividadesJASS.ToString();
                         #endregion
                     }
                     else
                     {
                         #region Agregar Detalle
 
-                        if (detalle.IdDetalleSeguimientoActividadesFamilias == 0)
+                        if (detalle.IdDetalleSeguimientoActividadesJASS == 0)
                         {
                             #region Nuevo Seguimiento
 
-                            DetalleSeguimientoActividadesFamilias d = new DetalleSeguimientoActividadesFamilias();
-                            d.IdSeguimientoActividades = detalle.IdSeguimientoActividades;
+                            DetalleSeguimientoActividadesJASS d = new DetalleSeguimientoActividadesJASS();
+                            d.IdSeguimientoActividadesJASS = detalle.IdSeguimientoActividadesJASS;
                             d.IdCronogramaActividades = detalle.IdCronogramaActividades;
                             d.Fecha = detalle.Fecha;
                             d.NroHombres = detalle.NroHombres;
                             d.NroMujeres = detalle.NroMujeres;
                             d.Total = detalle.Total;
-                            d.PorcentageAsistencia = detalle.PorcentageAsistencia;
+                            d.PorcentageTotal = detalle.PorcentageTotal;
+                            d.TotalSAP = detalle.TotalSAP;
+                            d.PorcentageSAP = detalle.PorcentageSAP;
+                            d.Comentarios = detalle.Comentarios;
                             d.Activo = true;
                             d.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
                             d.Fecha_add = DateTime.Now;
                             d.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                             d.Fecha_upd = DateTime.Now;
 
-                            context.DetalleSeguimientoActividadesFamilias.Add(d);
+                            context.DetalleSeguimientoActividadesJASS.Add(d);
                             context.SaveChanges();
 
                             dbtran.Commit();
                             //dbtran.Rollback();
                             respuesta.TipoRespuesta = 1;
                             respuesta.Mensaje = "Seguimiento de Actividad Agregado Satisfactoriamente";
-                            respuesta.ValorDevolucion = d.IdDetalleSeguimientoActividadesFamilias.ToString();
+                            respuesta.ValorDevolucion = d.IdDetalleSeguimientoActividadesJASS.ToString();
 
                             #endregion
                         }
@@ -246,17 +250,20 @@ namespace _04_Servicios
                         {
                             #region Actualizar Seguimiento
 
-                            var objDetalle = context.DetalleSeguimientoActividadesFamilias.Where(x => x.IdDetalleSeguimientoActividadesFamilias == detalle.IdDetalleSeguimientoActividadesFamilias && x.Activo == true).SingleOrDefault();
+                            var objDetalle = context.DetalleSeguimientoActividadesJASS.Where(x => x.IdDetalleSeguimientoActividadesJASS == detalle.IdDetalleSeguimientoActividadesJASS && x.Activo == true).SingleOrDefault();
 
                             if (objDetalle != null)
                             {
-                                objDetalle.IdSeguimientoActividades = detalle.IdSeguimientoActividades;
+                                objDetalle.IdSeguimientoActividadesJASS = detalle.IdSeguimientoActividadesJASS;
                                 objDetalle.IdCronogramaActividades = detalle.IdCronogramaActividades;
                                 objDetalle.Fecha = detalle.Fecha;
                                 objDetalle.NroHombres = detalle.NroHombres;
                                 objDetalle.NroMujeres = detalle.NroMujeres;
                                 objDetalle.Total = detalle.Total;
-                                objDetalle.PorcentageAsistencia = detalle.PorcentageAsistencia;
+                                objDetalle.PorcentageTotal = detalle.PorcentageTotal;
+                                objDetalle.TotalSAP = detalle.TotalSAP;
+                                objDetalle.PorcentageSAP = detalle.PorcentageSAP;
+                                objDetalle.Comentarios = detalle.Comentarios;
                                 objDetalle.Activo = true;
                                 objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                                 objDetalle.Fecha_upd = DateTime.Now;
@@ -267,7 +274,7 @@ namespace _04_Servicios
                                 //dbtran.Rollback();
                                 respuesta.TipoRespuesta = 1;
                                 respuesta.Mensaje = "Seguimiento de Actividad Actualizado Satisfactoriamente";
-                                respuesta.ValorDevolucion = objDetalle.IdDetalleSeguimientoActividadesFamilias.ToString();
+                                respuesta.ValorDevolucion = objDetalle.IdDetalleSeguimientoActividadesJASS.ToString();
                             }
                             else
                             {
@@ -293,21 +300,24 @@ namespace _04_Servicios
             }
             return respuesta;
         }
-        public EnDetalleSeguimientoActividadesFamilias ListDetalleSeguimientoId(int Id)
+        public EnDetalleSeguimientoActividadesJASS ListDetalleSeguimientoId(int Id)
         {
-            EnDetalleSeguimientoActividadesFamilias result = new EnDetalleSeguimientoActividadesFamilias();
+            EnDetalleSeguimientoActividadesJASS result = new EnDetalleSeguimientoActividadesJASS();
 
-            var objDetalle = context.DetalleSeguimientoActividadesFamilias.Where(x => x.IdDetalleSeguimientoActividadesFamilias == Id && x.Activo == true).SingleOrDefault();
+            var objDetalle = context.DetalleSeguimientoActividadesJASS.Where(x => x.IdDetalleSeguimientoActividadesJASS == Id && x.Activo == true).SingleOrDefault();
 
-            result.IdSeguimientoActividades = objDetalle.IdSeguimientoActividades;
-            result.IdDetalleSeguimientoActividadesFamilias = objDetalle.IdDetalleSeguimientoActividadesFamilias;
+            result.IdSeguimientoActividadesJASS = objDetalle.IdSeguimientoActividadesJASS;
+            result.IdDetalleSeguimientoActividadesJASS = objDetalle.IdDetalleSeguimientoActividadesJASS;
             result.Actividades = objDetalle.CronogramaActividades.Actividad;
             result.FechaString = Convert.ToDateTime(objDetalle.Fecha).ToString("dd/MM/yyyy");
             result.NroHombres = objDetalle.NroHombres;
             result.NroMujeres = objDetalle.NroMujeres;
             result.Total = objDetalle.Total;
-            result.PorcentageAsistencia = objDetalle.PorcentageAsistencia;
-            
+            result.PorcentageTotal = objDetalle.PorcentageTotal;
+            result.TotalSAP = objDetalle.TotalSAP;
+            result.PorcentageSAP = objDetalle.PorcentageSAP;
+            result.Comentarios = objDetalle.Comentarios;
+
             return result;
         }
         public EnRespuesta EliminarSeguimiento(int Id)
@@ -317,8 +327,8 @@ namespace _04_Servicios
             {
                 try
                 {
-                    var objDetalle = context.DetalleSeguimientoActividadesFamilias.Where(x => x.IdDetalleSeguimientoActividadesFamilias == Id && x.Activo == true).SingleOrDefault();
-                    if (objDetalle!=null)
+                    var objDetalle = context.DetalleSeguimientoActividadesJASS.Where(x => x.IdDetalleSeguimientoActividadesJASS == Id && x.Activo == true).SingleOrDefault();
+                    if (objDetalle != null)
                     {
                         objDetalle.Activo = false;
                         objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
@@ -330,7 +340,7 @@ namespace _04_Servicios
                         //dbtran.Rollback();
                         respuesta.TipoRespuesta = 1;
                         respuesta.Mensaje = "Seguimiento de Actividad Eliminado Satisfactoriamente";
-                        respuesta.ValorDevolucion = objDetalle.IdDetalleSeguimientoActividadesFamilias.ToString();
+                        respuesta.ValorDevolucion = objDetalle.IdDetalleSeguimientoActividadesJASS.ToString();
                     }
                     else
                     {
@@ -338,7 +348,7 @@ namespace _04_Servicios
                         respuesta.Mensaje = "No se pudo eliminar, actualice la pagina o verifique que el registro existe";
                         respuesta.ValorDevolucion = "";
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
