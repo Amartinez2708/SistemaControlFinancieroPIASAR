@@ -81,6 +81,7 @@
     <Compile Include="SrvMonitoreoObras.cs" />
     <Compile Include="SrvMonitoreoObrasContrataPIASAR.cs" />
     <Compile Include="SrvMonitoreoPIASAR.cs" />
+    <Compile Include="SrvNucleosEjecutores.cs" />
     <Compile Include="SrvReporteMensualProgreso.cs" />
     <Compile Include="SrvSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="SrvTabla.cs" />

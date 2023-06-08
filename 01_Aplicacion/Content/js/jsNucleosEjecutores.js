@@ -11,6 +11,7 @@
         ListHistorialSeguimiento();
     });
 });
+
 function ListProyectos() {
     var tabla = $("#dtSeguimiento").DataTable({
         processing: true,
@@ -27,26 +28,11 @@ function ListProyectos() {
         pageLength: 10,
         //order: [[4, "desc"]],
         ajax: {
-            url: "/JASS/ListProyectos",
+            url: "/NucleosEjecutores/ListProyectos",
             type: "GET",
             contentType: "application/json; charset=utf-8",
             datatype: "json"
         },
-        //dom: 'Bfrtip',
-        //buttons: [
-        //     {
-        //         text: '<span class="fa fa-file-excel-o"></span> Excel',
-        //         className: 'btn btn-mat btn-success mr-1 mb-2',
-        //         extend: 'excelHtml5',
-        //         title: getNombreFile('rpt_Monitoreo_Obras_')
-        //     },
-        //     {
-        //         text: '<span class="fa fa-clipboard"></span> Copiar',
-        //         className: 'btn btn-mat btn-warning mr-1 mb-2',
-        //         extend: 'copy',
-        //         title: getNombreFile('rpt_Monitoreo_Obras_')
-        //     }
-        //],
         columns: [
                     { "name": "N°", "title": "N°", "data": null, "autowidth": true },
                     { "name": "CUI", "title": "CUI", "data": "CUI", "autowidth": true },
@@ -122,7 +108,7 @@ function AbrirSeguimiento(cui, localidad) {
 }
 
 function ddlMeses() {
-    $.get("/JASS/ddlMeses?Etapa=" + $("#ddlEtapa").val(), function (data, status) {
+    $.get("/NucleosEjecutores/ddlMeses?Etapa=" + $("#ddlEtapa").val(), function (data, status) {
         $("#ddlMes").empty();
         if (data.length > 0) {
             $.each(data, function (i, data) {
@@ -139,7 +125,7 @@ function ddlMeses() {
 }
 
 function ddlActividad() {
-    $.get("/JASS/ddlActividad?Etapa=" + $("#ddlEtapa").val() + "&NroMes=" + $("#ddlMes").val(), function (data, status) {
+    $.get("/NucleosEjecutores/ddlActividad?Etapa=" + $("#ddlEtapa").val() + "&NroMes=" + $("#ddlMes").val(), function (data, status) {
         $("#ddlActividad").empty();
         if (data.length > 0) {
             $.each(data, function (i, data) {
@@ -156,24 +142,14 @@ function ddlActividad() {
 }
 
 function ListDatosSeguimiento() {
-    $.get("/JASS/ListSeguimiento?cui=" + $("#hdnCUI").val(), function (data, status) {
+    $.get("/NucleosEjecutores/ListSeguimiento?cui=" + $("#hdnCUI").val(), function (data, status) {
         $("#hdnIdDetalleSeguimientoActividades").val("");
-        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividadesJASS);
+        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividadesNE);
 
-        $("#txtNroAsociadosMujeres").val(data.NroAsociadosMujeres);
-        $("#txtNroAsociadosHombres").val(data.NroAsociadosHombres);
-        $("#txtTotalAsociados").val(data.TotalAsociados);
+        $("#txtNroMienbrosMujeres").val(data.NroMienbrosMujeres);
+        $("#txtNroMienbrosHombres").val(data.NroMienbrosHombres);
+        $("#txtTotalMienbros").val(data.TotalMienbros);
 
-        $("#txtTotalViviendasValidadas").val(data.TotalViviendasValidadas);
-        $("#txtTotalInstitucionesValidadas").val(data.TotalInstitucionesValidadas);
-        $("#txtTotalInstitucionesViviendas").val(data.TotalInstitucionesViviendasValidadas);
-
-        $("#txtNroOperadoresMujeres").val(data.NroOperadoresSAPMujeres);
-        $("#txtNroOperadoresHombres").val(data.NroOperadoresSAPHombres);
-        $("#txtTotalOperadores").val(data.TotalOperadores);
-
-        $("#txtLideres").val(data.TotalAutoridadesLideres);
-        $("#txtLideresIdentificados").val(data.NroIdentificacionLideres);
         ListHistorialSeguimiento();
     });
 }
@@ -194,7 +170,7 @@ function ListHistorialSeguimiento() {
         pageLength: 10,
         //order: [[4, "desc"]],
         ajax: {
-            url: "/JASS/ListDetalleSeguimiento?Id=" + $("#hdnIdSeguimientoActividades").val() + "&IdCronogramaActividades=" + $("#ddlActividad").val(),
+            url: "/NucleosEjecutores/ListDetalleSeguimiento?Id=" + $("#hdnIdSeguimientoActividades").val() + "&IdCronogramaActividades=" + $("#ddlActividad").val(),
             type: "GET",
             contentType: "application/json; charset=utf-8",
             datatype: "json"
@@ -205,10 +181,6 @@ function ListHistorialSeguimiento() {
                     { "name": "Nro. Hombres", "title": "Nro. Hombres", "data": "NroHombres", "autowidth": true },
                     { "name": "Nro. Mujeres", "title": "Nro. Mujeres", "data": "NroMujeres", "autowidth": true },
                     { "name": "Total", "title": "Total", "data": "Total", "autowidth": true },
-                    { "name": "% Asistencia", "title": "% Asistencia", "data": "PorcentageTotal", "autowidth": true },
-                    { "name": "", "title": "Adicional <br/>Operadores <br/>SAP", "data": "TotalSAP", "autowidth": true },
-                    { "name": "", "title": "% Adicional SAP", "data": "PorcentageSAP", "autowidth": true },
-                    { "name": "", "title": "Comentarios", "data": "Comentarios", "autowidth": true },
                     { "name": "", "title": "Acciones", "data": null, "autowidth": true },
         ],
         columnDefs: [
@@ -217,23 +189,7 @@ function ListHistorialSeguimiento() {
                 "data": null,
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
-                    return full.PorcentageTotal * 100 + "%";
-                }
-            },
-            {
-                "targets": 7,
-                "data": null,
-                "className": "align-middle text-center",
-                "mRender": function (data, type, full) {
-                    return full.PorcentageSAP * 100 + "%";
-                }
-            },
-            {
-                "targets": 9,
-                "data": null,
-                "className": "align-middle text-center",
-                "mRender": function (data, type, full) {
-                    return '<button class="btn btn-danger btn-icon" title="Eliminar" style="width: 30px;height: 30px;line-height: 0px;" onclick="ConfirmarEliminarActividad(' + full.IdDetalleSeguimientoActividadesJASS + ')"><i class="fa fa-trash f-18" style="margin-right:0px;"></i></button>&nbsp;<button class="btn btn-primary btn-icon" title="Editar" style="width: 30px;height: 30px;line-height: 0px;" onclick="EditarActividad(' + full.IdDetalleSeguimientoActividadesJASS + ')"><i class="fa fa-pencil f-18" style="margin-right:0px;"></i></button>';
+                    return '<button class="btn btn-danger btn-icon" title="Eliminar" style="width: 30px;height: 30px;line-height: 0px;" onclick="ConfirmarEliminarActividad(' + full.IdDetalleSeguimientoActividadesNE + ')"><i class="fa fa-trash f-18" style="margin-right:0px;"></i></button>&nbsp;<button class="btn btn-primary btn-icon" title="Editar" style="width: 30px;height: 30px;line-height: 0px;" onclick="EditarActividad(' + full.IdDetalleSeguimientoActividadesNE + ')"><i class="fa fa-pencil f-18" style="margin-right:0px;"></i></button>';
                 }
             },
             {
@@ -295,10 +251,6 @@ function LimpiarFormulario() {
     $("#txtNroHombres").val("");
     $("#txtNroMujeres").val("");
     $("#txtTotal").val("");
-    $("#txtPorcentajeAsistencia").val("");
-    $("#txtAdicional").val("");
-    $("#txtPorcentajeAdicional").val("");
-    $("#txtComentarios").val("");
 }
 
 function LimpiarRegistro() {
@@ -306,10 +258,6 @@ function LimpiarRegistro() {
     $("#txtNroHombres").val("");
     $("#txtNroMujeres").val("");
     $("#txtTotal").val("");
-    $("#txtPorcentajeAsistencia").val("");
-    $("#txtAdicional").val("");
-    $("#txtPorcentajeAdicional").val("");
-    $("#txtComentarios").val("");
 }
 
 function GuardarSeguimiento() {
@@ -325,30 +273,24 @@ function GuardarSeguimiento() {
     else if ($("txtTotal").val() == "") {
         MensajeAlerta('Ingrese el Total', 'txtTotal');
     }
-    else if ($("txtPorcentajeAsistencia").val() == "") {
-        MensajeAlerta('Ingrese el Porcentaje Asistencia', 'txtPorcentajeAsistencia');
-    }
-    else {
+    else
+    {
         $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
 
         var detalle = {
             CUI: $("#hdnCUI").val(),
-            IdDetalleSeguimientoActividadesJASS: $("#hdnIdDetalleSeguimientoActividades").val(),
-            IdSeguimientoActividadesJASS: $('#hdnIdSeguimientoActividades').val(),
+            IdDetalleSeguimientoActividadesNE: $("#hdnIdDetalleSeguimientoActividades").val(),
+            IdSeguimientoActividadesNE: $('#hdnIdSeguimientoActividades').val(),
             IdCronogramaActividades: $('#ddlActividad').val(),
             Fecha: $('#txtFecha').val(),
             NroHombres: $('#txtNroHombres').val(),
             NroMujeres: $("#txtNroMujeres").val(),
-            Total: $("#txtTotal").val(),
-            PorcentageTotal: ($("#txtPorcentajeAsistencia").val() / 100),
-            TotalSAP: $("#txtAdicional").val(),
-            PorcentageSAP: ($("#txtPorcentajeAdicional").val()/100),
-            Comentarios: $("#txtComentarios").val(),
+            Total: $("#txtTotal").val()
         }
 
         $.ajax({
             type: "POST",
-            url: "/JASS/GuardarSeguimiento",
+            url: "/NucleosEjecutores/GuardarSeguimiento",
             cache: false,
             data: JSON.stringify(detalle),
             contentType: "application/json; charset=utf-8",
@@ -458,17 +400,13 @@ function GuardarSeguimiento() {
 
 function EditarActividad(Id) {
 
-    $.get("/JASS/ListDetalleSeguimientoId?Id=" + Id, function (data, status) {
-        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividadesJASS);
-        $("#hdnIdDetalleSeguimientoActividades").val(data.IdDetalleSeguimientoActividadesJASS);
+    $.get("/NucleosEjecutores/ListDetalleSeguimientoId?Id=" + Id, function (data, status) {
+        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividadesNE);
+        $("#hdnIdDetalleSeguimientoActividades").val(data.IdDetalleSeguimientoActividadesNE);
         $("#txtFecha").val(data.FechaString);
         $("#txtNroHombres").val(data.NroHombres);
         $("#txtNroMujeres").val(data.NroMujeres);
         $("#txtTotal").val(data.Total);
-        $("#txtPorcentajeAsistencia").val(data.PorcentageTotal * 100);
-        $("#txtAdicional").val(data.TotalSAP);
-        $("#txtPorcentajeAdicional").val(data.PorcentageSAP * 100);
-        $("#txtComentarios").val(data.Comentarios);
     });
 }
 
@@ -508,7 +446,7 @@ function EliminarActividad(Id) {
 
     $.ajax({
         type: "POST",
-        url: "/JASS/EliminarSeguimiento",
+        url: "/NucleosEjecutores/EliminarSeguimiento",
         cache: false,
         data: JSON.stringify(obj),
         contentType: "application/json; charset=utf-8",

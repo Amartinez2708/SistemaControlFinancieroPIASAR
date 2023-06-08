@@ -772,6 +772,7 @@
     <Content Include="Content\js\jsMonitoreo.js" />
     <Content Include="Content\js\jsMonitoreoContrata.js" />
     <Content Include="Content\js\jsMonitoreoPiasar.js" />
+    <Content Include="Content\js\jsNucleosEjecutores.js" />
     <Content Include="Content\js\jsObras.js" />
     <Content Include="Content\js\jsPDF\addhtml.js" />
     <Content Include="Content\js\jsPDF\addimage.js" />
