@@ -53,6 +53,7 @@
     <Compile Include="EnDesembolsoProgramadoAnual.cs" />
     <Compile Include="EnDesembolsoProgramadoMensual.cs" />
     <Compile Include="EnDesembolsoVSJustificado.cs" />
+    <Compile Include="EnDetalleSeguimientoActividadesATM.cs" />
     <Compile Include="EnDetalleSeguimientoActividadesFamilias.cs" />
     <Compile Include="EnDetalleSeguimientoActividadesJASS.cs" />
     <Compile Include="EnDetalleSeguimientoActividadesNE.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="EnReporteBID.cs" />
     <Compile Include="EnReporteEstados.cs" />
     <Compile Include="EnRespuesta.cs" />
+    <Compile Include="EnSeguimientoActividadesATM.cs" />
     <Compile Include="EnSeguimientoActividadesFamilias.cs" />
     <Compile Include="EnSeguimientoActividadesJASS.cs" />
     <Compile Include="EnSeguimientoActividadesNE.cs" />

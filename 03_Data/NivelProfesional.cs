@@ -12,19 +12,16 @@ namespace _03_Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class NivelProfesional
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public NivelProfesional()
         {
-            this.UsuarioPerfil = new HashSet<UsuarioPerfil>();
+            this.Persona = new HashSet<Persona>();
         }
     
-        public int IdUsuario { get; set; }
-        public int IdPersona { get; set; }
-        public string Usuario1 { get; set; }
-        public string Password { get; set; }
-        public System.DateTime FechaCaducidad { get; set; }
+        public int IdNivelProfesional { get; set; }
+        public string NivelProfesional1 { get; set; }
         public bool Activo { get; set; }
         public int IdUsuario_add { get; set; }
         public System.DateTime Fecha_add { get; set; }
@@ -32,7 +29,6 @@ namespace _03_Data
         public System.DateTime Fecha_upd { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsuarioPerfil> UsuarioPerfil { get; set; }
-        public virtual Persona Persona { get; set; }
+        public virtual ICollection<Persona> Persona { get; set; }
     }
 }

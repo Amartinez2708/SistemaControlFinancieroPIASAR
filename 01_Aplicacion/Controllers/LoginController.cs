@@ -35,12 +35,12 @@ namespace _01_Aplicacion.Controllers
                         EnUsuario usuario = new EnUsuario();
                         usuario.IdUsuario = objContrasena.IdUsuario;
                         usuario.IdPersonal = objContrasena.IdPersona;
-                        usuario.Dni = objContrasena.Persona.Dni;
+                        usuario.Dni = objContrasena.Persona.NroDocumento;
                         usuario.ApePaterno = objContrasena.Persona.ApePaterno;
                         usuario.ApeMaterno = objContrasena.Persona.ApeMaterno;
                         usuario.Nombres = objContrasena.Persona.Nombres;
                         usuario.Sexo = objContrasena.Persona.Sexo;
-                        usuario.IdCargo = objContrasena.Persona.IdCargo;
+                        usuario.IdCargo = Convert.ToInt32(objContrasena.Persona.IdCargo);
                         usuario.Email1 = objContrasena.Persona.Email1;
                         usuario.Email2 = objContrasena.Persona.Email2;
                         usuario.Celular1 = objContrasena.Persona.Celular1;

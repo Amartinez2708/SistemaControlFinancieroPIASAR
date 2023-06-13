@@ -10,6 +10,12 @@
     $("#ddlActividad").change(function () {
         ListHistorialSeguimiento();
     });
+    $("#txtNroHombres").change(function () {
+        Sumar();
+    });
+    $("#txtNroMujeres").change(function () {
+        Sumar();
+    });
 });
 
 function ListProyectos() {
@@ -549,4 +555,9 @@ function EliminarActividad(Id) {
             });
         },
     });
+}
+function Sumar() {
+    var a = parseInt($("#txtNroHombres").val() == "" ? 0 : $("#txtNroHombres").val());
+    var b = parseInt($("#txtNroMujeres").val() == "" ? 0 : $("#txtNroMujeres").val());
+    $("#txtTotal").val(a + b);
 }

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SrvAlertaRegistro.cs" />
+    <Compile Include="SrvATM.cs" />
     <Compile Include="SrvEjecucionPresupuestalPNSR.cs" />
     <Compile Include="SrvEstadoSituacional.cs" />
     <Compile Include="SrvFamilias.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="SrvMonitoreoObrasContrataPIASAR.cs" />
     <Compile Include="SrvMonitoreoPIASAR.cs" />
     <Compile Include="SrvNucleosEjecutores.cs" />
+    <Compile Include="SrvPersonal.cs" />
     <Compile Include="SrvReporteMensualProgreso.cs" />
     <Compile Include="SrvSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="SrvTabla.cs" />

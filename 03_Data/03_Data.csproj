@@ -57,6 +57,9 @@
     <Compile Include="AUTORIZACION_GASTO_DETALLE.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cargo.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="CentroPoblado.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -189,6 +192,9 @@
     <Compile Include="Movimiento_Documento_Detalle.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="NivelProfesional.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Perfil.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -196,6 +202,9 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Persona.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PersonaFamilia.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Personal.cs">
@@ -214,6 +223,9 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductoAnio.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profesion.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ProgramadoEjecutadoMensual.cs">

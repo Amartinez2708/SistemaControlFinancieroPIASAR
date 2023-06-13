@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-    ListProyectosFamilias();
+    ListProyectos();
     $("#ddlEtapa").change(function () {
         ddlMeses();
     });
@@ -17,7 +17,8 @@
         Sumar();
     });
 });
-function ListProyectosFamilias() {
+
+function ListProyectos() {
     var tabla = $("#dtSeguimiento").DataTable({
         processing: true,
         filter: true,
@@ -33,26 +34,11 @@ function ListProyectosFamilias() {
         pageLength: 10,
         //order: [[4, "desc"]],
         ajax: {
-            url: "/Familias/ListProyectosFamilias",
+            url: "/ATM/ListProyectos",
             type: "GET",
             contentType: "application/json; charset=utf-8",
             datatype: "json"
         },
-        //dom: 'Bfrtip',
-        //buttons: [
-        //     {
-        //         text: '<span class="fa fa-file-excel-o"></span> Excel',
-        //         className: 'btn btn-mat btn-success mr-1 mb-2',
-        //         extend: 'excelHtml5',
-        //         title: getNombreFile('rpt_Monitoreo_Obras_')
-        //     },
-        //     {
-        //         text: '<span class="fa fa-clipboard"></span> Copiar',
-        //         className: 'btn btn-mat btn-warning mr-1 mb-2',
-        //         extend: 'copy',
-        //         title: getNombreFile('rpt_Monitoreo_Obras_')
-        //     }
-        //],
         columns: [
                     { "name": "N°", "title": "N°", "data": null, "autowidth": true },
                     { "name": "CUI", "title": "CUI", "data": "CUI", "autowidth": true },
@@ -66,7 +52,7 @@ function ListProyectosFamilias() {
                     { "name": "", "title": "Seguimiento", "data": null, "autowidth": true }
         ],
         columnDefs: [
-            
+
             {
                 "targets": 9,
                 "data": null,
@@ -103,9 +89,6 @@ function ListProyectosFamilias() {
             }
         },
         fnRowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            //var index = iDisplayIndex + 1;
-            //$('td:eq(0)', nRow).html(index);
-            //return nRow;
             var api = this.api();
             var startIndex = api.context[0]._iDisplayStart;
             var counter = startIndex + iDisplayIndex + 1;
@@ -113,27 +96,25 @@ function ListProyectosFamilias() {
             return nRow;
         },
         fnDrawCallback: function (settings) {
-            //$("#dtProyecto thead tr").css({ 'height': "0" });
-            //var api = this.api();
-            //var startIndex = api.context[0]._iDisplayStart;
-            //api.column(0, { order: 'applied', search: 'applied' }).nodes().each(function (cell, i) {
-            //    debugger;
-            //        cell.innerHTML = startIndex + i + 1;
-            //});
         },
         fnCreatedRow: function (row, data, index) {
-            //$('td', row).eq(0).html(index + 1);
         },
         initComplete: function (settings, json) {
-            //$("#dtProyecto thead tr").css({ 'height': "0" });
             $(".dataTables_scrollHeadInner").css("width", "100%");
             $(".table").css("width", "100%");
         },
     });
 }
 
+function AbrirSeguimiento(cui, localidad) {
+    $("#lblProyecto").html(cui + " - " + localidad);
+    $("#hdnCUI").val(cui);
+    ListDatosSeguimiento();
+    $("#modal-seguimiento").modal({ backdrop: 'static', keyboard: true, show: true });
+}
+
 function ddlMeses() {
-    $.get("/Familias/ddlMeses?Etapa=" + $("#ddlEtapa").val(), function (data, status) {
+    $.get("/ATM/ddlMeses?Etapa=" + $("#ddlEtapa").val(), function (data, status) {
         $("#ddlMes").empty();
         if (data.length > 0) {
             $.each(data, function (i, data) {
@@ -150,7 +131,7 @@ function ddlMeses() {
 }
 
 function ddlActividad() {
-    $.get("/Familias/ddlActividad?Etapa=" + $("#ddlEtapa").val() + "&NroMes="+$("#ddlMes").val(), function (data, status) {
+    $.get("/ATM/ddlActividad?Etapa=" + $("#ddlEtapa").val() + "&NroMes=" + $("#ddlMes").val(), function (data, status) {
         $("#ddlActividad").empty();
         if (data.length > 0) {
             $.each(data, function (i, data) {
@@ -166,30 +147,16 @@ function ddlActividad() {
     return false;
 }
 
-function AbrirSeguimiento(cui, localidad) {
-    $("#lblProyecto").html(cui + " - " + localidad);
-    $("#hdnCUI").val(cui);
-    ListDatosSeguimiento();
-    $("#modal-seguimiento").modal({ backdrop: 'static', keyboard: true, show: true });
-}
-
 function ListDatosSeguimiento() {
-    $.get("/Familias/ListSeguimiento?cui=" + $("#hdnCUI").val(), function (data, status) {
-        $("#hdnIdDetalleSeguimientoActividadesFamilias").val("");
-        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividades);
-        $("#txtNroPoblacionMujeres").val(data.NroPoblacionMujeres);
-        $("#txtNroPoblacionHombres").val(data.NroPoblaciónHombres);
-        $("#txtTotalPoblacion").val(data.TotalPoblacion);
-        $("#txtNroUsuariosMujeres").val(data.NroUsuariosMujeres);
-        $("#txtNroUsuariosHombres").val(data.NroUsuariosHombres);
-        $("#txtTotalUsuarios").val(data.TotalUsuarios);
-        $("#txtPoblacionFlotante").val(data.NroPoblacionFlotante);
-        $("#txtTotalViviendasValidadas").val(data.NroTotalViviendasValidadas);
-        $("#txtTotalInstitucionesValidadas").val(data.NroTotalInstitucionesValidadas);
-        $("#txtTotalInstitucionesViviendas").val(data.TotalInstitucionesViviendasValidadas);
-        $("#txtNroCentrosEducativos").val(data.NroCentrosEducativos);
-        $("#txtNivelCentrosEducativos").val(data.NivelCentrosEducativos);
-        $("#txtCentrosSalud").val(data.CentroSalud);
+    $.get("/ATM/ListSeguimiento?cui=" + $("#hdnCUI").val(), function (data, status) {
+        $("#hdnIdDetalleSeguimientoActividades").val("");
+        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividadesATM);
+
+        $("#txtNroMienbrosMujeres").val(data.NroMienbrosMujeres);
+        $("#txtNroMienbrosHombres").val(data.NroMienbrosHombres);
+        $("#txtTotalMienbros").val(data.TotalMienbros);
+        $("#txtSaludEducacionOtros").val(data.SaludEducacionOtros);
+
         ListHistorialSeguimiento();
     });
 }
@@ -210,7 +177,7 @@ function ListHistorialSeguimiento() {
         pageLength: 10,
         //order: [[4, "desc"]],
         ajax: {
-            url: "/Familias/ListDetalleSeguimiento?id=" + $("#hdnIdSeguimientoActividades").val() + "&IdCronogramaActividades=" + $("#ddlActividad").val(),
+            url: "/ATM/ListDetalleSeguimiento?Id=" + $("#hdnIdSeguimientoActividades").val() + "&IdCronogramaActividades=" + $("#ddlActividad").val(),
             type: "GET",
             contentType: "application/json; charset=utf-8",
             datatype: "json"
@@ -221,24 +188,16 @@ function ListHistorialSeguimiento() {
                     { "name": "Nro. Hombres", "title": "Nro. Hombres", "data": "NroHombres", "autowidth": true },
                     { "name": "Nro. Mujeres", "title": "Nro. Mujeres", "data": "NroMujeres", "autowidth": true },
                     { "name": "Total", "title": "Total", "data": "Total", "autowidth": true },
-                    { "name": "Porcentage Asistencia", "title": "% Asistencia", "data": "PorcentageAsistencia", "autowidth": true },
+                    { "name": "Comentarios", "title": "Comentarios", "data": "Comentarios", "autowidth": true },
                     { "name": "", "title": "Acciones", "data": null, "autowidth": true },
         ],
         columnDefs: [
-            {
-                "targets": 5,
-                "data": null,
-                "className": "align-middle text-center",
-                "mRender": function (data, type, full) {
-                    return full.PorcentageAsistencia * 100 + "%";
-                }
-            },
             {
                 "targets": 6,
                 "data": null,
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
-                    return '<button class="btn btn-danger btn-icon" title="Eliminar" style="width: 30px;height: 30px;line-height: 0px;" onclick="ConfirmarEliminarActividad(' + full.IdDetalleSeguimientoActividadesFamilias + ')"><i class="fa fa-trash f-18" style="margin-right:0px;"></i></button>&nbsp;<button class="btn btn-primary btn-icon" title="Editar" style="width: 30px;height: 30px;line-height: 0px;" onclick="EditarActividad(' + full.IdDetalleSeguimientoActividadesFamilias + ')"><i class="fa fa-pencil f-18" style="margin-right:0px;"></i></button>';
+                    return '<button class="btn btn-danger btn-icon" title="Eliminar" style="width: 30px;height: 30px;line-height: 0px;" onclick="ConfirmarEliminarActividad(' + full.IdDetalleSeguimientoActividadesATM + ')"><i class="fa fa-trash f-18" style="margin-right:0px;"></i></button>&nbsp;<button class="btn btn-primary btn-icon" title="Editar" style="width: 30px;height: 30px;line-height: 0px;" onclick="EditarActividad(' + full.IdDetalleSeguimientoActividadesATM + ')"><i class="fa fa-pencil f-18" style="margin-right:0px;"></i></button>';
                 }
             },
             {
@@ -295,11 +254,12 @@ function LimpiarFormulario() {
     $("#ddlMes").val(0);
     $("#ddlMes").change();
     $("#ddlActividad").val(0);
+
     $("#txtFecha").val("");
     $("#txtNroHombres").val("");
     $("#txtNroMujeres").val("");
     $("#txtTotal").val("");
-    $("#txtPorcentajeAsistencia").val("");
+    $("#txtComentarios").val("");
 }
 
 function LimpiarRegistro() {
@@ -307,7 +267,7 @@ function LimpiarRegistro() {
     $("#txtNroHombres").val("");
     $("#txtNroMujeres").val("");
     $("#txtTotal").val("");
-    $("#txtPorcentajeAsistencia").val("");
+    $("#txtComentarios").val("");
 }
 
 function GuardarSeguimiento() {
@@ -323,28 +283,24 @@ function GuardarSeguimiento() {
     else if ($("txtTotal").val() == "") {
         MensajeAlerta('Ingrese el Total', 'txtTotal');
     }
-    else if ($("txtPorcentajeAsistencia").val() == "") {
-        MensajeAlerta('Ingrese el Porcentaje Asistencia', 'txtPorcentajeAsistencia');
-    }
-    else
-    {
+    else {
         $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
 
         var detalle = {
             CUI: $("#hdnCUI").val(),
-            IdDetalleSeguimientoActividadesFamilias: $("#hdnIdDetalleSeguimientoActividadesFamilias").val(),
-            IdSeguimientoActividades: $('#hdnIdSeguimientoActividades').val(),
+            IdDetalleSeguimientoActividadesATM: $("#hdnIdDetalleSeguimientoActividades").val(),
+            IdSeguimientoActividadesATM: $('#hdnIdSeguimientoActividades').val(),
             IdCronogramaActividades: $('#ddlActividad').val(),
             Fecha: $('#txtFecha').val(),
             NroHombres: $('#txtNroHombres').val(),
             NroMujeres: $("#txtNroMujeres").val(),
             Total: $("#txtTotal").val(),
-            PorcentageAsistencia: ($("#txtPorcentajeAsistencia").val()/100)
+            Comentarios: $("#txtComentarios").val()
         }
 
         $.ajax({
             type: "POST",
-            url: "/Familias/GuardarSeguimiento",
+            url: "/ATM/GuardarSeguimiento",
             cache: false,
             data: JSON.stringify(detalle),
             contentType: "application/json; charset=utf-8",
@@ -454,14 +410,14 @@ function GuardarSeguimiento() {
 
 function EditarActividad(Id) {
 
-    $.get("/Familias/ListDetalleSeguimientoId?Id=" + Id, function (data, status) {
-        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividades);
-        $("#hdnIdDetalleSeguimientoActividadesFamilias").val(data.IdDetalleSeguimientoActividadesFamilias);
+    $.get("/ATM/ListDetalleSeguimientoId?Id=" + Id, function (data, status) {
+        $("#hdnIdSeguimientoActividades").val(data.IdSeguimientoActividadesATM);
+        $("#hdnIdDetalleSeguimientoActividades").val(data.IdDetalleSeguimientoActividadesATM);
         $("#txtFecha").val(data.FechaString);
         $("#txtNroHombres").val(data.NroHombres);
         $("#txtNroMujeres").val(data.NroMujeres);
         $("#txtTotal").val(data.Total);
-        $("#txtPorcentajeAsistencia").val(data.PorcentageAsistencia * 100);
+        $("#txtComentarios").val(data.Total);
     });
 }
 
@@ -501,7 +457,7 @@ function EliminarActividad(Id) {
 
     $.ajax({
         type: "POST",
-        url: "/Familias/EliminarSeguimiento",
+        url: "/ATM/EliminarSeguimiento",
         cache: false,
         data: JSON.stringify(obj),
         contentType: "application/json; charset=utf-8",
@@ -605,7 +561,6 @@ function EliminarActividad(Id) {
         },
     });
 }
-
 function Sumar() {
     var a = parseInt($("#txtNroHombres").val() == "" ? 0 : $("#txtNroHombres").val());
     var b = parseInt($("#txtNroMujeres").val() == "" ? 0 : $("#txtNroMujeres").val());

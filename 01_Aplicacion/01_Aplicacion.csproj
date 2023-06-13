@@ -252,10 +252,12 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManifiestoGastoController.cs" />
     <Compile Include="Controllers\MatrizResultadosController.cs" />
+    <Compile Include="Controllers\MenuSistemaController.cs" />
     <Compile Include="Controllers\MonitoreoObrasContrataPIASARController.cs" />
     <Compile Include="Controllers\MonitoreoObrasController.cs" />
     <Compile Include="Controllers\MonitoreoPIASARController.cs" />
     <Compile Include="Controllers\NucleosEjecutoresController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\ProyectosGeoreferenciadosPIASARController.cs" />
     <Compile Include="Controllers\ReporteMensualProgresoController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
@@ -602,6 +604,7 @@
     <Content Include="Content\Images\3.png" />
     <Content Include="Content\Images\4.png" />
     <Content Include="Content\Images\agua.jpg" />
+    <Content Include="Content\Images\arbol-de-familia.png" />
     <Content Include="Content\Images\autorizacion.png" />
     <Content Include="Content\Images\background-.jpg" />
     <Content Include="Content\Images\background.jpg" />
@@ -615,6 +618,7 @@
     <Content Include="Content\Images\black-texture.jpg" />
     <Content Include="Content\Images\contrato.png" />
     <Content Include="Content\Images\corte-de-cinta.png" />
+    <Content Include="Content\Images\curriculum.png" />
     <Content Include="Content\Images\desembolso.png" />
     <Content Include="Content\Images\DOC.png" />
     <Content Include="Content\Images\Ellipsis-1.6s-120px.gif" />
@@ -645,6 +649,7 @@
     <Content Include="Content\Images\m.png" />
     <Content Include="Content\Images\money.png" />
     <Content Include="Content\Images\navbar-img-5.jpg" />
+    <Content Include="Content\Images\negado.png" />
     <Content Include="Content\Images\obragua.png" />
     <Content Include="Content\Images\pages.png" />
     <Content Include="Content\Images\PDF.png" />
@@ -759,6 +764,7 @@
     <Content Include="Content\js\jquery.sharrre.js" />
     <Content Include="Content\js\jquery\jquery.min.js" />
     <Content Include="Content\js\jsAlerta.js" />
+    <Content Include="Content\js\jsATM.js" />
     <Content Include="Content\js\jsEjecucionPresupuestalPNSR.js" />
     <Content Include="Content\js\jsEstadoSituacional.js" />
     <Content Include="Content\js\jsFamilias.js" />
@@ -784,6 +790,7 @@
     <Content Include="Content\js\jsPDF\split_text_to_size.js" />
     <Content Include="Content\js\jsPDF\standard_fonts_metrics.js" />
     <Content Include="Content\js\jsPDF\zlib.js" />
+    <Content Include="Content\js\jsPersonal.js" />
     <Content Include="Content\js\jsReporteMensualProgreso.js" />
     <Content Include="Content\js\jsSeguimientoEjecucionProyectosInversion.js" />
     <Content Include="Content\js\leaflet.js\easyprint.js" />
@@ -839,6 +846,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\MenuSistema\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1017,6 +1025,7 @@
     <Content Include="Views\NucleosEjecutores\Index.cshtml" />
     <Content Include="Views\JASS\Index.cshtml" />
     <Content Include="Views\ATM\Index.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

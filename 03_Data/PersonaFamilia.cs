@@ -12,27 +12,29 @@ namespace _03_Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class PersonaFamilia
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
-        {
-            this.UsuarioPerfil = new HashSet<UsuarioPerfil>();
-        }
-    
-        public int IdUsuario { get; set; }
+        public int IdPersonaFamilia { get; set; }
         public int IdPersona { get; set; }
-        public string Usuario1 { get; set; }
-        public string Password { get; set; }
-        public System.DateTime FechaCaducidad { get; set; }
+        public Nullable<int> TipoFamiliar { get; set; }
+        public string ApePaterno { get; set; }
+        public string ApeMaterno { get; set; }
+        public string Nombres { get; set; }
+        public string Sexo { get; set; }
+        public Nullable<int> TipoSangre { get; set; }
+        public Nullable<System.DateTime> FechaNacimiento { get; set; }
+        public string UbigeoDireccion { get; set; }
+        public string Direccion { get; set; }
+        public string Referencia { get; set; }
+        public string Celular1 { get; set; }
+        public string Celular2 { get; set; }
+        public Nullable<bool> Emergencia { get; set; }
         public bool Activo { get; set; }
         public int IdUsuario_add { get; set; }
         public System.DateTime Fecha_add { get; set; }
         public int IdUsuario_upd { get; set; }
         public System.DateTime Fecha_upd { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsuarioPerfil> UsuarioPerfil { get; set; }
         public virtual Persona Persona { get; set; }
     }
 }

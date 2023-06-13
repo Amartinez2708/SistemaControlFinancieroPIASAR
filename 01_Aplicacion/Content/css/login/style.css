@@ -298,7 +298,9 @@ body {
       padding: 10px 30px;
       margin: auto;
       margin-bottom: 10px;
-      font-size: 13px; }
+      font-size: 13px; 
+      cursor: pointer;
+    }
   .log-det .forget-p {
     margin-top: 10px;
     font-size: .9rem; }

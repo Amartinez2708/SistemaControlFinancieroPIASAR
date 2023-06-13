@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PrincipalMenu.cshtml";
+}
+
+<div class="col-sm-12 col-xl-12">
+    <div class="page-header card">
+        <div class="card-block">
+            <h5 class="m-b-10">Personal</h5>
+            <p class="text-muted m-b-10"></p>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="/Inicio"> <i class="fa fa-home"></i> </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">Administración</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">Personal</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-12 col-xl-12">
+    <div class="card border-primary">
+        <div class="card-block text-dark">
+            <div class="form-group">
+                <button class="btn btn-mat btn-primary" onclick="AgregarPersonal()"><i class="fa fa-plus" aria-hidden="true"></i>Agregar Personal</button>
+            </div>
+            <div class="form-group">
+                <div class="table-responsive">
+                    <table id="dtPersonal" class="table table-bordered table-hover" width="100%"></table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+@Html.Hidden("hdnIdPersonal")
+<div class="modal fade" id="modal-personal" role="dialog">
+    <div class="modal-dialog modal-sm" role="document" style="height:900px; overflow-y: initial !important">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-edit"></i>&nbsp;<span id="lblPersonal"></span>
+                </h5>
+                <button type="button" class="close" onclick="CerrarPersonal()" aria-label="Close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Información del Personal</legend>
+                    <div class="row m-b-20">
+                        <div class="col-lg-12 col-sm-12">
+                            <h4 class="sub-title">Datos Personales</h4>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Tipo de Documento</label>
+                                        <select name="ddlTipoDcto" id="ddlTipoDcto" class="form-control">
+                                            <option value="">[--Seleccione--]</option>
+                                            <option value="1">Documento Nacional de Identidad</option>
+                                            <option value="2">Carnet de Extrangeria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nro. de Documento</label>
+                                        @Html.TextBox("txtNroDocumento", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Apellido Paterno</label>
+                                        @Html.TextBox("txtApellidoPaterno", null, new { @class = "form-control", @onkeypress = "return soloLetras(event);" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Apellido Materno</label>
+                                        @Html.TextBox("txtApellidoMaterno", null, new { @class = "form-control", @onkeypress = "return soloLetras(event);" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nombres</label>
+                                        @Html.TextBox("txtNombres", null, new { @class = "form-control", @onkeypress = "return soloLetras(event);" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Sexo</label>
+                                        <select name="ddlSexo" id="ddlSexo" class="form-control">
+                                            <option value="">[--Seleccione--]</option>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Tipo de Sangre</label>
+                                        <select name="ddlTipoSangre" id="ddlTipoSangre" class="form-control">
+                                            <option value="">[--Seleccione--]</option>
+                                            <option value="A+">A positivo (A+)</option>
+                                            <option value="A-">A negativo (A-)</option>
+                                            <option value="B+">B positivo (B+)</option>
+                                            <option value="B-">B negativo (B-)</option>
+                                            <option value="AB+">AB positivo (AB+)</option>
+                                            <option value="AB-">AB negativo (AB-)</option>
+                                            <option value="O+">O positivo (O+)</option>
+                                            <option value="O-">O negativo (O-)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Fecha de Nacimiento</label>
+                                        @Html.TextBox("txtFechaNacimiento", null, new { @class = "form-control date-pick" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Estado Civil</label>
+                                        <select name="ddlEstadoCivil" id="ddlEstadoCivil" class="form-control">
+                                            <option value="">[--Seleccione--]</option>
+                                            <option value="1">Soltero/a</option>
+                                            <option value="2">Casado/a</option>
+                                            <option value="3">Conviviente</option>
+                                            <option value="4">Separado/a</option>
+                                            <option value="5">Divorciado/a</option>
+                                            <option value="6">Viudo/a</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>                     
+                    </div>
+                    <div class="row m-b-20">
+                        <div class="col-lg-12 col-sm-12">
+                            <h4 class="sub-title">Datos Profesionales</h4>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Cargo</label>
+                                        @Html.DropDownList("ddlCargo", new SelectList(ViewBag.ddlCargo, "IdText", "text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nivel Profesional</label>
+                                        @Html.DropDownList("ddlNivelProfesional", new SelectList(ViewBag.ddlNivelProfesional, "IdText", "text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Profesión</label>
+                                        @Html.DropDownList("ddlProfesion", new SelectList(ViewBag.ddlProfesion, "IdText", "text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <h4 class="sub-title">Datos de Contacto</h4>
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Departamento</label>
+                                        @Html.DropDownList("ddlDepartamento", new SelectList(ViewBag.ddlDepartamento, "IdText", "text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Provincia</label>
+                                        @Html.DropDownList("ddlProvincia", new SelectList(string.Empty, "IdText", "text"), "[--Seleccione--]", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Distrito</label>
+                                        @Html.DropDownList("ddlDistrito", new SelectList(string.Empty, "IdText", "text"), "[--Seleccione--]", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Dirección</label>
+                                        @Html.TextBox("txtDirección", null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Referencia</label>
+                                        @Html.TextArea("txtReferencia", null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Email Principal</label>
+                                        @Html.TextBox("txtEmail1", null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Email Secundario</label>
+                                        @Html.TextBox("txtEmail2", null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Celular Principal</label>
+                                        @Html.TextBox("txtCelular1", null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Telefono o Celular Secundario</label>
+                                        @Html.TextBox("txtCelular2", null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger waves-effect " onclick="CerrarPersonal()"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsPersonal.js"></script>
+}
