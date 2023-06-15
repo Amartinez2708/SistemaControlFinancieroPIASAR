@@ -44,16 +44,16 @@ namespace _04_Servicios
                     model.IdCargo = data.IdCargo;
                     model.Cargo = data.Cargo.Cargo1;
                     model.IdNivelProfesional = data.IdNivelProfesional;
-                    model.NivelProfesional = data.NivelProfesional.NivelProfesional1;
+                    model.NivelProfesional = data.IdNivelProfesional == null ? "" : data.NivelProfesional.NivelProfesional1;
                     model.IdProfesion = data.IdProfesion;
-                    model.Profesion = data.Profesion.Profesion1;
+                    model.Profesion = data.IdProfesion == null ? "" : data.Profesion.Profesion1;
                     model.Email1 = data.Email1;
                     model.Email2 = data.Email2;
                     model.Celular1 = data.Celular1;
                     model.Celular2 = data.Celular2;
 
-                    model.FechaNacimientoString = data.FechaNacimiento == null ? "" : Convert.ToDateTime(data.FechaNacimiento).ToString("dd/MM/yyyy hh:mm:ss");
-
+                    model.FechaNacimientoString = data.FechaNacimiento == null ? "" : Convert.ToDateTime(data.FechaNacimiento).ToString("dd/MM/yyyy");
+                    model.EstadoConsultoria = "";
 
                     result.Add(model);
                 }
@@ -210,7 +210,7 @@ namespace _04_Servicios
                 {
                     if (detalle.IdPersona == 0)
                     {
-                        #region Agregar Seguimiento
+                        #region Agregar
 
                         Persona n = new Persona();
                         n.TipoDocumento = detalle.TipoDocumento;
@@ -226,8 +226,8 @@ namespace _04_Servicios
                         n.Direccion = detalle.Direccion;
                         n.Referencia = detalle.Referencia;
                         n.IdCargo = detalle.IdCargo;
-                        n.IdNivelProfesional = detalle.IdNivelProfesional;
-                        n.IdProfesion = detalle.IdProfesion;
+                        n.IdNivelProfesional = detalle.IdNivelProfesional == 0 ? null: detalle.IdNivelProfesional;
+                        n.IdProfesion = detalle.IdProfesion == 0 ? null : detalle.IdProfesion;
                         n.Email1 = detalle.Email1;
                         n.Email2 = detalle.Email2;
                         n.Celular1 = detalle.Celular1;
@@ -269,8 +269,8 @@ namespace _04_Servicios
                             objDetalle.Direccion = detalle.Direccion;
                             objDetalle.Referencia = detalle.Referencia;
                             objDetalle.IdCargo = detalle.IdCargo;
-                            objDetalle.IdNivelProfesional = detalle.IdNivelProfesional;
-                            objDetalle.IdProfesion = detalle.IdProfesion;
+                            objDetalle.IdNivelProfesional = detalle.IdNivelProfesional == 0 ? null : detalle.IdNivelProfesional;
+                            objDetalle.IdProfesion = detalle.IdProfesion == 0 ? null : detalle.IdProfesion;
                             objDetalle.Email1 = detalle.Email1;
                             objDetalle.Email2 = detalle.Email2;
                             objDetalle.Celular1 = detalle.Celular1;
@@ -308,6 +308,43 @@ namespace _04_Servicios
                 }
             }
             return respuesta;
+        }
+        public EnPersona ListPersonalId(int Id)
+        {
+            EnPersona result = new EnPersona();
+
+            var objDetalle = context.Persona.Where(x => x.IdPersona == Id && x.Activo == true).SingleOrDefault();
+
+            result.IdPersona = objDetalle.IdPersona;
+            result.TipoDocumento = objDetalle.TipoDocumento;
+            result.NroDocumento = objDetalle.NroDocumento;
+            result.TipoNroDcto = "DNI - " + objDetalle.NroDocumento;
+            result.ApePaterno = objDetalle.ApePaterno;
+            result.ApeMaterno = objDetalle.ApeMaterno;
+            result.Nombres = objDetalle.Nombres;
+            result.Personal = objDetalle.ApePaterno + " " + objDetalle.ApeMaterno + ", " + objDetalle.Nombres;
+            result.Sexo = objDetalle.Sexo;
+            result.TipoSangre = objDetalle.TipoSangre;
+            result.FechaNacimiento = objDetalle.FechaNacimiento;
+            result.EstadoCivil = objDetalle.EstadoCivil;
+            result.UbigeoDireccion = objDetalle.UbigeoDireccion;
+            result.Direccion = objDetalle.Direccion;
+            result.Referencia = objDetalle.Referencia;
+            result.IdCargo = objDetalle.IdCargo;
+            result.Cargo = objDetalle.Cargo.Cargo1;
+            result.IdNivelProfesional = objDetalle.IdNivelProfesional;
+            result.NivelProfesional = objDetalle.IdNivelProfesional == null ? "" : objDetalle.NivelProfesional.NivelProfesional1;
+            result.IdProfesion = objDetalle.IdProfesion;
+            result.Profesion = objDetalle.IdProfesion == null ? "" : objDetalle.Profesion.Profesion1;
+            result.Email1 = objDetalle.Email1;
+            result.Email2 = objDetalle.Email2;
+            result.Celular1 = objDetalle.Celular1;
+            result.Celular2 = objDetalle.Celular2;
+
+            result.FechaNacimientoString = objDetalle.FechaNacimiento == null ? "" : Convert.ToDateTime(objDetalle.FechaNacimiento).ToString("dd/MM/yyyy");
+            result.EstadoConsultoria = "";
+
+            return result;
         }
     }
 }

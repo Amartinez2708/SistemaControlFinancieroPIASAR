@@ -62,9 +62,9 @@
                             <div class="row">
                                 <div class="col-lg-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>Tipo de Documento</label>
+                                        <label>Tipo de Documento *</label>
                                         <select name="ddlTipoDcto" id="ddlTipoDcto" class="form-control">
-                                            <option value="">[--Seleccione--]</option>
+                                            <option value="0">[--Seleccione--]</option>
                                             <option value="1">Documento Nacional de Identidad</option>
                                             <option value="2">Carnet de Extrangeria</option>
                                         </select>
@@ -72,31 +72,31 @@
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>Nro. de Documento</label>
+                                        <label>Nro. de Documento*</label>
                                         @Html.TextBox("txtNroDocumento", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
-                                        <label>Apellido Paterno</label>
+                                        <label>Apellido Paterno*</label>
                                         @Html.TextBox("txtApellidoPaterno", null, new { @class = "form-control", @onkeypress = "return soloLetras(event);" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
-                                        <label>Apellido Materno</label>
+                                        <label>Apellido Materno*</label>
                                         @Html.TextBox("txtApellidoMaterno", null, new { @class = "form-control", @onkeypress = "return soloLetras(event);" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
-                                        <label>Nombres</label>
+                                        <label>Nombres*</label>
                                         @Html.TextBox("txtNombres", null, new { @class = "form-control", @onkeypress = "return soloLetras(event);" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
-                                        <label>Sexo</label>
+                                        <label>Sexo*</label>
                                         <select name="ddlSexo" id="ddlSexo" class="form-control">
                                             <option value="">[--Seleccione--]</option>
                                             <option value="M">Masculino</option>
@@ -130,7 +130,7 @@
                                     <div class="form-group">
                                         <label>Estado Civil</label>
                                         <select name="ddlEstadoCivil" id="ddlEstadoCivil" class="form-control">
-                                            <option value="">[--Seleccione--]</option>
+                                            <option value="0">[--Seleccione--]</option>
                                             <option value="1">Soltero/a</option>
                                             <option value="2">Casado/a</option>
                                             <option value="3">Conviviente</option>
@@ -150,20 +150,20 @@
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <div class="form-group">
-                                        <label>Cargo</label>
-                                        @Html.DropDownList("ddlCargo", new SelectList(ViewBag.ddlCargo, "IdText", "text"), new { @class = "form-control" })
+                                        <label>Cargo*</label>
+                                        @Html.DropDownList("ddlCargo", new SelectList(ViewBag.ddlCargo, "id", "text"), new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Nivel Profesional</label>
-                                        @Html.DropDownList("ddlNivelProfesional", new SelectList(ViewBag.ddlNivelProfesional, "IdText", "text"), new { @class = "form-control" })
+                                        @Html.DropDownList("ddlNivelProfesional", new SelectList(ViewBag.ddlNivelProfesional, "id", "text"), new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-sm-12">
                                     <div class="form-group">
                                         <label>Profesión</label>
-                                        @Html.DropDownList("ddlProfesion", new SelectList(ViewBag.ddlProfesion, "IdText", "text"), new { @class = "form-control" })
+                                        @Html.DropDownList("ddlProfesion", new SelectList(ViewBag.ddlProfesion, "id", "text"), new { @class = "form-control" })
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@
                                 </div>
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
-                                        <label>Email Principal</label>
+                                        <label>Email Principal*</label>
                                         @Html.TextBox("txtEmail1", null, new { @class = "form-control" })
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
-                                        <label>Celular Principal</label>
+                                        <label>Celular Principal*</label>
                                         @Html.TextBox("txtCelular1", null, new { @class = "form-control" })
                                     </div>
                                 </div>
@@ -230,7 +230,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group text-right">
+                        <button id="btnGuardar" type="button" class="btn btn-primary waves-effect " onclick="GuardarPersonal()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
+                    </div>
                 </fieldset>
+
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-danger waves-effect " onclick="CerrarPersonal()"><i class="fa fa-times" aria-hidden="true"></i>Cerrar</button>

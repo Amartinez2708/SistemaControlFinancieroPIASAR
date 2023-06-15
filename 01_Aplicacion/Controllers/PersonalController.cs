@@ -54,5 +54,18 @@ namespace _01_Aplicacion.Controllers
             result = obj.ddlDistrito(Id);
             return Json(new SelectList(result, "IdText", "Text"), JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult GuardarPersonal(EnPersona detalle)
+        {
+            EnRespuesta msj = obj.GuardarPersonal(detalle);
+            return Json(msj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListPersonalId(int Id)
+        {
+            EnPersona result = new EnPersona();
+            result = obj.ListPersonalId(Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
