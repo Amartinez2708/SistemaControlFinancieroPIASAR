@@ -239,6 +239,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controllers\AlertaRegistroController.cs" />
+    <Compile Include="Controllers\AsignacionProyectosController.cs" />
     <Compile Include="Controllers\ATMController.cs" />
     <Compile Include="Controllers\DirectorioController.cs" />
     <Compile Include="Controllers\EjecucionPresupuestalPNSRController.cs" />
@@ -764,6 +765,7 @@
     <Content Include="Content\js\jquery.sharrre.js" />
     <Content Include="Content\js\jquery\jquery.min.js" />
     <Content Include="Content\js\jsAlerta.js" />
+    <Content Include="Content\js\jsAsignacionProyectos.js" />
     <Content Include="Content\js\jsATM.js" />
     <Content Include="Content\js\jsEjecucionPresupuestalPNSR.js" />
     <Content Include="Content\js\jsEstadoSituacional.js" />
@@ -1026,6 +1028,7 @@
     <Content Include="Views\JASS\Index.cshtml" />
     <Content Include="Views\ATM\Index.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\AsignacionProyectos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

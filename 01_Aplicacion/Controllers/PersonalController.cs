@@ -67,5 +67,11 @@ namespace _01_Aplicacion.Controllers
             result = obj.ListPersonalId(Id);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult EliminarPersonal(int Id)
+        {
+            EnRespuesta msj = obj.EliminarPersonal(Id);
+            return Json(msj, JsonRequestBehavior.AllowGet);
+        }
     }
 }

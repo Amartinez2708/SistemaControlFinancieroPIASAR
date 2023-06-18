@@ -109,6 +109,7 @@ namespace _03_Data
         public virtual DbSet<Profesion> Profesion { get; set; }
         public virtual DbSet<Cargo> Cargo { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<PersonaProyecto> PersonaProyecto { get; set; }
     
         public virtual ObjectResult<sp_ListAutorizacionRubro_Result> sp_ListAutorizacionRubro(string ids)
         {

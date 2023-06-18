@@ -210,6 +210,9 @@
     <Compile Include="Personal.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonaProyecto.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Presupuesto_obra.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>

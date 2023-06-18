@@ -686,3 +686,162 @@ legend.scheduler-border {
 .panel .panel-body {
     padding: 15px;
 }
+.checklistproy {
+    -webkit-column-count: 4; /* Número de columnas */
+    -moz-column-count: 4;
+    column-count: 4;
+    -webkit-column-gap: 20px; /* Espacio entre columnas */
+    -moz-column-gap: 20px;
+    column-gap: 20px;
+    list-style-type: none; /* Quitamos los puntos de la lista */
+    padding: 0;
+    margin: 0;
+}
+
+.checklistproy li {
+    display: inline-block;
+    width: 100%; /* Ancho del 100% para ocupar el espacio de la columna */
+}
+
+/* Media query para ajustar el diseño en pantallas más pequeñas */
+@media (max-width: 600px) {
+    .checklistproy {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-gap: 0;
+    -moz-column-gap: 0;
+    column-gap: 0;
+    }
+    .checklistproy label {
+	font-size:11px;
+    }
+}
+
+
+/*** Styling Radio & Checkbox Input Fields (start here) ***/
+.checklistproy label {
+	font-weight: 400;
+	color: #777777;
+	width: 100%;
+	float: left;
+	cursor: pointer;
+	padding: 0 0.6em;
+	box-sizing: border-box;
+	background: #e6e6e6;
+	transition: all 0.5s ease 0s;
+}
+
+.checklistproy input[type="radio"],
+.checklistproy input[type="checkbox"] {
+	display: none;
+}
+
+.checklistproy input[type="radio"] + label,
+.checklistproy input[type="checkbox"] + label {
+	line-height: 3em;
+}
+
+.checklistproy input[type="radio"] + label {
+	border-radius: 50px;
+}
+
+.checklistproy input[type="radio"]:disabled + label,
+.checklistproy input[type="checkbox"]:disabled + label {
+	color: #ccc !important;
+	cursor: not-allowed;
+}
+.checklistproy input[type="radio"]:checked:disabled + label:after,
+.checklistproy input[type="checkbox"]:checked:disabled + label:after {
+	border-color: #ccc;
+}
+
+.checklistproy input[type="radio"] + label:before,
+.checklistproy input[type="checkbox"] + label:before {
+	content: "";
+	width: 26px;
+	height: 26px;
+	float: left;
+	margin-right: 0.5em;
+	border: 2px solid #ccc;
+	background: #fff;
+	margin-top: 0.5em;
+}
+.checklistproy input[type="radio"] + label:before {
+	border-radius: 100%;
+}
+
+.checklistproy input[type="radio"]:checked + label,
+.checklistproy input[type="checkbox"]:checked + label {
+	background: #73b4ff61;
+}
+
+.checklistproy input[type="radio"]:checked + label:after {
+	content: "";
+	width: 0;
+	height: 0;
+	border: 7px solid #0fbf12;
+	float: left;
+	margin-left: -1.85em;
+	margin-top: 1em;
+	border-radius: 100%;
+}
+.checklistproy input[type="checkbox"]:checked + label:after {
+	content: "";
+    width: 16px;
+    height: 8px;
+    border: 4px solid #007bff;
+    float: left;
+    margin-left: -1.95em;
+    border-right: 0;
+    border-top: 0;
+    margin-top: 15px;
+    transform: rotate(-55deg);
+}
+
+.checklistproy input[type="radio"]:checked + label:before,
+input[type="checkbox"]:checked + label:before {
+	border-color: #007bff;
+}
+
+.checklistproy input[type="radio"]:checked:disabled + label,
+.checklistproy input[type="checkbox"]:checked:disabled + label {
+	background: #ccc;
+	color: #fff !important;
+}
+
+.checklistproy input[type="radio"]:checked:disabled + label:before,
+.checklistproy input[type="checkbox"]:checked:disabled + label:before {
+	border-color: #bdbdbd;
+}
+.resaltado label {
+	font-weight: 400;
+	color: #777777;
+	width: 100%;
+	float: left;
+	cursor: pointer;
+	padding: 0 0.6em;
+	box-sizing: border-box;
+	background: #29ed7769;
+	transition: all 0.5s ease 0s;
+}
+ .input-with-icon {
+    position: relative;
+    display: inline-block;
+    width: 420px;
+}
+
+.input-with-icon input[type="text"] {
+    padding-left: 30px; /* Espacio para el icono */
+}
+
+.input-with-icon .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+}
+.hidden {
+      display: none !important;
+    }

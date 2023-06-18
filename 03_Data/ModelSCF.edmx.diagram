@@ -132,16 +132,19 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PerfilMen__IdPer__6F6A7CB2" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__UsuarioPe__IdPer__68BD7F23" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__UsuarioPe__IdUsu__67C95AEA" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" Width="1.5" PointX="42.375" PointY="7.125" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.NivelProfesional" Width="1.5" PointX="37.875" PointY="4.25" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Profesion" Width="1.5" PointX="37.875" PointY="1" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Cargo" Width="1.5" PointX="43.375" PointY="1" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Persona" Width="1.5" PointX="45.625" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" Width="1.5" PointX="45.375" PointY="3.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.NivelProfesional" Width="1.5" PointX="40.375" PointY="5.125" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Profesion" Width="1.5" PointX="45.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Cargo" Width="1.5" PointX="40.375" PointY="2.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Persona" Width="1.5" PointX="43" PointY="0.5" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Persona__IdCargo__407A839F" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Persona__IdNivel__2E5BD364" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Persona__IdProfe__2D67AF2B" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaProyecto" Width="1.5" PointX="47.625" PointY="2.125" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPer__58520D30" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -330,11 +330,11 @@ namespace _04_Servicios
             result.UbigeoDireccion = objDetalle.UbigeoDireccion;
             result.Direccion = objDetalle.Direccion;
             result.Referencia = objDetalle.Referencia;
-            result.IdCargo = objDetalle.IdCargo;
-            result.Cargo = objDetalle.Cargo.Cargo1;
-            result.IdNivelProfesional = objDetalle.IdNivelProfesional;
+            result.IdCargo = objDetalle.IdCargo == null ? 0 : objDetalle.IdCargo; 
+            result.Cargo = objDetalle.Cargo.Cargo1 == null ? "" : objDetalle.Cargo.Cargo1;
+            result.IdNivelProfesional = objDetalle.IdNivelProfesional == null ? 0 : objDetalle.IdNivelProfesional;
             result.NivelProfesional = objDetalle.IdNivelProfesional == null ? "" : objDetalle.NivelProfesional.NivelProfesional1;
-            result.IdProfesion = objDetalle.IdProfesion;
+            result.IdProfesion = objDetalle.IdProfesion == null ? 0 : objDetalle.IdProfesion;
             result.Profesion = objDetalle.IdProfesion == null ? "" : objDetalle.Profesion.Profesion1;
             result.Email1 = objDetalle.Email1;
             result.Email2 = objDetalle.Email2;
@@ -345,6 +345,46 @@ namespace _04_Servicios
             result.EstadoConsultoria = "";
 
             return result;
+        }
+        public EnRespuesta EliminarPersonal(int Id)
+        {
+            EnRespuesta respuesta = new EnRespuesta();
+            using (var dbtran = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var objDetalle = context.Persona.Where(x => x.IdPersona == Id && x.Activo == true).SingleOrDefault();
+                    if (objDetalle != null)
+                    {
+                        objDetalle.Activo = false;
+                        objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                        objDetalle.Fecha_upd = DateTime.Now;
+
+                        context.SaveChanges();
+
+                        dbtran.Commit();
+                        //dbtran.Rollback();
+                        respuesta.TipoRespuesta = 1;
+                        respuesta.Mensaje = "Personal Eliminado Satisfactoriamente";
+                        respuesta.ValorDevolucion = objDetalle.IdPersona.ToString();
+                    }
+                    else
+                    {
+                        respuesta.TipoRespuesta = 2;
+                        respuesta.Mensaje = "No se pudo eliminar, actualice la pagina o verifique que el registro existe";
+                        respuesta.ValorDevolucion = "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    dbtran.Rollback();
+                    respuesta.TipoRespuesta = 2;
+                    respuesta.Mensaje = ex.ToString();
+                    respuesta.ValorDevolucion = "";
+                }
+            }
+            return respuesta;
         }
     }
 }

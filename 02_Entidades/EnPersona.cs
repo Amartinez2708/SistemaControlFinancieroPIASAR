@@ -15,7 +15,7 @@ namespace _02_Entidades
         public string ApeMaterno { get; set; }
         public string Nombres { get; set; }
         public string Sexo { get; set; }
-        public Nullable<int> TipoSangre { get; set; }
+        public string TipoSangre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public Nullable<int> EstadoCivil { get; set; }
         public string UbigeoDireccion { get; set; }

@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PrincipalMenu.cshtml";
+}
+
+<div class="col-sm-12 col-xl-12">
+    <div class="page-header card">
+        <div class="card-block">
+            <h5 class="m-b-10">Asignación de Proyectos</h5>
+            <p class="text-muted m-b-10"></p>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="/Inicio"> <i class="fa fa-home"></i> </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">Administración</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">Asignación de Proyectos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12 col-xl-12">
+    <div class="card border-primary">
+        <div class="card-block text-dark">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="form-group">
+                        <label>Personal</label>
+                        @Html.DropDownList("ddlPersonal", new SelectList(ViewBag.ddlPersonal, "id", "text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                
+
+                <div class="col-lg-12 col-sm-12 m-b-10 text-right">
+                    <button class="btn btn-mat btn-primary" onclick="AgregarAsignacion()"><i class="fa fa-check" aria-hidden="true"></i>Asignar Proyectos</button>
+                </div>
+                
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="form-group input-with-icon">
+                        <input class="form-control" type="text" id="campoBusqueda" placeholder="Buscar Proyecto">
+                        <i class="icon fa fa-search"></i>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-sm-12 m-b-10 text-center">
+                    <button class="btn btn-mat btn-primary" onclick="removerChecks()"><i class="fa fa-check" aria-hidden="true"></i>Deseleccionar Todos</button>
+                    <button class="btn btn-mat btn-primary" onclick="seleccionarChecks()"><i class="fa fa-check" aria-hidden="true"></i>Seleccionar Todos</button>
+                </div>
+
+                <div class="col-lg-12 col-sm-12">
+                    <ul id="chklProyectos" class="checklistproy border-checkbox-group border-checkbox-group-primary">
+                    </ul>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsAsignacionProyectos.js"></script>
+}

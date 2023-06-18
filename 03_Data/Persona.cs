@@ -19,6 +19,7 @@ namespace _03_Data
         {
             this.PersonaFamilia = new HashSet<PersonaFamilia>();
             this.Usuario = new HashSet<Usuario>();
+            this.PersonaProyecto = new HashSet<PersonaProyecto>();
         }
     
         public int IdPersona { get; set; }
@@ -28,7 +29,7 @@ namespace _03_Data
         public string ApeMaterno { get; set; }
         public string Nombres { get; set; }
         public string Sexo { get; set; }
-        public Nullable<int> TipoSangre { get; set; }
+        public string TipoSangre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public Nullable<int> EstadoCivil { get; set; }
         public string UbigeoDireccion { get; set; }
@@ -54,5 +55,7 @@ namespace _03_Data
         public virtual ICollection<PersonaFamilia> PersonaFamilia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PersonaProyecto> PersonaProyecto { get; set; }
     }
 }

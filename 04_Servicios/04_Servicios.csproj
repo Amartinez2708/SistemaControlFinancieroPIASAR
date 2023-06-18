@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SrvAlertaRegistro.cs" />
+    <Compile Include="SrvAsignacionProyectos.cs" />
     <Compile Include="SrvATM.cs" />
     <Compile Include="SrvEjecucionPresupuestalPNSR.cs" />
     <Compile Include="SrvEstadoSituacional.cs" />

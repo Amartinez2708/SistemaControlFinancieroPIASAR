@@ -89,6 +89,7 @@
     <Compile Include="EnMovimiento_Documento_Detalle.cs" />
     <Compile Include="EnPerfilMenu.cs" />
     <Compile Include="EnPersona.cs" />
+    <Compile Include="EnPersonaProyecto.cs" />
     <Compile Include="EnProceso.cs" />
     <Compile Include="EnProcesoDetalle.cs" />
     <Compile Include="EnProgramadoEjecutadoMensual.cs" />

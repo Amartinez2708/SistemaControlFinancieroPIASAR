@@ -79,13 +79,13 @@ function ListPersonal() {
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
                     //if (full.FechaActualizacion == "Sin Seguimiento") {
-                    return '<div onclick="EliminarPersonal(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/negado.png" style="width:40px"/></div>';
+                    return '<div onclick="ConfirmarEliminarPersonal(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/negado.png" style="width:40px"/></div>';
                     //}
                 }
             },
             {
                 "targets": "_all",
-                "className": "align-middle text-center",
+                "className": "align-middle",
             }
         ],
         language: {
@@ -138,7 +138,6 @@ function ddlProvincia() {
         } else {
             $("#ddlProvincia").append('<option value="00">[--Seleccione--]</option>');
         }
-
     });
     return false;
 }
@@ -211,7 +210,7 @@ function GuardarPersonal() {
             FechaNacimiento: $("#txtFechaNacimiento").val(),
             EstadoCivil: $("#ddlEstadoCivil").val(),
             UbigeoDireccion: $("#ddlDepartamento").val() + $("#ddlProvincia").val() + $("#ddlDistrito").val(),
-            Direccion: $("#txtDirección").val(),
+            Direccion: $("#txtDireccion").val(),
             Referencia: $("#txtReferencia").val(),
             IdCargo: $("#ddlCargo").val(),
             IdNivelProfesional: $("#ddlNivelProfesional").val(),
@@ -221,7 +220,6 @@ function GuardarPersonal() {
             Celular1: $("#txtCelular1").val(),
             Celular2: $("#txtCelular2").val()
         }
-
         $.ajax({
             type: "POST",
             url: "/Personal/GuardarPersonal",
@@ -372,15 +370,49 @@ function EditarPersonal(Id) {
         $('#txtNombres').val(data.Nombres)
         $("#ddlSexo").val(data.Sexo)
         $("#ddlTipoSangre").val(data.TipoSangre)
-        $("#txtFechaNacimiento").val(data.FechaNacimiento)
-        $("#ddlEstadoCivil").val(data.EstadoCivil)
+        $("#txtFechaNacimiento").val(data.FechaNacimientoString)
+        $("#ddlEstadoCivil").val(data.EstadoCivil);
         debugger;
         $("#ddlDepartamento").val(data.UbigeoDireccion.substring(0, 2))
-        $("#ddlDepartamento").change();
-        $("#ddlProvincia").val(data.UbigeoDireccion.substring(2, 4));
-        $("#ddlProvincia").change();
-        $("#ddlDistrito").val(data.UbigeoDireccion.substring(4, 6))
-        $("#txtDirección").val(data.Direccion)
+        $.get("/Personal/ddlProvincia?Id=" + $("#ddlDepartamento").val(), function (data2, status) {
+            $("#ddlProvincia").empty();
+            if (data2.length > 0) {
+                $.each(data2, function (i, data2) {
+                    if (data2.Value == data.UbigeoDireccion.substring(2, 4)) {
+                        $("#ddlProvincia").append('<option value="'
+                    + data2.Value + '" selected>'
+                    + data2.Text + '</option>');
+                    } else {
+                        $("#ddlProvincia").append('<option value="'
+                    + data2.Value + '">'
+                    + data2.Text + '</option>');
+                    }
+                });
+            } else {
+                $("#ddlProvincia").append('<option value="00">[--Seleccione--]</option>');
+            }
+        });
+
+        $.get("/Personal/ddlDistrito?Id=" + data.UbigeoDireccion.substring(0, 4), function (data1, status) {
+            $("#ddlDistrito").empty();
+            if (data1.length > 0) {
+                $.each(data1, function (i, data1) {
+                    if (data1.Value == data.UbigeoDireccion.substring(4, 6)) {
+                        $("#ddlDistrito").append('<option value="'
+                    + data1.Value + '" selected>'
+                    + data1.Text + '</option>');
+                    } else {
+                        $("#ddlDistrito").append('<option value="'
+                    + data1.Value + '">'
+                    + data1.Text + '</option>');
+                    }
+                });
+            } else {
+                $("#ddlDistrito").append('<option value="00">[--Seleccione--]</option>');
+            }
+        });
+
+        $("#txtDireccion").val(data.Direccion)
         $("#txtReferencia").val(data.Referencia)
         $("#ddlCargo").val(data.IdCargo)
         $("#ddlNivelProfesional").val(data.IdNivelProfesional)
@@ -390,7 +422,148 @@ function EditarPersonal(Id) {
         $("#txtCelular1").val(data.Celular1)
         $("#txtCelular2").val(data.Celular2)
 
-        $("#lblPersonal").html("Editar:" + data.Personal);
+        $("#lblPersonal").html("Editar: " + data.Personal);
         $("#modal-personal").modal({ backdrop: 'static', keyboard: true, show: true });
+    });
+}
+
+function ConfirmarEliminarPersonal(Id) {
+    $.confirm({
+        title: 'Eliminar',
+        content: '<div class="form-group">' +
+                '<label> Esta seguro de eliminar el registro? </label>' +
+                '</div>',
+        icon: 'fa fa-question',
+        theme: 'modern',
+        closeIcon: false,
+        closeIconClass: 'fa fa-close',
+        animation: 'scale',
+        type: 'orange',
+        buttons: {
+            tryAgain: {
+                text: 'Aceptar',
+                btnClass: 'btn-orange',
+                action: function () {
+                    EliminarPersonal(Id);
+                }
+            },
+            Close: {
+                text: 'Cancelar',
+                btnClass: 'btn-default',
+                action: function () {
+                }
+            }
+        }
+    });
+}
+
+function EliminarPersonal(Id) {
+    $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
+    var obj = { Id: Id };
+
+    $.ajax({
+        type: "POST",
+        url: "/Personal/EliminarPersonal",
+        cache: false,
+        data: JSON.stringify(obj),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        traditional: true,
+        success: function (result) {
+            $.unblockUI();
+            if (result.TipoRespuesta == 1) {
+                $.confirm({
+                    title: 'Eliminar',
+                    content: '<div class="form-group">' +
+                            '<label>' + result.Mensaje + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-thumbs-o-up',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'green',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-green',
+                            action: function () {
+                                $('#dtPersonal').DataTable().ajax.reload();
+                            }
+                        }
+                    }
+                });
+            }
+            else if (result.TipoRespuesta == 2) {
+                $.confirm({
+                    title: 'Eliminar',
+                    content: '<div class="form-group">' +
+                            '<label>' + result.Mensaje + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-thumbs-o-down',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'red',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+            }
+            else if (result.TipoRespuesta == 3) {
+                $.confirm({
+                    title: 'Guardar',
+                    content: '<div class="form-group">' +
+                            '<label>' + result.Mensaje + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-thumbs-o-down',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'orange',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-orange',
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest, textStatus, errorThrown);
+            $.unblockUI();
+            $.confirm({
+                title: 'Error',
+                content: '<div class="form-group">' +
+                        '<label>' + XMLHttpRequest + textStatus + errorThrown + '</label>' +
+                        '</div>',
+                icon: 'fa fa-frown-o',
+                theme: 'modern',
+                closeIcon: false,
+                closeIconClass: 'fa fa-close',
+                animation: 'scale',
+                type: 'red',
+                buttons: {
+                    tryAgain: {
+                        text: 'Aceptar',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+        },
     });
 }

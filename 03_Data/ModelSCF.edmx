@@ -707,7 +707,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="ApeMaterno" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Nombres" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="TipoSangre" Type="int" />
+          <Property Name="TipoSangre" Type="varchar" MaxLength="5" />
           <Property Name="FechaNacimiento" Type="date" />
           <Property Name="EstadoCivil" Type="int" />
           <Property Name="UbigeoDireccion" Type="varchar" MaxLength="6" />
@@ -776,6 +776,19 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="Fecha_add" Type="datetime" />
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PersonaProyecto">
+          <Key>
+            <PropertyRef Name="IdPersonaProyecto" />
+          </Key>
+          <Property Name="IdPersonaProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario_add" Type="int" Nullable="false" />
+          <Property Name="Fecha_add" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
+          <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Presupuesto_obra">
           <Key>
@@ -1972,6 +1985,30 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PersonaPr__IdPer__58520D30">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="PersonaProyecto" Type="Self.PersonaProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaProyecto">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonaPr__IdPro__59463169">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1" />
+          <End Role="PersonaProyecto" Type="Self.PersonaProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="PersonaProyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Proceso__Fecha_u__075714DC">
           <End Role="Componente" Type="Self.Componente" Multiplicity="1" />
           <End Role="Proceso" Type="Self.Proceso" Multiplicity="*" />
@@ -2315,6 +2352,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonaFamilia" EntityType="Self.PersonaFamilia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonaProyecto" EntityType="Self.PersonaProyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Presupuesto_obra" EntityType="Self.Presupuesto_obra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proceso" EntityType="Self.Proceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcesoDetalle" EntityType="Self.ProcesoDetalle" Schema="dbo" store:Type="Tables" />
@@ -2643,6 +2681,14 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK__PersonaFa__Fecha__0C06BB60" Association="Self.FK__PersonaFa__Fecha__0C06BB60">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonaPr__IdPer__58520D30" Association="Self.FK__PersonaPr__IdPer__58520D30">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaProyecto" EntitySet="PersonaProyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonaPr__IdPro__59463169" Association="Self.FK__PersonaPr__IdPro__59463169">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="PersonaProyecto" EntitySet="PersonaProyecto" />
           </AssociationSet>
           <AssociationSet Name="FK__Proceso__Fecha_u__075714DC" Association="Self.FK__Proceso__Fecha_u__075714DC">
             <End Role="Componente" EntitySet="Componente" />
@@ -3154,6 +3200,15 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK__Usuario__IdPerso__611C5D5B" Association="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="PersonaProyecto" EntityType="BD_NucleosEjecutoresModel.PersonaProyecto" />
+          <AssociationSet Name="FK__PersonaPr__IdPer__58520D30" Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPer__58520D30">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaProyecto" EntitySet="PersonaProyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonaPr__IdPro__59463169" Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="PersonaProyecto" EntitySet="PersonaProyecto" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MANIFIESTO_GASTO_DETALLE">
@@ -4919,6 +4974,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <NavigationProperty Name="DesembolsoProgramadoAnual" Relationship="BD_NucleosEjecutoresModel.FK__Desembols__Fecha__43A1090D" FromRole="Proyecto" ToRole="DesembolsoProgramadoAnual" />
           <NavigationProperty Name="MANIFIESTO_GASTO" Relationship="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_Proyecto" FromRole="Proyecto" ToRole="MANIFIESTO_GASTO" />
           <NavigationProperty Name="MonitoreoObras" Relationship="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB" FromRole="Proyecto" ToRole="MonitoreoObras" />
+          <NavigationProperty Name="PersonaProyecto" Relationship="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169" FromRole="Proyecto" ToRole="PersonaProyecto" />
         </EntityType>
         <Association Name="FK_Autorizacion_Gasto_Proyecto">
           <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="1" />
@@ -5335,7 +5391,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="ApeMaterno" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Nombres" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="TipoSangre" Type="Int32" />
+          <Property Name="TipoSangre" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
           <Property Name="EstadoCivil" Type="Int32" />
           <Property Name="UbigeoDireccion" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
@@ -5358,6 +5414,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <NavigationProperty Name="Profesion" Relationship="BD_NucleosEjecutoresModel.FK__Persona__IdProfe__2D67AF2B" FromRole="Persona" ToRole="Profesion" />
           <NavigationProperty Name="PersonaFamilia" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" FromRole="Persona" ToRole="PersonaFamilia" />
           <NavigationProperty Name="Usuario" Relationship="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B" FromRole="Persona" ToRole="Usuario" />
+          <NavigationProperty Name="PersonaProyecto" Relationship="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPer__58520D30" FromRole="Persona" ToRole="PersonaProyecto" />
         </EntityType>
         <Association Name="FK__Persona__IdCargo__407A839F">
           <End Type="BD_NucleosEjecutoresModel.Cargo" Role="Cargo" Multiplicity="0..1" />
@@ -5416,6 +5473,45 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonaProyecto">
+          <Key>
+            <PropertyRef Name="IdPersonaProyecto" />
+          </Key>
+          <Property Name="IdPersonaProyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario_add" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_add" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_upd" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPer__58520D30" FromRole="PersonaProyecto" ToRole="Persona" />
+          <NavigationProperty Name="Proyecto" Relationship="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169" FromRole="PersonaProyecto" ToRole="Proyecto" />
+        </EntityType>
+        <Association Name="FK__PersonaPr__IdPer__58520D30">
+          <End Type="BD_NucleosEjecutoresModel.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.PersonaProyecto" Role="PersonaProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaProyecto">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonaPr__IdPro__59463169">
+          <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.PersonaProyecto" Role="PersonaProyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="PersonaProyecto">
+              <PropertyRef Name="IdProyecto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7049,6 +7145,20 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
                 <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonaProyecto">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PersonaProyecto">
+              <MappingFragment StoreEntitySet="PersonaProyecto">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdPersonaProyecto" ColumnName="IdPersonaProyecto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
