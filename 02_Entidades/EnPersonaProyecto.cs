@@ -12,5 +12,6 @@ namespace _02_Entidades
         public int IdPersona { get; set; }
         public int IdProyecto { get; set; }
         public string Proyecto { get; set; }
+        public bool Check { get; set; }
     }
 }

@@ -372,7 +372,6 @@ function EditarPersonal(Id) {
         $("#ddlTipoSangre").val(data.TipoSangre)
         $("#txtFechaNacimiento").val(data.FechaNacimientoString)
         $("#ddlEstadoCivil").val(data.EstadoCivil);
-        debugger;
         $("#ddlDepartamento").val(data.UbigeoDireccion.substring(0, 2))
         $.get("/Personal/ddlProvincia?Id=" + $("#ddlDepartamento").val(), function (data2, status) {
             $("#ddlProvincia").empty();

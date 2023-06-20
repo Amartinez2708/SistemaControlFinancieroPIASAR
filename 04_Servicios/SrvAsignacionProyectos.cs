@@ -53,5 +53,175 @@ namespace _04_Servicios
             }
             return result;
         }
+        public EnRespuesta GuardarAsignacion(int IdPersona, int IdProyecto, int Check)
+        {
+            EnRespuesta respuesta = new EnRespuesta();
+            using (var dbtran = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var obj = context.PersonaProyecto.Where(x => x.IdPersona == IdPersona && x.IdProyecto == IdProyecto).SingleOrDefault();
+                    if (obj != null)
+                    {
+                        #region Actualizar
+
+                        if (Check == 0)
+                        {
+                            obj.Activo = false;
+                            obj.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                            obj.Fecha_upd = DateTime.Now;
+                            context.SaveChanges();
+
+                            dbtran.Commit();
+                            respuesta.TipoRespuesta = 2;
+                            respuesta.Mensaje = "Proyecto desasignado Satisfactoriamente";
+                            respuesta.ValorDevolucion = obj.IdPersona.ToString();
+                        }
+                        else
+                        {
+                            obj.Activo = true;
+                            obj.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                            obj.Fecha_upd = DateTime.Now;
+                            context.SaveChanges();
+
+                            dbtran.Commit();
+                            respuesta.TipoRespuesta = 1;
+                            respuesta.Mensaje = "Proyecto asignado Satisfactoriamente";
+                            respuesta.ValorDevolucion = obj.IdPersona.ToString();
+                        }
+
+                        #endregion
+                        
+                    }
+                    else
+                    {
+                        #region Agregar
+
+                        PersonaProyecto n = new PersonaProyecto();
+                        n.IdPersona = IdPersona;
+                        n.IdProyecto = IdProyecto;
+                        n.Activo = true;
+                        n.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
+                        n.Fecha_add = DateTime.Now;
+                        n.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                        n.Fecha_upd = DateTime.Now;
+                        context.PersonaProyecto.Add(n);
+                        context.SaveChanges();
+
+                        dbtran.Commit();
+                        respuesta.TipoRespuesta = 1;
+                        respuesta.Mensaje = "Proyecto asignado Satisfactoriamente";
+                        respuesta.ValorDevolucion = n.IdPersona.ToString();
+
+                        #endregion
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    dbtran.Rollback();
+                    respuesta.TipoRespuesta = 3;
+                    respuesta.Mensaje = ex.ToString();
+                    respuesta.ValorDevolucion = "";
+                }
+            }
+            return respuesta;
+        }
+        public List<EnPersonaProyecto> ListarProyectosAsignados(int IdPersona)
+        {
+            List<EnPersonaProyecto> result = new List<EnPersonaProyecto>();
+
+            var obj = context.PersonaProyecto.Where(x => x.IdPersona == IdPersona && x.Activo == true).ToList();
+
+            if (obj != null && obj.Count() > 0)
+            {
+                foreach (var item in obj)
+                {
+                    EnPersonaProyecto n = new EnPersonaProyecto();
+                    n.IdPersonaProyecto = item.IdPersonaProyecto;
+                    n.IdPersona = item.IdPersona;
+                    n.IdProyecto = item.IdProyecto;
+                    n.Check = item.Activo;
+
+                    result.Add(n);
+                }
+            }
+
+            return result.ToList();
+        }
+        public EnRespuesta GuardarAsignacion2(List<EnPersonaProyecto> proyectos)
+        {
+            EnRespuesta respuesta = new EnRespuesta();
+            using (var dbtran = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    //var obj = context.PersonaProyecto.Where(x => x.IdPersona == IdPersona && x.IdProyecto == IdProyecto).SingleOrDefault();
+                    //if (obj != null)
+                    //{
+                    //    #region Actualizar
+
+                    //    if (Check == 0)
+                    //    {
+                    //        obj.Activo = false;
+                    //        obj.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                    //        obj.Fecha_upd = DateTime.Now;
+                    //        context.SaveChanges();
+
+                    //        dbtran.Commit();
+                    //        respuesta.TipoRespuesta = 2;
+                    //        respuesta.Mensaje = "Proyecto desasignado Satisfactoriamente";
+                    //        respuesta.ValorDevolucion = obj.IdPersona.ToString();
+                    //    }
+                    //    else
+                    //    {
+                    //        obj.Activo = true;
+                    //        obj.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                    //        obj.Fecha_upd = DateTime.Now;
+                    //        context.SaveChanges();
+
+                    //        dbtran.Commit();
+                    //        respuesta.TipoRespuesta = 1;
+                    //        respuesta.Mensaje = "Proyecto asignado Satisfactoriamente";
+                    //        respuesta.ValorDevolucion = obj.IdPersona.ToString();
+                    //    }
+
+                    //    #endregion
+
+                    //}
+                    //else
+                    //{
+                    //    #region Agregar
+
+                    //    PersonaProyecto n = new PersonaProyecto();
+                    //    n.IdPersona = IdPersona;
+                    //    n.IdProyecto = IdProyecto;
+                    //    n.Activo = true;
+                    //    n.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
+                    //    n.Fecha_add = DateTime.Now;
+                    //    n.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                    //    n.Fecha_upd = DateTime.Now;
+                    //    context.PersonaProyecto.Add(n);
+                    //    context.SaveChanges();
+
+                    //    dbtran.Commit();
+                    //    respuesta.TipoRespuesta = 1;
+                    //    respuesta.Mensaje = "Proyecto asignado Satisfactoriamente";
+                    //    respuesta.ValorDevolucion = n.IdPersona.ToString();
+
+                    //    #endregion
+                    //}
+
+                }
+                catch (Exception ex)
+                {
+                    dbtran.Rollback();
+                    respuesta.TipoRespuesta = 3;
+                    respuesta.Mensaje = ex.ToString();
+                    respuesta.ValorDevolucion = "";
+                }
+            }
+            return respuesta;
+        }
     }
 }

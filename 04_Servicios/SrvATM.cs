@@ -17,7 +17,9 @@ namespace _04_Servicios
         {
             List<EnProyecto> result = new List<EnProyecto>();
 
-            var obj = context.Proyecto.Where(x => x.Cod_subprograma == 133 && x.Estado == 1).ToList();
+            List<int> objProyectoAsignados = context.PersonaProyecto.Where(x=> x.IdPersona == SecurityManager<EnUsuario>.User.IdPersonal && x.Activo == true).Select(x => x.IdProyecto).ToList();
+
+            var obj = context.Proyecto.Where(x => x.Cod_subprograma == 133 && (objProyectoAsignados.Count() == 0 || objProyectoAsignados.Contains(x.IdProyecto)) && x.Estado == 1).ToList();
             if (obj != null && obj.Count() > 0)
             {
                 foreach (var data in obj)

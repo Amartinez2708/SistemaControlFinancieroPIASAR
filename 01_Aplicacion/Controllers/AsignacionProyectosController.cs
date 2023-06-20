@@ -30,5 +30,18 @@ namespace _01_Aplicacion.Controllers
             result = obj.chkProyectos();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult GuardarAsignacion(int IdPersona, int IdProyecto, int Check)
+        {
+            EnRespuesta msj = obj.GuardarAsignacion(IdPersona, IdProyecto, Check);
+            return Json(msj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListarProyectosAsignados(int Id)
+        {
+            List<EnPersonaProyecto> result = new List<EnPersonaProyecto>();
+            result = obj.ListarProyectosAsignados(Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

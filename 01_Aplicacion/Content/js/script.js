@@ -198,6 +198,7 @@ function MensajeAlerta(mensaje, campo) {
         onDestroy: function () { $('#' + campo).focus(); }
     });
 }
+
 function formatMoney(amount, decimalCount, decimal, thousands) {
     try {
         decimalCount = Math.abs(2);
