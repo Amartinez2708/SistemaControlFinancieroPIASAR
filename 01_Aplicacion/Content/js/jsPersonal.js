@@ -37,7 +37,7 @@ function ListPersonal() {
                     { "name": "Fecha Fin Consultoria", "title": "Fecha Fin <br/>Consultoria", "data": "EstadoConsultoria", "autowidth": true },
                     { "name": "Estado", "title": "Estado", "data": "EstadoConsultoria", "autowidth": true },
                     { "name": "", "title": "Familiares", "data": null, "autowidth": true },
-                    { "name": "", "title": "Consultoria", "data": null, "autowidth": true },
+                    { "name": "", "title": "Contrato", "data": null, "autowidth": true },
                     { "name": "", "title": "Editar", "data": null, "autowidth": true },
                     { "name": "", "title": "Eliminar", "data": null, "autowidth": true }
         ],
@@ -59,7 +59,7 @@ function ListPersonal() {
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
                     //if (full.FechaActualizacion == "Sin Seguimiento") {
-                    return '<div onclick="AbrirConsultoria(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/pages.png" style="width:40px"/></div>';
+                    return '<div onclick="AbrirContrato(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/pages.png" style="width:40px"/></div>';
                     //}
                 }
             },
@@ -565,4 +565,10 @@ function EliminarPersonal(Id) {
             });
         },
     });
+}
+
+/*-------------------------------------------------------------------------CONTRATO--------------------------------------------------------------------------------------*/
+
+function AbrirContrato(Id) {
+
 }

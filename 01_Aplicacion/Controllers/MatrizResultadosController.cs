@@ -279,5 +279,21 @@ namespace _01_Aplicacion.Controllers
         {
             return PartialView("_CapacitacionesJASS");
         }
+        public ActionResult ReportesActividadesFamilias()
+        {
+            return View();
+        }
+        public ActionResult ReportesActividadesNE()
+        {
+            return View();
+        }
+        public ActionResult ReportesActividadesJASS()
+        {
+            return View();
+        }
+        public ActionResult ReportesActividadesATM()
+        {
+            return View();
+        }
     }
 }
