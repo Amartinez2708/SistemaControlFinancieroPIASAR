@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "ReportesActividadesNE";
+    Layout = "~/Views/Shared/_PrincipalMenu.cshtml";
+}
+
+<div class="card">
+    <div class="card-block">
+        @{ Html.RenderAction("_MatrizResultadosReportesPlanosCapacitacionesNE", "MatrizResultados"); }
+    </div>
+</div>

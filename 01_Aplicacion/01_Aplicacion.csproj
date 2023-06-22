@@ -1034,6 +1034,10 @@
     <Content Include="Views\ATM\Index.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
     <Content Include="Views\AsignacionProyectos\Index.cshtml" />
+    <Content Include="Views\MatrizResultados\ReportesActividadesFamilias.cshtml" />
+    <Content Include="Views\MatrizResultados\ReportesActividadesNE.cshtml" />
+    <Content Include="Views\MatrizResultados\ReportesActividadesJASS.cshtml" />
+    <Content Include="Views\MatrizResultados\ReportesActividadesATM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">
