@@ -845,3 +845,6 @@ input[type="checkbox"]:checked + label:before {
 .hidden {
       display: none !important;
     }
+.breadcrumb-item {
+    float: left;
+}
