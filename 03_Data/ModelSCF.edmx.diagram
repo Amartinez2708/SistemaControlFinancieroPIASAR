@@ -178,8 +178,10 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_PRE_LIQUIDACION_MENSUAL_Proyecto" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_Presupuesto_obra_detalle_Presupuesto_obra" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" Width="1.5" PointX="49.875" PointY="5.25" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" Width="1.5" PointX="50.25" PointY="1.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoFamiliar" Width="1.5" PointX="48" PointY="5.875" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" />
+        <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaFa__IdTip__5634BA94" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

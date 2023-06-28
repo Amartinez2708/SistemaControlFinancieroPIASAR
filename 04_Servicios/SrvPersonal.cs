@@ -794,7 +794,7 @@ namespace _04_Servicios
                     EnPersonaFamilia model = new EnPersonaFamilia();
                     model.IdPersonaFamilia = data.IdPersonaFamilia;
                     model.IdPersona = data.IdPersona;
-                    model.TipoFamiliar = data.TipoFamiliar;
+                    //model.TipoFamiliar = data.TipoFamiliar;
                     model.TipoDocumento = data.TipoDocumento;
                     model.NroDocumento = data.NroDocumento;
                     model.TipoNroDcto = "DNI - " + data.NroDocumento;
@@ -819,6 +819,29 @@ namespace _04_Servicios
                 }
             }
             return result.ToList();
+        }
+        public List<EnDropDownList> ddlTipoFamiliar()
+        {
+            List<EnDropDownList> result = new List<EnDropDownList>();
+
+            var obj = context.TipoFamiliar.OrderBy(x => x.TipoFamiliar1);
+            if (obj != null && obj.Count() > 0)
+            {
+                EnDropDownList unidad = new EnDropDownList();
+                unidad.id = 0;
+                unidad.text = "[--Seleccione--]";
+                result.Add(unidad);
+
+                EnDropDownList values;
+                foreach (var data in obj)
+                {
+                    values = new EnDropDownList();
+                    values.id = data.IdTipoFamiliar;
+                    values.text = data.TipoFamiliar1;
+                    result.Add(values);
+                }
+            }
+            return result;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace _01_Aplicacion.Controllers
             ViewBag.ddlOficinaDependencia = obj.ddlOficinaDependencia();
             ViewBag.ddlLugarPrestacionServicios = obj.ddlLugarPrestacionServicios();
             ViewBag.ddlRepresentanteLegal = obj.ddlRepresentanteLegal();
-
+            ViewBag.ddlTipoFamiliar = obj.ddlTipoFamiliar();
             return View();
         }
         [HttpGet]

@@ -903,8 +903,8 @@
           <Property Name="IDUSUARIO_UPD" Type="int" />
           <Property Name="FECHA_UPD" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.PerfilMenu' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PerfilMenu">
           <Key>
             <PropertyRef Name="IdPerfilMenu" />
@@ -964,7 +964,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           </Key>
           <Property Name="IdPersonaFamilia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdPersona" Type="int" Nullable="false" />
-          <Property Name="TipoFamiliar" Type="int" Nullable="false" />
+          <Property Name="IdTipoFamiliar" Type="int" Nullable="false" />
           <Property Name="TipoDocumento" Type="int" Nullable="false" />
           <Property Name="NroDocumento" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="ApePaterno" Type="varchar" MaxLength="250" Nullable="false" />
@@ -1655,6 +1655,18 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
+        <EntityType Name="TipoFamiliar">
+          <Key>
+            <PropertyRef Name="IdTipoFamiliar" />
+          </Key>
+          <Property Name="IdTipoFamiliar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoFamiliar" Type="varchar" MaxLength="500" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="TipoSeguimiento">
           <Key>
             <PropertyRef Name="IdTipoSeguimiento" />
@@ -1695,8 +1707,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.Ubigeo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.Ubigeo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Ubigeo">
           <Key>
             <PropertyRef Name="idUbigeo" />
@@ -1759,8 +1771,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.Ubigeo' does not have a p
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="DesembolsoVSJustificado">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1797,8 +1809,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' 
           <Property Name="AnioEjecucion" Type="int" />
           <Property Name="Grupo" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDepa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDepa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListDepa">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1814,8 +1826,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDepa' does not have a
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDist' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDist' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListDist">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1835,8 +1847,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDist' does not have a
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoActividad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoActividad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListEstadoActividad">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1862,8 +1874,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoActividad' does
           <Property Name="fecha_ult_act" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="estado" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListEstadoPresupuesto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1886,8 +1898,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' do
           <Property Name="Presupuesto" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Fecha Actualización Presupuesto" Type="varchar" MaxLength="19" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListEstadoProyecto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1925,8 +1937,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' does 
           <Property Name="Fecha de Fin Real" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Fecha de Ultima Actualización" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresupuesto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListMontoProyectoVSPresupuesto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1953,8 +1965,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresup
           <Property Name="Porcentaje" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Correcto" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListProv">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -2413,6 +2425,18 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="PersonaFamilia">
               <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonaFa__IdTip__5634BA94">
+          <End Role="TipoFamiliar" Type="Self.TipoFamiliar" Multiplicity="1" />
+          <End Role="PersonaFamilia" Type="Self.PersonaFamilia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFamiliar">
+              <PropertyRef Name="IdTipoFamiliar" />
+            </Principal>
+            <Dependent Role="PersonaFamilia">
+              <PropertyRef Name="IdTipoFamiliar" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2927,6 +2951,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="TABLA_DETALLE" EntityType="Self.TABLA_DETALLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoActividad" EntityType="Self.TipoActividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoBienArticulo" EntityType="Self.TipoBienArticulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoFamiliar" EntityType="Self.TipoFamiliar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoSeguimiento" EntityType="Self.TipoSeguimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoSeguimientoBienATMJASS" EntityType="Self.TipoSeguimientoBienATMJASS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TituloSubComponente" EntityType="Self.TituloSubComponente" Schema="dbo" store:Type="Tables" />
@@ -3255,6 +3280,10 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           </AssociationSet>
           <AssociationSet Name="FK__PersonaFa__Fecha__0C06BB60" Association="Self.FK__PersonaFa__Fecha__0C06BB60">
             <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonaFa__IdTip__5634BA94" Association="Self.FK__PersonaFa__IdTip__5634BA94">
+            <End Role="TipoFamiliar" EntitySet="TipoFamiliar" />
             <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
           </AssociationSet>
           <AssociationSet Name="FK__PersonaPr__IdPer__58520D30" Association="Self.FK__PersonaPr__IdPer__58520D30">
@@ -3894,8 +3923,13 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             <End Role="Presupuesto_obra_detalle" EntitySet="Presupuesto_obra_detalle" />
           </AssociationSet>
           <EntitySet Name="PersonaFamilia" EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" />
+          <EntitySet Name="TipoFamiliar" EntityType="BD_NucleosEjecutoresModel.TipoFamiliar" />
           <AssociationSet Name="FK__PersonaFa__Fecha__0C06BB60" Association="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60">
             <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonaFa__IdTip__5634BA94" Association="BD_NucleosEjecutoresModel.FK__PersonaFa__IdTip__5634BA94">
+            <End Role="TipoFamiliar" EntitySet="TipoFamiliar" />
             <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
           </AssociationSet>
           </EntityContainer>
@@ -6725,7 +6759,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           </Key>
           <Property Name="IdPersonaFamilia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdPersona" Type="Int32" Nullable="false" />
-          <Property Name="TipoFamiliar" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoFamiliar" Type="Int32" Nullable="false" />
           <Property Name="TipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ApePaterno" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -6746,6 +6780,20 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="IdUsuario_upd" Type="Int32" Nullable="false" />
           <Property Name="Fecha_upd" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" FromRole="PersonaFamilia" ToRole="Persona" />
+          <NavigationProperty Name="TipoFamiliar" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__IdTip__5634BA94" FromRole="PersonaFamilia" ToRole="TipoFamiliar" />
+        </EntityType>
+        <EntityType Name="TipoFamiliar">
+          <Key>
+            <PropertyRef Name="IdTipoFamiliar" />
+          </Key>
+          <Property Name="IdTipoFamiliar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoFamiliar1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PersonaFamilia" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__IdTip__5634BA94" FromRole="TipoFamiliar" ToRole="PersonaFamilia" />
         </EntityType>
         <Association Name="FK__PersonaFa__Fecha__0C06BB60">
           <End Type="BD_NucleosEjecutoresModel.Persona" Role="Persona" Multiplicity="1" />
@@ -6756,6 +6804,18 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="PersonaFamilia">
               <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonaFa__IdTip__5634BA94">
+          <End Type="BD_NucleosEjecutoresModel.TipoFamiliar" Role="TipoFamiliar" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.PersonaFamilia" Role="PersonaFamilia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFamiliar">
+              <PropertyRef Name="IdTipoFamiliar" />
+            </Principal>
+            <Dependent Role="PersonaFamilia">
+              <PropertyRef Name="IdTipoFamiliar" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8767,9 +8827,22 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="ApePaterno" ColumnName="ApePaterno" />
                 <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
                 <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
-                <ScalarProperty Name="TipoFamiliar" ColumnName="TipoFamiliar" />
+                <ScalarProperty Name="IdTipoFamiliar" ColumnName="IdTipoFamiliar" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdPersonaFamilia" ColumnName="IdPersonaFamilia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoFamiliar">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.TipoFamiliar">
+              <MappingFragment StoreEntitySet="TipoFamiliar">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="TipoFamiliar1" ColumnName="TipoFamiliar" />
+                <ScalarProperty Name="IdTipoFamiliar" ColumnName="IdTipoFamiliar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

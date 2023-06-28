@@ -12,18 +12,16 @@ namespace _03_Data
     using System;
     using System.Collections.Generic;
     
-    public partial class RepresentanteLegal
+    public partial class TipoFamiliar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RepresentanteLegal()
+        public TipoFamiliar()
         {
-            this.ContratoAdenda = new HashSet<ContratoAdenda>();
-            this.Contrato = new HashSet<Contrato>();
+            this.PersonaFamilia = new HashSet<PersonaFamilia>();
         }
     
-        public int IdRepresentanteLegal { get; set; }
-        public Nullable<int> IdPersona { get; set; }
-        public string AbreviaturaProfesional { get; set; }
+        public int IdTipoFamiliar { get; set; }
+        public string TipoFamiliar1 { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario_add { get; set; }
         public Nullable<System.DateTime> Fecha_add { get; set; }
@@ -31,9 +29,6 @@ namespace _03_Data
         public Nullable<System.DateTime> Fecha_upd { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContratoAdenda> ContratoAdenda { get; set; }
-        public virtual Persona Persona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contrato> Contrato { get; set; }
+        public virtual ICollection<PersonaFamilia> PersonaFamilia { get; set; }
     }
 }

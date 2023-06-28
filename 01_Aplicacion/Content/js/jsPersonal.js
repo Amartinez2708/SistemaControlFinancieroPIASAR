@@ -186,31 +186,31 @@ function CerrarPersonal() {
 }
 function GuardarPersonal() {
 
-    if ($("ddlTipoDcto").val() == "") {
+    if ($("#ddlTipoDcto").val() == 0) {
         MensajeAlerta('Seleccione el Tipo de Documento', 'ddlTipoDcto');
     }
-    else if ($("txtNroDocumento").val() == "") {
+    else if ($("#txtNroDocumento").val() == "") {
         MensajeAlerta('Ingrese el Nro. de Documento', 'txtNroDocumento');
     }
-    else if ($("txtApellidoPaterno").val() == "") {
+    else if ($("#txtApellidoPaterno").val() == "") {
         MensajeAlerta('Ingrese el Apellido Paterno', 'txtApellidoPaterno');
     }
-    else if ($("txtApellidoMaterno").val() == "") {
+    else if ($("#txtApellidoMaterno").val() == "") {
         MensajeAlerta('Ingrese el Apellido Materno', 'txtApellidoMaterno');
     }
-    else if ($("txtNombres").val() == "") {
+    else if ($("#txtNombres").val() == "") {
         MensajeAlerta('Ingrese los Nombres', 'txtNombres');
     }
-    else if ($("ddlSexo").val() == "") {
+    else if ($("#ddlSexo").val() == 0) {
         MensajeAlerta('Seleccione el Sexo', 'ddlSexo');
     }
-    else if ($("ddlCargo").val() == "") {
+    else if ($("#ddlCargo").val() == 0) {
         MensajeAlerta('Seleccione el Cargo', 'ddlCargo');
     }
-    else if ($("txtEmail1").val() == "") {
+    else if ($("#txtEmail1").val() == "") {
         MensajeAlerta('Ingrese el Email Principal', 'txtEmail1');
     }
-    else if ($("txtCelular1").val() == "") {
+    else if ($("#txtCelular1").val() == "") {
         MensajeAlerta('Ingrese el Celular Principal', 'txtCelular1');
     }
     else {
@@ -784,6 +784,18 @@ function CerrarContrato() {
 
 function LimpiarContrato() {
     $("#hdnIdContrato").val("");
+    $("#txtDireccionContrato").val("");
+    $('#txtNroContrato').val("");
+    $('#ddlTipoContrato').val(0);
+    $('#ddlCargoContrato').val(0);
+    $("#ddlOficinaDependencia").val(0);
+    $("#txtEjecucionTrabajoSupervision").val("");
+    $("#txtFechaInicio").val("");
+    $("#txtFechaFin").val("");
+    $("#ddlLugarPrestacionServicios").val(0);
+    $("#txtMontoContrato").val("");
+    $("#txtFormaPago").val("");
+    $("#ddlRepresentanteLegal").val(0);
 }
 
 function ListDatosPersonal() {
@@ -800,37 +812,37 @@ function ListCorrelativoContrato() {
 }
 
 function GuardarContrato() {
-    if ($("ddlTipoContrato").val() == 0) {
+    if ($("#ddlTipoContrato").val() == 0) {
         MensajeAlerta('Seleccione el Tipo de Contrato', 'ddlTipoContrato');
     }
-    else if ($("txtNroContrato").val() == "") {
+    else if ($("#txtNroContrato").val() == "") {
         MensajeAlerta('Ingrese el Nro. de Contrato', 'txtNroContrato');
     }
-    else if ($("ddlCargoContrato").val() == 0) {
+    else if ($("#ddlCargoContrato").val() == 0) {
         MensajeAlerta('Seleccione el Cargo', 'ddlCargoContrato');
     }
-    else if ($("ddlOficinaDependencia").val() == 0) {
+    else if ($("#ddlOficinaDependencia").val() == 0) {
         MensajeAlerta('Seleccione la Oficina de Dependencia', 'ddlOficinaDependencia');
     }
-    else if ($("txtEjecucionTrabajoSupervision").val() == "") {
+    else if ($("#txtEjecucionTrabajoSupervision").val() == "") {
         MensajeAlerta('Ingrese la Ejecución del Trabajo y Supervisión del Contrato', 'txtEjecucionTrabajoSupervision');
     }
-    else if ($("txtFechaInicio").val() == "") {
+    else if ($("#txtFechaInicio").val() == "") {
         MensajeAlerta('Ingrese Fecha de Inicio', 'txtFechaInicio');
     }
-    else if ($("txtFechaFin").val() == "") {
+    else if ($("#txtFechaFin").val() == "") {
         MensajeAlerta('Ingrese Fecha de Fin', 'txtFechaFin');
     }
-    else if ($("ddlLugarPrestacionServicios").val() == 0) {
+    else if ($("#ddlLugarPrestacionServicios").val() == 0) {
         MensajeAlerta('Seleccione el Lugar de Prestación de Servicios', 'ddlLugarPrestacionServicios');
     }
-    else if ($("txtMontoContrato").val() == "") {
+    else if ($("#txtMontoContrato").val() == "") {
         MensajeAlerta('Ingrese el Monto del Contrato', 'txtMontoContrato');
     }
-    else if ($("txtFormaPago").val() == "") {
+    else if ($("#txtFormaPago").val() == "") {
         MensajeAlerta('Ingrese la Forma de Pago', 'txtFormaPago');
     }
-    else if ($("ddlRepresentanteLegal").val() == "") {
+    else if ($("#ddlRepresentanteLegal").val() == "") {
         MensajeAlerta('Seleccione el Representante Legal', 'ddlRepresentanteLegal');
     }
     else {
@@ -879,7 +891,7 @@ function GuardarContrato() {
                                 text: 'Aceptar',
                                 btnClass: 'btn-green',
                                 action: function () {
-                                    LimpiarFormulario();
+                                    LimpiarContrato();
                                     $('#dtContrato').DataTable().ajax.reload();
                                     $('#modal-personal-contrato-agregar').modal('hide');
 
@@ -1239,6 +1251,7 @@ function CerrarFamilia() {
     $("#hdnIdPersonal").val("");
     $('#modal-personal-familia').modal('toggle');
 }
+
 function AgregarFamilia() {
     $("#lblPersonalFamiliaAgregar").html("Agregar Nuevo Familiar");
     $("#modal-personal-familia-agregar").modal({ backdrop: 'static', keyboard: true, show: true });
@@ -1248,6 +1261,166 @@ function CerrarPersonalFamiliaAgregar() {
     LimpiarFamiliar();
     $('#modal-personal-familia-agregar').modal('toggle');
 }
+
 function LimpiarFamiliar() {
     $("#hdnIdPersonalFamilia").val("");
+}
+
+function GuardarFamiliar() {
+    if ($("#ddlTipoFamiliar").val() == 0) {
+        MensajeAlerta('Seleccione el Tipo de Familiar', 'ddlTipoFamiliar');
+    }
+    else if ($("#ddlTipoDctoFamiliar").val() == 0) {
+        MensajeAlerta('Seleccione el Tipo de Documento', 'ddlTipoDctoFamiliar');
+    }
+    else if ($("#txtNroDocumentoFamiliar").val() == 0) {
+        MensajeAlerta('Ingrese el Nro. de Contrato', 'txtNroDocumentoFamiliar');
+    }
+    else if ($("#txtApellidoPaternoFamiliar").val() == 0) {
+        MensajeAlerta('Ingrese el Apellido Paterno', 'txtApellidoPaternoFamiliar');
+    }
+    else if ($("#txtApellidoMaternoFamiliar").val() == 0) {
+        MensajeAlerta('Ingrese el Apellido Materno', 'txtApellidoMaternoFamiliar');
+    }
+    else if ($("#txtNombresFamiliar").val() == "") {
+        MensajeAlerta('Ingrese los Nombres', 'txtNombresFamiliar');
+    }
+    else if ($("#ddlSexoFamiliar").val() == "") {
+        MensajeAlerta('Ingrese el Sexo', 'ddlSexoFamiliar');
+    }
+    else if ($("#txtCelular1").val() == "") {
+        MensajeAlerta('Ingrese EL Nro. de Celular', 'txtCelular1');
+    }
+    else {
+        $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
+
+        var detalle = {
+            IdPersonaFamilia: $("#hdnIdContrato").val(),
+            IdPersona: $("#hdnIdPersonal").val(),
+            IdTipoFamiliar: $("#txtDireccionContrato").val(),
+            TipoDocumento: $('#txtNroContrato').val(),
+            NroDocumento: $('#ddlTipoContrato').val(),
+            ApePaterno: $('#ddlCargoContrato').val(),
+            ApeMaterno: $("#ddlOficinaDependencia").val(),
+            Nombres: $("#txtEjecucionTrabajoSupervision").val(),
+            Sexo: $("#txtFechaInicio").val(),
+            TipoSangre: $("#txtFechaFin").val(),
+            FechaNacimiento: $("#ddlLugarPrestacionServicios").val(),
+            UbigeoDireccion: $("#txtMontoContrato").val(),
+            Direccion: $("#txtFormaPago").val(),
+            Referencia: $("#ddlRepresentanteLegal").val(),
+            Celular1: $("#ddlRepresentanteLegal").val(),
+            Celular2: $("#ddlRepresentanteLegal").val(),
+            Emergencia: $("#ddlRepresentanteLegal").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Personal/GuardarContrato",
+            cache: false,
+            data: JSON.stringify(detalle),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            traditional: true,
+            success: function (result) {
+                $.unblockUI();
+                if (result.TipoRespuesta == 1) {
+                    $.confirm({
+                        title: 'Guardar',
+                        content: '<div class="form-group">' +
+                                '<label>' + result.Mensaje + '</label>' +
+                                '</div>',
+                        icon: 'fa fa-thumbs-o-up',
+                        theme: 'modern',
+                        closeIcon: false,
+                        closeIconClass: 'fa fa-close',
+                        animation: 'scale',
+                        type: 'green',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Aceptar',
+                                btnClass: 'btn-green',
+                                action: function () {
+                                    LimpiarFormulario();
+                                    $('#dtContrato').DataTable().ajax.reload();
+                                    $('#modal-personal-contrato-agregar').modal('hide');
+
+                                }
+                            }
+                        }
+                    });
+                }
+                else if (result.TipoRespuesta == 2) {
+                    $.confirm({
+                        title: 'Guardar',
+                        content: '<div class="form-group">' +
+                                '<label>' + result.Mensaje + '</label>' +
+                                '</div>',
+                        icon: 'fa fa-thumbs-o-down',
+                        theme: 'modern',
+                        closeIcon: false,
+                        closeIconClass: 'fa fa-close',
+                        animation: 'scale',
+                        type: 'red',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Aceptar',
+                                btnClass: 'btn-red',
+                                action: function () {
+
+                                }
+                            }
+                        }
+                    });
+                }
+                else if (result.TipoRespuesta == 3) {
+                    $.confirm({
+                        title: 'Guardar',
+                        content: '<div class="form-group">' +
+                                '<label>' + result.Mensaje + '</label>' +
+                                '</div>',
+                        icon: 'fa fa-thumbs-o-down',
+                        theme: 'modern',
+                        closeIcon: false,
+                        closeIconClass: 'fa fa-close',
+                        animation: 'scale',
+                        type: 'orange',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Aceptar',
+                                btnClass: 'btn-orange',
+                                action: function () {
+
+                                }
+                            }
+                        }
+                    });
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest, textStatus, errorThrown);
+                $.unblockUI();
+                $.confirm({
+                    title: 'Error',
+                    content: '<div class="form-group">' +
+                            '<label>' + XMLHttpRequest + textStatus + errorThrown + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-frown-o',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'red',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+            },
+        });
+    }
+
 }

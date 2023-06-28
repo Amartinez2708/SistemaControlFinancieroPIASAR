@@ -44,6 +44,7 @@
 @Html.Hidden("hdnIdPersonal")
 @Html.Hidden("hdnIdContrato")
 @Html.Hidden("hdnIdPersonalFamilia")
+
 <div class="modal fade" id="modal-personal" role="dialog">
     <div class="modal-dialog modal-sm" role="document" style="height:900px; overflow-y: initial !important">
         <div class="modal-content">
@@ -452,9 +453,15 @@
                         <div class="col-lg-12 col-sm-12">
                             <h4 class="sub-title">Datos Personales</h4>
                             <div class="row">
-                                <div class="col-lg-6 col-sm-12">
+                                <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
-                                        <label>Tipo de Documento *</label>
+                                        <label>Tipo Familiar*</label>
+                                        @Html.DropDownList("ddlTipoFamiliar", new SelectList(ViewBag.ddlTipoFamiliar, "IdText", "text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Tipo de Documento*</label>
                                         <select name="ddlTipoDctoFamiliar" id="ddlTipoDctoFamiliar" class="form-control">
                                             <option value="0">[--Seleccione--]</option>
                                             <option value="1">Documento Nacional de Identidad</option>
@@ -462,7 +469,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-sm-12">
+                                <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Nro. de Documento*</label>
                                         @Html.TextBox("txtNroDocumentoFamiliar", null, new { @class = "form-control", @onkeypress = "return soloNumeros(event);" })
@@ -580,7 +587,7 @@
                         </div>
                     </div>
                     <div class="form-group text-right">
-                        <button id="btnGuardar" type="button" class="btn btn-primary waves-effect " onclick="GuardarPersonal()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
+                        <button type="button" class="btn btn-primary waves-effect " onclick="GuardarFamiliar()"><i class="fa fa-save" aria-hidden="true"></i>Guardar</button>
                     </div>
                 </fieldset>
 

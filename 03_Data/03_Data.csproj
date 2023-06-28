@@ -358,6 +358,9 @@
     <Compile Include="TipoBienArticulo.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoFamiliar.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="TipoSeguimiento.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>

@@ -10,7 +10,7 @@ namespace _02_Entidades
     {
         public int IdPersonaFamilia { get; set; }
         public int IdPersona { get; set; }
-        public int TipoFamiliar { get; set; }
+        public int IdTipoFamiliar { get; set; }
         public int TipoDocumento { get; set; }
         public string NroDocumento { get; set; }
         public string ApePaterno { get; set; }
