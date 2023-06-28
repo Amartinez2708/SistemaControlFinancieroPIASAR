@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+@model _02_Entidades.EnContrato
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Contrato @Model.NroContrato-PNSR-PIASAR</title>
+</head>
+<body>
+    <style>
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            vertical-align: middle;
+            text-align: left;
+            border: 0px;
+            white-space: nowrap;
+        }
+    </style>
+    <table class="table table-bordered">
+        @*<tr>
+            <td colspan="1" style="text-align:center;margin-bottom:20px;"><img src="@Url.Content("~/Content/Images/pnsr_logo.png")" width="120"/></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align:center;margin-bottom:20px;"><img src="@Url.Content("~/Content/Images/pnsr_logo.png")" width="120" /></td>
+        </tr>*@
+        <tr>
+            <td colspan="2" style="text-align:center;"> <h4>&nbsp;<br />CONTRATO N° @Model.NroContrato-PNSR-PIASAR <br />@Model.TipoContrato.ToUpper()</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;"> <h4>"@Model.Cargo.ToUpper()"</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:16px;text-align:justify;">Interviene en la celebración del presente contrato, por una parte <strong>PROGRAMA NACIONAL DE SANEAMIENTO RURAL</strong>, con R.U.C. N° 20548776920, en su condición de Unidad Ejecutora a través del <strong>PIASAR</strong> o simplemente "la Entidad", legalmente representada por, <strong>@Model.RepresentanteLegal.ToUpper()</strong>, en su calidad de Coordinador General; y, por otra <strong>@Model.Persona.ToUpper()</strong>, de nacionalidad peruana, con documento de identidad DNI N° @Model.PersonaDNI, otorgado en Lima, domiciliado en @Model.DireccionContrato, por sus propios y personales derechos, a quien en adelante se le denominará "el Consultor", quienes convienen en celebrar este contrato de prestación de servicios de consultoria, contenido en las siguientes cláusulas:</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:14px" colspan="19"></td>
+        </tr>
+       
+    </table>
+
+</body>
+</html>
+

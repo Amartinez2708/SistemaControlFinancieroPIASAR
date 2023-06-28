@@ -104,12 +104,32 @@ namespace _03_Data
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioPerfil> UsuarioPerfil { get; set; }
         public virtual DbSet<PerfilMenu> PerfilMenu { get; set; }
-        public virtual DbSet<PersonaFamilia> PersonaFamilia { get; set; }
         public virtual DbSet<NivelProfesional> NivelProfesional { get; set; }
         public virtual DbSet<Profesion> Profesion { get; set; }
         public virtual DbSet<Cargo> Cargo { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<PersonaProyecto> PersonaProyecto { get; set; }
+        public virtual DbSet<ContratoAdenda> ContratoAdenda { get; set; }
+        public virtual DbSet<LugarPrestacionServicios> LugarPrestacionServicios { get; set; }
+        public virtual DbSet<OficinaDependencia> OficinaDependencia { get; set; }
+        public virtual DbSet<RepresentanteLegal> RepresentanteLegal { get; set; }
+        public virtual DbSet<Contrato> Contrato { get; set; }
+        public virtual DbSet<AsignacionProyecto_Personal> AsignacionProyecto_Personal { get; set; }
+        public virtual DbSet<CronogramaAdquisicionInsumos> CronogramaAdquisicionInsumos { get; set; }
+        public virtual DbSet<CronogramaAdquisicionInsumosDetalle> CronogramaAdquisicionInsumosDetalle { get; set; }
+        public virtual DbSet<CronogramaAdquisicionInsumosDetalleMes> CronogramaAdquisicionInsumosDetalleMes { get; set; }
+        public virtual DbSet<detalle_transferencias_sav> detalle_transferencias_sav { get; set; }
+        public virtual DbSet<DOCUMENTO_SUSTENTO> DOCUMENTO_SUSTENTO { get; set; }
+        public virtual DbSet<DOCUMENTO_SUSTENTO_MANIFIESTO> DOCUMENTO_SUSTENTO_MANIFIESTO { get; set; }
+        public virtual DbSet<EstadoCuentaBancaria> EstadoCuentaBancaria { get; set; }
+        public virtual DbSet<INSUMO_SERVICIO> INSUMO_SERVICIO { get; set; }
+        public virtual DbSet<PebsOperacion> PebsOperacion { get; set; }
+        public virtual DbSet<PERFIL_ACCESO> PERFIL_ACCESO { get; set; }
+        public virtual DbSet<PRE_LIQUIDACION_MENSUAL> PRE_LIQUIDACION_MENSUAL { get; set; }
+        public virtual DbSet<Presupuesto_obra_detalle> Presupuesto_obra_detalle { get; set; }
+        public virtual DbSet<PRESUPUESTO_OBRA_DETALLE_AGRUPADO> PRESUPUESTO_OBRA_DETALLE_AGRUPADO { get; set; }
+        public virtual DbSet<RESUMEN_ESTADO_FINANCIERO> RESUMEN_ESTADO_FINANCIERO { get; set; }
+        public virtual DbSet<PersonaFamilia> PersonaFamilia { get; set; }
     
         public virtual ObjectResult<sp_ListAutorizacionRubro_Result> sp_ListAutorizacionRubro(string ids)
         {

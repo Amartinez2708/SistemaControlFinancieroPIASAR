@@ -17,9 +17,11 @@ namespace _03_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persona()
         {
-            this.PersonaFamilia = new HashSet<PersonaFamilia>();
             this.Usuario = new HashSet<Usuario>();
             this.PersonaProyecto = new HashSet<PersonaProyecto>();
+            this.RepresentanteLegal = new HashSet<RepresentanteLegal>();
+            this.Contrato = new HashSet<Contrato>();
+            this.PersonaFamilia = new HashSet<PersonaFamilia>();
         }
     
         public int IdPersona { get; set; }
@@ -52,10 +54,14 @@ namespace _03_Data
         public virtual NivelProfesional NivelProfesional { get; set; }
         public virtual Profesion Profesion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonaFamilia> PersonaFamilia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonaProyecto> PersonaProyecto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RepresentanteLegal> RepresentanteLegal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contrato> Contrato { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PersonaFamilia> PersonaFamilia { get; set; }
     }
 }

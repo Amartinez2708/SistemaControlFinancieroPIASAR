@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BD_NucleosEjecutoresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AsignacionProyecto_Personal">
+          <Key>
+            <PropertyRef Name="IdAsignacion" />
+          </Key>
+          <Property Name="IdAsignacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" />
+          <Property Name="IdPersonal" Type="int" />
+          <Property Name="Cod_cargo" Type="int" />
+          <Property Name="FechaAsignacion" Type="datetime" />
+          <Property Name="EstadoAsignacion" Type="int" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="Autorizacion_Gasto">
           <Key>
             <PropertyRef Name="IdAutorizacion" />
@@ -139,6 +155,52 @@
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
+        <EntityType Name="Contrato">
+          <Key>
+            <PropertyRef Name="IdContrato" />
+          </Key>
+          <Property Name="IdContrato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="DireccionContrato" Type="varchar" MaxLength="500" />
+          <Property Name="AnioContrato" Type="int" />
+          <Property Name="NroContrato" Type="varchar" MaxLength="20" />
+          <Property Name="IdTipoContrato" Type="int" />
+          <Property Name="IdCargo" Type="int" />
+          <Property Name="IdOficinaDependencia" Type="int" />
+          <Property Name="EjecucionTrabajoSupervision" Type="varchar(max)" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="IdLugarPrestacionServicios" Type="int" />
+          <Property Name="MontoContrato" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MontoMensual" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FormaPago" Type="varchar(max)" />
+          <Property Name="IdRepresentanteLegal" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ContratoAdenda">
+          <Key>
+            <PropertyRef Name="IdContratoAdenda" />
+          </Key>
+          <Property Name="IdContratoAdenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContrato" Type="int" Nullable="false" />
+          <Property Name="AnioAdenda" Type="int" />
+          <Property Name="NroAdenda" Type="varchar" MaxLength="50" />
+          <Property Name="TipoAdenda" Type="int" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="MontoAdenda" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdRepresentanteLegal" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="CronogramaActividades">
           <Key>
             <PropertyRef Name="IdCronogramaActividades" />
@@ -149,6 +211,52 @@
           <Property Name="IdTipoActividad" Type="int" Nullable="false" />
           <Property Name="Actividad" Type="varchar" MaxLength="500" />
           <Property Name="Etapa" Type="varchar" MaxLength="250" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CronogramaAdquisicionInsumos">
+          <Key>
+            <PropertyRef Name="IdCronogramaAdquisicionInsumos" />
+          </Key>
+          <Property Name="IdCronogramaAdquisicionInsumos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="MontoTotalProgramado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NroMeses" Type="int" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CronogramaAdquisicionInsumosDetalle">
+          <Key>
+            <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalle" />
+          </Key>
+          <Property Name="IdCronogramaAdquisicionInsumosDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCronogramaAdquisicionInsumos" Type="int" />
+          <Property Name="IdPresupuestoObraDetalleAgrupado" Type="int" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CronogramaAdquisicionInsumosDetalleMes">
+          <Key>
+            <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalleMes" />
+          </Key>
+          <Property Name="IdCronogramaAdquisicionInsumosDetalleMes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCronogramaAdquisicionInsumosDetalle" Type="int" />
+          <Property Name="NroMes" Type="int" />
+          <Property Name="CantidadProgramada" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialProgramado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="int" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario_add" Type="int" />
           <Property Name="Fecha_add" Type="datetime" />
@@ -216,6 +324,23 @@
           <Property Name="Fecha_add" Type="datetime" />
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="detalle_transferencias_sav">
+          <Key>
+            <PropertyRef Name="idtransferencia" />
+          </Key>
+          <Property Name="idtransferencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="constante" Type="varchar" MaxLength="10" />
+          <Property Name="documentonumero" Type="varchar" MaxLength="20" />
+          <Property Name="documentofecha" Type="datetime" />
+          <Property Name="codigomoneda" Type="varchar" MaxLength="5" />
+          <Property Name="moneda" Type="varchar" MaxLength="50" />
+          <Property Name="saldomoneda" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="idfase" Type="char" MaxLength="1" />
+          <Property Name="montomoneda" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="numerosiaf" Type="varchar" MaxLength="20" />
+          <Property Name="snip" Type="varchar" MaxLength="8" />
+          <Property Name="dfecha_add" Type="datetime" />
         </EntityType>
         <EntityType Name="DetalleSeguimientoActividadesATM">
           <Key>
@@ -388,6 +513,34 @@
           <Property Name="nom_dist" Type="varchar" MaxLength="250" />
           <Property Name="capital" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="DOCUMENTO_SUSTENTO">
+          <Key>
+            <PropertyRef Name="IDDOCUMENTO_SUSTENTO" />
+          </Key>
+          <Property Name="IDDOCUMENTO_SUSTENTO" Type="int" Nullable="false" />
+          <Property Name="IDAUTORIZACION" Type="int" />
+          <Property Name="NOMBRE_DOCUMENTO" Type="nvarchar" MaxLength="250" />
+          <Property Name="ADJUNTO_DOCUMENTO" Type="nvarchar" MaxLength="250" />
+          <Property Name="DESCRIPCION_DOCUMENTO" Type="nvarchar" MaxLength="250" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="int" />
+          <Property Name="FECHA_UPD" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DOCUMENTO_SUSTENTO_MANIFIESTO">
+          <Key>
+            <PropertyRef Name="IDDOCUMENTO_SUSTENTO" />
+          </Key>
+          <Property Name="IDDOCUMENTO_SUSTENTO" Type="int" Nullable="false" />
+          <Property Name="IDMANIFIESTO" Type="int" />
+          <Property Name="NOMBRE_DOCUMENTO" Type="nvarchar" MaxLength="250" />
+          <Property Name="ADJUNTO_DOCUMENTO" Type="nvarchar" MaxLength="250" />
+          <Property Name="DESCRIPCION_DOCUMENTO" Type="nvarchar" MaxLength="250" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="int" />
+          <Property Name="FECHA_UPD" Type="datetime" />
+        </EntityType>
         <EntityType Name="EjecucionInversion">
           <Key>
             <PropertyRef Name="IdEjecucionInversion" />
@@ -430,6 +583,22 @@
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="EstadoCuentaBancaria">
+          <Key>
+            <PropertyRef Name="IdEstadoCuentaBancaria" />
+          </Key>
+          <Property Name="IdEstadoCuentaBancaria" Type="int" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" />
+          <Property Name="Anio" Type="int" />
+          <Property Name="Mes" Type="nvarchar" MaxLength="50" />
+          <Property Name="NombreArchivo" Type="nvarchar" MaxLength="250" />
+          <Property Name="RutaArchivo" Type="nvarchar" MaxLength="250" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="IdUsuario_Add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_Upd" Type="int" />
+          <Property Name="Fecha_Upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="HistoricoMonitoreo">
           <Key>
             <PropertyRef Name="IdHistoricoMonitoreo" />
@@ -458,6 +627,34 @@
           <Property Name="Fecha_add" Type="datetime" Nullable="false" />
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSUMO_SERVICIO">
+          <Key>
+            <PropertyRef Name="IDINSUMO_SERVICIO" />
+          </Key>
+          <Property Name="IDINSUMO_SERVICIO" Type="int" Nullable="false" />
+          <Property Name="IDRUBRO" Type="int" />
+          <Property Name="IDSUBRUBRO" Type="int" />
+          <Property Name="ITEM" Type="nvarchar" MaxLength="20" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UNIDAD" Type="nvarchar" MaxLength="20" />
+          <Property Name="ESTADO" Type="int" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="datetime" />
+          <Property Name="FECHA_UPD" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LugarPrestacionServicios">
+          <Key>
+            <PropertyRef Name="IdLugarPrestacionServicios" />
+          </Key>
+          <Property Name="IdLugarPrestacionServicios" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LugarPrestacionServicios" Type="varchar" MaxLength="500" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
         <EntityType Name="MANIFIESTO_GASTO">
           <Key>
@@ -659,6 +856,27 @@
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="OficinaDependencia">
+          <Key>
+            <PropertyRef Name="IdOficinaDependencia" />
+          </Key>
+          <Property Name="IdOficinaDependencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OficinaDependencia" Type="varchar" MaxLength="500" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PebsOperacion">
+          <Key>
+            <PropertyRef Name="nIdOperacion" />
+          </Key>
+          <Property Name="nIdOperacion" Type="int" Nullable="false" />
+          <Property Name="sNameSP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sDescripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="bestado" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Perfil">
           <Key>
             <PropertyRef Name="IdPerfil" />
@@ -670,6 +888,20 @@
           <Property Name="Fecha_add" Type="datetime" Nullable="false" />
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERFIL_ACCESO">
+          <Key>
+            <PropertyRef Name="IDPERFIL" />
+          </Key>
+          <Property Name="IDPERFIL" Type="int" Nullable="false" />
+          <Property Name="IDTIPOPERFIL" Type="int" />
+          <Property Name="IDUSUARIO" Type="int" />
+          <Property Name="OPCIONES" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ESTADO" Type="int" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="int" />
+          <Property Name="FECHA_UPD" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -732,7 +964,9 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           </Key>
           <Property Name="IdPersonaFamilia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdPersona" Type="int" Nullable="false" />
-          <Property Name="TipoFamiliar" Type="int" />
+          <Property Name="TipoFamiliar" Type="int" Nullable="false" />
+          <Property Name="TipoDocumento" Type="int" Nullable="false" />
+          <Property Name="NroDocumento" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="ApePaterno" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="ApeMaterno" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Nombres" Type="varchar" MaxLength="250" Nullable="false" />
@@ -790,6 +1024,30 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="PRE_LIQUIDACION_MENSUAL">
+          <Key>
+            <PropertyRef Name="IDPRE_LIQUIDACION_MENSUAL" />
+          </Key>
+          <Property Name="IDPRE_LIQUIDACION_MENSUAL" Type="int" Nullable="false" />
+          <Property Name="IDPROYECTO" Type="int" />
+          <Property Name="IDMANIFIESTO" Type="int" />
+          <Property Name="MES_PRELIQUIDACION_MENSUAL" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESEMBOLSADO_ACUMULADO_NE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DESEMBOLSO_MES" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OTROS_APORTES_MES" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="INTERES_MES" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DEVOLUCION_PROGRAMA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MONTO_EJECUTADO_MES" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MONTO_EJECUTADO_ACUMULADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ESTADO_COORDINADOR" Type="int" />
+          <Property Name="ESTADO_LIQUIDADOR" Type="int" />
+          <Property Name="FECHA_APROBACION_PRELIQUIDACION" Type="datetime" />
+          <Property Name="ESTADO" Type="int" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="int" />
+          <Property Name="FECHA_UPD" Type="datetime" />
+        </EntityType>
         <EntityType Name="Presupuesto_obra">
           <Key>
             <PropertyRef Name="IdPresupuesto" />
@@ -808,6 +1066,66 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="Fecha_add" Type="datetime" />
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Presupuesto_obra_detalle">
+          <Key>
+            <PropertyRef Name="Id_presupuesto_obra_detalle" />
+          </Key>
+          <Property Name="Id_presupuesto_obra_detalle" Type="int" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="int" />
+          <Property Name="IdProyecto" Type="int" />
+          <Property Name="IdRubro" Type="int" />
+          <Property Name="Item_actividad" Type="varchar" MaxLength="250" />
+          <Property Name="Descripcion_actividad" Type="varchar" MaxLength="400" />
+          <Property Name="Item" Type="varchar" MaxLength="250" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="400" />
+          <Property Name="Cantidad_metrado" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Unidad" Type="varchar" MaxLength="250" />
+          <Property Name="Costo_unitario_precio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Parcial" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Etapa" Type="varchar" MaxLength="250" />
+          <Property Name="Mes" Type="varchar" MaxLength="250" />
+          <Property Name="Agregado" Type="int" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PRESUPUESTO_OBRA_DETALLE_AGRUPADO">
+          <Key>
+            <PropertyRef Name="ID_PRESUPUESTO_OBRA_DETALLE_AGRUPADO" />
+          </Key>
+          <Property Name="ID_PRESUPUESTO_OBRA_DETALLE_AGRUPADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPROYECTO" Type="int" />
+          <Property Name="IDRUBRO" Type="int" />
+          <Property Name="ITEM" Type="nvarchar" MaxLength="250" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="400" />
+          <Property Name="UNIDAD" Type="nvarchar" MaxLength="250" />
+          <Property Name="COSTO_UNITARIO_PRECIO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CANTIDAD_METRADO_ORIGINAL" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="PARCIAL_ORIGINAL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION_REAL" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION_REAL" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="PARCIAL_ACUMULADO_AUTORIZACION_REAL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_ACUMULADO_AUTORIZACION" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_AUTORIZACION_REAL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_AUTORIZACION" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO_REAL" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO_REAL" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="PARCIAL_ACUMULADO_MANIFIESTO_REAL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_ACUMULADO_MANIFIESTO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_MANIFIESTO_REAL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_MANIFIESTO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ESTADO" Type="int" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="int" />
+          <Property Name="FECHA_UPD" Type="datetime" />
         </EntityType>
         <EntityType Name="Proceso">
           <Key>
@@ -1057,6 +1375,19 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
+        <EntityType Name="RepresentanteLegal">
+          <Key>
+            <PropertyRef Name="IdRepresentanteLegal" />
+          </Key>
+          <Property Name="IdRepresentanteLegal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="int" />
+          <Property Name="AbreviaturaProfesional" Type="varchar" MaxLength="20" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="ResultadoEsperado">
           <Key>
             <PropertyRef Name="IdResultadoEsperado" />
@@ -1091,6 +1422,22 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="Fecha_add" Type="datetime" />
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RESUMEN_ESTADO_FINANCIERO">
+          <Key>
+            <PropertyRef Name="IDRESUMEN_FINANCIERO" />
+          </Key>
+          <Property Name="IDRESUMEN_FINANCIERO" Type="int" Nullable="false" />
+          <Property Name="IDPROYECTO" Type="int" />
+          <Property Name="ANIO" Type="int" />
+          <Property Name="MES" Type="varchar" MaxLength="20" />
+          <Property Name="ESTADO_RESUMEN" Type="int" />
+          <Property Name="ESTADO" Type="int" />
+          <Property Name="FECHA_CIERRE" Type="datetime" />
+          <Property Name="IDUSUARIO_ADD" Type="int" />
+          <Property Name="FECHA_ADD" Type="datetime" />
+          <Property Name="IDUSUARIO_UPD" Type="int" />
+          <Property Name="FECHA_UPD" Type="datetime" />
         </EntityType>
         <EntityType Name="ROLES_SISTEMA">
           <Key>
@@ -1625,6 +1972,90 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Contrato__Fecha___74EE4BDE">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdCarg__75E27017">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdLuga__77CAB889">
+          <End Role="LugarPrestacionServicios" Type="Self.LugarPrestacionServicios" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LugarPrestacionServicios">
+              <PropertyRef Name="IdLugarPrestacionServicios" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdLugarPrestacionServicios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdOfic__76D69450">
+          <End Role="OficinaDependencia" Type="Self.OficinaDependencia" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OficinaDependencia">
+              <PropertyRef Name="IdOficinaDependencia" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdOficinaDependencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdRepr__78BEDCC2">
+          <End Role="RepresentanteLegal" Type="Self.RepresentanteLegal" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepresentanteLegal">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContratoA__Fecha__7C8F6DA6">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="1" />
+          <End Role="ContratoAdenda" Type="Self.ContratoAdenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="ContratoAdenda">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContratoA__IdRep__7D8391DF">
+          <End Role="RepresentanteLegal" Type="Self.RepresentanteLegal" Multiplicity="0..1" />
+          <End Role="ContratoAdenda" Type="Self.ContratoAdenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepresentanteLegal">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Principal>
+            <Dependent Role="ContratoAdenda">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Cronogram__Fecha__7FD5EEA5">
           <End Role="TipoActividad" Type="Self.TipoActividad" Multiplicity="1" />
           <End Role="CronogramaActividades" Type="Self.CronogramaActividades" Multiplicity="*" />
@@ -2093,6 +2524,18 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Represent__Fecha__697C9932">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="RepresentanteLegal" Type="Self.RepresentanteLegal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="RepresentanteLegal">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Resultado__Fecha__338A9CD5">
           <End Role="MatrizResultado" Type="Self.MatrizResultado" Multiplicity="1" />
           <End Role="ResultadoEsperado" Type="Self.ResultadoEsperado" Multiplicity="*" />
@@ -2213,6 +2656,30 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AsignacionProyecto_Personal_Personal">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="AsignacionProyecto_Personal" Type="Self.AsignacionProyecto_Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="IdPersonal" />
+            </Principal>
+            <Dependent Role="AsignacionProyecto_Personal">
+              <PropertyRef Name="IdPersonal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AsignacionProyecto_Personal_Proyecto">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="0..1" />
+          <End Role="AsignacionProyecto_Personal" Type="Self.AsignacionProyecto_Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="AsignacionProyecto_Personal">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AUTORIZACION_GASTO_DETALLE_Autorizacion_Gasto">
           <End Role="Autorizacion_Gasto" Type="Self.Autorizacion_Gasto" Multiplicity="0..1" />
           <End Role="AUTORIZACION_GASTO_DETALLE" Type="Self.AUTORIZACION_GASTO_DETALLE" Multiplicity="*" />
@@ -2246,6 +2713,42 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="ComprobanteDetalle">
               <PropertyRef Name="IdComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CronogramaAdquisicionInsumos_Proyecto">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="0..1" />
+          <End Role="CronogramaAdquisicionInsumos" Type="Self.CronogramaAdquisicionInsumos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="CronogramaAdquisicionInsumos">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos">
+          <End Role="CronogramaAdquisicionInsumos" Type="Self.CronogramaAdquisicionInsumos" Multiplicity="0..1" />
+          <End Role="CronogramaAdquisicionInsumosDetalle" Type="Self.CronogramaAdquisicionInsumosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CronogramaAdquisicionInsumos">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumos" />
+            </Principal>
+            <Dependent Role="CronogramaAdquisicionInsumosDetalle">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle">
+          <End Role="CronogramaAdquisicionInsumosDetalle" Type="Self.CronogramaAdquisicionInsumosDetalle" Multiplicity="0..1" />
+          <End Role="CronogramaAdquisicionInsumosDetalleMes" Type="Self.CronogramaAdquisicionInsumosDetalleMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CronogramaAdquisicionInsumosDetalle">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalle" />
+            </Principal>
+            <Dependent Role="CronogramaAdquisicionInsumosDetalleMes">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalle" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2297,6 +2800,30 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRE_LIQUIDACION_MENSUAL_Proyecto">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="0..1" />
+          <End Role="PRE_LIQUIDACION_MENSUAL" Type="Self.PRE_LIQUIDACION_MENSUAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="PRE_LIQUIDACION_MENSUAL">
+              <PropertyRef Name="IDPROYECTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuesto_obra_detalle_Presupuesto_obra">
+          <End Role="Presupuesto_obra" Type="Self.Presupuesto_obra" Multiplicity="0..1" />
+          <End Role="Presupuesto_obra_detalle" Type="Self.Presupuesto_obra_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presupuesto_obra">
+              <PropertyRef Name="IdPresupuesto" />
+            </Principal>
+            <Dependent Role="Presupuesto_obra_detalle">
+              <PropertyRef Name="IdPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TABLA_DETALLE_TABLA">
           <End Role="TABLA" Type="Self.TABLA" Multiplicity="1" />
           <End Role="TABLA_DETALLE" Type="Self.TABLA_DETALLE" Multiplicity="*" />
@@ -2313,6 +2840,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Parameter Name="Ids" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="BD_NucleosEjecutoresModelStoreContainer">
+          <EntitySet Name="AsignacionProyecto_Personal" EntityType="Self.AsignacionProyecto_Personal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Autorizacion_Gasto" EntityType="Self.Autorizacion_Gasto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AUTORIZACION_GASTO_DETALLE" EntityType="Self.AUTORIZACION_GASTO_DETALLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
@@ -2320,11 +2848,17 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="Componente" EntityType="Self.Componente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comprobante" EntityType="Self.Comprobante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComprobanteDetalle" EntityType="Self.ComprobanteDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contrato" EntityType="Self.Contrato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContratoAdenda" EntityType="Self.ContratoAdenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CronogramaActividades" EntityType="Self.CronogramaActividades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CronogramaAdquisicionInsumos" EntityType="Self.CronogramaAdquisicionInsumos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CronogramaAdquisicionInsumosDetalle" EntityType="Self.CronogramaAdquisicionInsumosDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CronogramaAdquisicionInsumosDetalleMes" EntityType="Self.CronogramaAdquisicionInsumosDetalleMes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Desembolso" EntityType="Self.Desembolso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DesembolsoProgramadoAnual" EntityType="Self.DesembolsoProgramadoAnual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DesembolsoProgramadoMensual" EntityType="Self.DesembolsoProgramadoMensual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_transferencias_sav" EntityType="Self.detalle_transferencias_sav" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleSeguimientoActividadesATM" EntityType="Self.DetalleSeguimientoActividadesATM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleSeguimientoActividadesFamilias" EntityType="Self.DetalleSeguimientoActividadesFamilias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleSeguimientoActividadesJASS" EntityType="Self.DetalleSeguimientoActividadesJASS" Schema="dbo" store:Type="Tables" />
@@ -2334,10 +2868,15 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="DetalleSeguimientoJASS" EntityType="Self.DetalleSeguimientoJASS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DevengadoMensual" EntityType="Self.DevengadoMensual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUMENTO_SUSTENTO" EntityType="Self.DOCUMENTO_SUSTENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUMENTO_SUSTENTO_MANIFIESTO" EntityType="Self.DOCUMENTO_SUSTENTO_MANIFIESTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EjecucionInversion" EntityType="Self.EjecucionInversion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EjecucionInversionMes" EntityType="Self.EjecucionInversionMes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCuentaBancaria" EntityType="Self.EstadoCuentaBancaria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoricoMonitoreo" EntityType="Self.HistoricoMonitoreo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Indicador" EntityType="Self.Indicador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSUMO_SERVICIO" EntityType="Self.INSUMO_SERVICIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LugarPrestacionServicios" EntityType="Self.LugarPrestacionServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MANIFIESTO_GASTO" EntityType="Self.MANIFIESTO_GASTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MANIFIESTO_GASTO_DETALLE" EntityType="Self.MANIFIESTO_GASTO_DETALLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MatrizResultado" EntityType="Self.MatrizResultado" Schema="dbo" store:Type="Tables" />
@@ -2348,12 +2887,18 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="Movimiento_Documento" EntityType="Self.Movimiento_Documento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movimiento_Documento_Detalle" EntityType="Self.Movimiento_Documento_Detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NivelProfesional" EntityType="Self.NivelProfesional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OficinaDependencia" EntityType="Self.OficinaDependencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PebsOperacion" EntityType="Self.PebsOperacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERFIL_ACCESO" EntityType="Self.PERFIL_ACCESO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonaFamilia" EntityType="Self.PersonaFamilia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonaProyecto" EntityType="Self.PersonaProyecto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRE_LIQUIDACION_MENSUAL" EntityType="Self.PRE_LIQUIDACION_MENSUAL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Presupuesto_obra" EntityType="Self.Presupuesto_obra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presupuesto_obra_detalle" EntityType="Self.Presupuesto_obra_detalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRESUPUESTO_OBRA_DETALLE_AGRUPADO" EntityType="Self.PRESUPUESTO_OBRA_DETALLE_AGRUPADO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proceso" EntityType="Self.Proceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcesoDetalle" EntityType="Self.ProcesoDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
@@ -2364,8 +2909,10 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProyectosSeguimiento" EntityType="Self.ProyectosSeguimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepresentanteLegal" EntityType="Self.RepresentanteLegal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultadoEsperado" EntityType="Self.ResultadoEsperado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultadoEsperadoAnio" EntityType="Self.ResultadoEsperadoAnio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESUMEN_ESTADO_FINANCIERO" EntityType="Self.RESUMEN_ESTADO_FINANCIERO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLES_SISTEMA" EntityType="Self.ROLES_SISTEMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoActividadesATM" EntityType="Self.SeguimientoActividadesATM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoActividadesFamilias" EntityType="Self.SeguimientoActividadesFamilias" Schema="dbo" store:Type="Tables" />
@@ -2562,6 +3109,34 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
     [ListProv].[TotalManifiesto] AS [TotalManifiesto]
     FROM [dbo].[ListProv] AS [ListProv]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Contrato__Fecha___74EE4BDE" Association="Self.FK__Contrato__Fecha___74EE4BDE">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdCarg__75E27017" Association="Self.FK__Contrato__IdCarg__75E27017">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdLuga__77CAB889" Association="Self.FK__Contrato__IdLuga__77CAB889">
+            <End Role="LugarPrestacionServicios" EntitySet="LugarPrestacionServicios" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdOfic__76D69450" Association="Self.FK__Contrato__IdOfic__76D69450">
+            <End Role="OficinaDependencia" EntitySet="OficinaDependencia" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdRepr__78BEDCC2" Association="Self.FK__Contrato__IdRepr__78BEDCC2">
+            <End Role="RepresentanteLegal" EntitySet="RepresentanteLegal" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContratoA__Fecha__7C8F6DA6" Association="Self.FK__ContratoA__Fecha__7C8F6DA6">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="ContratoAdenda" EntitySet="ContratoAdenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContratoA__IdRep__7D8391DF" Association="Self.FK__ContratoA__IdRep__7D8391DF">
+            <End Role="RepresentanteLegal" EntitySet="RepresentanteLegal" />
+            <End Role="ContratoAdenda" EntitySet="ContratoAdenda" />
+          </AssociationSet>
           <AssociationSet Name="FK__Cronogram__Fecha__7FD5EEA5" Association="Self.FK__Cronogram__Fecha__7FD5EEA5">
             <End Role="TipoActividad" EntitySet="TipoActividad" />
             <End Role="CronogramaActividades" EntitySet="CronogramaActividades" />
@@ -2718,6 +3293,10 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             <End Role="SubComponente" EntitySet="SubComponente" />
             <End Role="ProgresoSubComponente" EntitySet="ProgresoSubComponente" />
           </AssociationSet>
+          <AssociationSet Name="FK__Represent__Fecha__697C9932" Association="Self.FK__Represent__Fecha__697C9932">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="RepresentanteLegal" EntitySet="RepresentanteLegal" />
+          </AssociationSet>
           <AssociationSet Name="FK__Resultado__Fecha__338A9CD5" Association="Self.FK__Resultado__Fecha__338A9CD5">
             <End Role="MatrizResultado" EntitySet="MatrizResultado" />
             <End Role="ResultadoEsperado" EntitySet="ResultadoEsperado" />
@@ -2758,6 +3337,14 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
           </AssociationSet>
+          <AssociationSet Name="FK_AsignacionProyecto_Personal_Personal" Association="Self.FK_AsignacionProyecto_Personal_Personal">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="AsignacionProyecto_Personal" EntitySet="AsignacionProyecto_Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AsignacionProyecto_Personal_Proyecto" Association="Self.FK_AsignacionProyecto_Personal_Proyecto">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="AsignacionProyecto_Personal" EntitySet="AsignacionProyecto_Personal" />
+          </AssociationSet>
           <AssociationSet Name="FK_AUTORIZACION_GASTO_DETALLE_Autorizacion_Gasto" Association="Self.FK_AUTORIZACION_GASTO_DETALLE_Autorizacion_Gasto">
             <End Role="Autorizacion_Gasto" EntitySet="Autorizacion_Gasto" />
             <End Role="AUTORIZACION_GASTO_DETALLE" EntitySet="AUTORIZACION_GASTO_DETALLE" />
@@ -2769,6 +3356,18 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK_ComprobanteDetalle_Comprobante" Association="Self.FK_ComprobanteDetalle_Comprobante">
             <End Role="Comprobante" EntitySet="Comprobante" />
             <End Role="ComprobanteDetalle" EntitySet="ComprobanteDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CronogramaAdquisicionInsumos_Proyecto" Association="Self.FK_CronogramaAdquisicionInsumos_Proyecto">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="CronogramaAdquisicionInsumos" EntitySet="CronogramaAdquisicionInsumos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos" Association="Self.FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos">
+            <End Role="CronogramaAdquisicionInsumos" EntitySet="CronogramaAdquisicionInsumos" />
+            <End Role="CronogramaAdquisicionInsumosDetalle" EntitySet="CronogramaAdquisicionInsumosDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle" Association="Self.FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle">
+            <End Role="CronogramaAdquisicionInsumosDetalle" EntitySet="CronogramaAdquisicionInsumosDetalle" />
+            <End Role="CronogramaAdquisicionInsumosDetalleMes" EntitySet="CronogramaAdquisicionInsumosDetalleMes" />
           </AssociationSet>
           <AssociationSet Name="FK_DesembolsoProyecto" Association="Self.FK_DesembolsoProyecto">
             <End Role="Proyecto" EntitySet="Proyecto" />
@@ -2785,6 +3384,14 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK_Movimiento_Documento_Detalle_Movimiento_Documento" Association="Self.FK_Movimiento_Documento_Detalle_Movimiento_Documento">
             <End Role="Movimiento_Documento" EntitySet="Movimiento_Documento" />
             <End Role="Movimiento_Documento_Detalle" EntitySet="Movimiento_Documento_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRE_LIQUIDACION_MENSUAL_Proyecto" Association="Self.FK_PRE_LIQUIDACION_MENSUAL_Proyecto">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="PRE_LIQUIDACION_MENSUAL" EntitySet="PRE_LIQUIDACION_MENSUAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuesto_obra_detalle_Presupuesto_obra" Association="Self.FK_Presupuesto_obra_detalle_Presupuesto_obra">
+            <End Role="Presupuesto_obra" EntitySet="Presupuesto_obra" />
+            <End Role="Presupuesto_obra_detalle" EntitySet="Presupuesto_obra_detalle" />
           </AssociationSet>
           <AssociationSet Name="FK_TABLA_DETALLE_TABLA" Association="Self.FK_TABLA_DETALLE_TABLA">
             <End Role="TABLA" EntitySet="TABLA" />
@@ -2824,6 +3431,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="Fecha_add" Type="DateTime" Precision="3" />
           <Property Name="IdUsuario_upd" Type="Int32" />
           <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Presupuesto_obra_detalle" Relationship="BD_NucleosEjecutoresModel.FK_Presupuesto_obra_detalle_Presupuesto_obra" FromRole="Presupuesto_obra" ToRole="Presupuesto_obra_detalle" />
         </EntityType>
         <EntityType Name="ROLES_SISTEMA">
           <Key>
@@ -3176,7 +3784,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
           </AssociationSet>
-          <EntitySet Name="PersonaFamilia" EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" />
           <EntitySet Name="NivelProfesional" EntityType="BD_NucleosEjecutoresModel.NivelProfesional" />
           <EntitySet Name="Profesion" EntityType="BD_NucleosEjecutoresModel.Profesion" />
           <EntitySet Name="Cargo" EntityType="BD_NucleosEjecutoresModel.Cargo" />
@@ -3193,10 +3800,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             <End Role="Profesion" EntitySet="Profesion" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
-          <AssociationSet Name="FK__PersonaFa__Fecha__0C06BB60" Association="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
-          </AssociationSet>
           <AssociationSet Name="FK__Usuario__IdPerso__611C5D5B" Association="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -3209,6 +3812,91 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <AssociationSet Name="FK__PersonaPr__IdPro__59463169" Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169">
             <End Role="Proyecto" EntitySet="Proyecto" />
             <End Role="PersonaProyecto" EntitySet="PersonaProyecto" />
+          </AssociationSet>
+          <EntitySet Name="ContratoAdenda" EntityType="BD_NucleosEjecutoresModel.ContratoAdenda" />
+          <EntitySet Name="LugarPrestacionServicios" EntityType="BD_NucleosEjecutoresModel.LugarPrestacionServicios" />
+          <EntitySet Name="OficinaDependencia" EntityType="BD_NucleosEjecutoresModel.OficinaDependencia" />
+          <EntitySet Name="RepresentanteLegal" EntityType="BD_NucleosEjecutoresModel.RepresentanteLegal" />
+          <AssociationSet Name="FK__ContratoA__IdRep__7D8391DF" Association="BD_NucleosEjecutoresModel.FK__ContratoA__IdRep__7D8391DF">
+            <End Role="RepresentanteLegal" EntitySet="RepresentanteLegal" />
+            <End Role="ContratoAdenda" EntitySet="ContratoAdenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Represent__Fecha__697C9932" Association="BD_NucleosEjecutoresModel.FK__Represent__Fecha__697C9932">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="RepresentanteLegal" EntitySet="RepresentanteLegal" />
+          </AssociationSet>
+          <EntitySet Name="Contrato" EntityType="BD_NucleosEjecutoresModel.Contrato" />
+          <AssociationSet Name="FK__Contrato__IdCarg__75E27017" Association="BD_NucleosEjecutoresModel.FK__Contrato__IdCarg__75E27017">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__Fecha___74EE4BDE" Association="BD_NucleosEjecutoresModel.FK__Contrato__Fecha___74EE4BDE">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdLuga__77CAB889" Association="BD_NucleosEjecutoresModel.FK__Contrato__IdLuga__77CAB889">
+            <End Role="LugarPrestacionServicios" EntitySet="LugarPrestacionServicios" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdOfic__76D69450" Association="BD_NucleosEjecutoresModel.FK__Contrato__IdOfic__76D69450">
+            <End Role="OficinaDependencia" EntitySet="OficinaDependencia" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contrato__IdRepr__78BEDCC2" Association="BD_NucleosEjecutoresModel.FK__Contrato__IdRepr__78BEDCC2">
+            <End Role="RepresentanteLegal" EntitySet="RepresentanteLegal" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContratoA__Fecha__7C8F6DA6" Association="BD_NucleosEjecutoresModel.FK__ContratoA__Fecha__7C8F6DA6">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="ContratoAdenda" EntitySet="ContratoAdenda" />
+          </AssociationSet>
+          <EntitySet Name="AsignacionProyecto_Personal" EntityType="BD_NucleosEjecutoresModel.AsignacionProyecto_Personal" />
+          <EntitySet Name="CronogramaAdquisicionInsumos" EntityType="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumos" />
+          <EntitySet Name="CronogramaAdquisicionInsumosDetalle" EntityType="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalle" />
+          <EntitySet Name="CronogramaAdquisicionInsumosDetalleMes" EntityType="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalleMes" />
+          <EntitySet Name="detalle_transferencias_sav" EntityType="BD_NucleosEjecutoresModel.detalle_transferencias_sav" />
+          <EntitySet Name="DOCUMENTO_SUSTENTO" EntityType="BD_NucleosEjecutoresModel.DOCUMENTO_SUSTENTO" />
+          <EntitySet Name="DOCUMENTO_SUSTENTO_MANIFIESTO" EntityType="BD_NucleosEjecutoresModel.DOCUMENTO_SUSTENTO_MANIFIESTO" />
+          <EntitySet Name="EstadoCuentaBancaria" EntityType="BD_NucleosEjecutoresModel.EstadoCuentaBancaria" />
+          <EntitySet Name="INSUMO_SERVICIO" EntityType="BD_NucleosEjecutoresModel.INSUMO_SERVICIO" />
+          <EntitySet Name="PebsOperacion" EntityType="BD_NucleosEjecutoresModel.PebsOperacion" />
+          <EntitySet Name="PERFIL_ACCESO" EntityType="BD_NucleosEjecutoresModel.PERFIL_ACCESO" />
+          <EntitySet Name="PRE_LIQUIDACION_MENSUAL" EntityType="BD_NucleosEjecutoresModel.PRE_LIQUIDACION_MENSUAL" />
+          <EntitySet Name="Presupuesto_obra_detalle" EntityType="BD_NucleosEjecutoresModel.Presupuesto_obra_detalle" />
+          <EntitySet Name="PRESUPUESTO_OBRA_DETALLE_AGRUPADO" EntityType="BD_NucleosEjecutoresModel.PRESUPUESTO_OBRA_DETALLE_AGRUPADO" />
+          <EntitySet Name="RESUMEN_ESTADO_FINANCIERO" EntityType="BD_NucleosEjecutoresModel.RESUMEN_ESTADO_FINANCIERO" />
+          <AssociationSet Name="FK_AsignacionProyecto_Personal_Personal" Association="BD_NucleosEjecutoresModel.FK_AsignacionProyecto_Personal_Personal">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="AsignacionProyecto_Personal" EntitySet="AsignacionProyecto_Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AsignacionProyecto_Personal_Proyecto" Association="BD_NucleosEjecutoresModel.FK_AsignacionProyecto_Personal_Proyecto">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="AsignacionProyecto_Personal" EntitySet="AsignacionProyecto_Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CronogramaAdquisicionInsumos_Proyecto" Association="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumos_Proyecto">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="CronogramaAdquisicionInsumos" EntitySet="CronogramaAdquisicionInsumos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos" Association="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos">
+            <End Role="CronogramaAdquisicionInsumos" EntitySet="CronogramaAdquisicionInsumos" />
+            <End Role="CronogramaAdquisicionInsumosDetalle" EntitySet="CronogramaAdquisicionInsumosDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle" Association="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle">
+            <End Role="CronogramaAdquisicionInsumosDetalle" EntitySet="CronogramaAdquisicionInsumosDetalle" />
+            <End Role="CronogramaAdquisicionInsumosDetalleMes" EntitySet="CronogramaAdquisicionInsumosDetalleMes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRE_LIQUIDACION_MENSUAL_Proyecto" Association="BD_NucleosEjecutoresModel.FK_PRE_LIQUIDACION_MENSUAL_Proyecto">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="PRE_LIQUIDACION_MENSUAL" EntitySet="PRE_LIQUIDACION_MENSUAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuesto_obra_detalle_Presupuesto_obra" Association="BD_NucleosEjecutoresModel.FK_Presupuesto_obra_detalle_Presupuesto_obra">
+            <End Role="Presupuesto_obra" EntitySet="Presupuesto_obra" />
+            <End Role="Presupuesto_obra_detalle" EntitySet="Presupuesto_obra_detalle" />
+          </AssociationSet>
+          <EntitySet Name="PersonaFamilia" EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" />
+          <AssociationSet Name="FK__PersonaFa__Fecha__0C06BB60" Association="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MANIFIESTO_GASTO_DETALLE">
@@ -4077,6 +4765,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="Fecha_add" Type="DateTime" Precision="3" />
           <Property Name="IdUsuario_upd" Type="Int32" />
           <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AsignacionProyecto_Personal" Relationship="BD_NucleosEjecutoresModel.FK_AsignacionProyecto_Personal_Personal" FromRole="Personal" ToRole="AsignacionProyecto_Personal" />
         </EntityType>
         <Association Name="FK_AUTORIZACION_GASTO_DETALLE_Autorizacion_Gasto">
           <End Type="BD_NucleosEjecutoresModel.Autorizacion_Gasto" Role="Autorizacion_Gasto" Multiplicity="0..1" />
@@ -4975,6 +5664,9 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <NavigationProperty Name="MANIFIESTO_GASTO" Relationship="BD_NucleosEjecutoresModel.FK_MANIFIESTO_GASTO_Proyecto" FromRole="Proyecto" ToRole="MANIFIESTO_GASTO" />
           <NavigationProperty Name="MonitoreoObras" Relationship="BD_NucleosEjecutoresModel.FK__Monitoreo__Fecha__13F1F5EB" FromRole="Proyecto" ToRole="MonitoreoObras" />
           <NavigationProperty Name="PersonaProyecto" Relationship="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169" FromRole="Proyecto" ToRole="PersonaProyecto" />
+          <NavigationProperty Name="AsignacionProyecto_Personal" Relationship="BD_NucleosEjecutoresModel.FK_AsignacionProyecto_Personal_Proyecto" FromRole="Proyecto" ToRole="AsignacionProyecto_Personal" />
+          <NavigationProperty Name="CronogramaAdquisicionInsumos" Relationship="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumos_Proyecto" FromRole="Proyecto" ToRole="CronogramaAdquisicionInsumos" />
+          <NavigationProperty Name="PRE_LIQUIDACION_MENSUAL" Relationship="BD_NucleosEjecutoresModel.FK_PRE_LIQUIDACION_MENSUAL_Proyecto" FromRole="Proyecto" ToRole="PRE_LIQUIDACION_MENSUAL" />
         </EntityType>
         <Association Name="FK_Autorizacion_Gasto_Proyecto">
           <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="1" />
@@ -5315,32 +6007,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PersonaFamilia">
-          <Key>
-            <PropertyRef Name="IdPersonaFamilia" />
-          </Key>
-          <Property Name="IdPersonaFamilia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdPersona" Type="Int32" Nullable="false" />
-          <Property Name="TipoFamiliar" Type="Int32" />
-          <Property Name="ApePaterno" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ApeMaterno" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="TipoSangre" Type="Int32" />
-          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
-          <Property Name="UbigeoDireccion" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Referencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Celular1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Celular2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Emergencia" Type="Boolean" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario_add" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_add" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuario_upd" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_upd" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" FromRole="PersonaFamilia" ToRole="Persona" />
-        </EntityType>
         <EntityType Name="NivelProfesional">
           <Key>
             <PropertyRef Name="IdNivelProfesional" />
@@ -5379,6 +6045,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="IdUsuario_upd" Type="Int32" Nullable="false" />
           <Property Name="Fecha_upd" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__Persona__IdCargo__407A839F" FromRole="Cargo" ToRole="Persona" />
+          <NavigationProperty Name="Contrato" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdCarg__75E27017" FromRole="Cargo" ToRole="Contrato" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -5412,9 +6079,11 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <NavigationProperty Name="Cargo" Relationship="BD_NucleosEjecutoresModel.FK__Persona__IdCargo__407A839F" FromRole="Persona" ToRole="Cargo" />
           <NavigationProperty Name="NivelProfesional" Relationship="BD_NucleosEjecutoresModel.FK__Persona__IdNivel__2E5BD364" FromRole="Persona" ToRole="NivelProfesional" />
           <NavigationProperty Name="Profesion" Relationship="BD_NucleosEjecutoresModel.FK__Persona__IdProfe__2D67AF2B" FromRole="Persona" ToRole="Profesion" />
-          <NavigationProperty Name="PersonaFamilia" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" FromRole="Persona" ToRole="PersonaFamilia" />
           <NavigationProperty Name="Usuario" Relationship="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B" FromRole="Persona" ToRole="Usuario" />
           <NavigationProperty Name="PersonaProyecto" Relationship="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPer__58520D30" FromRole="Persona" ToRole="PersonaProyecto" />
+          <NavigationProperty Name="RepresentanteLegal" Relationship="BD_NucleosEjecutoresModel.FK__Represent__Fecha__697C9932" FromRole="Persona" ToRole="RepresentanteLegal" />
+          <NavigationProperty Name="Contrato" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__Fecha___74EE4BDE" FromRole="Persona" ToRole="Contrato" />
+          <NavigationProperty Name="PersonaFamilia" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" FromRole="Persona" ToRole="PersonaFamilia" />
         </EntityType>
         <Association Name="FK__Persona__IdCargo__407A839F">
           <End Type="BD_NucleosEjecutoresModel.Cargo" Role="Cargo" Multiplicity="0..1" />
@@ -5449,18 +6118,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="Persona">
               <PropertyRef Name="IdProfesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PersonaFa__Fecha__0C06BB60">
-          <End Type="BD_NucleosEjecutoresModel.Persona" Role="Persona" Multiplicity="1" />
-          <End Type="BD_NucleosEjecutoresModel.PersonaFamilia" Role="PersonaFamilia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="IdPersona" />
-            </Principal>
-            <Dependent Role="PersonaFamilia">
-              <PropertyRef Name="IdPersona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5512,6 +6169,593 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Principal>
             <Dependent Role="PersonaProyecto">
               <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ContratoAdenda">
+          <Key>
+            <PropertyRef Name="IdContratoAdenda" />
+          </Key>
+          <Property Name="IdContratoAdenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContrato" Type="Int32" Nullable="false" />
+          <Property Name="AnioAdenda" Type="Int32" />
+          <Property Name="NroAdenda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoAdenda" Type="Int32" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="MontoAdenda" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdRepresentanteLegal" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RepresentanteLegal" Relationship="BD_NucleosEjecutoresModel.FK__ContratoA__IdRep__7D8391DF" FromRole="ContratoAdenda" ToRole="RepresentanteLegal" />
+          <NavigationProperty Name="Contrato" Relationship="BD_NucleosEjecutoresModel.FK__ContratoA__Fecha__7C8F6DA6" FromRole="ContratoAdenda" ToRole="Contrato" />
+        </EntityType>
+        <EntityType Name="LugarPrestacionServicios">
+          <Key>
+            <PropertyRef Name="IdLugarPrestacionServicios" />
+          </Key>
+          <Property Name="IdLugarPrestacionServicios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LugarPrestacionServicios1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contrato" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdLuga__77CAB889" FromRole="LugarPrestacionServicios" ToRole="Contrato" />
+        </EntityType>
+        <EntityType Name="OficinaDependencia">
+          <Key>
+            <PropertyRef Name="IdOficinaDependencia" />
+          </Key>
+          <Property Name="IdOficinaDependencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OficinaDependencia1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contrato" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdOfic__76D69450" FromRole="OficinaDependencia" ToRole="Contrato" />
+        </EntityType>
+        <EntityType Name="RepresentanteLegal">
+          <Key>
+            <PropertyRef Name="IdRepresentanteLegal" />
+          </Key>
+          <Property Name="IdRepresentanteLegal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="Int32" />
+          <Property Name="AbreviaturaProfesional" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ContratoAdenda" Relationship="BD_NucleosEjecutoresModel.FK__ContratoA__IdRep__7D8391DF" FromRole="RepresentanteLegal" ToRole="ContratoAdenda" />
+          <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__Represent__Fecha__697C9932" FromRole="RepresentanteLegal" ToRole="Persona" />
+          <NavigationProperty Name="Contrato" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdRepr__78BEDCC2" FromRole="RepresentanteLegal" ToRole="Contrato" />
+        </EntityType>
+        <Association Name="FK__ContratoA__IdRep__7D8391DF">
+          <End Type="BD_NucleosEjecutoresModel.RepresentanteLegal" Role="RepresentanteLegal" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.ContratoAdenda" Role="ContratoAdenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepresentanteLegal">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Principal>
+            <Dependent Role="ContratoAdenda">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Represent__Fecha__697C9932">
+          <End Type="BD_NucleosEjecutoresModel.Persona" Role="Persona" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.RepresentanteLegal" Role="RepresentanteLegal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="RepresentanteLegal">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contrato">
+          <Key>
+            <PropertyRef Name="IdContrato" />
+          </Key>
+          <Property Name="IdContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="DireccionContrato" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AnioContrato" Type="Int32" />
+          <Property Name="NroContrato" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoContrato" Type="Int32" />
+          <Property Name="IdCargo" Type="Int32" />
+          <Property Name="IdOficinaDependencia" Type="Int32" />
+          <Property Name="EjecucionTrabajoSupervision" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="IdLugarPrestacionServicios" Type="Int32" />
+          <Property Name="MontoContrato" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MontoMensual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FormaPago" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdRepresentanteLegal" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cargo" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdCarg__75E27017" FromRole="Contrato" ToRole="Cargo" />
+          <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__Fecha___74EE4BDE" FromRole="Contrato" ToRole="Persona" />
+          <NavigationProperty Name="LugarPrestacionServicios" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdLuga__77CAB889" FromRole="Contrato" ToRole="LugarPrestacionServicios" />
+          <NavigationProperty Name="OficinaDependencia" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdOfic__76D69450" FromRole="Contrato" ToRole="OficinaDependencia" />
+          <NavigationProperty Name="RepresentanteLegal" Relationship="BD_NucleosEjecutoresModel.FK__Contrato__IdRepr__78BEDCC2" FromRole="Contrato" ToRole="RepresentanteLegal" />
+          <NavigationProperty Name="ContratoAdenda" Relationship="BD_NucleosEjecutoresModel.FK__ContratoA__Fecha__7C8F6DA6" FromRole="Contrato" ToRole="ContratoAdenda" />
+        </EntityType>
+        <Association Name="FK__Contrato__IdCarg__75E27017">
+          <End Type="BD_NucleosEjecutoresModel.Cargo" Role="Cargo" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.Contrato" Role="Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__Fecha___74EE4BDE">
+          <End Type="BD_NucleosEjecutoresModel.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.Contrato" Role="Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdLuga__77CAB889">
+          <End Type="BD_NucleosEjecutoresModel.LugarPrestacionServicios" Role="LugarPrestacionServicios" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.Contrato" Role="Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LugarPrestacionServicios">
+              <PropertyRef Name="IdLugarPrestacionServicios" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdLugarPrestacionServicios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdOfic__76D69450">
+          <End Type="BD_NucleosEjecutoresModel.OficinaDependencia" Role="OficinaDependencia" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.Contrato" Role="Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OficinaDependencia">
+              <PropertyRef Name="IdOficinaDependencia" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdOficinaDependencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contrato__IdRepr__78BEDCC2">
+          <End Type="BD_NucleosEjecutoresModel.RepresentanteLegal" Role="RepresentanteLegal" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.Contrato" Role="Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepresentanteLegal">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdRepresentanteLegal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContratoA__Fecha__7C8F6DA6">
+          <End Type="BD_NucleosEjecutoresModel.Contrato" Role="Contrato" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.ContratoAdenda" Role="ContratoAdenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="ContratoAdenda">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AsignacionProyecto_Personal">
+          <Key>
+            <PropertyRef Name="IdAsignacion" />
+          </Key>
+          <Property Name="IdAsignacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProyecto" Type="Int32" />
+          <Property Name="IdPersonal" Type="Int32" />
+          <Property Name="Cod_cargo" Type="Int32" />
+          <Property Name="FechaAsignacion" Type="DateTime" Precision="3" />
+          <Property Name="EstadoAsignacion" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Personal" Relationship="BD_NucleosEjecutoresModel.FK_AsignacionProyecto_Personal_Personal" FromRole="AsignacionProyecto_Personal" ToRole="Personal" />
+          <NavigationProperty Name="Proyecto" Relationship="BD_NucleosEjecutoresModel.FK_AsignacionProyecto_Personal_Proyecto" FromRole="AsignacionProyecto_Personal" ToRole="Proyecto" />
+        </EntityType>
+        <EntityType Name="CronogramaAdquisicionInsumos">
+          <Key>
+            <PropertyRef Name="IdCronogramaAdquisicionInsumos" />
+          </Key>
+          <Property Name="IdCronogramaAdquisicionInsumos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProyecto" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="MontoTotalProgramado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NroMeses" Type="Int32" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Proyecto" Relationship="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumos_Proyecto" FromRole="CronogramaAdquisicionInsumos" ToRole="Proyecto" />
+          <NavigationProperty Name="CronogramaAdquisicionInsumosDetalle" Relationship="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos" FromRole="CronogramaAdquisicionInsumos" ToRole="CronogramaAdquisicionInsumosDetalle" />
+        </EntityType>
+        <EntityType Name="CronogramaAdquisicionInsumosDetalle">
+          <Key>
+            <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalle" />
+          </Key>
+          <Property Name="IdCronogramaAdquisicionInsumosDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCronogramaAdquisicionInsumos" Type="Int32" />
+          <Property Name="IdPresupuestoObraDetalleAgrupado" Type="Int32" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CronogramaAdquisicionInsumos" Relationship="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos" FromRole="CronogramaAdquisicionInsumosDetalle" ToRole="CronogramaAdquisicionInsumos" />
+          <NavigationProperty Name="CronogramaAdquisicionInsumosDetalleMes" Relationship="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle" FromRole="CronogramaAdquisicionInsumosDetalle" ToRole="CronogramaAdquisicionInsumosDetalleMes" />
+        </EntityType>
+        <EntityType Name="CronogramaAdquisicionInsumosDetalleMes">
+          <Key>
+            <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalleMes" />
+          </Key>
+          <Property Name="IdCronogramaAdquisicionInsumosDetalleMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCronogramaAdquisicionInsumosDetalle" Type="Int32" />
+          <Property Name="NroMes" Type="Int32" />
+          <Property Name="CantidadProgramada" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialProgramado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CronogramaAdquisicionInsumosDetalle" Relationship="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle" FromRole="CronogramaAdquisicionInsumosDetalleMes" ToRole="CronogramaAdquisicionInsumosDetalle" />
+        </EntityType>
+        <EntityType Name="detalle_transferencias_sav">
+          <Key>
+            <PropertyRef Name="idtransferencia" />
+          </Key>
+          <Property Name="idtransferencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="constante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="documentonumero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="documentofecha" Type="DateTime" Precision="3" />
+          <Property Name="codigomoneda" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="moneda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="saldomoneda" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="idfase" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="montomoneda" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="numerosiaf" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="snip" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="dfecha_add" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DOCUMENTO_SUSTENTO">
+          <Key>
+            <PropertyRef Name="IDDOCUMENTO_SUSTENTO" />
+          </Key>
+          <Property Name="IDDOCUMENTO_SUSTENTO" Type="Int32" Nullable="false" />
+          <Property Name="IDAUTORIZACION" Type="Int32" />
+          <Property Name="NOMBRE_DOCUMENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ADJUNTO_DOCUMENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_DOCUMENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="Int32" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DOCUMENTO_SUSTENTO_MANIFIESTO">
+          <Key>
+            <PropertyRef Name="IDDOCUMENTO_SUSTENTO" />
+          </Key>
+          <Property Name="IDDOCUMENTO_SUSTENTO" Type="Int32" Nullable="false" />
+          <Property Name="IDMANIFIESTO" Type="Int32" />
+          <Property Name="NOMBRE_DOCUMENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ADJUNTO_DOCUMENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_DOCUMENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="Int32" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EstadoCuentaBancaria">
+          <Key>
+            <PropertyRef Name="IdEstadoCuentaBancaria" />
+          </Key>
+          <Property Name="IdEstadoCuentaBancaria" Type="Int32" Nullable="false" />
+          <Property Name="IdProyecto" Type="Int32" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="Mes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="RutaArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="IdUsuario_Add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_Upd" Type="Int32" />
+          <Property Name="Fecha_Upd" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="INSUMO_SERVICIO">
+          <Key>
+            <PropertyRef Name="IDINSUMO_SERVICIO" />
+          </Key>
+          <Property Name="IDINSUMO_SERVICIO" Type="Int32" Nullable="false" />
+          <Property Name="IDRUBRO" Type="Int32" />
+          <Property Name="IDSUBRUBRO" Type="Int32" />
+          <Property Name="ITEM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UNIDAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PebsOperacion">
+          <Key>
+            <PropertyRef Name="nIdOperacion" />
+          </Key>
+          <Property Name="nIdOperacion" Type="Int32" Nullable="false" />
+          <Property Name="sNameSP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sDescripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bestado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERFIL_ACCESO">
+          <Key>
+            <PropertyRef Name="IDPERFIL" />
+          </Key>
+          <Property Name="IDPERFIL" Type="Int32" Nullable="false" />
+          <Property Name="IDTIPOPERFIL" Type="Int32" />
+          <Property Name="IDUSUARIO" Type="Int32" />
+          <Property Name="OPCIONES" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="Int32" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PRE_LIQUIDACION_MENSUAL">
+          <Key>
+            <PropertyRef Name="IDPRE_LIQUIDACION_MENSUAL" />
+          </Key>
+          <Property Name="IDPRE_LIQUIDACION_MENSUAL" Type="Int32" Nullable="false" />
+          <Property Name="IDPROYECTO" Type="Int32" />
+          <Property Name="IDMANIFIESTO" Type="Int32" />
+          <Property Name="MES_PRELIQUIDACION_MENSUAL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESEMBOLSADO_ACUMULADO_NE" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DESEMBOLSO_MES" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OTROS_APORTES_MES" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="INTERES_MES" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DEVOLUCION_PROGRAMA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MONTO_EJECUTADO_MES" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MONTO_EJECUTADO_ACUMULADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ESTADO_COORDINADOR" Type="Int32" />
+          <Property Name="ESTADO_LIQUIDADOR" Type="Int32" />
+          <Property Name="FECHA_APROBACION_PRELIQUIDACION" Type="DateTime" Precision="3" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="Int32" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Proyecto" Relationship="BD_NucleosEjecutoresModel.FK_PRE_LIQUIDACION_MENSUAL_Proyecto" FromRole="PRE_LIQUIDACION_MENSUAL" ToRole="Proyecto" />
+        </EntityType>
+        <EntityType Name="Presupuesto_obra_detalle">
+          <Key>
+            <PropertyRef Name="Id_presupuesto_obra_detalle" />
+          </Key>
+          <Property Name="Id_presupuesto_obra_detalle" Type="Int32" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="Int32" />
+          <Property Name="IdProyecto" Type="Int32" />
+          <Property Name="IdRubro" Type="Int32" />
+          <Property Name="Item_actividad" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_actividad" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Item" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad_metrado" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Unidad" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Costo_unitario_precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Parcial" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Etapa" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Mes" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Agregado" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Presupuesto_obra" Relationship="BD_NucleosEjecutoresModel.FK_Presupuesto_obra_detalle_Presupuesto_obra" FromRole="Presupuesto_obra_detalle" ToRole="Presupuesto_obra" />
+        </EntityType>
+        <EntityType Name="PRESUPUESTO_OBRA_DETALLE_AGRUPADO">
+          <Key>
+            <PropertyRef Name="ID_PRESUPUESTO_OBRA_DETALLE_AGRUPADO" />
+          </Key>
+          <Property Name="ID_PRESUPUESTO_OBRA_DETALLE_AGRUPADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPROYECTO" Type="Int32" />
+          <Property Name="IDRUBRO" Type="Int32" />
+          <Property Name="ITEM" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="UNIDAD" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="COSTO_UNITARIO_PRECIO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CANTIDAD_METRADO_ORIGINAL" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="PARCIAL_ORIGINAL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION_REAL" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION_REAL" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="PARCIAL_ACUMULADO_AUTORIZACION_REAL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_ACUMULADO_AUTORIZACION" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_AUTORIZACION_REAL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_AUTORIZACION" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO_REAL" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO_REAL" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="PARCIAL_ACUMULADO_MANIFIESTO_REAL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_ACUMULADO_MANIFIESTO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_MANIFIESTO_REAL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PARCIAL_DISPONIBLE_MANIFIESTO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="Int32" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RESUMEN_ESTADO_FINANCIERO">
+          <Key>
+            <PropertyRef Name="IDRESUMEN_FINANCIERO" />
+          </Key>
+          <Property Name="IDRESUMEN_FINANCIERO" Type="Int32" Nullable="false" />
+          <Property Name="IDPROYECTO" Type="Int32" />
+          <Property Name="ANIO" Type="Int32" />
+          <Property Name="MES" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO_RESUMEN" Type="Int32" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="FECHA_CIERRE" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_ADD" Type="Int32" />
+          <Property Name="FECHA_ADD" Type="DateTime" Precision="3" />
+          <Property Name="IDUSUARIO_UPD" Type="Int32" />
+          <Property Name="FECHA_UPD" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_AsignacionProyecto_Personal_Personal">
+          <End Type="BD_NucleosEjecutoresModel.Personal" Role="Personal" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.AsignacionProyecto_Personal" Role="AsignacionProyecto_Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="IdPersonal" />
+            </Principal>
+            <Dependent Role="AsignacionProyecto_Personal">
+              <PropertyRef Name="IdPersonal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AsignacionProyecto_Personal_Proyecto">
+          <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.AsignacionProyecto_Personal" Role="AsignacionProyecto_Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="AsignacionProyecto_Personal">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CronogramaAdquisicionInsumos_Proyecto">
+          <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumos" Role="CronogramaAdquisicionInsumos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="CronogramaAdquisicionInsumos">
+              <PropertyRef Name="IdProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CronogramaAdquisicionInsumosDetalle_CronogramaAdquisicionInsumos">
+          <End Type="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumos" Role="CronogramaAdquisicionInsumos" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalle" Role="CronogramaAdquisicionInsumosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CronogramaAdquisicionInsumos">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumos" />
+            </Principal>
+            <Dependent Role="CronogramaAdquisicionInsumosDetalle">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle">
+          <End Type="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalle" Role="CronogramaAdquisicionInsumosDetalle" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalleMes" Role="CronogramaAdquisicionInsumosDetalleMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CronogramaAdquisicionInsumosDetalle">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalle" />
+            </Principal>
+            <Dependent Role="CronogramaAdquisicionInsumosDetalleMes">
+              <PropertyRef Name="IdCronogramaAdquisicionInsumosDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRE_LIQUIDACION_MENSUAL_Proyecto">
+          <End Type="BD_NucleosEjecutoresModel.Proyecto" Role="Proyecto" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.PRE_LIQUIDACION_MENSUAL" Role="PRE_LIQUIDACION_MENSUAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="IdProyecto" />
+            </Principal>
+            <Dependent Role="PRE_LIQUIDACION_MENSUAL">
+              <PropertyRef Name="IDPROYECTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuesto_obra_detalle_Presupuesto_obra">
+          <End Type="BD_NucleosEjecutoresModel.Presupuesto_obra" Role="Presupuesto_obra" Multiplicity="0..1" />
+          <End Type="BD_NucleosEjecutoresModel.Presupuesto_obra_detalle" Role="Presupuesto_obra_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presupuesto_obra">
+              <PropertyRef Name="IdPresupuesto" />
+            </Principal>
+            <Dependent Role="Presupuesto_obra_detalle">
+              <PropertyRef Name="IdPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonaFamilia">
+          <Key>
+            <PropertyRef Name="IdPersonaFamilia" />
+          </Key>
+          <Property Name="IdPersonaFamilia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="TipoFamiliar" Type="Int32" Nullable="false" />
+          <Property Name="TipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="NroDocumento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ApePaterno" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ApeMaterno" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TipoSangre" Type="Int32" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="UbigeoDireccion" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Celular1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Celular2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Emergencia" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario_add" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_add" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_upd" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Persona" Relationship="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" FromRole="PersonaFamilia" ToRole="Persona" />
+        </EntityType>
+        <Association Name="FK__PersonaFa__Fecha__0C06BB60">
+          <End Type="BD_NucleosEjecutoresModel.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="BD_NucleosEjecutoresModel.PersonaFamilia" Role="PersonaFamilia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaFamilia">
+              <PropertyRef Name="IdPersona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7052,32 +8296,6 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PersonaFamilia">
-            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PersonaFamilia">
-              <MappingFragment StoreEntitySet="PersonaFamilia">
-                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
-                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
-                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
-                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Emergencia" ColumnName="Emergencia" />
-                <ScalarProperty Name="Celular2" ColumnName="Celular2" />
-                <ScalarProperty Name="Celular1" ColumnName="Celular1" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="UbigeoDireccion" ColumnName="UbigeoDireccion" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="TipoSangre" ColumnName="TipoSangre" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="ApeMaterno" ColumnName="ApeMaterno" />
-                <ScalarProperty Name="ApePaterno" ColumnName="ApePaterno" />
-                <ScalarProperty Name="TipoFamiliar" ColumnName="TipoFamiliar" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdPersonaFamilia" ColumnName="IdPersonaFamilia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NivelProfesional">
             <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.NivelProfesional">
               <MappingFragment StoreEntitySet="NivelProfesional">
@@ -7159,6 +8377,399 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdPersonaProyecto" ColumnName="IdPersonaProyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContratoAdenda">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.ContratoAdenda">
+              <MappingFragment StoreEntitySet="ContratoAdenda">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdRepresentanteLegal" ColumnName="IdRepresentanteLegal" />
+                <ScalarProperty Name="MontoAdenda" ColumnName="MontoAdenda" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TipoAdenda" ColumnName="TipoAdenda" />
+                <ScalarProperty Name="NroAdenda" ColumnName="NroAdenda" />
+                <ScalarProperty Name="AnioAdenda" ColumnName="AnioAdenda" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="IdContratoAdenda" ColumnName="IdContratoAdenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LugarPrestacionServicios">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.LugarPrestacionServicios">
+              <MappingFragment StoreEntitySet="LugarPrestacionServicios">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="LugarPrestacionServicios1" ColumnName="LugarPrestacionServicios" />
+                <ScalarProperty Name="IdLugarPrestacionServicios" ColumnName="IdLugarPrestacionServicios" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OficinaDependencia">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.OficinaDependencia">
+              <MappingFragment StoreEntitySet="OficinaDependencia">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="OficinaDependencia1" ColumnName="OficinaDependencia" />
+                <ScalarProperty Name="IdOficinaDependencia" ColumnName="IdOficinaDependencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepresentanteLegal">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.RepresentanteLegal">
+              <MappingFragment StoreEntitySet="RepresentanteLegal">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="AbreviaturaProfesional" ColumnName="AbreviaturaProfesional" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdRepresentanteLegal" ColumnName="IdRepresentanteLegal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contrato">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.Contrato">
+              <MappingFragment StoreEntitySet="Contrato">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdRepresentanteLegal" ColumnName="IdRepresentanteLegal" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="MontoMensual" ColumnName="MontoMensual" />
+                <ScalarProperty Name="MontoContrato" ColumnName="MontoContrato" />
+                <ScalarProperty Name="IdLugarPrestacionServicios" ColumnName="IdLugarPrestacionServicios" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="EjecucionTrabajoSupervision" ColumnName="EjecucionTrabajoSupervision" />
+                <ScalarProperty Name="IdOficinaDependencia" ColumnName="IdOficinaDependencia" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
+                <ScalarProperty Name="NroContrato" ColumnName="NroContrato" />
+                <ScalarProperty Name="AnioContrato" ColumnName="AnioContrato" />
+                <ScalarProperty Name="DireccionContrato" ColumnName="DireccionContrato" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsignacionProyecto_Personal">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.AsignacionProyecto_Personal">
+              <MappingFragment StoreEntitySet="AsignacionProyecto_Personal">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstadoAsignacion" ColumnName="EstadoAsignacion" />
+                <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
+                <ScalarProperty Name="Cod_cargo" ColumnName="Cod_cargo" />
+                <ScalarProperty Name="IdPersonal" ColumnName="IdPersonal" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdAsignacion" ColumnName="IdAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CronogramaAdquisicionInsumos">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumos">
+              <MappingFragment StoreEntitySet="CronogramaAdquisicionInsumos">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NroMeses" ColumnName="NroMeses" />
+                <ScalarProperty Name="MontoTotalProgramado" ColumnName="MontoTotalProgramado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdCronogramaAdquisicionInsumos" ColumnName="IdCronogramaAdquisicionInsumos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CronogramaAdquisicionInsumosDetalle">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalle">
+              <MappingFragment StoreEntitySet="CronogramaAdquisicionInsumosDetalle">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdPresupuestoObraDetalleAgrupado" ColumnName="IdPresupuestoObraDetalleAgrupado" />
+                <ScalarProperty Name="IdCronogramaAdquisicionInsumos" ColumnName="IdCronogramaAdquisicionInsumos" />
+                <ScalarProperty Name="IdCronogramaAdquisicionInsumosDetalle" ColumnName="IdCronogramaAdquisicionInsumosDetalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CronogramaAdquisicionInsumosDetalleMes">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.CronogramaAdquisicionInsumosDetalleMes">
+              <MappingFragment StoreEntitySet="CronogramaAdquisicionInsumosDetalleMes">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ParcialProgramado" ColumnName="ParcialProgramado" />
+                <ScalarProperty Name="CantidadProgramada" ColumnName="CantidadProgramada" />
+                <ScalarProperty Name="NroMes" ColumnName="NroMes" />
+                <ScalarProperty Name="IdCronogramaAdquisicionInsumosDetalle" ColumnName="IdCronogramaAdquisicionInsumosDetalle" />
+                <ScalarProperty Name="IdCronogramaAdquisicionInsumosDetalleMes" ColumnName="IdCronogramaAdquisicionInsumosDetalleMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalle_transferencias_sav">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.detalle_transferencias_sav">
+              <MappingFragment StoreEntitySet="detalle_transferencias_sav">
+                <ScalarProperty Name="dfecha_add" ColumnName="dfecha_add" />
+                <ScalarProperty Name="snip" ColumnName="snip" />
+                <ScalarProperty Name="numerosiaf" ColumnName="numerosiaf" />
+                <ScalarProperty Name="montomoneda" ColumnName="montomoneda" />
+                <ScalarProperty Name="idfase" ColumnName="idfase" />
+                <ScalarProperty Name="saldomoneda" ColumnName="saldomoneda" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="codigomoneda" ColumnName="codigomoneda" />
+                <ScalarProperty Name="documentofecha" ColumnName="documentofecha" />
+                <ScalarProperty Name="documentonumero" ColumnName="documentonumero" />
+                <ScalarProperty Name="constante" ColumnName="constante" />
+                <ScalarProperty Name="idtransferencia" ColumnName="idtransferencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTO_SUSTENTO">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.DOCUMENTO_SUSTENTO">
+              <MappingFragment StoreEntitySet="DOCUMENTO_SUSTENTO">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="DESCRIPCION_DOCUMENTO" ColumnName="DESCRIPCION_DOCUMENTO" />
+                <ScalarProperty Name="ADJUNTO_DOCUMENTO" ColumnName="ADJUNTO_DOCUMENTO" />
+                <ScalarProperty Name="NOMBRE_DOCUMENTO" ColumnName="NOMBRE_DOCUMENTO" />
+                <ScalarProperty Name="IDAUTORIZACION" ColumnName="IDAUTORIZACION" />
+                <ScalarProperty Name="IDDOCUMENTO_SUSTENTO" ColumnName="IDDOCUMENTO_SUSTENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTO_SUSTENTO_MANIFIESTO">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.DOCUMENTO_SUSTENTO_MANIFIESTO">
+              <MappingFragment StoreEntitySet="DOCUMENTO_SUSTENTO_MANIFIESTO">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="DESCRIPCION_DOCUMENTO" ColumnName="DESCRIPCION_DOCUMENTO" />
+                <ScalarProperty Name="ADJUNTO_DOCUMENTO" ColumnName="ADJUNTO_DOCUMENTO" />
+                <ScalarProperty Name="NOMBRE_DOCUMENTO" ColumnName="NOMBRE_DOCUMENTO" />
+                <ScalarProperty Name="IDMANIFIESTO" ColumnName="IDMANIFIESTO" />
+                <ScalarProperty Name="IDDOCUMENTO_SUSTENTO" ColumnName="IDDOCUMENTO_SUSTENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCuentaBancaria">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.EstadoCuentaBancaria">
+              <MappingFragment StoreEntitySet="EstadoCuentaBancaria">
+                <ScalarProperty Name="Fecha_Upd" ColumnName="Fecha_Upd" />
+                <ScalarProperty Name="IdUsuario_Upd" ColumnName="IdUsuario_Upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_Add" ColumnName="IdUsuario_Add" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="RutaArchivo" ColumnName="RutaArchivo" />
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdEstadoCuentaBancaria" ColumnName="IdEstadoCuentaBancaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSUMO_SERVICIO">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.INSUMO_SERVICIO">
+              <MappingFragment StoreEntitySet="INSUMO_SERVICIO">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="IDSUBRUBRO" ColumnName="IDSUBRUBRO" />
+                <ScalarProperty Name="IDRUBRO" ColumnName="IDRUBRO" />
+                <ScalarProperty Name="IDINSUMO_SERVICIO" ColumnName="IDINSUMO_SERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PebsOperacion">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PebsOperacion">
+              <MappingFragment StoreEntitySet="PebsOperacion">
+                <ScalarProperty Name="bestado" ColumnName="bestado" />
+                <ScalarProperty Name="sDescripcion" ColumnName="sDescripcion" />
+                <ScalarProperty Name="sNameSP" ColumnName="sNameSP" />
+                <ScalarProperty Name="nIdOperacion" ColumnName="nIdOperacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERFIL_ACCESO">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PERFIL_ACCESO">
+              <MappingFragment StoreEntitySet="PERFIL_ACCESO">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="OPCIONES" ColumnName="OPCIONES" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDTIPOPERFIL" ColumnName="IDTIPOPERFIL" />
+                <ScalarProperty Name="IDPERFIL" ColumnName="IDPERFIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRE_LIQUIDACION_MENSUAL">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PRE_LIQUIDACION_MENSUAL">
+              <MappingFragment StoreEntitySet="PRE_LIQUIDACION_MENSUAL">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="FECHA_APROBACION_PRELIQUIDACION" ColumnName="FECHA_APROBACION_PRELIQUIDACION" />
+                <ScalarProperty Name="ESTADO_LIQUIDADOR" ColumnName="ESTADO_LIQUIDADOR" />
+                <ScalarProperty Name="ESTADO_COORDINADOR" ColumnName="ESTADO_COORDINADOR" />
+                <ScalarProperty Name="MONTO_EJECUTADO_ACUMULADO" ColumnName="MONTO_EJECUTADO_ACUMULADO" />
+                <ScalarProperty Name="MONTO_EJECUTADO_MES" ColumnName="MONTO_EJECUTADO_MES" />
+                <ScalarProperty Name="DEVOLUCION_PROGRAMA" ColumnName="DEVOLUCION_PROGRAMA" />
+                <ScalarProperty Name="INTERES_MES" ColumnName="INTERES_MES" />
+                <ScalarProperty Name="OTROS_APORTES_MES" ColumnName="OTROS_APORTES_MES" />
+                <ScalarProperty Name="DESEMBOLSO_MES" ColumnName="DESEMBOLSO_MES" />
+                <ScalarProperty Name="DESEMBOLSADO_ACUMULADO_NE" ColumnName="DESEMBOLSADO_ACUMULADO_NE" />
+                <ScalarProperty Name="MES_PRELIQUIDACION_MENSUAL" ColumnName="MES_PRELIQUIDACION_MENSUAL" />
+                <ScalarProperty Name="IDMANIFIESTO" ColumnName="IDMANIFIESTO" />
+                <ScalarProperty Name="IDPROYECTO" ColumnName="IDPROYECTO" />
+                <ScalarProperty Name="IDPRE_LIQUIDACION_MENSUAL" ColumnName="IDPRE_LIQUIDACION_MENSUAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presupuesto_obra_detalle">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.Presupuesto_obra_detalle">
+              <MappingFragment StoreEntitySet="Presupuesto_obra_detalle">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Agregado" ColumnName="Agregado" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Etapa" ColumnName="Etapa" />
+                <ScalarProperty Name="Parcial" ColumnName="Parcial" />
+                <ScalarProperty Name="Costo_unitario_precio" ColumnName="Costo_unitario_precio" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Cantidad_metrado" ColumnName="Cantidad_metrado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Descripcion_actividad" ColumnName="Descripcion_actividad" />
+                <ScalarProperty Name="Item_actividad" ColumnName="Item_actividad" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="Id_presupuesto_obra_detalle" ColumnName="Id_presupuesto_obra_detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESUPUESTO_OBRA_DETALLE_AGRUPADO">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PRESUPUESTO_OBRA_DETALLE_AGRUPADO">
+              <MappingFragment StoreEntitySet="PRESUPUESTO_OBRA_DETALLE_AGRUPADO">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="PARCIAL_DISPONIBLE_MANIFIESTO" ColumnName="PARCIAL_DISPONIBLE_MANIFIESTO" />
+                <ScalarProperty Name="PARCIAL_DISPONIBLE_MANIFIESTO_REAL" ColumnName="PARCIAL_DISPONIBLE_MANIFIESTO_REAL" />
+                <ScalarProperty Name="PARCIAL_ACUMULADO_MANIFIESTO" ColumnName="PARCIAL_ACUMULADO_MANIFIESTO" />
+                <ScalarProperty Name="PARCIAL_ACUMULADO_MANIFIESTO_REAL" ColumnName="PARCIAL_ACUMULADO_MANIFIESTO_REAL" />
+                <ScalarProperty Name="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO" ColumnName="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO" />
+                <ScalarProperty Name="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO_REAL" ColumnName="CANTIDAD_METRADO_DISPONIBLE_MANIFIESTO_REAL" />
+                <ScalarProperty Name="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO" ColumnName="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO" />
+                <ScalarProperty Name="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO_REAL" ColumnName="CANTIDAD_METRADO_ACUMULADO_MANIFIESTO_REAL" />
+                <ScalarProperty Name="PARCIAL_DISPONIBLE_AUTORIZACION" ColumnName="PARCIAL_DISPONIBLE_AUTORIZACION" />
+                <ScalarProperty Name="PARCIAL_DISPONIBLE_AUTORIZACION_REAL" ColumnName="PARCIAL_DISPONIBLE_AUTORIZACION_REAL" />
+                <ScalarProperty Name="PARCIAL_ACUMULADO_AUTORIZACION" ColumnName="PARCIAL_ACUMULADO_AUTORIZACION" />
+                <ScalarProperty Name="PARCIAL_ACUMULADO_AUTORIZACION_REAL" ColumnName="PARCIAL_ACUMULADO_AUTORIZACION_REAL" />
+                <ScalarProperty Name="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION" ColumnName="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION" />
+                <ScalarProperty Name="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION_REAL" ColumnName="CANTIDAD_METRADO_DISPONIBLE_AUTORIZACION_REAL" />
+                <ScalarProperty Name="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION" ColumnName="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION" />
+                <ScalarProperty Name="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION_REAL" ColumnName="CANTIDAD_METRADO_ACUMULADO_AUTORIZACION_REAL" />
+                <ScalarProperty Name="PARCIAL_ORIGINAL" ColumnName="PARCIAL_ORIGINAL" />
+                <ScalarProperty Name="CANTIDAD_METRADO_ORIGINAL" ColumnName="CANTIDAD_METRADO_ORIGINAL" />
+                <ScalarProperty Name="COSTO_UNITARIO_PRECIO" ColumnName="COSTO_UNITARIO_PRECIO" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="IDRUBRO" ColumnName="IDRUBRO" />
+                <ScalarProperty Name="IDPROYECTO" ColumnName="IDPROYECTO" />
+                <ScalarProperty Name="ID_PRESUPUESTO_OBRA_DETALLE_AGRUPADO" ColumnName="ID_PRESUPUESTO_OBRA_DETALLE_AGRUPADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESUMEN_ESTADO_FINANCIERO">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.RESUMEN_ESTADO_FINANCIERO">
+              <MappingFragment StoreEntitySet="RESUMEN_ESTADO_FINANCIERO">
+                <ScalarProperty Name="FECHA_UPD" ColumnName="FECHA_UPD" />
+                <ScalarProperty Name="IDUSUARIO_UPD" ColumnName="IDUSUARIO_UPD" />
+                <ScalarProperty Name="FECHA_ADD" ColumnName="FECHA_ADD" />
+                <ScalarProperty Name="IDUSUARIO_ADD" ColumnName="IDUSUARIO_ADD" />
+                <ScalarProperty Name="FECHA_CIERRE" ColumnName="FECHA_CIERRE" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="ESTADO_RESUMEN" ColumnName="ESTADO_RESUMEN" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+                <ScalarProperty Name="IDPROYECTO" ColumnName="IDPROYECTO" />
+                <ScalarProperty Name="IDRESUMEN_FINANCIERO" ColumnName="IDRESUMEN_FINANCIERO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonaFamilia">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.PersonaFamilia">
+              <MappingFragment StoreEntitySet="PersonaFamilia">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Emergencia" ColumnName="Emergencia" />
+                <ScalarProperty Name="Celular2" ColumnName="Celular2" />
+                <ScalarProperty Name="Celular1" ColumnName="Celular1" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="UbigeoDireccion" ColumnName="UbigeoDireccion" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="TipoSangre" ColumnName="TipoSangre" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApeMaterno" ColumnName="ApeMaterno" />
+                <ScalarProperty Name="ApePaterno" ColumnName="ApePaterno" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="TipoFamiliar" ColumnName="TipoFamiliar" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdPersonaFamilia" ColumnName="IdPersonaFamilia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -36,5 +36,6 @@ namespace _02_Entidades
         public string NivelProfesional { get; set; }
         public string Profesion { get; set; }
         public string TipoNroDcto { get; set; }
+        public string DireccionContrato { get; set; }
     }
 }

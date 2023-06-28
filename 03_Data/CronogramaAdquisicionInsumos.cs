@@ -12,30 +12,28 @@ namespace _03_Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Presupuesto_obra
+    public partial class CronogramaAdquisicionInsumos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Presupuesto_obra()
+        public CronogramaAdquisicionInsumos()
         {
-            this.Presupuesto_obra_detalle = new HashSet<Presupuesto_obra_detalle>();
+            this.CronogramaAdquisicionInsumosDetalle = new HashSet<CronogramaAdquisicionInsumosDetalle>();
         }
     
-        public int IdPresupuesto { get; set; }
+        public int IdCronogramaAdquisicionInsumos { get; set; }
         public Nullable<int> IdProyecto { get; set; }
-        public string Nro_presupuesto { get; set; }
-        public Nullable<int> Cod_presupuesto { get; set; }
-        public Nullable<int> Cod_partida { get; set; }
-        public Nullable<int> Cod_subpartida { get; set; }
-        public Nullable<System.DateTime> Fecha_presupuesto { get; set; }
-        public Nullable<decimal> Porcentaje_presupuesto { get; set; }
-        public Nullable<decimal> Costo_total_presupuesto { get; set; }
-        public Nullable<bool> Estado { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<decimal> MontoTotalProgramado { get; set; }
+        public Nullable<int> NroMeses { get; set; }
+        public Nullable<int> Estado { get; set; }
+        public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario_add { get; set; }
         public Nullable<System.DateTime> Fecha_add { get; set; }
         public Nullable<int> IdUsuario_upd { get; set; }
         public Nullable<System.DateTime> Fecha_upd { get; set; }
     
+        public virtual Proyecto Proyecto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Presupuesto_obra_detalle> Presupuesto_obra_detalle { get; set; }
+        public virtual ICollection<CronogramaAdquisicionInsumosDetalle> CronogramaAdquisicionInsumosDetalle { get; set; }
     }
 }

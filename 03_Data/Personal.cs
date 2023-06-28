@@ -14,6 +14,12 @@ namespace _03_Data
     
     public partial class Personal
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Personal()
+        {
+            this.AsignacionProyecto_Personal = new HashSet<AsignacionProyecto_Personal>();
+        }
+    
         public int IdPersonal { get; set; }
         public Nullable<int> Tipo { get; set; }
         public string Snip { get; set; }
@@ -35,5 +41,8 @@ namespace _03_Data
         public Nullable<System.DateTime> Fecha_add { get; set; }
         public Nullable<int> IdUsuario_upd { get; set; }
         public Nullable<System.DateTime> Fecha_upd { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AsignacionProyecto_Personal> AsignacionProyecto_Personal { get; set; }
     }
 }

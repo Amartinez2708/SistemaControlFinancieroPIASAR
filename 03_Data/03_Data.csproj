@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsignacionProyecto_Personal.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Autorizacion_Gasto.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
@@ -72,7 +75,22 @@
     <Compile Include="ComprobanteDetalle.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Contrato.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContratoAdenda.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="CronogramaActividades.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CronogramaAdquisicionInsumos.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CronogramaAdquisicionInsumosDetalle.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CronogramaAdquisicionInsumosDetalleMes.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Departamento.cs">
@@ -111,10 +129,19 @@
     <Compile Include="DetalleSeguimientoJASS.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="detalle_transferencias_sav.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="DevengadoMensual.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Distrito.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCUMENTO_SUSTENTO.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCUMENTO_SUSTENTO_MANIFIESTO.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="EjecucionInversion.cs">
@@ -123,10 +150,16 @@
     <Compile Include="EjecucionInversionMes.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="EstadoCuentaBancaria.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="HistoricoMonitoreo.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Indicador.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INSUMO_SERVICIO.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ListDepa.cs">
@@ -148,6 +181,9 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ListProv.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LugarPrestacionServicios.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="MANIFIESTO_GASTO.cs">
@@ -195,10 +231,19 @@
     <Compile Include="NivelProfesional.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="OficinaDependencia.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PebsOperacion.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Perfil.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="PerfilMenu.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PERFIL_ACCESO.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Persona.cs">
@@ -214,6 +259,15 @@
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Presupuesto_obra.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presupuesto_obra_detalle.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRESUPUESTO_OBRA_DETALLE_AGRUPADO.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRE_LIQUIDACION_MENSUAL.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Proceso.cs">
@@ -247,10 +301,16 @@
     <Compile Include="ProyectosSeguimiento.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="RepresentanteLegal.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="ResultadoEsperado.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ResultadoEsperadoAnio.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RESUMEN_ESTADO_FINANCIERO.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
     <Compile Include="ROLES_SISTEMA.cs">

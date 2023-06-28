@@ -18,6 +18,7 @@ namespace _03_Data
         public Cargo()
         {
             this.Persona = new HashSet<Persona>();
+            this.Contrato = new HashSet<Contrato>();
         }
     
         public int IdCargo { get; set; }
@@ -30,5 +31,7 @@ namespace _03_Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Persona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contrato> Contrato { get; set; }
     }
 }

@@ -49,6 +49,8 @@
     <Compile Include="EnComponenteRPT.cs" />
     <Compile Include="EnComprobante.cs" />
     <Compile Include="EnComprobanteDetalle.cs" />
+    <Compile Include="EnContrato.cs" />
+    <Compile Include="EnContratoAdenda.cs" />
     <Compile Include="EnDepartamento.cs" />
     <Compile Include="EnDesembolsoProgramadoAnual.cs" />
     <Compile Include="EnDesembolsoProgramadoMensual.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="EnListSeguimientoDetalle.cs" />
     <Compile Include="EnListSeguimientoDetalleActividades.cs" />
     <Compile Include="EnListSeguimientoProgramadoEjecutadoMensual.cs" />
+    <Compile Include="EnLugarPrestacionServicios.cs" />
     <Compile Include="EnMANIFIESTO_GASTO.cs" />
     <Compile Include="EnMANIFIESTO_GASTO_DETALLE.cs" />
     <Compile Include="EnMatrizResumen.cs" />
@@ -87,8 +90,10 @@
     <Compile Include="EnMonitoreoObras.cs" />
     <Compile Include="EnMovimiento_Documento.cs" />
     <Compile Include="EnMovimiento_Documento_Detalle.cs" />
+    <Compile Include="EnOficinaDependencia.cs" />
     <Compile Include="EnPerfilMenu.cs" />
     <Compile Include="EnPersona.cs" />
+    <Compile Include="EnPersonaFamilia.cs" />
     <Compile Include="EnPersonaProyecto.cs" />
     <Compile Include="EnProceso.cs" />
     <Compile Include="EnProcesoDetalle.cs" />
@@ -99,6 +104,7 @@
     <Compile Include="EnProyectosSeguimiento.cs" />
     <Compile Include="EnReporteBID.cs" />
     <Compile Include="EnReporteEstados.cs" />
+    <Compile Include="EnRepresentanteLegal.cs" />
     <Compile Include="EnRespuesta.cs" />
     <Compile Include="EnSeguimientoActividadesATM.cs" />
     <Compile Include="EnSeguimientoActividadesFamilias.cs" />

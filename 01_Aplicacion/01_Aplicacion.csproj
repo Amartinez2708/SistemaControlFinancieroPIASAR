@@ -619,11 +619,15 @@
     <Content Include="Content\Images\bg_banner.jpg" />
     <Content Include="Content\Images\bid.png" />
     <Content Include="Content\Images\black-texture.jpg" />
+    <Content Include="Content\Images\contrato cerrado.png" />
     <Content Include="Content\Images\contrato.png" />
+    <Content Include="Content\Images\convenio.png" />
     <Content Include="Content\Images\corte-de-cinta.png" />
     <Content Include="Content\Images\curriculum.png" />
     <Content Include="Content\Images\desembolso.png" />
     <Content Include="Content\Images\DOC.png" />
+    <Content Include="Content\Images\editar-usuario.png" />
+    <Content Include="Content\Images\eliminar-usuario.png" />
     <Content Include="Content\Images\Ellipsis-1.6s-120px.gif" />
     <Content Include="Content\Images\Ellipsis-2.3s-182px.gif" />
     <Content Include="Content\Images\Ellipsis.png" />
@@ -641,6 +645,7 @@
     <Content Include="Content\Images\header.jpg" />
     <Content Include="Content\Images\hogar.png" />
     <Content Include="Content\Images\HTML.png" />
+    <Content Include="Content\Images\impresora.png" />
     <Content Include="Content\Images\INAUGURACIONES.jpg" />
     <Content Include="Content\Images\JPG.png" />
     <Content Include="Content\Images\justificacion.png" />
@@ -667,6 +672,7 @@
     <Content Include="Content\Images\proceso-de-trabajo.png" />
     <Content Include="Content\Images\product-management.png" />
     <Content Include="Content\Images\RAR.png" />
+    <Content Include="Content\Images\rechazado.png" />
     <Content Include="Content\Images\Regiones\00.jpg" />
     <Content Include="Content\Images\Regiones\01.jpg" />
     <Content Include="Content\Images\Regiones\02.jpg" />
@@ -1038,6 +1044,7 @@
     <Content Include="Views\MatrizResultados\ReportesActividadesNE.cshtml" />
     <Content Include="Views\MatrizResultados\ReportesActividadesJASS.cshtml" />
     <Content Include="Views\MatrizResultados\ReportesActividadesATM.cshtml" />
+    <Content Include="Views\Personal\_ImprimirContrato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

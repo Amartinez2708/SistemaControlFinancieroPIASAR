@@ -23,6 +23,9 @@ namespace _03_Data
             this.MANIFIESTO_GASTO = new HashSet<MANIFIESTO_GASTO>();
             this.MonitoreoObras = new HashSet<MonitoreoObras>();
             this.PersonaProyecto = new HashSet<PersonaProyecto>();
+            this.AsignacionProyecto_Personal = new HashSet<AsignacionProyecto_Personal>();
+            this.CronogramaAdquisicionInsumos = new HashSet<CronogramaAdquisicionInsumos>();
+            this.PRE_LIQUIDACION_MENSUAL = new HashSet<PRE_LIQUIDACION_MENSUAL>();
         }
     
         public int IdProyecto { get; set; }
@@ -106,5 +109,11 @@ namespace _03_Data
         public virtual ICollection<MonitoreoObras> MonitoreoObras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PersonaProyecto> PersonaProyecto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AsignacionProyecto_Personal> AsignacionProyecto_Personal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CronogramaAdquisicionInsumos> CronogramaAdquisicionInsumos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRE_LIQUIDACION_MENSUAL> PRE_LIQUIDACION_MENSUAL { get; set; }
     }
 }
