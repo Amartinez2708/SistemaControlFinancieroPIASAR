@@ -737,7 +737,14 @@ namespace _04_Servicios
                 result.FechaFinString = obj.FechaFin == null ? "" : Convert.ToDateTime(obj.FechaFin).ToString("dd/MM/yyyy");
                 result.Persona = obj.Persona.Nombres +" "+ obj.Persona.ApePaterno + " " + obj.Persona.ApeMaterno;
                 result.PersonaDNI = obj.Persona.NroDocumento;
+                
 
+                result.Plazo = Utilidades.PlazoEnLetras(Convert.ToDateTime(result.FechaInicio), Convert.ToDateTime(result.FechaFin));
+                result.FechaInicioLetras = Utilidades.ConvertirFechaEnLetras(Convert.ToDateTime(result.FechaInicio));
+                result.FechaFinLetras = Utilidades.ConvertirFechaEnLetras(Convert.ToDateTime(result.FechaFin));
+                result.MontoContratoLetras = Utilidades.ConvertirDineroLetras(Convert.ToDecimal(result.MontoContrato));
+                result.NroCelularPersona = obj.Persona.Celular1;
+                result.EmailPersona = obj.Persona.Email1;
             }
             return result;
         }

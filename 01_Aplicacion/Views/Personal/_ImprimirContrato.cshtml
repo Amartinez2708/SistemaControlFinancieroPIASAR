@@ -4,6 +4,7 @@
 }
 @model _02_Entidades.EnContrato
 
+
 <!DOCTYPE html>
 
 <html>
@@ -46,9 +47,293 @@
             <td colspan="2" style="font-size:16px;text-align:justify;">Interviene en la celebración del presente contrato, por una parte <strong>PROGRAMA NACIONAL DE SANEAMIENTO RURAL</strong>, con R.U.C. N° 20548776920, en su condición de Unidad Ejecutora a través del <strong>PIASAR</strong> o simplemente "la Entidad", legalmente representada por, <strong>@Model.RepresentanteLegal.ToUpper()</strong>, en su calidad de Coordinador General; y, por otra <strong>@Model.Persona.ToUpper()</strong>, de nacionalidad peruana, con documento de identidad DNI N° @Model.PersonaDNI, otorgado en Lima, domiciliado en @Model.DireccionContrato, por sus propios y personales derechos, a quien en adelante se le denominará "el Consultor", quienes convienen en celebrar este contrato de prestación de servicios de consultoria, contenido en las siguientes cláusulas:</td>
         </tr>
         <tr>
-            <td style="font-weight: bold;font-size:14px" colspan="19"></td>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />PRIMERA: DEFINICIONES</h4></td>
         </tr>
-       
+        <tr>
+            <td colspan="2" style="font-size:16px;text-align:justify;">Los siguientes términos serán interpretados como se indica a continuación:</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(a)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Servicios de Consultoría"</strong> son servicios profesionales de diversa índole tales como asesoría, dictámenes de expertos y servicios relacionados con alguna ciencia, arte u oficio que requiera la aplicación del intelecto humano.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(b)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"BID"</strong> es el Banco Interamericano de Desarrollo. Institución financiera multilateral de carácter regional, con sede en Washington DC de los Estados Unidos de Norte América.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(c)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"La Entidad", "Entidad Contratante", o "Contratante"</strong> es la institución que requiere los servicios del Consultor.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(d)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"La Entidad", "Entidad Contratante", o "Contratante"</strong> es la institución que requiere los servicios del Consultor.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(e)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Concurso"</strong> es el proceso que tiene por objeto seleccionar y contratar al Consultor.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(f)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Documentos Precontractuales"</strong>, son los documentos que contemplan las disposiciones para el proceso de selección y contratación del Consultor, los Términos de Referencia y las condiciones del contrato.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(g)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Contrato"</strong>, es el convenio celebrado entre la Entidad y el Consultor. Incluye los TDR, sus apéndices y todos los documentos incorporados a él por referencia.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(h)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Precio del contrato"</strong> es el precio total pagadero al Consultor por la prestación de sus servicios y por cualquier otro concepto contemplado en sus Términos de Referencia.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(i)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Honorarios"</strong> es el pago por la prestación de los servicios realizados por el Consultor. Por la naturaleza del contrato, no admite relación de dependencia laboral alguna y por tanto reconocimiento de ningún beneficio de orden social.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(j)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Remuneración"</strong> incluye los honorarios y los gastos incurridos por la prestación de los servicios.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(k)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Programa"</strong> es aquél que se financia con los recursos del Préstamo o Cooperación Técnica del BID.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(l)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Proyecto"</strong> es el objeto del contrato.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(m)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Financiamiento"</strong> se entenderá como los fondos que el BID conviene en poner a disposición del Prestatario o Beneficiario para contribuir a la realización del Proyecto.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(n)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Fuerza Mayor" o "Caso Fortuito"</strong> es el imprevisto al que no es posible resistir, como un naufragio, terremoto, apresamiento de enemigos, los actos de autoridad ejercidos por un funcionario público, etc.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(o)</td>
+            <td style="font-size:16px;text-align:justify;"><strong>"Plazo"</strong>, período en días calendario sucesivos, incluyendo sábados, domingos y feriados, dentro del cual se deberán realizar la prestación de los servicios.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />SEGUNDA: ANTECEDENTES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El 12 de setiembre del 2018 se suscribió el Contrato de Préstamo o (Convenio de Cooperación Técnica) No.4442/OC-PE entre el BID y la República del Perú con el objeto de financiar la ejecución del PROGRAMA INTEGRAL DE AGUA Y SANEAMIENTO RURAL — PIASAR.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />TERCERA:	DOCUMENTOS QUE INTEGRAN EL CONTRATO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Forman parte integrante del presente contrato los siguientes documentos:</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(a)</td>
+            <td style="font-size:16px;text-align:justify;">Los <strong>Términos de Referencia.</strong></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(b)</td>
+            <td style="font-size:16px;text-align:justify;">El currículum vitae del Consultor <strong>(y de ser el caso, si lo solicita la Entidad, la(s) copia(s) de las acreditaciones pertinentes).</strong></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(c)</td>
+            <td style="font-size:16px;text-align:justify;">Informe de Evaluación</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">(d)</td>
+            <td style="font-size:16px;text-align:justify;">Formulario Estándar</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />CUARTA: OBJETO DEL CONTRATO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El objeto del contrato se encuentra señalado en los <strong>Términos de Referencia</strong>, cuyas actividades son resumidamente las siguientes:</td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">"@Model.Cargo.ToUpper()"</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />QUINTA: PRÁCTICAS PROHIBIDAS</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">La descripción integral de prácticas prohibidas según la Política de Adquisiciones del BID GN-2350-15, se encuentran en el anexo N2 1 de este contrato y su inclusión es de carácter obligatorio y hace parte integra del presente contrato.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />SEXTA: EJECUCIÓN DEL TRABAJO Y SUPERVISIÓN DEL CONTRATO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">@Model.EjecucionTrabajoSupervision</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />SÉPTIMA:	INFORMES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Es obligación del Consultor presentar a la Entidad los informes mensuales de las actividades realizadas acuerdo a las funciones señalados en el numeral 3.1 de los Términos de Referencia, los mismos que rrnan parte del contrato.<br />Las opiniones y recomendaciones del Consultor no comprometen a la Entidad, que se reservan el derecho de aplicarlas o no.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />OCTAVA: CALIDAD Y RESPONSABILIDAD TÉCNICA DE LOS SERVICIOS</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El Consultor se compromete a prestar sus servicios de acuerdo con las normas más elevadas de competencia e integridad ética, moral y profesional, aplicando en forma eficiente y efectiva sus conocimientos y experiencia y utilizando los métodos y procedimientos más convenientes para el logro objeto del contrato.<br />Asimismo, el Consultor reconoce su responsabilidad profesional directa ante la Entidad por la utilización y aplicación de métodos, procedimientos o elementos que fuesen de propiedad de terceros, así como por casos de negligencia, error u omisión en el desempeño de sus actividades, liberando a la Entidad de cualquier acción judicial o extrajudicial por estos conceptos.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />NOVENA: CONFLICTO DE INTERÉS</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El Consultor no podrá participar en actividades que generen conflicto de interés como consecuencia de sus servicios de consultoría derivados de este contrato.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DÉCIMA: DURACIÓN DEL CONTRATO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Los servicios de consultoría serán ejecutados en el plazo de @Model.Plazo, a partir del @Model.FechaInicioLetras hasta el @Model.FechaFinLetras o durante cualquier otro periodo en que las Partes pudieran convenir posteriormente por escrito.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DÉCIMA PRIMERA: PRÓRROGAS Y MODIFICACIONES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Se podrá prorrogar el contrato/modificar Términos de Referencia del Consultor siempre y cuando se cumplan con los siguientes requisitos: i) la prórroga sea consistente con los objetivos de la operación; ii) la evaluación del desempeño del Consultor hasta la fecha sea satisfactoria; iii) Que el contrato no se haya vencido; iv) para los contratos por productos, o por suma global alzada (valor total fijo), la eventual prórroga no implica incremento alguno de costos; y, iv) que haya fondos</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA SEGUNDA: LUGAR DE PRESTACIÓN DE LOS SERVICIOS</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El Consultor realizará sus actividades en @Model.LugarPrestacionServicios.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA TERCERA: VALOR DEL CONTRATO Y MONEDA DE PAGO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El monto del contrato asciende a S/ @Convert.ToDecimal(Model.MontoContrato).ToString("N2") (@Model.MontoContratoLetras), incluido todo tipo de impuestos, el mismo que será desembolsado de acuerdo con lo efectivamente ejecutado. </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA CUARTA: FORMA DE PAGO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">@Model.FormaPago</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA QUINTA: IMPUESTOS Y RETENCIONES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2"><strong>15.1 Impuestos</strong><br />El consultor se obliga a pagar todos los impuestos que le fueren aplicables de acuerdo con las leyes locales. Si fuera del caso, la Entidad actuará como agente de retención, en cumplimiento de la Ley Tributaria vigente.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA SEXTA: VIÁTICOS Y GASTOS DE VIAJE</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El/la consultor/a podrá efectuar viajes a ciudades diferentes a la asignada, para lo cual la UGP PIASAR, asumirá el costo de pasajes y viáticos, según lo dispuesto en la Directiva "Normas y Procedimientos para el otorgamiento de pasajes, viáticos y rendición de cuentas por comisión de servicios de la Unidad Ejecutora N2 005: PROGRAMA NACIONAL DE SANEAMIENTO RURAL".</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA SÉPTIMA: APOYO LOGÍSTICO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Se estará a lo dispuesto en los Términos de Referencia que forman parte del contrato.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMA OCTAVA: TERMINACION ANTICIPADA DEL CONTRATO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">
+                En caso de incumplimiento del contrato imputable al Consultor, éste dispondrá de tres días contados a partir de la notificación de la Entidad para justificar o enmendar el incumplimiento de cualquiera de las estipulaciones contractuales. Si no lo hiciese, o no justificare o enmendare adecuadamente el incumplimiento, la Entidad declarará anticipada y unilateralmente terminado el contrato.<br />
+                Será también causa para que la Entidad proceda a declarar la terminación anticipada y unilateral del contrato, cuando el Consultor incurriere en prácticas corruptivas (soborno, extorsión o coerción, fraude, colusión), desmerezca en el concepto público o resulte sancionado por tribunales de justicia con nación de libertad por delito grave. Cuando el contrato termine por las causas indicadas en éste párrafo, el Consultor perderá el derecho de percibir los pagos por los trabajos no realizados. En caso de haberse causado perjuicio a la Entidad, el Consultor estará sujeto a las acciones legales que correspondan, además de asumir la responsabilidad total por los daños y perjuicios causados.<br />
+                El incumplimiento de la Entidad respecto a sus obligaciones, que afecte de manera importante al desarrollo del trabajo del Consultor, le da derecho a éste a demandar la terminación del contrato con indemnización de daños y perjuicios. Cuando el contrato termine de mutuo acuerdo, el convenio correspondiente deberá tramitarse legalmente y contendrá el tratamiento de todos los aspectos relacionados con la liquidación contractual. La terminación por mutuo acuerdo no implicará renuncia a derechos causados o adquiridos en favor de la Entidad o del Consultor. La Entidad no podrá celebrar con el mismo Consultor contrato posterior que contemple el mismo objeto.<br />
+                Para el caso de terminación de mutuo acuerdo, el Consultor se compromete a presentar los informes e eventualmente estén pendientes de entrega, así como a elaborar y presentar un informe final en el ue dé cuenta de las actividades realizadas y resultados obtenidos. La presentación de los informes periódicos o de alguna de las fases que puedan estar pendientes y del informe final antes mencionado, a entera satisfacción de la Entidad, será condición indispensable para cancelar los pagos a que tenga derecho el Consultor, incluyendo las sumas que tenga retenidas, desde el momento que se haya invocado las causas para la terminación anticipada del contrato. Consecuentemente, la Entidad a partir de tal fecha, suspenderá cualquier pago que adeude al Consultor hasta tanto éste presente los informes a que ,esté obligado y los mismos hayan sido aprobados por la Entidad<br />
+                En todo caso de terminación, el Consultor deberá devolver a la Entidad todo el material que se le hubiere entregado para la realización de su trabajo y todos los documentos que hubiese producido hasta la fecha de terminación; y, la Entidad, por su parte, reembolsará al Consultor todas las cantidades a que éste tenga derecho bajo el presente Contrato, pero sólo hasta el día efectivo de cancelación o terminación anticipada.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />DECIMO NOVENA: CONFIDENCIALIDAD Y PROPIEDAD DE LOS DOCUMENTOS</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">
+                <strong>19.1 Confidencialidad</strong><br />El Consultor, excepto previo consentimiento por escrito del Contratante, no podrá revelar en ningún momento a cualquier persona o entidad ninguna información confidencial adquirida en el curso de la prestación de los servicios.<br />Ni el Consultor ni cualquier persona que le haya colaborado en su trabajo, podrán publicar las recomendaciones formuladas en el curso de, o como resultado de la prestación de los servicios.
+                <strong>19.2 Propiedad del Contratante de los documentos preparados por el Consultor</strong><br />Todos los planos, dibujos, especificaciones, diseños, informes, otros documentos y programas de computación preparados por el Consultor para el Contratante en virtud de este Contrato pasarán a ser e propiedad del Contratante.<br />
+                El Consultor entregará al Contratante dichos documentos junto con un inventario detallado, a más tardar en la fecha de terminación del Contrato.<br />
+                Si fuera necesario o apropiado establecer acuerdos de licencias entre el Consultor y terceros para desarrollar cualquiera de esos programas, el Consultor deberá obtener del Contratante previamente y por escrito aprobación a dichos acuerdos, y el contratante, a su discreción, tendrá derecho de exigir gastos de recuperación relacionados con el desarrollo del programa en cuestión.<br />
+                Toda la documentación generada por el Consultor es de propiedad del PIASAR y no podrá ser usada - sin previa autorización y sólo para fines académicos.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGÉSIMA: AUSENCIA DE INCOMPATIBILIDADES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">La entidad y el Consultor declaran que no existe ninguna condición o circunstancia que sea incompatible la celebración del presente contrato.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGÉSIMA PRIMERA: PARTICIPACION DEL BID</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Queda formalmente establecido que El BID no es parte del presente contrato y que por lo tanto no asumirá responsabilidad alguna con respecto al mismo. Por su parte, el consultor no tiene relación laboral alguna con el BID.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGÉSIMA SEGUNDA: SOLUCION DE CONTROVERSIAS</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">
+                <strong>Negociaciones directas:</strong> La Entidad y el Consultor harán todo lo posible para resolver las controversias que surjan en virtud del contrato o en relación con él, en forma amistosa, de buena fe, mediante negociaciones directas informales y agotando todas las instancias.<br />
+                <strong>Arbitraje:</strong> De no existir entendimiento después de diez (10) días desde el inicio de las negociaciones directas (condición que se entenderá cumplida cuando una de las partes rechace por escrito la reclamación de la otra), las partes acuerdan someter las controversias al procedimiento de arbitraje en derecho y al Centro de Análisis y Resolución de Conflictos — PUCP, de la ciudad de Lima, de conformidad con el procedimiento previsto en la Ley de Arbitraje y Mediación y al reglamento de dicho centro.<br />
+                <strong>Renuncia a presentar reclamos por vía diplomática:</strong> Si cabe esta posibilidad, el Consultor renuncia expresamente a presentar reclamos por la vía diplomática.
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGÉSIMA TERCERA: ELEGIBILIDAD Y CONFLICTO DE INTERESES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">En virtud de que el consultor seleccionado debe cumplir con los Requisitos de Elegibilidad y de integridad, establecidos por el BID para consultores individuales financiados o cofinanciados con sus cursos, se adjunta al presente contrato como parte del integra del mismo el Anexo Ng 2: "Certificado e Elegibilidad y de Integridad" debidamente suscrito por el consultor.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGÉSIMA CUARTA: NOTIFICACIONES</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">A los efectos de cualquier aviso o notificación que las partes deban dirigirse en virtud del presente Contrato, el mismo se efectuará por escrito y se considerará dado, entregado o realizado desde el -momento en que el documento correspondiente se entregue al destinatario en su respectiva dirección. Con este fin las direcciones de las partes son las siguientes:</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">Entidad</td>
+            <td style="font-size:16px;text-align:justify;">
+                Dirección: Av. Alfredo Benavides N° 395 - Piso 07, Miraflores - Lima<br />
+                Telfs: (01) 418-3800 anexo 8457<br />
+                Email: piasar@vivienda.gob.pe
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size:16px; width:5px; vertical-align:top;">Consultor</td>
+            <td style="font-size:16px;text-align:justify;">
+                Dirección: @Model.DireccionContrato<br />
+                Telfs: @Model.NroCelularPersona<br />
+                Email: @Model.EmailPersona
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Cualquier cambio de dirección deberá ser notificado por escrito a la otra parte para que surta sus efectos legales; de lo contrario tendrán validez los avisos efectuados a las direcciones antes indicadas.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGESIMA QUINTA: VIGENCIA DEL CONTRATO</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">El presente Contrato entra en vigor a partir de su suscripción.</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;" colspan="2"><h4>&nbsp;<br />VIGESIMA SEXTA:	ACEPTACIÓN</h4></td>
+        </tr>
+        <tr>
+            <td style="font-size:16px;text-align:justify;" colspan="2">Las partes aceptan el contenido de todas y cada una de las Cláusulas del presente Contrato y en consecuencia se comprometen a cumplirlas en toda su extensión, en fe de lo cual y para los fines legales correspondientes, lo firman en cuatro ejemplares del mismo tenor y efecto, en la ciudad de Lima el @Model.FechaInicioLetras.</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <table>
+                    <tr>
+                        <td>Por la Entidad</td>
+                        <td>El Consultor</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br /></td>
+                        <td>&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br /></td>
+                    </tr>
+                    <tr>
+                        <td>@Model.RepresentanteLegal <br />Coordinador General</td>
+                        <td>@Model.Persona <br />@Model.PersonaDNI</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
     </table>
 
 </body>

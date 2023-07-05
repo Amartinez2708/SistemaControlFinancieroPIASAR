@@ -139,7 +139,7 @@ namespace _01_Aplicacion.Controllers
             document.Open();
 
             // Agrega la imagen como cabecera
-            var headerImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Content/Images/pnsr_logo.png"));
+            var headerImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Content/Images/pnsr_logo_documento.png"));
             headerImage.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
             headerImage.ScaleToFit(300f, 80f);
 

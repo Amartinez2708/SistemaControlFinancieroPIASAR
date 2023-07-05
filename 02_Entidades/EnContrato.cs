@@ -35,6 +35,11 @@ namespace _02_Entidades
         public string FechaInicioString { get; set; }
         public string FechaFinString { get; set; }
         public string PersonaDNI { get; set; }
-
+        public string Plazo { get; set; }
+        public string FechaInicioLetras { get; set; }
+        public string FechaFinLetras { get; set; }
+        public string MontoContratoLetras { get; set; }
+        public string NroCelularPersona { get; set; }
+        public string EmailPersona { get; set; }
     }
 }
