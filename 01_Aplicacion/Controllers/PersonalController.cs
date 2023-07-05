@@ -167,5 +167,24 @@ namespace _01_Aplicacion.Controllers
             jsonData.MaxJsonLength = 500000000;
             return jsonData;
         }
+        [HttpPost]
+        public JsonResult GuardarFamiliar(EnPersonaFamilia detalle)
+        {
+            EnRespuesta msj = obj.GuardarFamiliar(detalle);
+            return Json(msj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult ListFamiliarId(int Id)
+        {
+            EnPersonaFamilia result = new EnPersonaFamilia();
+            result = obj.ListFamiliarId(Id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult EliminarFamiliar(int Id)
+        {
+            EnRespuesta msj = obj.EliminarFamiliar(Id);
+            return Json(msj, JsonRequestBehavior.AllowGet);
+        }
     }
 }

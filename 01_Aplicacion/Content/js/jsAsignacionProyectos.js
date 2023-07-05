@@ -42,7 +42,6 @@ function ListarProyectosAsignados() {
         }
         
         $('#chklProyectos li').each(function () {
-            debugger;
             var valorElemento = parseInt($(this).find('input[type="checkbox"]').val());
 
             if (valoresBuscados.includes(valorElemento)) {

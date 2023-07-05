@@ -456,7 +456,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <div class="form-group">
                                         <label>Tipo Familiar*</label>
-                                        @Html.DropDownList("ddlTipoFamiliar", new SelectList(ViewBag.ddlTipoFamiliar, "IdText", "text"), new { @class = "form-control" })
+                                        @Html.DropDownList("ddlTipoFamiliar", new SelectList(ViewBag.ddlTipoFamiliar, "id", "text"), new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-12">
@@ -566,17 +566,17 @@
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
                                         <label>Celular Principal*</label>
-                                        @Html.TextBox("txtCelular1", null, new { @class = "form-control" })
+                                        @Html.TextBox("txtCelular1Familiar", null, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
                                         <label>Telefono o Celular Secundario</label>
-                                        @Html.TextBox("txtCelular2", null, new { @class = "form-control" })
+                                        @Html.TextBox("txtCelular2Familiar", null, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top: 1.8em;">
                                         <ul class="checklist border-checkbox-group border-checkbox-group-primary">
                                             <li><input class="border-checkbox" type="checkbox" id="chkContactoEmergencia"><label class="border-checkbox-label" for="chkContactoEmergencia">Contacto de Emergencia</label></li>
                                         </ul>

@@ -794,7 +794,7 @@ namespace _04_Servicios
                     EnPersonaFamilia model = new EnPersonaFamilia();
                     model.IdPersonaFamilia = data.IdPersonaFamilia;
                     model.IdPersona = data.IdPersona;
-                    //model.TipoFamiliar = data.TipoFamiliar;
+                    model.IdTipoFamiliar = data.IdTipoFamiliar;
                     model.TipoDocumento = data.TipoDocumento;
                     model.NroDocumento = data.NroDocumento;
                     model.TipoNroDcto = "DNI - " + data.NroDocumento;
@@ -812,6 +812,7 @@ namespace _04_Servicios
                     model.Celular2 = data.Celular2;
                     model.Emergencia = data.Emergencia;
 
+                    model.TipoFamiliar = data.TipoFamiliar.TipoFamiliar1;
                     model.FechaNacimientoString = data.FechaNacimiento == null ? "" : Convert.ToDateTime(data.FechaNacimiento).ToString("dd/MM/yyyy");
 
 
@@ -842,6 +843,187 @@ namespace _04_Servicios
                 }
             }
             return result;
+        }
+
+        public EnRespuesta GuardarFamiliar(EnPersonaFamilia detalle)
+        {
+            EnRespuesta respuesta = new EnRespuesta();
+            using (var dbtran = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    if (detalle.IdPersonaFamilia == 0)
+                    {
+                        #region Agregar
+
+                        PersonaFamilia n = new PersonaFamilia();
+                        n.IdPersona = detalle.IdPersona;
+                        n.IdTipoFamiliar = detalle.IdTipoFamiliar;
+                        n.TipoDocumento = detalle.TipoDocumento;
+                        n.NroDocumento = detalle.NroDocumento;
+                        n.ApePaterno = detalle.ApePaterno;
+                        n.ApeMaterno = detalle.ApeMaterno;
+                        n.Nombres = detalle.Nombres;
+                        n.Sexo = detalle.Sexo;
+                        n.TipoSangre = detalle.TipoSangre;
+                        n.FechaNacimiento = detalle.FechaNacimiento;
+                        n.UbigeoDireccion = detalle.UbigeoDireccion;
+                        n.Direccion = detalle.Direccion;
+                        n.Referencia = detalle.Referencia;
+                        n.Celular1 = detalle.Celular1;
+                        n.Celular2 = detalle.Celular2;
+                        n.Emergencia = detalle.Emergencia;
+                        n.Activo = true;
+                        n.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
+                        n.Fecha_add = DateTime.Now;
+                        n.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                        n.Fecha_upd = DateTime.Now;
+
+                        context.PersonaFamilia.Add(n);
+                        context.SaveChanges();
+
+                        dbtran.Commit();
+                        //dbtran.Rollback();
+                        respuesta.TipoRespuesta = 1;
+                        respuesta.Mensaje = "Familiar Agregado Satisfactoriamente";
+                        respuesta.ValorDevolucion = n.IdPersona.ToString();
+                        #endregion
+                    }
+                    else
+                    {
+                        #region Actualizar
+
+                        var objDetalle = context.PersonaFamilia.Where(x => x.IdPersonaFamilia == detalle.IdPersonaFamilia && x.Activo == true).SingleOrDefault();
+
+                        if (objDetalle != null)
+                        {
+                            objDetalle.IdPersona = detalle.IdPersona;
+                            objDetalle.IdTipoFamiliar = detalle.IdTipoFamiliar;
+                            objDetalle.TipoDocumento = detalle.TipoDocumento;
+                            objDetalle.NroDocumento = detalle.NroDocumento;
+                            objDetalle.ApePaterno = detalle.ApePaterno;
+                            objDetalle.ApeMaterno = detalle.ApeMaterno;
+                            objDetalle.Nombres = detalle.Nombres;
+                            objDetalle.Sexo = detalle.Sexo;
+                            objDetalle.TipoSangre = detalle.TipoSangre;
+                            objDetalle.FechaNacimiento = detalle.FechaNacimiento;
+                            objDetalle.UbigeoDireccion = detalle.UbigeoDireccion;
+                            objDetalle.Direccion = detalle.Direccion;
+                            objDetalle.Referencia = detalle.Referencia;
+                            objDetalle.Celular1 = detalle.Celular1;
+                            objDetalle.Celular2 = detalle.Celular2;
+                            objDetalle.Emergencia = detalle.Emergencia;
+                            objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                            objDetalle.Fecha_upd = DateTime.Now;
+
+                            context.SaveChanges();
+
+                            dbtran.Commit();
+                            //dbtran.Rollback();
+                            respuesta.TipoRespuesta = 1;
+                            respuesta.Mensaje = "Familiar Actualizado Satisfactoriamente";
+                            respuesta.ValorDevolucion = objDetalle.IdPersona.ToString();
+
+                            #endregion
+                        }
+                        else
+                        {
+                            respuesta.TipoRespuesta = 2;
+                            respuesta.Mensaje = "No se pudo actualizar, actualice la pagina o verifique que el registro existe";
+                            respuesta.ValorDevolucion = "";
+                        }
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    dbtran.Rollback();
+                    respuesta.TipoRespuesta = 2;
+                    respuesta.Mensaje = ex.ToString();
+                    respuesta.ValorDevolucion = "";
+                }
+            }
+            return respuesta;
+        }
+        public EnPersonaFamilia ListFamiliarId(int Id)
+        {
+            EnPersonaFamilia result = new EnPersonaFamilia();
+
+            var objDetalle = context.PersonaFamilia.Where(x => x.IdPersonaFamilia == Id && x.Activo == true).SingleOrDefault();
+
+            var departamento = "";
+            var Provincia = "";
+            var Distrito = "";
+
+            if (objDetalle.UbigeoDireccion != "00")
+            {
+                departamento = context.Departamento.FirstOrDefault(x => x.cod_depa == objDetalle.UbigeoDireccion.Substring(0, 2)).nom_depa;
+                Provincia = context.Provincia.FirstOrDefault(x => x.cod_depa == objDetalle.UbigeoDireccion.Substring(0, 2) && x.cod_prov == objDetalle.UbigeoDireccion.Substring(2, 2)).nom_prov;
+                Distrito = context.Distrito.FirstOrDefault(x => x.cod_depa == objDetalle.UbigeoDireccion.Substring(0, 2) && x.cod_prov == objDetalle.UbigeoDireccion.Substring(2, 2) && x.cod_dist == objDetalle.UbigeoDireccion.Substring(4, 2)).nom_dist;
+            }
+            result.IdPersonaFamilia = objDetalle.IdPersonaFamilia;
+            result.IdPersona = objDetalle.IdPersona;
+            result.IdTipoFamiliar = objDetalle.IdTipoFamiliar;
+            result.TipoDocumento = objDetalle.TipoDocumento;
+            result.NroDocumento = objDetalle.NroDocumento;
+            result.TipoNroDcto = "DNI - " + objDetalle.NroDocumento;
+            result.ApePaterno = objDetalle.ApePaterno;
+            result.ApeMaterno = objDetalle.ApeMaterno;
+            result.Nombres = objDetalle.Nombres;
+            result.Personal = objDetalle.ApePaterno + " " + objDetalle.ApeMaterno + ", " + objDetalle.Nombres;
+            result.Sexo = objDetalle.Sexo;
+            result.TipoSangre = objDetalle.TipoSangre;
+            result.FechaNacimiento = objDetalle.FechaNacimiento;
+            result.UbigeoDireccion = objDetalle.UbigeoDireccion;
+            result.Direccion = objDetalle.Direccion;
+            result.Referencia = objDetalle.Referencia;
+            result.Celular1 = objDetalle.Celular1;
+            result.Celular2 = objDetalle.Celular2;
+            result.Emergencia = objDetalle.Emergencia;
+            result.FechaNacimientoString = objDetalle.FechaNacimiento == null ? "" : Convert.ToDateTime(objDetalle.FechaNacimiento).ToString("dd/MM/yyyy");
+
+            return result;
+        }
+        public EnRespuesta EliminarFamiliar(int Id)
+        {
+            EnRespuesta respuesta = new EnRespuesta();
+            using (var dbtran = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var objDetalle = context.PersonaFamilia.Where(x => x.IdPersonaFamilia == Id && x.Activo == true).SingleOrDefault();
+                    if (objDetalle != null)
+                    {
+                        objDetalle.Activo = false;
+                        objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                        objDetalle.Fecha_upd = DateTime.Now;
+
+                        context.SaveChanges();
+
+                        dbtran.Commit();
+                        //dbtran.Rollback();
+                        respuesta.TipoRespuesta = 1;
+                        respuesta.Mensaje = "Familiar Eliminado Satisfactoriamente";
+                        respuesta.ValorDevolucion = objDetalle.IdPersona.ToString();
+                    }
+                    else
+                    {
+                        respuesta.TipoRespuesta = 2;
+                        respuesta.Mensaje = "No se pudo eliminar, actualice la pagina o verifique que el registro existe";
+                        respuesta.ValorDevolucion = "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    dbtran.Rollback();
+                    respuesta.TipoRespuesta = 2;
+                    respuesta.Mensaje = ex.ToString();
+                    respuesta.ValorDevolucion = "";
+                }
+            }
+            return respuesta;
         }
     }
 }

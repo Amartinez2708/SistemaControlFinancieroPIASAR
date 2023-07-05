@@ -10,6 +10,12 @@
     $("#ddlTipoContrato").change(function () {
         ListCorrelativoContrato()
     });
+    $("#ddlDepartamentoFamiliar").change(function () {
+        ddlProvinciaFamiliar();
+    });
+    $("#ddlProvinciaFamiliar").change(function () {
+        ddlDistritoFamiliar()
+    });
 });
 
 function ListPersonal() {
@@ -41,6 +47,7 @@ function ListPersonal() {
                     { "name": "Estado", "title": "Estado", "data": "EstadoConsultoria", "autowidth": true },
                     { "name": "", "title": "Familiares", "data": null, "autowidth": true },
                     { "name": "", "title": "Contrato", "data": null, "autowidth": true },
+                    { "name": "", "title": "Ficha<br/>Personal", "data": null, "autowidth": true },
                     { "name": "", "title": "Editar", "data": null, "autowidth": true },
                     { "name": "", "title": "Eliminar", "data": null, "autowidth": true }
         ],
@@ -87,12 +94,22 @@ function ListPersonal() {
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
                     //if (full.FechaActualizacion == "Sin Seguimiento") {
-                    return '<div onclick="EditarPersonal(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/curriculum.png" style="width:40px"/></div>';
+                    return '<div onclick="FichaPersonal(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/fichapersonal.png" style="width:40px"/></div>';
                     //}
                 }
             },
             {
                 "targets": 8,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    //if (full.FechaActualizacion == "Sin Seguimiento") {
+                    return '<div onclick="EditarPersonal(\'' + full.IdPersona + '\')" style="cursor: pointer;"><img src="../Content/Images/curriculum.png" style="width:40px"/></div>';
+                    //}
+                }
+            },
+            {
+                "targets": 9,
                 "data": null,
                 "className": "align-middle text-center",
                 "mRender": function (data, type, full) {
@@ -159,6 +176,7 @@ function ddlProvincia() {
     });
     return false;
 }
+
 function ddlDistrito() {
     $.get("/Personal/ddlDistrito?Id=" + $("#ddlDepartamento").val() + $("#ddlProvincia").val(), function (data, status) {
         $("#ddlDistrito").empty();
@@ -175,15 +193,49 @@ function ddlDistrito() {
     return false;
 }
 
+function ddlProvinciaFamiliar() {
+    $.get("/Personal/ddlProvincia?Id=" + $("#ddlDepartamentoFamiliar").val(), function (data, status) {
+        $("#ddlProvinciaFamiliar").empty();
+        if (data.length > 0) {
+            $.each(data, function (i, data) {
+                $("#ddlProvinciaFamiliar").append('<option value="'
+                + data.Value + '">'
+                + data.Text + '</option>');
+            });
+        } else {
+            $("#ddlProvinciaFamiliar").append('<option value="00">[--Seleccione--]</option>');
+        }
+    });
+    return false;
+}
+
+function ddlDistritoFamiliar() {
+    $.get("/Personal/ddlDistrito?Id=" + $("#ddlDepartamentoFamiliar").val() + $("#ddlProvinciaFamiliar").val(), function (data, status) {
+        $("#ddlDistritoFamiliar").empty();
+        if (data.length > 0) {
+            $.each(data, function (i, data) {
+                $("#ddlDistritoFamiliar").append('<option value="'
+                + data.Value + '">'
+                + data.Text + '</option>');
+            });
+        } else {
+            $("#ddlDistritoFamiliar").append('<option value="00">[--Seleccione--]</option>');
+        }
+    });
+    return false;
+}
+
 function AgregarPersonal() {
     $("#lblPersonal").html("Agregar Nuevo Personal");
     $("#hdnIdPersonal").val("");
     $("#modal-personal").modal({ backdrop: 'static', keyboard: true, show: true });
 }
+
 function CerrarPersonal() {
     LimpiarFormulario();
     $('#modal-personal').modal('toggle');
 }
+
 function GuardarPersonal() {
 
     if ($("#ddlTipoDcto").val() == 0) {
@@ -1185,6 +1237,19 @@ function ListPersonalFamiliar() {
         ],
         columnDefs: [
             {
+                "targets": 3,
+                "data": null,
+                "className": "align-middle text-center",
+                "mRender": function (data, type, full) {
+                    if (full.Emergencia == true)
+                    {
+                        return 'SI';
+                    } else {
+                        return 'NO';
+                    }
+                }
+            },
+            {
                 "targets": 4,
                 "data": null,
                 "className": "align-middle text-center",
@@ -1264,6 +1329,24 @@ function CerrarPersonalFamiliaAgregar() {
 
 function LimpiarFamiliar() {
     $("#hdnIdPersonalFamilia").val("");
+    $("#ddlTipoFamiliar").val(0);
+    $('#ddlTipoDctoFamiliar').val(0);
+    $('#txtNroDocumentoFamiliar').val("");
+    $('#txtApellidoPaternoFamiliar').val("");
+    $("#txtApellidoMaternoFamiliar").val("");
+    $("#txtNombresFamiliar").val("");
+    $("#ddlSexoFamiliar").val("");
+    $("#ddlTipoSangreFamiliar").val("");
+    $("#txtFechaNacimientoFamiliar").val("");
+    $("#ddlDepartamentoFamiliar").val("00");
+    $("#ddlDepartamentoFamiliar").change();
+    $("#ddlProvinciaFamiliar").val("00");
+    $("#ddlProvinciaFamiliar").change();
+    $("#ddlDistritoFamiliar").val("00");
+    $("#txtDireccionFamiliar").val("");
+    $("#txtReferenciaFamiliar").val("");
+    $("#txtCelular1Familiar").val("");
+    $("#txtCelular2Familiar").val("");
 }
 
 function GuardarFamiliar() {
@@ -1288,34 +1371,38 @@ function GuardarFamiliar() {
     else if ($("#ddlSexoFamiliar").val() == "") {
         MensajeAlerta('Ingrese el Sexo', 'ddlSexoFamiliar');
     }
-    else if ($("#txtCelular1").val() == "") {
-        MensajeAlerta('Ingrese EL Nro. de Celular', 'txtCelular1');
+    else if ($("#txtCelular1Familiar").val() == "") {
+        MensajeAlerta('Ingrese EL Nro. de Celular', 'txtCelular1Familiar');
     }
     else {
         $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
 
+        var val = 0;
+
+        if ($("#chkContactoEmergencia").is(':checked')) { val = 1; }
+
         var detalle = {
-            IdPersonaFamilia: $("#hdnIdContrato").val(),
+            IdPersonaFamilia: $("#hdnIdPersonalFamilia").val(),
             IdPersona: $("#hdnIdPersonal").val(),
-            IdTipoFamiliar: $("#txtDireccionContrato").val(),
-            TipoDocumento: $('#txtNroContrato').val(),
-            NroDocumento: $('#ddlTipoContrato').val(),
-            ApePaterno: $('#ddlCargoContrato').val(),
-            ApeMaterno: $("#ddlOficinaDependencia").val(),
-            Nombres: $("#txtEjecucionTrabajoSupervision").val(),
-            Sexo: $("#txtFechaInicio").val(),
-            TipoSangre: $("#txtFechaFin").val(),
-            FechaNacimiento: $("#ddlLugarPrestacionServicios").val(),
-            UbigeoDireccion: $("#txtMontoContrato").val(),
-            Direccion: $("#txtFormaPago").val(),
-            Referencia: $("#ddlRepresentanteLegal").val(),
-            Celular1: $("#ddlRepresentanteLegal").val(),
-            Celular2: $("#ddlRepresentanteLegal").val(),
-            Emergencia: $("#ddlRepresentanteLegal").val()
+            IdTipoFamiliar: $("#ddlTipoFamiliar").val(),
+            TipoDocumento: $('#ddlTipoDctoFamiliar').val(),
+            NroDocumento: $('#txtNroDocumentoFamiliar').val(),
+            ApePaterno: $('#txtApellidoPaternoFamiliar').val(),
+            ApeMaterno: $("#txtApellidoMaternoFamiliar").val(),
+            Nombres: $("#txtNombresFamiliar").val(),
+            Sexo: $("#ddlSexoFamiliar").val(),
+            TipoSangre: $("#ddlTipoSangreFamiliar").val(),
+            FechaNacimiento: $("#txtFechaNacimientoFamiliar").val(),
+            UbigeoDireccion: $("#ddlDepartamentoFamiliar").val() + $("#ddlProvinciaFamiliar").val() + $("#ddlDistritoFamiliar").val(),
+            Direccion: $("#txtDireccionFamiliar").val(),
+            Referencia: $("#txtReferenciaFamiliar").val(),
+            Celular1: $("#txtCelular1Familiar").val(),
+            Celular2: $("#txtCelular2Familiar").val(),
+            Emergencia: val
         }
         $.ajax({
             type: "POST",
-            url: "/Personal/GuardarContrato",
+            url: "/Personal/GuardarFamiliar",
             cache: false,
             data: JSON.stringify(detalle),
             contentType: "application/json; charset=utf-8",
@@ -1340,9 +1427,9 @@ function GuardarFamiliar() {
                                 text: 'Aceptar',
                                 btnClass: 'btn-green',
                                 action: function () {
-                                    LimpiarFormulario();
-                                    $('#dtContrato').DataTable().ajax.reload();
-                                    $('#modal-personal-contrato-agregar').modal('hide');
+                                    LimpiarFamiliar();
+                                    $('#dtFamilia').DataTable().ajax.reload();
+                                    $('#modal-personal-familia-agregar').modal('hide');
 
                                 }
                             }
@@ -1423,4 +1510,215 @@ function GuardarFamiliar() {
         });
     }
 
+}
+
+function EditarFamiliar(Id) {
+
+    $.get("/Personal/ListFamiliarId?Id=" + Id, function (data, status) {
+        $("#hdnIdPersonal").val(data.IdPersona);
+        $("#hdnIdPersonalFamilia").val(data.IdPersonaFamilia);
+        $("#ddlTipoFamiliar").val(data.IdTipoFamiliar);
+        $("#ddlTipoDctoFamiliar").val(data.TipoDocumento);
+        $('#txtNroDocumentoFamiliar').val(data.NroDocumento);
+        $('#txtApellidoPaternoFamiliar').val(data.ApePaterno);
+        $('#txtApellidoMaternoFamiliar').val(data.ApeMaterno);
+        $('#txtNombresFamiliar').val(data.Nombres);
+        $("#ddlSexoFamiliar").val(data.Sexo);
+        $("#ddlTipoSangreFamiliar").val(data.TipoSangre);
+        $("#txtFechaNacimientoFamiliar").val(data.FechaNacimientoString);
+        $("#ddlDepartamentoFamiliar").val(data.UbigeoDireccion.substring(0, 2));
+        $.get("/Personal/ddlProvincia?Id=" + $("#ddlDepartamentoFamiliar").val(), function (data2, status) {
+            $("#ddlProvinciaFamiliar").empty();
+            if (data2.length > 0) {
+                $.each(data2, function (i, data2) {
+                    if (data2.Value == data.UbigeoDireccion.substring(2, 4)) {
+                        $("#ddlProvinciaFamiliar").append('<option value="'
+                    + data2.Value + '" selected>'
+                    + data2.Text + '</option>');
+                    } else {
+                        $("#ddlProvinciaFamiliar").append('<option value="'
+                    + data2.Value + '">'
+                    + data2.Text + '</option>');
+                    }
+                });
+            } else {
+                $("#ddlProvinciaFamiliar").append('<option value="00">[--Seleccione--]</option>');
+            }
+        });
+
+        $.get("/Personal/ddlDistrito?Id=" + data.UbigeoDireccion.substring(0, 4), function (data1, status) {
+            $("#ddlDistritoFamiliar").empty();
+            if (data1.length > 0) {
+                $.each(data1, function (i, data1) {
+                    if (data1.Value == data.UbigeoDireccion.substring(4, 6)) {
+                        $("#ddlDistritoFamiliar").append('<option value="'
+                    + data1.Value + '" selected>'
+                    + data1.Text + '</option>');
+                    } else {
+                        $("#ddlDistritoFamiliar").append('<option value="'
+                    + data1.Value + '">'
+                    + data1.Text + '</option>');
+                    }
+                });
+            } else {
+                $("#ddlDistritoFamiliar").append('<option value="00">[--Seleccione--]</option>');
+            }
+        });
+
+        $("#txtDireccionFamiliar").val(data.Direccion);
+        $("#txtReferenciaFamiliar").val(data.Referencia);
+        $("#txtCelular1Familiar").val(data.Celular1);
+        $("#txtCelular2Familiar").val(data.Celular2);
+
+        if (data.Emergencia==1) {
+            $("#chkContactoEmergencia").prop('checked', true);
+        } else {
+            $("#chkContactoEmergencia").prop('checked', false);
+        }
+
+
+        $("#lblPersonalFamiliaAgregar").html("Editar Familiar: " + data.Personal);
+        $("#modal-personal-familia-agregar").modal({ backdrop: 'static', keyboard: true, show: true });
+    });
+}
+
+function ConfirmarEliminarFamiliar(Id) {
+    $.confirm({
+        title: 'Eliminar',
+        content: '<div class="form-group">' +
+                '<label> Esta seguro de eliminar el registro? </label>' +
+                '</div>',
+        icon: 'fa fa-question',
+        theme: 'modern',
+        closeIcon: false,
+        closeIconClass: 'fa fa-close',
+        animation: 'scale',
+        type: 'orange',
+        buttons: {
+            tryAgain: {
+                text: 'Aceptar',
+                btnClass: 'btn-orange',
+                action: function () {
+                    EliminarFamiliar(Id);
+                }
+            },
+            Close: {
+                text: 'Cancelar',
+                btnClass: 'btn-default',
+                action: function () {
+                }
+            }
+        }
+    });
+}
+
+function EliminarFamiliar(Id) {
+    $.blockUI({ message: '<img src="/Content/Images/Ellipsis-2.3s-182px.gif">' });
+    var obj = { Id: Id };
+
+    $.ajax({
+        type: "POST",
+        url: "/Personal/EliminarFamiliar",
+        cache: false,
+        data: JSON.stringify(obj),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        traditional: true,
+        success: function (result) {
+            $.unblockUI();
+            if (result.TipoRespuesta == 1) {
+                $.confirm({
+                    title: 'Eliminar',
+                    content: '<div class="form-group">' +
+                            '<label>' + result.Mensaje + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-thumbs-o-up',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'green',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-green',
+                            action: function () {
+                                $('#dtFamilia').DataTable().ajax.reload();
+                            }
+                        }
+                    }
+                });
+            }
+            else if (result.TipoRespuesta == 2) {
+                $.confirm({
+                    title: 'Eliminar',
+                    content: '<div class="form-group">' +
+                            '<label>' + result.Mensaje + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-thumbs-o-down',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'red',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+            }
+            else if (result.TipoRespuesta == 3) {
+                $.confirm({
+                    title: 'Guardar',
+                    content: '<div class="form-group">' +
+                            '<label>' + result.Mensaje + '</label>' +
+                            '</div>',
+                    icon: 'fa fa-thumbs-o-down',
+                    theme: 'modern',
+                    closeIcon: false,
+                    closeIconClass: 'fa fa-close',
+                    animation: 'scale',
+                    type: 'orange',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Aceptar',
+                            btnClass: 'btn-orange',
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest, textStatus, errorThrown);
+            $.unblockUI();
+            $.confirm({
+                title: 'Error',
+                content: '<div class="form-group">' +
+                        '<label>' + XMLHttpRequest + textStatus + errorThrown + '</label>' +
+                        '</div>',
+                icon: 'fa fa-frown-o',
+                theme: 'modern',
+                closeIcon: false,
+                closeIconClass: 'fa fa-close',
+                animation: 'scale',
+                type: 'red',
+                buttons: {
+                    tryAgain: {
+                        text: 'Aceptar',
+                        btnClass: 'btn-red',
+                        action: function () {
+                        }
+                    }
+                }
+            });
+        },
+    });
 }

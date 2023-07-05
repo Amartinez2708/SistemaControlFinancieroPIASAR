@@ -17,7 +17,7 @@ namespace _02_Entidades
         public string ApeMaterno { get; set; }
         public string Nombres { get; set; }
         public string Sexo { get; set; }
-        public Nullable<int> TipoSangre { get; set; }
+        public string TipoSangre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public string UbigeoDireccion { get; set; }
         public string Direccion { get; set; }
@@ -28,5 +28,6 @@ namespace _02_Entidades
         public string TipoNroDcto { get; set; }
         public string Personal { get; set; }
         public string FechaNacimientoString { get; set; }
+        public string TipoFamiliar { get; set; }
     }
 }
