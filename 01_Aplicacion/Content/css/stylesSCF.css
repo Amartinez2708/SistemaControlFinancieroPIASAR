@@ -978,13 +978,32 @@ input[type="checkbox"]:checked + label:before {
 }
 /* Personaliza los estilos según tus preferencias */
 .dropzone {
-    border: 2px dashed #999;
-    background: #f0f0f0;
+    border: 3px dashed #0056ac;
+    background: #e1ebf7;
     padding: 20px;
 }
 
 .dropzone .dz-message {
     text-align: center;
     font-size: 18px;
-    color: #999;
+    color: #333;
+}
+#progressContainer {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  margin-bottom: 10px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background-color: #4CAF50;
+}
+
+#progressText {
+  line-height: 20px;
+  text-align: center;
+  color: #000;
 }

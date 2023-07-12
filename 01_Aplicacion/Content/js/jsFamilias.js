@@ -658,7 +658,7 @@ function validarFecha(fecha) {
 
 Dropzone.autoDiscover = false;
 
-$(document).ready(function () {
+//$(document).ready(function () {
     // Configuración de Dropzone
     $("#myDropzone").dropzone({
         url: "/Familias/UploadAction",
@@ -666,15 +666,48 @@ $(document).ready(function () {
         paramName: "file",
         maxFilesize: 50,
         addRemoveLinks: true,
+        chunking: true,
+        chunkRetry: 3, // Número de intentos de carga para cada fragmento
+        chunkSize: 1024 * 1024, // Tamaño del fragmento (por ejemplo, 1 MB)
+        sending: function (file, xhr, formData) {
+            debugger;
+            //var uniqueId = generateUniqueId(); // Generar un identificador único para el archivo
+            //var chunkName = uniqueId + "-" + file.upload.uuid; // Asignar el nombre único al fragmento
+            //formData.append("chunkName", chunkName); // Agregar el nombre único al formulario
+
+            var chunkIndex = file.upload.chunks[0].index;
+            var totalChunks = file.upload.totalChunkCount;
+            var fileName = file.upload.filename;
+
+            // Agregar los parámetros al formulario de datos
+            formData.append("chunkName", file.upload.uuid);
+            formData.append("chunkIndex", chunkIndex);
+            formData.append("totalChunks", totalChunks);
+            formData.append("fileName", fileName);
+        },
+        //chunkInit: function (file, chunk, done) {
+        //    debugger;
+        //    var uniqueId = generateUniqueId();
+        //    chunk.dataChunkName = uniqueId + "-" + chunk.index; // Asigna el nombre único al fragmento
+        //    done();
+        //},
         //acceptedFiles: ".jpeg,.jpg,.png,.gif"
     });
-
+   
     // Evento que se dispara cuando se completa la carga de un archivo
     $("#myDropzone").on("complete", function (file) {
+
+        $("#progressContainer").hide();
         // Redirige o actualiza la página después de la carga exitosa
         // window.location.href = "/Controller/Action";
     });
-});
+//});
+
+    function generateUniqueId() {
+        var f = new Date();
+        var title = f.getFullYear() + "_" + (f.getMonth() + 1) + "_" + f.getDate() + "_" + f.getHours() + "_" + f.getMinutes();
+        return title;
+    }
 
 //Dropzone.autoDiscover = false;
 
