@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using _02_Entidades;
 using _04_Servicios;
 using _05_Utilidades;
+using System.IO;
+using System.Configuration;
 
 namespace _01_Aplicacion.Controllers
 {
@@ -90,6 +92,40 @@ namespace _01_Aplicacion.Controllers
         {
             EnRespuesta msj = objFamilias.EliminarSeguimiento(Id);
             return Json(msj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult UploadAction(HttpPostedFileBase file, string cui )
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                try
+                {
+                    var sRuta = ConfigurationManager.AppSettings["RutaDocumentosSeguimientoActividades"].ToString() + "/" + cui;
+                    var Now = DateTime.Now;
+                    var FechaStringName = Now.Year.ToString() + Now.Month.ToString() + Now.Day.ToString() + Now.Hour.ToString() + Now.Minute.ToString() + Now.Second.ToString() + Now.Millisecond.ToString();
+                    var FileNombreReal = file.FileName;
+                    var FileExtension = Path.GetExtension(FileNombreReal);
+                    var FileNombre = FechaStringName + FileExtension;
+
+                    if (Directory.Exists(sRuta) == true)
+                    {
+                        file.SaveAs(sRuta + "/"+ FileNombre);
+                    }
+                    else
+                    {
+                        Directory.CreateDirectory(sRuta);
+                        file.SaveAs(sRuta + "/" + FileNombre);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    // Manejar cualquier excepción que ocurra durante el procesamiento del archivo
+                    return RedirectToAction("Error"); // Redirigir a una página de error o realizar acciones adicionales
+                }
+            }
+
+            return RedirectToAction("Index"); // Redirigir a la página principal o a otra página deseada
         }
     }
 }

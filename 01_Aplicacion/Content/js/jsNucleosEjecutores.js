@@ -267,16 +267,26 @@ function LimpiarRegistro() {
 }
 
 function GuardarSeguimiento() {
-    if ($("txtFecha").val() == "") {
-        MensajeAlerta('Ingrese la fecha', 'txtFecha');
+
+    if ($("#ddlEtapa").val() == "") {
+        MensajeAlerta('Seleccione la Etapa', 'ddlEtapa');
     }
-    else if ($("txtNroHombres").val() == "") {
+    else if ($("#ddlMes").val() == "0") {
+        MensajeAlerta('Seleccione el Mes', 'ddlMes');
+    }
+    else if ($("#ddlActividad").val() == "0") {
+        MensajeAlerta('Seleccione el Mes', 'ddlActividad');
+    }
+    else if (validarFecha($("#txtFecha").val()) == false) {
+        MensajeAlerta('Ingrese una fecha valida', 'txtFecha');
+    }
+    else if ($("#txtNroHombres").val() == "") {
         MensajeAlerta('Ingrese el Nro. Hombres', 'txtNroHombres');
     }
-    else if ($("txtNroMujeres").val() == "") {
+    else if ($("#txtNroMujeres").val() == "") {
         MensajeAlerta('Ingrese el Nro. Mujeres', 'txtNroMujeres');
     }
-    else if ($("txtTotal").val() == "") {
+    else if ($("#txtTotal").val() == "") {
         MensajeAlerta('Ingrese el Total', 'txtTotal');
     }
     else
@@ -556,8 +566,43 @@ function EliminarActividad(Id) {
         },
     });
 }
+
 function Sumar() {
     var a = parseInt($("#txtNroHombres").val() == "" ? 0 : $("#txtNroHombres").val());
     var b = parseInt($("#txtNroMujeres").val() == "" ? 0 : $("#txtNroMujeres").val());
     $("#txtTotal").val(a + b);
+}
+
+function validarFecha(fecha) {
+    // Expresión regular para verificar el formato de la fecha (YYYY-MM-DD)
+    var formatoFecha = /^\d{2}\/\d{2}\/\d{4}$/;
+
+    // Verificar el formato de la fecha
+    if (!formatoFecha.test(fecha)) {
+        return false;
+    }
+
+    // Obtener los componentes de la fecha
+    var partesFecha = fecha.split("/");
+    var anio = parseInt(partesFecha[2]);
+    var mes = parseInt(partesFecha[1]);
+    var dia = parseInt(partesFecha[0]);
+
+    // Verificar que los componentes de la fecha sean válidos
+    if (isNaN(anio) || isNaN(mes) || isNaN(dia)) {
+        return false;
+    }
+
+    // Verificar que el mes esté dentro del rango válido (1-12)
+    if (mes < 1 || mes > 12) {
+        return false;
+    }
+
+    // Verificar que el día esté dentro del rango válido para el mes y el año
+    var diasEnMes = new Date(anio, mes, 0).getDate();
+    if (dia < 1 || dia > diasEnMes) {
+        return false;
+    }
+
+    return true;
 }

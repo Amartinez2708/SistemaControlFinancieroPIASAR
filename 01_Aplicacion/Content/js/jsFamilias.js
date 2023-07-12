@@ -15,7 +15,7 @@
     });
     $("#txtNroMujeres").change(function () {
         Sumar();
-    });
+    });   
 });
 function ListProyectosFamilias() {
     var tabla = $("#dtSeguimiento").DataTable({
@@ -311,19 +311,29 @@ function LimpiarRegistro() {
 }
 
 function GuardarSeguimiento() {
-    if ($("txtFecha").val() == "") {
-        MensajeAlerta('Ingrese la fecha', 'txtFecha');
+
+    if ($("#ddlEtapa").val() == "") {
+        MensajeAlerta('Seleccione la Etapa', 'ddlEtapa');
     }
-    else if ($("txtNroHombres").val() == "") {
+    else if ($("#ddlMes").val() == "0") {
+        MensajeAlerta('Seleccione el Mes', 'ddlMes');
+    }
+    else if ($("#ddlActividad").val() == "0") {
+        MensajeAlerta('Seleccione el Mes', 'ddlActividad');
+    }
+    else if (validarFecha($("#txtFecha").val()) == false) {
+        MensajeAlerta('Ingrese una fecha valida', 'txtFecha');
+    }
+    else if ($("#txtNroHombres").val() == "") {
         MensajeAlerta('Ingrese el Nro. Hombres', 'txtNroHombres');
     }
-    else if ($("txtNroMujeres").val() == "") {
+    else if ($("#txtNroMujeres").val() == "") {
         MensajeAlerta('Ingrese el Nro. Mujeres', 'txtNroMujeres');
     }
-    else if ($("txtTotal").val() == "") {
+    else if ($("#txtTotal").val() == "") {
         MensajeAlerta('Ingrese el Total', 'txtTotal');
     }
-    else if ($("txtPorcentajeAsistencia").val() == "") {
+    else if ($("#txtPorcentajeAsistencia").val() == "") {
         MensajeAlerta('Ingrese el Porcentaje Asistencia', 'txtPorcentajeAsistencia');
     }
     else
@@ -611,3 +621,122 @@ function Sumar() {
     var b = parseInt($("#txtNroMujeres").val() == "" ? 0 : $("#txtNroMujeres").val());
     $("#txtTotal").val(a + b);
 }
+
+function validarFecha(fecha) {
+    // Expresión regular para verificar el formato de la fecha (YYYY-MM-DD)
+    var formatoFecha = /^\d{2}\/\d{2}\/\d{4}$/;
+
+    // Verificar el formato de la fecha
+    if (!formatoFecha.test(fecha)) {
+        return false;
+    }
+
+    // Obtener los componentes de la fecha
+    var partesFecha = fecha.split("/");
+    var anio = parseInt(partesFecha[2]);
+    var mes = parseInt(partesFecha[1]);
+    var dia = parseInt(partesFecha[0]);
+
+    // Verificar que los componentes de la fecha sean válidos
+    if (isNaN(anio) || isNaN(mes) || isNaN(dia)) {
+        return false;
+    }
+
+    // Verificar que el mes esté dentro del rango válido (1-12)
+    if (mes < 1 || mes > 12) {
+        return false;
+    }
+
+    // Verificar que el día esté dentro del rango válido para el mes y el año
+    var diasEnMes = new Date(anio, mes, 0).getDate();
+    if (dia < 1 || dia > diasEnMes) {
+        return false;
+    }
+
+    return true;
+}
+
+Dropzone.autoDiscover = false;
+
+$(document).ready(function () {
+    // Configuración de Dropzone
+    $("#myDropzone").dropzone({
+        url: "/Familias/UploadAction",
+        //autoProcessQueue: false,
+        paramName: "file",
+        maxFilesize: 50,
+        addRemoveLinks: true,
+        //acceptedFiles: ".jpeg,.jpg,.png,.gif"
+    });
+
+    // Evento que se dispara cuando se completa la carga de un archivo
+    $("#myDropzone").on("complete", function (file) {
+        // Redirige o actualiza la página después de la carga exitosa
+        // window.location.href = "/Controller/Action";
+    });
+});
+
+//Dropzone.autoDiscover = false;
+
+//var myDropzone = new Dropzone("#dZUpload", {
+//    url: 'Upload.ashx',
+//    dictDefaultMessage: "Suelta los archivos aquí o haz clic para cargarlos.",
+//    maxFiles: 6,
+//    thumbnailWidth: 80,
+//    thumbnailHeight: 80,
+//    autoProcessQueue: false,
+//    timeout: 3600000,
+//    maxFilesize: 100,
+//    parallelUploads: 4,
+//    //autoQueue: false,
+//    addRemoveLinks: false,
+//    previewTemplate: document.getElementById('template-preview').innerHTML,
+//    clickable: ".fileinput-button"
+//});
+//myDropzone.on("addedfile", function (file) {
+//    // Hookup the start button
+//    var ext = file.name.split('.').pop();
+//    if (ext == "pdf") {
+//        myDropzone.emit("thumbnail", file, "images/pdf.png");
+//    } else if (ext.indexOf("doc") != -1) {
+//        myDropzone.emit("thumbnail", file, "images/word.png");
+//    } else if (ext.indexOf("xls") != -1) {
+//        myDropzone.emit("thumbnail", file, "images/excel.png");
+//    }
+//    if (file.size <= 52428800) {
+//        $("#subir").show();
+//        $("#cancelar").show();
+//    }
+//    numfiles = numfiles + 1
+//    //file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file); };
+//});
+//// Update the total progress bar
+//myDropzone.on("totaluploadprogress", function (progress) {
+//    document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+//});
+//myDropzone.on("sending", function (file) {
+//    // Show the total progress bar when upload starts
+//    document.querySelector("#total-progress").style.opacity = "1";
+//    // And disable the start button
+//    $("#subir").prop('disabled', true);
+//});
+//myDropzone.on("success", function (file, responseText) {
+//    console.log(file);
+//    //console.log(responseText);
+//    var fileonserver = responseText; // response is the file on the server
+//    file.name = fileonserver; // IF THIS ONLY WORKED i would solve my problem 
+//    file.previewElement.querySelector("#progressbarfile").innerHTML = '<h4><span class="label label-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Finalizado</span></h4>';
+//    file.previewElement.classList.add("dz-success");
+//    $("#subir").prop('disabled', false);
+//});
+//myDropzone.on('removedfile', function (file) {
+//    $.post('Upload.ashx?Snip=' + snip + '&file=' + file.name + '&Cod=' + cod_pag, { filename: file.name })
+//    numfiles = numfiles - 1
+//    if (numfiles == 0) {
+//        $("#subir").hide();
+//        $("#cancelar").hide();
+//    }
+//});
+//$('#subir').on('click', function (e) {
+//    myDropzone.processQueue();
+//});

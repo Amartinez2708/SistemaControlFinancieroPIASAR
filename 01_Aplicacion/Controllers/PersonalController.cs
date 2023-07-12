@@ -131,27 +131,35 @@ namespace _01_Aplicacion.Controllers
             var viewRenderer = new ViewToStringRenderer(ControllerContext);
             var html = viewRenderer.RenderViewToString("~/Views/Personal/_ImprimirContrato.cshtml", data);
 
-            // Convertir HTML a PDF
-            var document = new Document(PageSize.A4, 50, 50, 30, 30);
-            var memoryStream = new MemoryStream();
-            var writer = PdfWriter.GetInstance(document, memoryStream);
+            PdfGenerator pdf = new PdfGenerator();
 
-            document.Open();
+            var ImagenPath = Server.MapPath("~/Content/Images/pnsr_logo_documento.png");
+            var HeaderTex = "";
+            var MainText = html;
 
-            // Agrega la imagen como cabecera
-            var headerImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Content/Images/pnsr_logo_documento.png"));
-            headerImage.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
-            headerImage.ScaleToFit(300f, 80f);
+            var Bit = pdf.GeneratePdf(ImagenPath, HeaderTex, MainText);
 
-            document.Add(headerImage);
+            //// Convertir HTML a PDF
+            //var document = new Document(PageSize.A4, 50, 50, 30, 30);
+            //var memoryStream = new MemoryStream();
+            //var writer = PdfWriter.GetInstance(document, memoryStream);
 
-            var xmlWorker = XMLWorkerHelper.GetInstance();
-            xmlWorker.ParseXHtml(writer, document, new StringReader(html));
+            //document.Open();
 
-            document.Close();
+            //// Agrega la imagen como cabecera
+            //var headerImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Content/Images/pnsr_logo_documento.png"));
+            //headerImage.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
+            //headerImage.ScaleToFit(300f, 80f);
+
+            //document.Add(headerImage);
+
+            //var xmlWorker = XMLWorkerHelper.GetInstance();
+            //xmlWorker.ParseXHtml(writer, document, new StringReader(html));
+
+            //document.Close();
 
             // Devolver archivo PDF como respuesta
-            return File(memoryStream.ToArray(), "application/pdf", "CONTRATO " + data.NroContrato + ".pdf");
+            return File(Bit, "application/pdf", "CONTRATO " + data.NroContrato + ".pdf");
         }
         [HttpGet]
         public JsonResult ListPersonalFamilia(int Id)

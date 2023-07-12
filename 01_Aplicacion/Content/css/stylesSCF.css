@@ -976,3 +976,15 @@ input[type="checkbox"]:checked + label:before {
 .checklist input[type="checkbox"]:checked:disabled + label:before {
 	border-color: #bdbdbd;
 }
+/* Personaliza los estilos según tus preferencias */
+.dropzone {
+    border: 2px dashed #999;
+    background: #f0f0f0;
+    padding: 20px;
+}
+
+.dropzone .dz-message {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+}
