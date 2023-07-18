@@ -19,5 +19,6 @@ namespace _02_Entidades
         public Nullable<decimal> PorcentageAsistencia { get; set; }
         public string Actividades { get; set; }
         public string FechaString { get; set; }
+        public string Archivos { get; set; }
     }
 }

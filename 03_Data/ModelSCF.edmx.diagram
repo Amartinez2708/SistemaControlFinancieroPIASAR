@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="000568ea3ada4d11b8d41dc65a6c085a" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="000568ea3ada4d11b8d41dc65a6c085a" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Menu_Sistema" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Presupuesto_obra" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ROLES_SISTEMA" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
@@ -140,13 +140,13 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Persona__IdNivel__2E5BD364" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Persona__IdProfe__2D67AF2B" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Usuario__IdPerso__611C5D5B" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaProyecto" Width="1.5" PointX="47.625" PointY="2.125" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaProyecto" Width="1.5" PointX="45.375" PointY="3.5" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPer__58520D30" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaPr__IdPro__59463169" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ContratoAdenda" Width="1.5" PointX="43.375" PointY="10.875" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.LugarPrestacionServicios" Width="1.5" PointX="38.875" PointY="21.5" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.OficinaDependencia" Width="1.5" PointX="38.875" PointY="18.25" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.RepresentanteLegal" Width="1.5" PointX="37.875" PointY="13.5" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.ContratoAdenda" Width="1.5" PointX="43.625" PointY="10" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.LugarPrestacionServicios" Width="1.5" PointX="43.625" PointY="14.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.OficinaDependencia" Width="1.5" PointX="48.5" PointY="13.375" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.RepresentanteLegal" Width="1.5" PointX="48.5" PointY="10.125" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__ContratoA__IdRep__7D8391DF" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__Represent__Fecha__697C9932" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.Contrato" Width="1.5" PointX="46.25" PointY="10.125" />
@@ -178,10 +178,11 @@
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_CronogramaAdquisicionInsumosDetalleMes_CronogramaAdquisicionInsumosDetalle" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_PRE_LIQUIDACION_MENSUAL_Proyecto" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK_Presupuesto_obra_detalle_Presupuesto_obra" />
-        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoFamiliar" Width="1.5" PointX="48" PointY="5.875" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.TipoFamiliar" Width="1.5" PointX="48.25" PointY="4" />
         <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.PersonaFamilia" Width="1.5" PointX="50.25" PointY="1.625" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaFa__Fecha__0C06BB60" />
         <AssociationConnector Association="BD_NucleosEjecutoresModel.FK__PersonaFa__IdTip__5634BA94" />
+        <EntityTypeShape EntityType="BD_NucleosEjecutoresModel.SeguimientoDetalleArchivo" Width="1.5" PointX="9.375" PointY="34.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

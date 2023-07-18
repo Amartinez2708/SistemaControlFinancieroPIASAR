@@ -131,6 +131,7 @@ namespace _03_Data
         public virtual DbSet<RESUMEN_ESTADO_FINANCIERO> RESUMEN_ESTADO_FINANCIERO { get; set; }
         public virtual DbSet<TipoFamiliar> TipoFamiliar { get; set; }
         public virtual DbSet<PersonaFamilia> PersonaFamilia { get; set; }
+        public virtual DbSet<SeguimientoDetalleArchivo> SeguimientoDetalleArchivo { get; set; }
     
         public virtual ObjectResult<sp_ListAutorizacionRubro_Result> sp_ListAutorizacionRubro(string ids)
         {

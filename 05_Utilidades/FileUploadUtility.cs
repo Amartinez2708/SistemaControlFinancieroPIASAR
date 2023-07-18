@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _02_Entidades;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -6,163 +7,128 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace _05_Utilidades
 {
     public static class FileUploadUtility
     {
-        public static string UploadFileInChunks(HttpPostedFileBase file, string cui)
+        public static EnRespuesta UploadFile(HttpPostedFileBase file, string chunkName, int chunkIndex, int totalChunks, string fileName, string extension, string cui)
         {
-            if (file == null || file.ContentLength == 0)
-                return "";
-
+            EnRespuesta result = new EnRespuesta();
             try
             {
-
-                var sRuta = ConfigurationManager.AppSettings["RutaDocumentosSeguimientoActividades"].ToString() + "/" + cui;
-                var Now = DateTime.Now;
-                var FechaStringName = Now.Year.ToString() + "_" +Now.Month.ToString()+"_" + Now.Day.ToString() +"_"+ Now.Hour.ToString() + Now.Minute.ToString() + Now.Second.ToString() +"_"+ Now.Millisecond.ToString()+"_"+ Guid.NewGuid().ToString();
-                var FileNombreReal = file.FileName;
-                var FileExtension = Path.GetExtension(FileNombreReal);
-                var FileNombre = FechaStringName + FileExtension;
-
-                string targetFilePath = ConfigurationManager.AppSettings["RutaDocumentosSeguimientoActividades"].ToString() + "/" + cui+"/"+ FileNombre;
-
-
-                int chunkSize = 1024 * 1024; // Tamaño del fragmento (por ejemplo, 1 MB)
-
-                int fileSize = file.ContentLength;
-                int totalChunks = (int)Math.Ceiling((double)fileSize / chunkSize);
-                int currentChunk = 0;
-                byte[] buffer = new byte[chunkSize];
-
                 // Crea una carpeta temporal para guardar los fragmentos (por ejemplo, en el directorio "App_Data")
                 string tempFolderPath = ConfigurationManager.AppSettings["RutaTemp"].ToString();
-
                 if (!Directory.Exists(tempFolderPath))
                     Directory.CreateDirectory(tempFolderPath);
 
-                // Nombre de archivo temporal basado en un identificador único (puedes usar otra lógica para generar nombres únicos)
-                string tempFileName = Guid.NewGuid().ToString();
+                // Ruta y nombre del fragmento actual
+                string tempFilePath = Path.Combine(tempFolderPath, chunkName + "-" + chunkIndex);
 
-                // Ruta completa del archivo temporal
-                string tempFilePath = Path.Combine(tempFolderPath, tempFileName);
+                // Guardar el fragmento en la ubicación temporal
+                file.SaveAs(tempFilePath);
 
-                using (FileStream fs = new FileStream(tempFilePath, FileMode.Append))
+                // Verificar si es el último fragmento
+                bool isLastChunk = (chunkIndex == totalChunks);
+
+                if (isLastChunk)
                 {
-                    while ((currentChunk = file.InputStream.Read(buffer, 0, buffer.Length)) > 0)
+                    var Now = DateTime.Now;
+                    var FechaStringName = Now.Year.ToString() + "_" + Now.Month.ToString() + "_" + Now.Day.ToString() + "_" + Now.Hour.ToString() + "_" + Now.Minute.ToString() + "_" + Now.Second.ToString() + "_" + Now.Millisecond.ToString() + "_" + Guid.NewGuid().ToString();
+
+                    // Ruta y nombre del archivo final
+                    string targetFolderPath = ConfigurationManager.AppSettings["RutaDocumentosSeguimientoActividades"].ToString();
+                    string targetFilePath = targetFolderPath + "/" + cui + "/" + FechaStringName + "." + extension;
+
+                    if (!Directory.Exists(targetFolderPath + "/" + cui))
+                        Directory.CreateDirectory(targetFolderPath + "/" + cui);
+
+                    // Unir los fragmentos en un solo archivo
+                    using (FileStream fs = new FileStream(targetFilePath, FileMode.Create))
                     {
-                        fs.Write(buffer, 0, currentChunk);
-                    }
-                }
-
-                if (IsAllChunksUploaded(totalChunks, tempFolderPath, tempFileName))
-                {
-                    // Mueve o copia el archivo temporal a su ubicación final (por ejemplo, en el directorio "Uploads")
-                    if (Directory.Exists(sRuta) == true)
-                    {
-                        //file.SaveAs(sRuta + "/" + FileNombre);
-                        File.Move(tempFilePath, targetFilePath);
-                    }
-                    else
-                    {
-                        Directory.CreateDirectory(sRuta);
-                        //file.SaveAs(sRuta + "/" + FileNombre);
-                        File.Move(tempFilePath, targetFilePath);
-                    }
-
-
-                    
-
-                    // Elimina la carpeta temporal y los fragmentos
-                    DeleteTempUploads(tempFolderPath, tempFileName);
-
-                    return FileNombre + "|" + FileNombreReal;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar cualquier excepción que ocurra durante la carga o el procesamiento del archivo
-                return "";
-            }
-
-            return "";
-        }
-
-        private static bool IsAllChunksUploaded(int totalChunks, string tempFolderPath, string tempFileName)
-        {
-            for (int i = 0; i < totalChunks; i++)
-            {
-                string chunkFilePath = Path.Combine(tempFolderPath, tempFileName + "_" + i);
-                if (File.Exists(chunkFilePath))
-                    return false;
-            }
-
-            return true;
-        }
-
-        private static void DeleteTempUploads(string tempFolderPath, string tempFileName)
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(tempFolderPath);
-            FileInfo[] files = directoryInfo.GetFiles(tempFileName + "_*");
-            foreach (FileInfo file in files)
-            {
-                file.Delete();
-            }
-        }
-
-        //public static string UploadAction(HttpPostedFileBase file)
-        //{
-            
-        //}
-
-        public static string JoinFile(string chunkName, string filename, string cui)
-        {
-            try
-            {
-                var sRuta = ConfigurationManager.AppSettings["RutaDocumentosSeguimientoActividades"].ToString() + "/" + cui;
-                var Now = DateTime.Now;
-                var FechaStringName = Now.Year.ToString() + "_" + Now.Month.ToString() + "_" + Now.Day.ToString() + "_" + Now.Hour.ToString() + Now.Minute.ToString() + Now.Second.ToString() + "_" + Now.Millisecond.ToString() + "_" + Guid.NewGuid().ToString();
-                var FileNombreReal = filename;
-                var FileExtension = Path.GetExtension(FileNombreReal);
-                var FileNombre = FechaStringName;
-                // Ruta y nombre del archivo final
-                string finalFilePath = sRuta+"/" +FileNombre;
-
-                // Ruta de la carpeta temporal donde se guardaron los fragmentos
-                string tempFolderPath = ConfigurationManager.AppSettings["RutaTemp"].ToString();
-
-                // Obtén los nombres de los fragmentos que coinciden con el nombre único
-                string[] chunkFileNames = Directory.GetFiles(tempFolderPath, chunkName + "-*");
-
-                // Ordena los fragmentos por número
-                Array.Sort(chunkFileNames);
-
-                // Une los fragmentos en un solo archivo
-                using (FileStream fs = new FileStream(finalFilePath, FileMode.Create))
-                {
-                    foreach (string chunkFileName in chunkFileNames)
-                    {
-                        using (FileStream chunkStream = new FileStream(chunkFileName, FileMode.Open))
+                        for (int i = 1; i <= totalChunks; i++)
                         {
-                            chunkStream.CopyTo(fs);
+                            // Ruta y nombre del fragmento
+                            string chunkFileName = Path.Combine(tempFolderPath, $"{chunkName}-{i}");
+
+                            // Leer el contenido del fragmento y escribirlo en el archivo final
+                            using (FileStream chunkStream = new FileStream(chunkFileName, FileMode.Open))
+                            {
+                                chunkStream.CopyTo(fs);
+                            }
+
+                            // Eliminar el fragmento
+                            System.IO.File.Delete(chunkFileName);
                         }
                     }
-                }
 
-                // Elimina los fragmentos
-                foreach (string chunkFileName in chunkFileNames)
+                    result.Success = true;
+                    result.Mensaje = fileName + "|" + FechaStringName + "." + extension + "|" + targetFilePath;
+
+                    return result;
+                }
+                else
                 {
-                    System.IO.File.Delete(chunkFileName);
-                }
 
-                return "ok";
+                    result.Success = true;
+                    result.Mensaje = "Fragmento subido con éxito.";
+
+                    return result;
+                }
             }
             catch (Exception ex)
             {
-                // Manejar cualquier excepción que ocurra durante la unión del archivo
-                return "Error al unir el archivo: " + ex.Message;
+                // Manejar cualquier excepción que ocurra durante la carga o el procesamiento del fragmento
+
+                result.Success = false;
+                result.Mensaje = "Error al subir el fragmento: " + ex.Message;
+
+                return result;
             }
+        }
+        public static EnRespuesta DownloadAction(string filePath, string nombre)
+        {
+            EnRespuesta result = new EnRespuesta();
+            try
+            {
+                // Verificar que el archivo exista
+                if (!File.Exists(filePath))
+                {
+                    result.Success = false;
+                    result.Mensaje = "El archivo no existe.";
+
+                    return result;
+                }
+
+                // Configurar la respuesta HTTP
+                HttpResponse response = HttpContext.Current.Response;
+                response.Clear();
+                response.ClearHeaders();
+                response.ClearContent();
+                response.ContentType = "application/octet-stream";
+                response.AddHeader("Content-Disposition", $"attachment; filename={nombre}");
+                response.AddHeader("Content-Length", new FileInfo(filePath).Length.ToString());
+
+                // Leer el archivo y enviarlo al cliente
+                response.BinaryWrite(File.ReadAllBytes(filePath));
+                response.Flush();
+                response.End();
+
+                result.Success = true;
+                result.Mensaje = "Archivo descargado con exito";
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                result.Success = false;
+                result.Mensaje = "Error al descargar: " + ex.Message;
+
+                return result;
+            }
+            
         }
     }
 }

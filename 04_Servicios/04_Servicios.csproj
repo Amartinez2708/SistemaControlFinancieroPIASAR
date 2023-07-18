@@ -53,7 +53,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc.Extensions, Version=1.1.0.6, Culture=neutral, PublicKeyToken=d631f4e4b226a032, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Web.Mvc.Extensions.1.1.1.2\lib\net45\System.Web.Mvc.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +88,7 @@
     <Compile Include="SrvNucleosEjecutores.cs" />
     <Compile Include="SrvPersonal.cs" />
     <Compile Include="SrvReporteMensualProgreso.cs" />
+    <Compile Include="SrvSeguimientoDetalleArchivo.cs" />
     <Compile Include="SrvSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="SrvTabla.cs" />
   </ItemGroup>

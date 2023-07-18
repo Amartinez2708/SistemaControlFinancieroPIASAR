@@ -204,6 +204,24 @@ namespace _04_Servicios
                         context.DetalleSeguimientoActividadesFamilias.Add(d);
                         context.SaveChanges();
 
+                        if (detalle.Archivos != "")
+                        {
+                            string[] Archivos = detalle.Archivos.Split('|');
+
+                            foreach (string Archivo in Archivos)
+                            {
+                                var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Convert.ToInt32(Archivo));
+                                if (objArchivo != null)
+                                {
+                                    objArchivo.IdSeguimiento = n.IdSeguimientoActividades;
+                                    objArchivo.IdDetalleSeguimiento = d.IdDetalleSeguimientoActividadesFamilias;
+                                    objArchivo.Activo = true;
+
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+
                         dbtran.Commit();
                         //dbtran.Rollback();
                         respuesta.TipoRespuesta = 1;
@@ -236,6 +254,24 @@ namespace _04_Servicios
                             context.DetalleSeguimientoActividadesFamilias.Add(d);
                             context.SaveChanges();
 
+                            if (detalle.Archivos != "")
+                            {
+                                string[] Archivos = detalle.Archivos.Split('|');
+
+                                foreach (string Archivo in Archivos)
+                                {
+                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Convert.ToInt32(Archivo));
+                                    if (objArchivo != null)
+                                    {
+                                        objArchivo.IdSeguimiento = d.IdSeguimientoActividades;
+                                        objArchivo.IdDetalleSeguimiento = d.IdDetalleSeguimientoActividadesFamilias;
+                                        objArchivo.Activo = true;
+
+                                        context.SaveChanges();
+                                    }
+                                }
+                            }
+
                             dbtran.Commit();
                             //dbtran.Rollback();
                             respuesta.TipoRespuesta = 1;
@@ -262,6 +298,30 @@ namespace _04_Servicios
                                 objDetalle.Activo = true;
                                 objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                                 objDetalle.Fecha_upd = DateTime.Now;
+
+                                //if (detalle.Archivos != "")  convierto todo a falso y luego habilito los que si estan 
+                                //{
+                                //    string[] Archivos = detalle.Archivos.Split('*');
+
+                                //    foreach (string Archivo in Archivos)
+                                //    {
+                                //        SeguimientoDetalleArchivo a = new SeguimientoDetalleArchivo();
+                                //        a.TipoSeguimiento = "Familias";
+                                //        a.IdSeguimiento = objDetalle.IdSeguimientoActividades;
+                                //        a.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesFamilias;
+                                //        a.NombreArchivo = detalle.Archivos.Split('|')[1];
+                                //        a.NombreRealArchivo = detalle.Archivos.Split('|')[0];
+                                //        a.FolderPath = detalle.Archivos.Split('|')[2];
+                                //        a.Activo = true;
+                                //        a.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
+                                //        a.Fecha_add = DateTime.Now;
+                                //        a.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                                //        a.Fecha_upd = DateTime.Now;
+
+                                //        context.SeguimientoDetalleArchivo.Add(a);
+                                //        context.SaveChanges();
+                                //    }
+                                //}
 
                                 context.SaveChanges();
 

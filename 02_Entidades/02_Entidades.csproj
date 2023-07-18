@@ -110,6 +110,7 @@
     <Compile Include="EnSeguimientoActividadesFamilias.cs" />
     <Compile Include="EnSeguimientoActividadesJASS.cs" />
     <Compile Include="EnSeguimientoActividadesNE.cs" />
+    <Compile Include="EnSeguimientoDetalleArchivo.cs" />
     <Compile Include="EnSeguimientoEjecucionProyectosInversion.cs" />
     <Compile Include="EnSubComponente.cs" />
     <Compile Include="EnTablaDinamica.cs" />

@@ -319,7 +319,7 @@ function GuardarSeguimiento() {
         MensajeAlerta('Seleccione el Mes', 'ddlMes');
     }
     else if ($("#ddlActividad").val() == "0") {
-        MensajeAlerta('Seleccione el Mes', 'ddlActividad');
+        MensajeAlerta('Seleccione la Actividad', 'ddlActividad');
     }
     else if (validarFecha($("#txtFecha").val()) == false) {
         MensajeAlerta('Ingrese una fecha valida', 'txtFecha');
@@ -349,7 +349,8 @@ function GuardarSeguimiento() {
             NroHombres: $('#txtNroHombres').val(),
             NroMujeres: $("#txtNroMujeres").val(),
             Total: $("#txtTotal").val(),
-            PorcentageAsistencia: ($("#txtPorcentajeAsistencia").val()/100)
+            PorcentageAsistencia: ($("#txtPorcentajeAsistencia").val() / 100),
+            Archivos: $("#txtFiles").val()
         }
 
         $.ajax({
@@ -658,11 +659,9 @@ function validarFecha(fecha) {
 
 Dropzone.autoDiscover = false;
 
-//$(document).ready(function () {
     // Configuración de Dropzone
     $("#myDropzone").dropzone({
         url: "/Familias/UploadAction",
-        //autoProcessQueue: false,
         paramName: "file",
         maxFilesize: 50,
         addRemoveLinks: true,
@@ -670,106 +669,137 @@ Dropzone.autoDiscover = false;
         chunkRetry: 3, // Número de intentos de carga para cada fragmento
         chunkSize: 1024 * 1024, // Tamaño del fragmento (por ejemplo, 1 MB)
         sending: function (file, xhr, formData) {
-            debugger;
-            //var uniqueId = generateUniqueId(); // Generar un identificador único para el archivo
-            //var chunkName = uniqueId + "-" + file.upload.uuid; // Asignar el nombre único al fragmento
-            //formData.append("chunkName", chunkName); // Agregar el nombre único al formulario
 
-            var chunkIndex = file.upload.chunks[0].index;
-            var totalChunks = file.upload.totalChunkCount;
-            var fileName = file.upload.filename;
+            if ($("#ddlEtapa").val() == "") {
+                this.removeFile(file);
+                MensajeAlerta('Seleccione la Etapa', 'ddlEtapa');
+                return false;
+            }
+            else if ($("#ddlMes").val() == "0") {
+                this.removeFile(file);
+                MensajeAlerta('Seleccione el Mes', 'ddlMes');
+                return false;
+            }
+            else if ($("#ddlActividad").val() == "0") {
+                this.removeFile(file);
+                MensajeAlerta('Seleccione la Actividad', 'ddlActividad');
+                return false;
+            }
+            else if (validarFecha($("#txtFecha").val()) == false) {
+                this.removeFile(file);
+                MensajeAlerta('Ingrese una fecha valida', 'txtFecha');
+                return false;
+            }
+            else if ($("#txtNroHombres").val() == "") {
+                this.removeFile(file);
+                MensajeAlerta('Ingrese el Nro. Hombres', 'txtNroHombres');
+                return false;
+            }
+            else if ($("#txtNroMujeres").val() == "") {
+                this.removeFile(file);
+                MensajeAlerta('Ingrese el Nro. Mujeres', 'txtNroMujeres');
+                return false;
+            }
+            else if ($("#txtTotal").val() == "") {
+                this.removeFile(file);
+                MensajeAlerta('Ingrese el Total', 'txtTotal');
+                return false;
+            }
+            else if ($("#txtPorcentajeAsistencia").val() == "") {
+                this.removeFile(file);
+                MensajeAlerta('Ingrese el Porcentaje Asistencia', 'txtPorcentajeAsistencia');
+                return false;
+            }
+            else {
 
-            // Agregar los parámetros al formulario de datos
-            formData.append("chunkName", file.upload.uuid);
-            formData.append("chunkIndex", chunkIndex);
-            formData.append("totalChunks", totalChunks);
-            formData.append("fileName", fileName);
+                var chunkIndex = file.upload.chunked == true ? file.upload.chunks.length : 1;
+                var totalChunks = file.upload.totalChunkCount;
+                var fileName = file.upload.filename;
+                var extension = file.name.split('.').pop();
+
+                // Agregar los parámetros al formulario de datos
+                formData.append("chunkName", file.upload.uuid);
+                formData.append("chunkIndex", chunkIndex);
+                formData.append("totalChunks", totalChunks);
+                formData.append("fileName", fileName);
+                formData.append("extension", extension);
+                formData.append("cui", $("#hdnCUI").val());
+            }
         },
-        //chunkInit: function (file, chunk, done) {
-        //    debugger;
-        //    var uniqueId = generateUniqueId();
-        //    chunk.dataChunkName = uniqueId + "-" + chunk.index; // Asigna el nombre único al fragmento
-        //    done();
-        //},
-        //acceptedFiles: ".jpeg,.jpg,.png,.gif"
-    });
-   
-    // Evento que se dispara cuando se completa la carga de un archivo
-    $("#myDropzone").on("complete", function (file) {
+        dictRemoveFile: "<i class='fa fa-trash-o' aria-hidden='true'></i>&nbsp;Eliminar",
+        thumbnailWidth: 100,
+        thumbnailHeight: 110,
+        success: function (file, e) {
+            // Agregar enlace de descarga archivo desde c# 
+            var a = document.createElement('a');
+            a.setAttribute('class', "btn btn-sm btn-success m-t-5 f-14 text-white");
+            a.setAttribute('onclick', "Download('" + e.Mensaje.split('|')[2] + "','" + e.Mensaje.split('|')[0] + "')");
+            a.innerHTML = "<i class='fa fa-download' aria-hidden='true'></i>&nbsp;Descargar";
+            file.previewTemplate.appendChild(a);
 
-        $("#progressContainer").hide();
-        // Redirige o actualiza la página después de la carga exitosa
-        // window.location.href = "/Controller/Action";
+            var Files = $("#txtFiles").val();
+            if (Files == "") {
+                $("#txtFiles").val(e.Mensaje);
+            } else {
+                $("#txtFiles").val(Files + "*" + e.Mensaje);
+            }
+            
+        }
     });
-//});
 
-    function generateUniqueId() {
-        var f = new Date();
-        var title = f.getFullYear() + "_" + (f.getMonth() + 1) + "_" + f.getDate() + "_" + f.getHours() + "_" + f.getMinutes();
-        return title;
+    function Download(filePath, nombre) {
+        var url = "/Familias/DownloadAction"; // URL de la acción con JsonResult
+        var parametros = {
+            filePath: filePath,
+            nombre: nombre
+        };
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: parametros,
+            xhrFields: {
+                responseType: 'arraybuffer' // Especifica que la respuesta será un arreglo de bytes
+            },
+            success: function (data) {
+                // Crear un objeto Blob a partir del arreglo de bytes
+                var blob = new Blob([data], { type: 'application/octet-stream' });
+
+                // Crear un enlace temporal y simular un clic para descargar el archivo
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = nombre;
+                link.click();
+
+                // Liberar recursos
+                window.URL.revokeObjectURL(link.href);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                // Manejar el error de la solicitud AJAX
+                console.log(xhr.responseText);
+            }
+        });
     }
 
-//Dropzone.autoDiscover = false;
+//debugger;
+//var ext = file.name.split('.').pop();
+//if (ext == "pdf") {
+//    this.emit("thumbnail", file, "content/images/PDF.png");
+//} else if (ext.indexOf("doc") != -1 || ext.indexOf("docx") != -1) {
 
-//var myDropzone = new Dropzone("#dZUpload", {
-//    url: 'Upload.ashx',
-//    dictDefaultMessage: "Suelta los archivos aquí o haz clic para cargarlos.",
-//    maxFiles: 6,
-//    thumbnailWidth: 80,
-//    thumbnailHeight: 80,
-//    autoProcessQueue: false,
-//    timeout: 3600000,
-//    maxFilesize: 100,
-//    parallelUploads: 4,
-//    //autoQueue: false,
-//    addRemoveLinks: false,
-//    previewTemplate: document.getElementById('template-preview').innerHTML,
-//    clickable: ".fileinput-button"
-//});
-//myDropzone.on("addedfile", function (file) {
-//    // Hookup the start button
-//    var ext = file.name.split('.').pop();
-//    if (ext == "pdf") {
-//        myDropzone.emit("thumbnail", file, "images/pdf.png");
-//    } else if (ext.indexOf("doc") != -1) {
-//        myDropzone.emit("thumbnail", file, "images/word.png");
-//    } else if (ext.indexOf("xls") != -1) {
-//        myDropzone.emit("thumbnail", file, "images/excel.png");
-//    }
-//    if (file.size <= 52428800) {
-//        $("#subir").show();
-//        $("#cancelar").show();
-//    }
-//    numfiles = numfiles + 1
-//    //file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file); };
-//});
-//// Update the total progress bar
-//myDropzone.on("totaluploadprogress", function (progress) {
-//    document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
-//});
-//myDropzone.on("sending", function (file) {
-//    // Show the total progress bar when upload starts
-//    document.querySelector("#total-progress").style.opacity = "1";
-//    // And disable the start button
-//    $("#subir").prop('disabled', true);
-//});
-//myDropzone.on("success", function (file, responseText) {
-//    console.log(file);
-//    //console.log(responseText);
-//    var fileonserver = responseText; // response is the file on the server
-//    file.name = fileonserver; // IF THIS ONLY WORKED i would solve my problem 
-//    file.previewElement.querySelector("#progressbarfile").innerHTML = '<h4><span class="label label-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Finalizado</span></h4>';
-//    file.previewElement.classList.add("dz-success");
-//    $("#subir").prop('disabled', false);
-//});
-//myDropzone.on('removedfile', function (file) {
-//    $.post('Upload.ashx?Snip=' + snip + '&file=' + file.name + '&Cod=' + cod_pag, { filename: file.name })
-//    numfiles = numfiles - 1
-//    if (numfiles == 0) {
-//        $("#subir").hide();
-//        $("#cancelar").hide();
-//    }
-//});
-//$('#subir').on('click', function (e) {
-//    myDropzone.processQueue();
-//});
+//    file.previewElement.querySelector("[data-dz-thumbnail]").src = "content/images/DOC.png";
+//    file.previewElement.querySelector("[data-dz-thumbnail]").width = "100px";
+
+//} else if (ext.indexOf("xls") != -1 || ext.indexOf("xlsx") != -1) {
+//    this.emit("thumbnail", file, "content/images/XLSX.png");
+//} else if (ext.indexOf("rar") != -1) {
+//    this.emit("thumbnail", file, "content/images/rar.png");
+//} else if (ext.indexOf("zip") != -1) {
+//    this.emit("thumbnail", file, "content/images/zip.png");
+//} else if (ext.indexOf("ppt") != -1) {
+//    this.emit("thumbnail", file, "content/images/ppt.png");
+//} else if (ext.indexOf("jpg") != -1) {
+//    this.emit("thumbnail", file, "content/images/jpg.png");
+//} else if (ext.indexOf("png") != -1) {
+//    this.emit("thumbnail", file, "content/images/png.png");
+//}

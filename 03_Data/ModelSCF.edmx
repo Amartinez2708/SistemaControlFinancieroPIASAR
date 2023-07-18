@@ -1552,6 +1552,23 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
+        <EntityType Name="SeguimientoDetalleArchivo">
+          <Key>
+            <PropertyRef Name="IdSeguimientoDetalleArchivo" />
+          </Key>
+          <Property Name="IdSeguimientoDetalleArchivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoSeguimiento" Type="varchar" MaxLength="100" />
+          <Property Name="IdSeguimiento" Type="int" />
+          <Property Name="IdDetalleSeguimiento" Type="int" />
+          <Property Name="NombreArchivo" Type="varchar" MaxLength="250" />
+          <Property Name="NombreRealArchivo" Type="varchar" MaxLength="250" />
+          <Property Name="FolderPath" Type="varchar" MaxLength="4000" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario_add" Type="int" />
+          <Property Name="Fecha_add" Type="datetime" />
+          <Property Name="IdUsuario_upd" Type="int" />
+          <Property Name="Fecha_upd" Type="datetime" />
+        </EntityType>
         <EntityType Name="SeguimientoEjecucionProyectosInversion">
           <Key>
             <PropertyRef Name="IdSeguimientoEjecucionProyectosInversion" />
@@ -2944,6 +2961,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <EntitySet Name="SeguimientoActividadesNE" EntityType="Self.SeguimientoActividadesNE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoATM" EntityType="Self.SeguimientoATM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoCuotaFamiliarJASS" EntityType="Self.SeguimientoCuotaFamiliarJASS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeguimientoDetalleArchivo" EntityType="Self.SeguimientoDetalleArchivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoEjecucionProyectosInversion" EntityType="Self.SeguimientoEjecucionProyectosInversion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeguimientoJASS" EntityType="Self.SeguimientoJASS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubComponente" EntityType="Self.SubComponente" Schema="dbo" store:Type="Tables" />
@@ -3932,6 +3950,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             <End Role="TipoFamiliar" EntitySet="TipoFamiliar" />
             <End Role="PersonaFamilia" EntitySet="PersonaFamilia" />
           </AssociationSet>
+          <EntitySet Name="SeguimientoDetalleArchivo" EntityType="BD_NucleosEjecutoresModel.SeguimientoDetalleArchivo" />
           </EntityContainer>
         <EntityType Name="MANIFIESTO_GASTO_DETALLE">
           <Key>
@@ -6819,6 +6838,23 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SeguimientoDetalleArchivo">
+          <Key>
+            <PropertyRef Name="IdSeguimientoDetalleArchivo" />
+          </Key>
+          <Property Name="IdSeguimientoDetalleArchivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoSeguimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdSeguimiento" Type="Int32" />
+          <Property Name="IdDetalleSeguimiento" Type="Int32" />
+          <Property Name="NombreArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NombreRealArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FolderPath" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario_add" Type="Int32" />
+          <Property Name="Fecha_add" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_upd" Type="Int32" />
+          <Property Name="Fecha_upd" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8843,6 +8879,24 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="IdTipoFamiliar" ColumnName="IdTipoFamiliar" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdPersonaFamilia" ColumnName="IdPersonaFamilia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeguimientoDetalleArchivo">
+            <EntityTypeMapping TypeName="BD_NucleosEjecutoresModel.SeguimientoDetalleArchivo">
+              <MappingFragment StoreEntitySet="SeguimientoDetalleArchivo">
+                <ScalarProperty Name="Fecha_upd" ColumnName="Fecha_upd" />
+                <ScalarProperty Name="IdUsuario_upd" ColumnName="IdUsuario_upd" />
+                <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
+                <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FolderPath" ColumnName="FolderPath" />
+                <ScalarProperty Name="NombreRealArchivo" ColumnName="NombreRealArchivo" />
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="IdDetalleSeguimiento" ColumnName="IdDetalleSeguimiento" />
+                <ScalarProperty Name="IdSeguimiento" ColumnName="IdSeguimiento" />
+                <ScalarProperty Name="TipoSeguimiento" ColumnName="TipoSeguimiento" />
+                <ScalarProperty Name="IdSeguimientoDetalleArchivo" ColumnName="IdSeguimientoDetalleArchivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

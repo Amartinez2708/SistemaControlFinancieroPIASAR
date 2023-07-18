@@ -1030,6 +1030,7 @@ function GuardarContrato() {
 
 function EditarContrato(Id) {
     $.get("/Personal/ListContratoId?Id=" + Id, function (data, status) {
+
         $("#hdnIdContrato").val(data.IdContrato);
         $("#hdnIdPersonal").val(data.IdPersona)
         $("#txtPersonalContrato").val(data.Persona);
@@ -1046,7 +1047,7 @@ function EditarContrato(Id) {
         $("#txtFormaPago").val(data.FormaPago);
         $("#ddlRepresentanteLegal").val(data.IdRepresentanteLegal);
 
-        $("#lblPersonalContratoAgregar").html("Editar Contrato " + data.ValorDevolucion);
+        $("#lblPersonalContratoAgregar").html("Editar Contrato " + data.NroContrato);
         $("#modal-personal-contrato-agregar").modal({ backdrop: 'static', keyboard: true, show: true });
     });
 }

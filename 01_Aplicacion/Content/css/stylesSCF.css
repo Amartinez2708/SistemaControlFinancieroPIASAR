@@ -978,15 +978,23 @@ input[type="checkbox"]:checked + label:before {
 }
 /* Personaliza los estilos según tus preferencias */
 .dropzone {
-    border: 3px dashed #0056ac;
-    background: #e1ebf7;
-    padding: 20px;
+    border: 4px dashed #4099ff;
+    background: #fff;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .dropzone .dz-message {
     text-align: center;
     font-size: 18px;
-    color: #333;
+    color: #4099ff;
+    font-weight: 500;
+}
+.dropzone .dz-preview.dz-file-preview .dz-image {
+    background: linear-gradient(to bottom, #03A9F4, #00BCD4);
+    /*background: #9990;*/
+    /* background: #999; */
+    /* background: linear-gradient(to bottom, #eee, #ddd); */
 }
 #progressContainer {
   width: 100%;
@@ -1007,3 +1015,12 @@ input[type="checkbox"]:checked + label:before {
   text-align: center;
   color: #000;
 }
+.f-14{
+    font-size:14px !important;
+}
+/*.dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {
+    background-color: #6c757dd1;
+    padding: 0 0.4em;
+    border-radius: 3px;
+    color: #fff;
+}*/

@@ -334,6 +334,9 @@
     <Compile Include="SeguimientoCuotaFamiliarJASS.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>
+    <Compile Include="SeguimientoDetalleArchivo.cs">
+      <DependentUpon>ModelSCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="SeguimientoEjecucionProyectosInversion.cs">
       <DependentUpon>ModelSCF.tt</DependentUpon>
     </Compile>

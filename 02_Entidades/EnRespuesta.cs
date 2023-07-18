@@ -8,6 +8,7 @@ namespace _02_Entidades
 {
     public class EnRespuesta
     {
+        public bool Success { get; set; }
         public int TipoRespuesta { get; set; }
         public string Mensaje { get; set; }
         public string ValorDevolucion { get; set; }
