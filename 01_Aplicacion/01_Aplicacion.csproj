@@ -691,9 +691,12 @@
     <Content Include="Content\Images\pendienteautorizacion.png" />
     <Content Include="Content\Images\pendienterendicion.png" />
     <Content Include="Content\Images\peru.png" />
+    <Content Include="Content\Images\png.png" />
     <Content Include="Content\Images\pnsr_logo.png" />
+    <Content Include="Content\Images\pnsr_logo_documento.png" />
     <Content Include="Content\Images\porcentajejustificado.png" />
     <Content Include="Content\Images\portada_web.jpg" />
+    <Content Include="Content\Images\ppt.png" />
     <Content Include="Content\Images\presentacion.png" />
     <Content Include="Content\Images\presupuesto.png" />
     <Content Include="Content\Images\proceso-de-trabajo.png" />
