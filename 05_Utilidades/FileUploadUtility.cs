@@ -34,6 +34,7 @@ namespace _05_Utilidades
 
                 if (isLastChunk)
                 {
+                    long length = 0;
                     var Now = DateTime.Now;
                     var FechaStringName = Now.Year.ToString() + "_" + Now.Month.ToString() + "_" + Now.Day.ToString() + "_" + Now.Hour.ToString() + "_" + Now.Minute.ToString() + "_" + Now.Second.ToString() + "_" + Now.Millisecond.ToString() + "_" + Guid.NewGuid().ToString();
 
@@ -61,16 +62,17 @@ namespace _05_Utilidades
                             // Eliminar el fragmento
                             System.IO.File.Delete(chunkFileName);
                         }
+                        length = fs.Length;
                     }
-
+                    result.isLastChunk = true;
                     result.Success = true;
-                    result.Mensaje = fileName + "|" + FechaStringName + "." + extension + "|" + targetFilePath;
+                    result.Mensaje = fileName + "|" + FechaStringName + "." + extension + "|" + targetFilePath + "|" + length.ToString();
 
                     return result;
                 }
                 else
                 {
-
+                    result.isLastChunk = false;
                     result.Success = true;
                     result.Mensaje = "Fragmento subido con éxito.";
 
@@ -80,7 +82,7 @@ namespace _05_Utilidades
             catch (Exception ex)
             {
                 // Manejar cualquier excepción que ocurra durante la carga o el procesamiento del fragmento
-
+                result.isLastChunk = false;
                 result.Success = false;
                 result.Mensaje = "Error al subir el fragmento: " + ex.Message;
 

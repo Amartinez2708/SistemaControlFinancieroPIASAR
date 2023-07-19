@@ -260,7 +260,9 @@ namespace _04_Servicios
 
                                 foreach (string Archivo in Archivos)
                                 {
-                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Convert.ToInt32(Archivo));
+                                    int id = Convert.ToInt32(Archivo);
+
+                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == id);
                                     if (objArchivo != null)
                                     {
                                         objArchivo.IdSeguimiento = d.IdSeguimientoActividades;
@@ -299,30 +301,33 @@ namespace _04_Servicios
                                 objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                                 objDetalle.Fecha_upd = DateTime.Now;
 
-                                //if (detalle.Archivos != "")  convierto todo a falso y luego habilito los que si estan 
-                                //{
-                                //    string[] Archivos = detalle.Archivos.Split('*');
+                                var objArchivo = context.SeguimientoDetalleArchivo.Where(x => x.IdSeguimiento == objDetalle.IdSeguimientoActividades && x.IdDetalleSeguimiento == objDetalle.IdDetalleSeguimientoActividadesFamilias).ToList();
+                                if (objArchivo.Count() > 0)
+                                {
+                                    objArchivo.ForEach(a => a.Activo = false);
+                                    context.SaveChanges();
 
-                                //    foreach (string Archivo in Archivos)
-                                //    {
-                                //        SeguimientoDetalleArchivo a = new SeguimientoDetalleArchivo();
-                                //        a.TipoSeguimiento = "Familias";
-                                //        a.IdSeguimiento = objDetalle.IdSeguimientoActividades;
-                                //        a.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesFamilias;
-                                //        a.NombreArchivo = detalle.Archivos.Split('|')[1];
-                                //        a.NombreRealArchivo = detalle.Archivos.Split('|')[0];
-                                //        a.FolderPath = detalle.Archivos.Split('|')[2];
-                                //        a.Activo = true;
-                                //        a.IdUsuario_add = SecurityManager<EnUsuario>.User.IdUsuario;
-                                //        a.Fecha_add = DateTime.Now;
-                                //        a.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
-                                //        a.Fecha_upd = DateTime.Now;
+                                    if (detalle.Archivos != "")
+                                    {
+                                        string[] Archivos = detalle.Archivos.Split('|');
 
-                                //        context.SeguimientoDetalleArchivo.Add(a);
-                                //        context.SaveChanges();
-                                //    }
-                                //}
+                                        foreach (string Archivo in Archivos)
+                                        {
+                                            int id = Convert.ToInt32(Archivo);
 
+                                            var file = objArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == id);
+                                            if (file != null)
+                                            {
+                                                file.IdSeguimiento = objDetalle.IdSeguimientoActividades;
+                                                file.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesFamilias;
+                                                file.Activo = true;
+
+                                                context.SaveChanges();
+                                            }
+                                        }
+                                    }
+
+                                }
                                 context.SaveChanges();
 
                                 dbtran.Commit();

@@ -15,5 +15,6 @@ namespace _02_Entidades
         public string NombreArchivo { get; set; }
         public string NombreRealArchivo { get; set; }
         public string FolderPath { get; set; }
+        public string TamanioArchivo { get; set; }
     }
 }

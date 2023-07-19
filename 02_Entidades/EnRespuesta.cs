@@ -12,5 +12,6 @@ namespace _02_Entidades
         public int TipoRespuesta { get; set; }
         public string Mensaje { get; set; }
         public string ValorDevolucion { get; set; }
+        public bool isLastChunk { get; set; }
     }
 }

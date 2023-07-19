@@ -903,8 +903,8 @@
           <Property Name="IDUSUARIO_UPD" Type="int" />
           <Property Name="FECHA_UPD" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.PerfilMenu' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PerfilMenu">
           <Key>
             <PropertyRef Name="IdPerfilMenu" />
@@ -1563,6 +1563,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="NombreArchivo" Type="varchar" MaxLength="250" />
           <Property Name="NombreRealArchivo" Type="varchar" MaxLength="250" />
           <Property Name="FolderPath" Type="varchar" MaxLength="4000" />
+          <Property Name="TamanioArchivo" Type="varchar" MaxLength="50" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario_add" Type="int" />
           <Property Name="Fecha_add" Type="datetime" />
@@ -1724,8 +1725,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.PerfilMenu' does not have
           <Property Name="IdUsuario_upd" Type="int" />
           <Property Name="Fecha_upd" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.Ubigeo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.Ubigeo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Ubigeo">
           <Key>
             <PropertyRef Name="idUbigeo" />
@@ -1788,8 +1789,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.Ubigeo' does not have a p
           <Property Name="IdUsuario_upd" Type="int" Nullable="false" />
           <Property Name="Fecha_upd" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="DesembolsoVSJustificado">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1826,8 +1827,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.DesembolsoVSJustificado' 
           <Property Name="AnioEjecucion" Type="int" />
           <Property Name="Grupo" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDepa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDepa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListDepa">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1843,8 +1844,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDepa' does not have a
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDist' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListDist' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListDist">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -1864,8 +1865,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListDist' does not have a
           <Property Name="TotalAutorizacion" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="TotalManifiesto" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoActividad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoActividad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListEstadoActividad">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1891,8 +1892,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoActividad' does
           <Property Name="fecha_ult_act" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="estado" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListEstadoPresupuesto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1915,8 +1916,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoPresupuesto' do
           <Property Name="Presupuesto" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Fecha Actualización Presupuesto" Type="varchar" MaxLength="19" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListEstadoProyecto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1954,8 +1955,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListEstadoProyecto' does 
           <Property Name="Fecha de Fin Real" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Fecha de Ultima Actualización" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresupuesto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListMontoProyectoVSPresupuesto">
           <Key>
             <PropertyRef Name="IdProyecto" />
@@ -1982,8 +1983,8 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListMontoProyectoVSPresup
           <Property Name="Porcentaje" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Correcto" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BD_NucleosEjecutores.dbo.ListProv' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ListProv">
           <Key>
             <PropertyRef Name="cod_depa" />
@@ -6849,6 +6850,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
           <Property Name="NombreArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="NombreRealArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="FolderPath" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="TamanioArchivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario_add" Type="Int32" />
           <Property Name="Fecha_add" Type="DateTime" Precision="3" />
@@ -8890,6 +8892,7 @@ warning 6002: The table/view 'BD_NucleosEjecutores.dbo.ListProv' does not have a
                 <ScalarProperty Name="Fecha_add" ColumnName="Fecha_add" />
                 <ScalarProperty Name="IdUsuario_add" ColumnName="IdUsuario_add" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="TamanioArchivo" ColumnName="TamanioArchivo" />
                 <ScalarProperty Name="FolderPath" ColumnName="FolderPath" />
                 <ScalarProperty Name="NombreRealArchivo" ColumnName="NombreRealArchivo" />
                 <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />

@@ -110,5 +110,13 @@ namespace _01_Aplicacion.Controllers
 
             return File(filePath, "application/octet-stream", nombre);
         }
+        [HttpGet]
+        public JsonResult ListSeguimientoDetalleArchivoId(int IdSeguimiento, int IdDetalleSeguimiento)
+        {
+            List<EnSeguimientoDetalleArchivo> result = new List<EnSeguimientoDetalleArchivo>();
+            string TipoSeguimiento = "Familias";
+            result = objFile.ListSeguimientoDetalleArchivoId(TipoSeguimiento, IdSeguimiento, IdDetalleSeguimiento);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -308,6 +308,9 @@ function LimpiarRegistro() {
     $("#txtNroMujeres").val("");
     $("#txtTotal").val("");
     $("#txtPorcentajeAsistencia").val("");
+    $("#txtFiles").val("");
+    $("#myDropzone").html('<div class="dz-message">Arrastra y suelta los archivos aquí o haz clic para seleccionarlos.<br /><i class="fa fa-cloud-upload f-30 m-t-5" aria-hidden="true"></i></div>');
+
 }
 
 function GuardarSeguimiento() {
@@ -473,6 +476,33 @@ function EditarActividad(Id) {
         $("#txtNroMujeres").val(data.NroMujeres);
         $("#txtTotal").val(data.Total);
         $("#txtPorcentajeAsistencia").val(data.PorcentageAsistencia * 100);
+
+        $.get("/Familias/ListSeguimientoDetalleArchivoId?IdSeguimiento=" + data.IdSeguimientoActividades+ "&IdDetalleSeguimiento="+ data.IdDetalleSeguimientoActividadesFamilias, function (archivo, status) {
+            var template = "";
+            var Files = "";
+            /*append html jquery eliminar archivo debe eliminar el id del array*/
+            for (var i = 0; i < archivo.length; i++) {             
+                template =template+'<div class="dz-preview dz-file-preview dz-processing dz-complete">'; 
+                template =template+'    <div class="dz-image"><img data-dz-thumbnail>';
+                template =template+'    </div> <div class="dz-details"> <div class="dz-size"><span data-dz-size=""><strong>'+convertSizeToReadable(archivo[i].TamanioArchivo)+'</strong></span></div>';
+                template =template+'    <div class="dz-filename"><span data-dz-name>'+archivo[i].NombreRealArchivo+'</span></div>'; 
+                template =template+'    </div> <div class="dz-progress"> <span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span> </div>'; 
+                template =template+'    <div class="dz-error-message"><span data-dz-errormessage=""></span></div>'; 
+                template =template+'    <div class="dz-success-mark"> <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>Check</title> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF"></path> </g> </svg> </div>'; 
+                template =template+'    <div class="dz-error-mark"> <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>Error</title> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475"> <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"></path> </g> </g> </svg> </div>'; 
+                template =template+'    <a class="dz-remove btn-danger btn btn-sm m-t-5" href="javascript:undefined;" data-dz-remove><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Eliminar</a>';
+                template = template + '    <a class="btn btn-sm btn-success m-t-5 f-14 text-white" onclick="Download(\'' + archivo[i].FolderPath + '\',\'' + archivo[i].NombreRealArchivo + '\')"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar</a>';
+                template = template + '</div>';
+
+                if (Files == "") {
+                    Files = archivo[i].IdSeguimientoDetalleArchivo;
+                } else {
+                    Files = Files + "|" + archivo[i].IdSeguimientoDetalleArchivo;
+                }
+            }
+            $("#txtFiles").val(Files);
+            $("#myDropzone").html(template);
+        });
     });
 }
 
@@ -659,147 +689,142 @@ function validarFecha(fecha) {
 
 Dropzone.autoDiscover = false;
 
-    // Configuración de Dropzone
-    $("#myDropzone").dropzone({
-        url: "/Familias/UploadAction",
-        paramName: "file",
-        maxFilesize: 50,
-        addRemoveLinks: true,
-        chunking: true,
-        chunkRetry: 3, // Número de intentos de carga para cada fragmento
-        chunkSize: 1024 * 1024, // Tamaño del fragmento (por ejemplo, 1 MB)
-        sending: function (file, xhr, formData) {
+// Configuración de Dropzone
+$("#myDropzone").dropzone({
+    url: "/Familias/UploadAction",
+    paramName: "file",
+    maxFilesize: 50,
+    addRemoveLinks: true,
+    chunking: true,
+    chunkRetry: 3, // Número de intentos de carga para cada fragmento
+    chunkSize: 1024 * 1024, // Tamaño del fragmento (por ejemplo, 1 MB)
+    sending: function (file, xhr, formData) {
 
-            if ($("#ddlEtapa").val() == "") {
-                this.removeFile(file);
-                MensajeAlerta('Seleccione la Etapa', 'ddlEtapa');
-                return false;
-            }
-            else if ($("#ddlMes").val() == "0") {
-                this.removeFile(file);
-                MensajeAlerta('Seleccione el Mes', 'ddlMes');
-                return false;
-            }
-            else if ($("#ddlActividad").val() == "0") {
-                this.removeFile(file);
-                MensajeAlerta('Seleccione la Actividad', 'ddlActividad');
-                return false;
-            }
-            else if (validarFecha($("#txtFecha").val()) == false) {
-                this.removeFile(file);
-                MensajeAlerta('Ingrese una fecha valida', 'txtFecha');
-                return false;
-            }
-            else if ($("#txtNroHombres").val() == "") {
-                this.removeFile(file);
-                MensajeAlerta('Ingrese el Nro. Hombres', 'txtNroHombres');
-                return false;
-            }
-            else if ($("#txtNroMujeres").val() == "") {
-                this.removeFile(file);
-                MensajeAlerta('Ingrese el Nro. Mujeres', 'txtNroMujeres');
-                return false;
-            }
-            else if ($("#txtTotal").val() == "") {
-                this.removeFile(file);
-                MensajeAlerta('Ingrese el Total', 'txtTotal');
-                return false;
-            }
-            else if ($("#txtPorcentajeAsistencia").val() == "") {
-                this.removeFile(file);
-                MensajeAlerta('Ingrese el Porcentaje Asistencia', 'txtPorcentajeAsistencia');
-                return false;
-            }
-            else {
+        if ($("#ddlEtapa").val() == "") {
+            this.removeFile(file);
+            MensajeAlerta('Seleccione la Etapa', 'ddlEtapa');
+            return false;
+        }
+        else if ($("#ddlMes").val() == "0") {
+            this.removeFile(file);
+            MensajeAlerta('Seleccione el Mes', 'ddlMes');
+            return false;
+        }
+        else if ($("#ddlActividad").val() == "0") {
+            this.removeFile(file);
+            MensajeAlerta('Seleccione la Actividad', 'ddlActividad');
+            return false;
+        }
+        else if (validarFecha($("#txtFecha").val()) == false) {
+            this.removeFile(file);
+            MensajeAlerta('Ingrese una fecha valida', 'txtFecha');
+            return false;
+        }
+        else if ($("#txtNroHombres").val() == "") {
+            this.removeFile(file);
+            MensajeAlerta('Ingrese el Nro. Hombres', 'txtNroHombres');
+            return false;
+        }
+        else if ($("#txtNroMujeres").val() == "") {
+            this.removeFile(file);
+            MensajeAlerta('Ingrese el Nro. Mujeres', 'txtNroMujeres');
+            return false;
+        }
+        else if ($("#txtTotal").val() == "") {
+            this.removeFile(file);
+            MensajeAlerta('Ingrese el Total', 'txtTotal');
+            return false;
+        }
+        else if ($("#txtPorcentajeAsistencia").val() == "") {
+            this.removeFile(file);
+            MensajeAlerta('Ingrese el Porcentaje Asistencia', 'txtPorcentajeAsistencia');
+            return false;
+        }
+        else {
 
-                var chunkIndex = file.upload.chunked == true ? file.upload.chunks.length : 1;
-                var totalChunks = file.upload.totalChunkCount;
-                var fileName = file.upload.filename;
-                var extension = file.name.split('.').pop();
+            var chunkIndex = file.upload.chunked == true ? file.upload.chunks.length : 1;
+            var totalChunks = file.upload.totalChunkCount;
+            var fileName = file.upload.filename;
+            var extension = file.name.split('.').pop();
 
-                // Agregar los parámetros al formulario de datos
-                formData.append("chunkName", file.upload.uuid);
-                formData.append("chunkIndex", chunkIndex);
-                formData.append("totalChunks", totalChunks);
-                formData.append("fileName", fileName);
-                formData.append("extension", extension);
-                formData.append("cui", $("#hdnCUI").val());
-            }
-        },
-        dictRemoveFile: "<i class='fa fa-trash-o' aria-hidden='true'></i>&nbsp;Eliminar",
-        thumbnailWidth: 100,
-        thumbnailHeight: 110,
-        success: function (file, e) {
-            // Agregar enlace de descarga archivo desde c# 
+            // Agregar los parámetros al formulario de datos
+            formData.append("chunkName", file.upload.uuid);
+            formData.append("chunkIndex", chunkIndex);
+            formData.append("totalChunks", totalChunks);
+            formData.append("fileName", fileName);
+            formData.append("extension", extension);
+            formData.append("cui", $("#hdnCUI").val());
+        }
+    },
+    dictRemoveFile: "<i class='fa fa-trash-o' aria-hidden='true'></i>&nbsp;Eliminar",
+    thumbnailWidth: 100,
+    thumbnailHeight: 110,
+    success: function (file, e) {
+        // Agregar enlace de descarga archivo desde c# 
+        if (e.Success == true) {
             var a = document.createElement('a');
             a.setAttribute('class', "btn btn-sm btn-success m-t-5 f-14 text-white");
-            a.setAttribute('onclick', "Download('" + e.Mensaje.split('|')[2] + "','" + e.Mensaje.split('|')[0] + "')");
+            a.setAttribute('onclick', "Download('" + e.Mensaje.split('|')[3] + "','" + e.Mensaje.split('|')[1] + "')");
             a.innerHTML = "<i class='fa fa-download' aria-hidden='true'></i>&nbsp;Descargar";
             file.previewTemplate.appendChild(a);
 
             var Files = $("#txtFiles").val();
             if (Files == "") {
-                $("#txtFiles").val(e.Mensaje);
+                $("#txtFiles").val(e.Mensaje.split('|')[0]);
             } else {
-                $("#txtFiles").val(Files + "*" + e.Mensaje);
+                $("#txtFiles").val(Files + "|" + e.Mensaje.split('|')[0]);
             }
-            
+        }
+    },
+    init: function () {
+        this.on("removedfile", handleFileRemoval);
+    }
+});
+
+function Download(filePath, nombre) {
+    var url = "/Familias/DownloadAction"; // URL de la acción con JsonResult
+    var parametros = {
+        filePath: filePath,
+        nombre: nombre
+    };
+
+    $.ajax({
+        url: url,
+        method: 'GET',
+        data: parametros,
+        xhrFields: {
+            responseType: 'arraybuffer' // Especifica que la respuesta será un arreglo de bytes
+        },
+        success: function (data) {
+            // Crear un objeto Blob a partir del arreglo de bytes
+            var blob = new Blob([data], { type: 'application/octet-stream' });
+
+            // Crear un enlace temporal y simular un clic para descargar el archivo
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = nombre;
+            link.click();
+
+            // Liberar recursos
+            window.URL.revokeObjectURL(link.href);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            // Manejar el error de la solicitud AJAX
+            console.log(xhr.responseText);
         }
     });
+}
 
-    function Download(filePath, nombre) {
-        var url = "/Familias/DownloadAction"; // URL de la acción con JsonResult
-        var parametros = {
-            filePath: filePath,
-            nombre: nombre
-        };
-
-        $.ajax({
-            url: url,
-            method: 'GET',
-            data: parametros,
-            xhrFields: {
-                responseType: 'arraybuffer' // Especifica que la respuesta será un arreglo de bytes
-            },
-            success: function (data) {
-                // Crear un objeto Blob a partir del arreglo de bytes
-                var blob = new Blob([data], { type: 'application/octet-stream' });
-
-                // Crear un enlace temporal y simular un clic para descargar el archivo
-                var link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = nombre;
-                link.click();
-
-                // Liberar recursos
-                window.URL.revokeObjectURL(link.href);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                // Manejar el error de la solicitud AJAX
-                console.log(xhr.responseText);
-            }
-        });
+function convertSizeToReadable(sizeInBytes) {
+    const units = ['bytes', 'KB', 'MB', 'GB', 'TB'];
+    let index = 0;
+    while (sizeInBytes >= 1024 && index < units.length - 1) {
+        sizeInBytes /= 1024;
+        index++;
     }
-
-//debugger;
-//var ext = file.name.split('.').pop();
-//if (ext == "pdf") {
-//    this.emit("thumbnail", file, "content/images/PDF.png");
-//} else if (ext.indexOf("doc") != -1 || ext.indexOf("docx") != -1) {
-
-//    file.previewElement.querySelector("[data-dz-thumbnail]").src = "content/images/DOC.png";
-//    file.previewElement.querySelector("[data-dz-thumbnail]").width = "100px";
-
-//} else if (ext.indexOf("xls") != -1 || ext.indexOf("xlsx") != -1) {
-//    this.emit("thumbnail", file, "content/images/XLSX.png");
-//} else if (ext.indexOf("rar") != -1) {
-//    this.emit("thumbnail", file, "content/images/rar.png");
-//} else if (ext.indexOf("zip") != -1) {
-//    this.emit("thumbnail", file, "content/images/zip.png");
-//} else if (ext.indexOf("ppt") != -1) {
-//    this.emit("thumbnail", file, "content/images/ppt.png");
-//} else if (ext.indexOf("jpg") != -1) {
-//    this.emit("thumbnail", file, "content/images/jpg.png");
-//} else if (ext.indexOf("png") != -1) {
-//    this.emit("thumbnail", file, "content/images/png.png");
-//}
+    return `${sizeInBytes.toFixed(1)} ${units[index]}`;
+}
+function handleFileRemoval(file) {
+    console.log('Archivo eliminado:', file.name);
+    // Agrega aquí tu lógica personalizada para manejar la eliminación del archivo
+}
