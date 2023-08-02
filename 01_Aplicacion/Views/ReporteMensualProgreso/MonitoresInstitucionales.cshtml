@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "MonitoresInstitucionales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12 col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-header-left">
+                <h4><i class="fa fa-users"></i>&nbsp; Registro de Atividades de los Monitores Institucionales</h4>
+            </div>
+            <div class="card-header-right" style="padding-right:20px;">
+                <span id="SpanFechaInicio" style="color: #8c8c8c;font-size: 18px;"></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th rowspan="2" style="vertical-align:middle; text-align:center">Nro.</th>
+                    <th rowspan="2" style="vertical-align:middle; text-align:center">Personal</th>
+                    <th colspan="2" style="vertical-align:middle; text-align:center">Familias</th>
+                    <th colspan="2" style="vertical-align:middle; text-align:center">Núcleos Ejecutores</th>
+                    <th colspan="2" style="vertical-align:middle; text-align:center">JASS</th>
+                    <th colspan="2" style="vertical-align:middle; text-align:center">ATM</th>
+                </tr>
+                <tr>
+                    <th style="text-align:center">Nro. Registros</th>
+                    <th style="text-align:center">Fecha Ult.<br />Actualización</th>
+                    <th style="text-align:center">Nro. Registros</th>
+                    <th style="text-align:center">Fecha Ult.<br />Actualización</th>
+                    <th style="text-align:center">Nro. Registros</th>
+                    <th style="text-align:center">Fecha Ult.<br />Actualización</th>
+                    <th style="text-align:center">Nro. Registros</th>
+                    <th style="text-align:center">Fecha Ult.<br />Actualización</th>
+                </tr>
+                @foreach (var i in ViewBag.ReporteMI)
+                {
+                    <tr>
+                        <td style="text-align:center">@i.Orden</td>
+                        <td>@i.Personal</td>
+                        <td style="text-align:center">@i.NroRegistrosFamilias</td>
+                        <td style="text-align:center">@i.FechaUltimaActualizacionFamilias</td>
+                        <td style="text-align:center">@i.NroRegistrosNE</td>
+                        <td style="text-align:center">@i.FechaUltimaActualizacionNE</td>
+                        <td style="text-align:center">@i.NroRegistrosJASS</td>
+                        <td style="text-align:center">@i.FechaUltimaActualizacionJASS</td>
+                        <td style="text-align:center">@i.NroRegistrosATM</td>
+                        <td style="text-align:center">@i.FechaUltimaActualizacionATM</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

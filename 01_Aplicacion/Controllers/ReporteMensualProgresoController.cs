@@ -136,5 +136,11 @@ namespace _01_Aplicacion.Controllers
             }
         }
 
+        public ActionResult MonitoresInstitucionales()
+        {
+            ViewBag.ReporteMI = objReporteMensualProgreso.RegistrosRealizadosPorActividad();
+            return View();
+        }
+
     }
 }

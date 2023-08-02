@@ -99,15 +99,12 @@ namespace _01_Aplicacion.Controllers
         [HttpPost]
         public JsonResult UploadAction(string chunkName, int chunkIndex, int totalChunks, string fileName, string extension, string cui)
         {
-
             EnRespuesta result = objFile.UploadSeguimiento(Request.Files[0], chunkName, chunkIndex, totalChunks, fileName, extension, cui, "Familias");
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DownloadAction(string filePath, string nombre)
         {
-            //EnRespuesta result = FileUploadUtility.DownloadAction(filePath, nombre);
-
             return File(filePath, "application/octet-stream", nombre);
         }
         [HttpGet]

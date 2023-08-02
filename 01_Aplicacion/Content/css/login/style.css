@@ -384,9 +384,9 @@ body {
 
 /*# sourceMappingURL=style.css.map */
 .img-paper {
-    background-image: url('../../Images/background.png') !important;
+    background-image: url('../../Images/background.jpg') !important;
     background-color: #fff;
-    background-repeat:round;
+    background-repeat:repeat;
 }
 .input-group-text {
     display: -webkit-box;

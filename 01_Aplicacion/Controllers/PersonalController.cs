@@ -139,25 +139,6 @@ namespace _01_Aplicacion.Controllers
 
             var Bit = pdf.GeneratePdf(ImagenPath, HeaderTex, MainText);
 
-            //// Convertir HTML a PDF
-            //var document = new Document(PageSize.A4, 50, 50, 30, 30);
-            //var memoryStream = new MemoryStream();
-            //var writer = PdfWriter.GetInstance(document, memoryStream);
-
-            //document.Open();
-
-            //// Agrega la imagen como cabecera
-            //var headerImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Content/Images/pnsr_logo_documento.png"));
-            //headerImage.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
-            //headerImage.ScaleToFit(300f, 80f);
-
-            //document.Add(headerImage);
-
-            //var xmlWorker = XMLWorkerHelper.GetInstance();
-            //xmlWorker.ParseXHtml(writer, document, new StringReader(html));
-
-            //document.Close();
-
             // Devolver archivo PDF como respuesta
             return File(Bit, "application/pdf", "CONTRATO " + data.NroContrato + ".pdf");
         }

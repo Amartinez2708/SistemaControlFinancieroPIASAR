@@ -204,13 +204,13 @@ namespace _04_Servicios
                         context.DetalleSeguimientoActividadesFamilias.Add(d);
                         context.SaveChanges();
 
-                        if (detalle.Archivos != "")
+                        if (String.IsNullOrEmpty(detalle.Archivos) == false)
                         {
-                            string[] Archivos = detalle.Archivos.Split('|');
+                            int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
 
-                            foreach (string Archivo in Archivos)
+                            foreach (int Archivo in Archivos)
                             {
-                                var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Convert.ToInt32(Archivo));
+                                var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
                                 if (objArchivo != null)
                                 {
                                     objArchivo.IdSeguimiento = n.IdSeguimientoActividades;
@@ -254,15 +254,13 @@ namespace _04_Servicios
                             context.DetalleSeguimientoActividadesFamilias.Add(d);
                             context.SaveChanges();
 
-                            if (detalle.Archivos != "")
+                            if (String.IsNullOrEmpty(detalle.Archivos) == false)
                             {
-                                string[] Archivos = detalle.Archivos.Split('|');
+                                int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
 
-                                foreach (string Archivo in Archivos)
+                                foreach (int Archivo in Archivos)
                                 {
-                                    int id = Convert.ToInt32(Archivo);
-
-                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == id);
+                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
                                     if (objArchivo != null)
                                     {
                                         objArchivo.IdSeguimiento = d.IdSeguimientoActividades;
@@ -272,6 +270,15 @@ namespace _04_Servicios
                                         context.SaveChanges();
                                     }
                                 }
+                            }
+
+                            var objSeg = context.SeguimientoActividadesFamilias.SingleOrDefault(x => x.IdSeguimientoActividades == detalle.IdSeguimientoActividades);
+                            if(objSeg != null)
+                            {
+                                objSeg.IdUsuario_upd= SecurityManager<EnUsuario>.User.IdUsuario;
+                                objSeg.Fecha_upd = DateTime.Now;
+
+                                context.SaveChanges();
                             }
 
                             dbtran.Commit();
@@ -301,34 +308,42 @@ namespace _04_Servicios
                                 objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                                 objDetalle.Fecha_upd = DateTime.Now;
 
+                                context.SaveChanges();
+
+                                //buscar todos los archivos asignados al seguimiento
                                 var objArchivo = context.SeguimientoDetalleArchivo.Where(x => x.IdSeguimiento == objDetalle.IdSeguimientoActividades && x.IdDetalleSeguimiento == objDetalle.IdDetalleSeguimientoActividadesFamilias).ToList();
                                 if (objArchivo.Count() > 0)
                                 {
-                                    objArchivo.ForEach(a => a.Activo = false);
+                                    objArchivo.ForEach(a => a.Activo = false);//poner todos los archivos en false
                                     context.SaveChanges();
+                                }
 
-                                    if (detalle.Archivos != "")
+                                if (String.IsNullOrEmpty(detalle.Archivos)== false)
+                                {
+                                    int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                                    foreach (int Archivo in Archivos)
                                     {
-                                        string[] Archivos = detalle.Archivos.Split('|');
-
-                                        foreach (string Archivo in Archivos)
+                                        var file = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                        if (file != null)
                                         {
-                                            int id = Convert.ToInt32(Archivo);
+                                            file.IdSeguimiento = objDetalle.IdSeguimientoActividades;
+                                            file.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesFamilias;
+                                            file.Activo = true;
 
-                                            var file = objArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == id);
-                                            if (file != null)
-                                            {
-                                                file.IdSeguimiento = objDetalle.IdSeguimientoActividades;
-                                                file.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesFamilias;
-                                                file.Activo = true;
-
-                                                context.SaveChanges();
-                                            }
+                                            context.SaveChanges();
                                         }
                                     }
-
                                 }
-                                context.SaveChanges();
+
+                                var objSeg = context.SeguimientoActividadesFamilias.SingleOrDefault(x => x.IdSeguimientoActividades == detalle.IdSeguimientoActividades);
+                                if (objSeg != null)
+                                {
+                                    objSeg.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                                    objSeg.Fecha_upd = DateTime.Now;
+
+                                    context.SaveChanges();
+                                }
 
                                 dbtran.Commit();
                                 //dbtran.Rollback();

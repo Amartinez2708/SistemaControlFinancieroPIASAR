@@ -20,6 +20,25 @@ namespace _01_Aplicacion.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+
+            ViewBag.UsuarioNombre = SecurityManager<EnUsuario>.User.NombreCompleto;
+            ViewBag.PerfilUsuario = SecurityManager<EnUsuario>.User.Perfil.ToString();
+            ViewBag.IdPerfil = SecurityManager<EnUsuario>.User.IdPerfil;
+
+            if (SecurityManager<EnUsuario>.User.IdPerfil == 2)
+            {
+                ViewBag.IndicadoresInicio = objInicio.Indicadores(SecurityManager<EnUsuario>.User.IdPerfil);
+                ViewBag.ActividadReciente = objInicio.ActividadReciente().Take(8).ToList();
+            }
+
+            if (SecurityManager<EnUsuario>.User.Sexo.ToString() == "M")
+            {
+                ViewBag.ImgenUsuario = "/Content/Images/m.png";
+            }
+            else
+            {
+                ViewBag.ImgenUsuario = "/Content/Images/f.png";
+            }
             return View();
         }
         public ActionResult UserInfo()
@@ -54,6 +73,13 @@ namespace _01_Aplicacion.Controllers
             ViewBag.MenuSistema = objEnMenuSistema;
 
             return PartialView("SideMenu");
+        }
+        [HttpGet]
+        public JsonResult GraficoAreaIntervencion()
+        {
+            List<EnIndicadoresInicio> result = new List<EnIndicadoresInicio>();
+            result = objInicio.AreaIntervencion(SecurityManager<EnUsuario>.User.IdPerfil, SecurityManager<EnUsuario>.User.IdPersonal);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace _01_Aplicacion.Controllers
     public class ATMController : Controller
     {
         SrvATM obj = new SrvATM();
+        SrvSeguimientoDetalleArchivo objFile = new SrvSeguimientoDetalleArchivo();
         // GET: ATM
         public ActionResult Index()
         {
@@ -89,6 +90,25 @@ namespace _01_Aplicacion.Controllers
         {
             EnRespuesta msj = obj.EliminarSeguimiento(Id);
             return Json(msj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult UploadAction(string chunkName, int chunkIndex, int totalChunks, string fileName, string extension, string cui)
+        {
+            EnRespuesta result = objFile.UploadSeguimiento(Request.Files[0], chunkName, chunkIndex, totalChunks, fileName, extension, cui, "ATM");
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DownloadAction(string filePath, string nombre)
+        {
+            return File(filePath, "application/octet-stream", nombre);
+        }
+        [HttpGet]
+        public JsonResult ListSeguimientoDetalleArchivoId(int IdSeguimiento, int IdDetalleSeguimiento)
+        {
+            List<EnSeguimientoDetalleArchivo> result = new List<EnSeguimientoDetalleArchivo>();
+            string TipoSeguimiento = "ATM";
+            result = objFile.ListSeguimientoDetalleArchivoId(TipoSeguimiento, IdSeguimiento, IdDetalleSeguimiento);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

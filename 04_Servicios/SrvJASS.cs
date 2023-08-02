@@ -205,6 +205,24 @@ namespace _04_Servicios
                         context.DetalleSeguimientoActividadesJASS.Add(d);
                         context.SaveChanges();
 
+                        if (String.IsNullOrEmpty(detalle.Archivos) == false)
+                        {
+                            int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                            foreach (int Archivo in Archivos)
+                            {
+                                var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                if (objArchivo != null)
+                                {
+                                    objArchivo.IdSeguimiento = n.IdSeguimientoActividadesJASS;
+                                    objArchivo.IdDetalleSeguimiento = d.IdDetalleSeguimientoActividadesJASS;
+                                    objArchivo.Activo = true;
+
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+
                         dbtran.Commit();
                         //dbtran.Rollback();
                         respuesta.TipoRespuesta = 1;
@@ -240,6 +258,33 @@ namespace _04_Servicios
                             context.DetalleSeguimientoActividadesJASS.Add(d);
                             context.SaveChanges();
 
+                            if (String.IsNullOrEmpty(detalle.Archivos) == false)
+                            {
+                                int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                                foreach (int Archivo in Archivos)
+                                {
+                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                    if (objArchivo != null)
+                                    {
+                                        objArchivo.IdSeguimiento = d.IdSeguimientoActividadesJASS;
+                                        objArchivo.IdDetalleSeguimiento = d.IdDetalleSeguimientoActividadesJASS;
+                                        objArchivo.Activo = true;
+
+                                        context.SaveChanges();
+                                    }
+                                }
+                            }
+
+                            var objSeg = context.SeguimientoActividadesJASS.SingleOrDefault(x => x.IdSeguimientoActividadesJASS == detalle.IdSeguimientoActividadesJASS);
+                            if (objSeg != null)
+                            {
+                                objSeg.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                                objSeg.Fecha_upd = DateTime.Now;
+
+                                context.SaveChanges();
+                            }
+
                             dbtran.Commit();
                             //dbtran.Rollback();
                             respuesta.TipoRespuesta = 1;
@@ -271,6 +316,41 @@ namespace _04_Servicios
                                 objDetalle.Fecha_upd = DateTime.Now;
 
                                 context.SaveChanges();
+
+                                //buscar todos los archivos asignados al seguimiento
+                                var objArchivo = context.SeguimientoDetalleArchivo.Where(x => x.IdSeguimiento == objDetalle.IdSeguimientoActividadesJASS && x.IdDetalleSeguimiento == objDetalle.IdDetalleSeguimientoActividadesJASS).ToList();
+                                if (objArchivo.Count() > 0)
+                                {
+                                    objArchivo.ForEach(a => a.Activo = false);//poner todos los archivos en false
+                                    context.SaveChanges();
+                                }
+
+                                if (String.IsNullOrEmpty(detalle.Archivos) == false)
+                                {
+                                    int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                                    foreach (int Archivo in Archivos)
+                                    {
+                                        var file = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                        if (file != null)
+                                        {
+                                            file.IdSeguimiento = objDetalle.IdSeguimientoActividadesJASS;
+                                            file.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesJASS;
+                                            file.Activo = true;
+
+                                            context.SaveChanges();
+                                        }
+                                    }
+                                }
+
+                                var objSeg = context.SeguimientoActividadesJASS.SingleOrDefault(x => x.IdSeguimientoActividadesJASS == detalle.IdSeguimientoActividadesJASS);
+                                if (objSeg != null)
+                                {
+                                    objSeg.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                                    objSeg.Fecha_upd = DateTime.Now;
+
+                                    context.SaveChanges();
+                                }
 
                                 dbtran.Commit();
                                 //dbtran.Rollback();

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnActividadReciente.cs" />
     <Compile Include="EnAlertaRegistro.cs" />
     <Compile Include="EnAutorizacionVSManifiesto.cs" />
     <Compile Include="EnAutorizacion_Gasto.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="EnHistoricoMonitoreo.cs" />
     <Compile Include="EnIndicador.cs" />
     <Compile Include="EnIndicadores.cs" />
+    <Compile Include="EnIndicadoresInicio.cs" />
     <Compile Include="EnListDepa.cs" />
     <Compile Include="EnListDist.cs" />
     <Compile Include="EnListEstadoActividad.cs" />

@@ -187,6 +187,24 @@ namespace _04_Servicios
                         context.DetalleSeguimientoActividadesATM.Add(d);
                         context.SaveChanges();
 
+                        if (String.IsNullOrEmpty(detalle.Archivos) == false)
+                        {
+                            int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                            foreach (int Archivo in Archivos)
+                            {
+                                var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                if (objArchivo != null)
+                                {
+                                    objArchivo.IdSeguimiento = n.IdSeguimientoActividadesATM;
+                                    objArchivo.IdDetalleSeguimiento = d.IdDetalleSeguimientoActividadesATM;
+                                    objArchivo.Activo = true;
+
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+
                         dbtran.Commit();
                         //dbtran.Rollback();
                         respuesta.TipoRespuesta = 1;
@@ -219,6 +237,33 @@ namespace _04_Servicios
                             context.DetalleSeguimientoActividadesATM.Add(d);
                             context.SaveChanges();
 
+                            if (String.IsNullOrEmpty(detalle.Archivos) == false)
+                            {
+                                int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                                foreach (int Archivo in Archivos)
+                                {
+                                    var objArchivo = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                    if (objArchivo != null)
+                                    {
+                                        objArchivo.IdSeguimiento = d.IdSeguimientoActividadesATM;
+                                        objArchivo.IdDetalleSeguimiento = d.IdDetalleSeguimientoActividadesATM;
+                                        objArchivo.Activo = true;
+
+                                        context.SaveChanges();
+                                    }
+                                }
+                            }
+
+                            var objSeg = context.SeguimientoActividadesATM.SingleOrDefault(x => x.IdSeguimientoActividadesATM == detalle.IdSeguimientoActividadesATM);
+                            if (objSeg != null)
+                            {
+                                objSeg.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                                objSeg.Fecha_upd = DateTime.Now;
+
+                                context.SaveChanges();
+                            }
+
                             dbtran.Commit();
                             //dbtran.Rollback();
                             respuesta.TipoRespuesta = 1;
@@ -241,11 +286,47 @@ namespace _04_Servicios
                                 objDetalle.NroHombres = detalle.NroHombres;
                                 objDetalle.NroMujeres = detalle.NroMujeres;
                                 objDetalle.Total = detalle.Total;
+                                objDetalle.Comentarios = detalle.Comentarios;
                                 objDetalle.Activo = true;
                                 objDetalle.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
                                 objDetalle.Fecha_upd = DateTime.Now;
 
                                 context.SaveChanges();
+
+                                //buscar todos los archivos asignados al seguimiento
+                                var objArchivo = context.SeguimientoDetalleArchivo.Where(x => x.IdSeguimiento == objDetalle.IdSeguimientoActividadesATM && x.IdDetalleSeguimiento == objDetalle.IdDetalleSeguimientoActividadesATM).ToList();
+                                if (objArchivo.Count() > 0)
+                                {
+                                    objArchivo.ForEach(a => a.Activo = false);//poner todos los archivos en false
+                                    context.SaveChanges();
+                                }
+
+                                if (String.IsNullOrEmpty(detalle.Archivos) == false)
+                                {
+                                    int[] Archivos = Array.ConvertAll(detalle.Archivos.Split(','), s => int.Parse(s));
+
+                                    foreach (int Archivo in Archivos)
+                                    {
+                                        var file = context.SeguimientoDetalleArchivo.SingleOrDefault(x => x.IdSeguimientoDetalleArchivo == Archivo);
+                                        if (file != null)
+                                        {
+                                            file.IdSeguimiento = objDetalle.IdSeguimientoActividadesATM;
+                                            file.IdDetalleSeguimiento = objDetalle.IdDetalleSeguimientoActividadesATM;
+                                            file.Activo = true;
+
+                                            context.SaveChanges();
+                                        }
+                                    }
+                                }
+
+                                var objSeg = context.SeguimientoActividadesATM.SingleOrDefault(x => x.IdSeguimientoActividadesATM == detalle.IdSeguimientoActividadesATM);
+                                if (objSeg != null)
+                                {
+                                    objSeg.IdUsuario_upd = SecurityManager<EnUsuario>.User.IdUsuario;
+                                    objSeg.Fecha_upd = DateTime.Now;
+
+                                    context.SaveChanges();
+                                }
 
                                 dbtran.Commit();
                                 //dbtran.Rollback();

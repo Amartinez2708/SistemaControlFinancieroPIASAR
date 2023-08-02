@@ -672,6 +672,7 @@
     <Content Include="Content\Images\header.jpg" />
     <Content Include="Content\Images\hogar.png" />
     <Content Include="Content\Images\HTML.png" />
+    <Content Include="Content\Images\img-1.png" />
     <Content Include="Content\Images\impresora.png" />
     <Content Include="Content\Images\INAUGURACIONES.jpg" />
     <Content Include="Content\Images\JPG.png" />
@@ -687,6 +688,7 @@
     <Content Include="Content\Images\negado.png" />
     <Content Include="Content\Images\obragua.png" />
     <Content Include="Content\Images\pages.png" />
+    <Content Include="Content\Images\pc.png" />
     <Content Include="Content\Images\PDF.png" />
     <Content Include="Content\Images\pendienteautorizacion.png" />
     <Content Include="Content\Images\pendienterendicion.png" />
@@ -701,6 +703,10 @@
     <Content Include="Content\Images\presupuesto.png" />
     <Content Include="Content\Images\proceso-de-trabajo.png" />
     <Content Include="Content\Images\product-management.png" />
+    <Content Include="Content\Images\profile-img-2.png" />
+    <Content Include="Content\Images\profile-img-3.png" />
+    <Content Include="Content\Images\profile-img-4.png" />
+    <Content Include="Content\Images\profile-img.png" />
     <Content Include="Content\Images\RAR.png" />
     <Content Include="Content\Images\rechazado.png" />
     <Content Include="Content\Images\Regiones\00.jpg" />
@@ -743,6 +749,7 @@
     <Content Include="Content\js\amcharts\charts.js" />
     <Content Include="Content\js\amcharts\core.js" />
     <Content Include="Content\js\amcharts\maps.js" />
+    <Content Include="Content\js\amcharts\peruHigh.js" />
     <Content Include="Content\js\amcharts\themes\animated.js" />
     <Content Include="Content\js\AutoNumeric\autoNumeric.js" />
     <Content Include="Content\js\AutoNumeric\autoNumeric.min.js" />
@@ -811,6 +818,7 @@
     <Content Include="Content\js\jsFamilias.js" />
     <Content Include="Content\js\jsGestionAutorizacionRendicion.js" />
     <Content Include="Content\js\jsGestionComponente.js" />
+    <Content Include="Content\js\jsInicio.js" />
     <Content Include="Content\js\jsJASS.js" />
     <Content Include="Content\js\jsJustificacionGastos.js" />
     <Content Include="Content\js\jsLogin.js" />
@@ -1076,6 +1084,7 @@
     <Content Include="Views\MatrizResultados\ReportesActividadesJASS.cshtml" />
     <Content Include="Views\MatrizResultados\ReportesActividadesATM.cshtml" />
     <Content Include="Views\Personal\_ImprimirContrato.cshtml" />
+    <Content Include="Views\ReporteMensualProgreso\MonitoresInstitucionales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\02_Entidades\02_Entidades.csproj">

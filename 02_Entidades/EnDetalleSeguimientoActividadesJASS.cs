@@ -22,5 +22,6 @@ namespace _02_Entidades
         public string Comentarios { get; set; }
         public string Actividades { get; set; }
         public string FechaString { get; set; }
+        public string Archivos { get; set; }
     }
 }

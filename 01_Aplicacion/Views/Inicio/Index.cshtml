@@ -4,4 +4,295 @@
     Layout = "~/Views/Shared/_PrincipalMenu.cshtml";
 }
 
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 p-30">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                            <img src="@ViewBag.ImgenUsuario" alt="" class="avatar-md rounded-circle img-thumbnail">
+                        </div>
+                        <div class="flex-grow-1 align-self-center">
+                            <div class="text-primary">
+                                <p class="mb-2">Bienvenido al Sistema de Control Financiero</p>
+                                <h5 class="mb-1">@ViewBag.UsuarioNombre</h5>
+                                <p class="mb-0">@ViewBag.PerfilUsuario</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-lg-4 col-sm-12 align-self-center">
+                    @if (ViewBag.IdPerfil == 2)//Monitor Social Institucional
+                    {
+                        <div class="text-lg-center mt-4 mt-lg-0">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="text-center">
+                                        <p class="text-muted mb-2">Nro. Total de Proyectos</p>
+                                        <h5 class="mb-0">@ViewBag.IndicadoresInicio.NroProyectos</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="text-center">
+                                        <p class="text-muted mb-2">Mis Proyectos Asignados</p>
+                                        <h5 class="mb-0">@ViewBag.IndicadoresInicio.NroProyectosAsignados</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 d-none">
+                                    <div class="text-center">
+                                        <p class="text-muted mb-2">Mis Registros Realizados</p>
+                                        <h5 class="mb-0">18</h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-lg-4 col-sm-4 align-self-center">
+                    <div class="text-right">
+                        <img src="~/Content/Images/profile-img.png" alt="" class="img-fluid-profile" style="max-width: 350px;">
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.IdPerfil == 2)//Monitor Social Institucional
+{
+    <div class="col-md-6 col-lg-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="fw-medium">Familias</p>
+                        <h4 class="mb-0">@ViewBag.IndicadoresInicio.NroActividadesFamilias</h4>
+                        <p class="text-muted fw-medium">Actividades Registradas</p>
+                    </div>
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                            <span class="avatar-title">
+                                <i class="fa fa-users f-24"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="fw-medium">Núcleos Ejecutores</p>
+                        <h4 class="mb-0">@ViewBag.IndicadoresInicio.NroActividadesNE</h4>
+                        <p class="text-muted fw-medium">Actividades Registradas</p>
+                    </div>
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                            <span class="avatar-title">
+                                <i class="fa fa-universal-access f-24"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="fw-medium">JASS</p>
+                        <h4 class="mb-0">@ViewBag.IndicadoresInicio.NroActividadesJASS</h4>
+                        <p class="text-muted fw-medium">Actividades Registradas</p>
+                    </div>
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                            <span class="avatar-title">
+                                <i class="fa fa-suitcase f-24"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="fw-medium">ATM</p>
+                        <h4 class="mb-0">@ViewBag.IndicadoresInicio.NroActividadesATM</h4>
+                        <p class="text-muted fw-medium">Actividades Registradas</p>
+                    </div>
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                            <span class="avatar-title">
+                                <i class="fa fa-university f-24"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title mb-4">Mis Regiones de Intervención</h6>
+                <div id="chartdiv" style="width: 100%; height: 489px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="card-header text-dark">
+                <h6>
+                    Mis Registros de Seguimiento
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="mb-4">
+                        <img src="~/Content/Images/profile-img-3.png" width="200"/>
+                    </div>
+                    <h3>@ViewBag.IndicadoresInicio.NroRegistroPrincipal</h3>
+                    <p>@ViewBag.IndicadoresInicio.Principal</p>
+                </div>
+                <div class="table-responsive mt-4">
+                    <table class="table align-middle table-nowrap">
+                        <tbody>
+                            <tr>
+                                <td style="width: 30%">
+                                    <p class="mb-0">Familias</p>
+                                </td>
+                                <td style="width: 25%">
+                                    <h5 class="mb-0">@ViewBag.IndicadoresInicio.NroRegistroFamilias</h5>
+                                </td>
+                                <td>
+                                    <div class="progress bg-transparent progress-sm">
+                                        <div class="progress-bar bg-primary rounded" role="progressbar" style="width:@ViewBag.IndicadoresInicio.PRFamilia%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="mb-0">Nucleos Ejecutores</p>
+                                </td>
+                                <td>
+                                    <h5 class="mb-0">@ViewBag.IndicadoresInicio.NroRegistroNE</h5>
+                                </td>
+                                <td>
+                                    <div class="progress bg-transparent progress-sm">
+                                        <div class="progress-bar bg-success rounded" role="progressbar" style="width: @ViewBag.IndicadoresInicio.PRNE%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="mb-0">JASS</p>
+                                </td>
+                                <td>
+                                    <h5 class="mb-0">@ViewBag.IndicadoresInicio.NroRegistroJASS</h5>
+                                </td>
+                                <td>
+                                    <div class="progress bg-transparent progress-sm">
+                                        <div class="progress-bar bg-warning rounded" role="progressbar" style="width: @ViewBag.IndicadoresInicio.PRJASS%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="mb-0">ATM</p>
+                                </td>
+                                <td>
+                                    <h5 class="mb-0">@ViewBag.IndicadoresInicio.NroRegistroATM</h5>
+                                </td>
+                                <td>
+                                    <div class="progress bg-transparent progress-sm">
+                                        <div class="progress-bar bg-danger rounded" role="progressbar" style="width: @ViewBag.IndicadoresInicio.PRATM%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title mb-4">Mi Actividad Reciente</h6>
+                <ul class="verti-timeline list-unstyled">
+                    @{
+                        if (((System.Collections.Generic.List<_02_Entidades.EnActividadReciente>)ViewBag.ActividadReciente).Count > 0)
+                        {
+                            foreach (var item in ViewBag.ActividadReciente)
+                            {
+                                <li class="event-list">
+                                    <div class="d-flex bg-light mb-3 rounded">
+                                        <div class="flex-shrink-0 me-3">
+                                            <h5 class="f-14">
+                                                <i class="fa fa-clock-o f-16"></i>&nbsp; @Convert.ToDateTime(item.Fecha_add).ToString("dd MMM yyyy")
+                                                <i class="fa fa-arrow-right f-12 text-primary align-middle ms-2"></i>
+                                            </h5>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                Registro de Actividad en @item.Tipo
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="event-list">
+                                <div class="d-flex bg-light mb-3 rounded">
+                                    <div class="flex-shrink-0 me-3">
+                                        <h5 class="f-14">
+                                            <i class="fa fa-clock-o f-16"></i>&nbsp; -
+                                            <i class="fa fa-arrow-right f-12 text-primary align-middle ms-2"></i>
+                                        </h5>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            Sin Actividad Reciente
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    } 
+                </ul>
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary waves-effect waves-light btn-sm">Ver mas&nbsp;<i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+}
+
+
+@section _ScriptCode {
+    <script src="~/Content/js/jsInicio.js"></script>
+}

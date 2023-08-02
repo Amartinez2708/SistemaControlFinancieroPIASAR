@@ -221,5 +221,40 @@ namespace _04_Servicios
 
             return result;
         }
+
+        public List<EnIndicadoresInicio> RegistrosRealizadosPorActividad()
+        {
+            List<EnIndicadoresInicio> result = new List<EnIndicadoresInicio>();
+
+            var objUsuario = context.Usuario.Where(x => x.Persona.IdCargo == 2 && x.Activo == true).ToList();
+            if(objUsuario.Count() > 0 && objUsuario != null)
+            {
+                var n = 1;
+                foreach (var item in objUsuario)
+                {
+                    var fechainicio = Convert.ToDateTime("2023-07-21");
+                    var Familias = context.DetalleSeguimientoActividadesFamilias.Where(x => x.IdUsuario_add == item.IdUsuario && x.Fecha_add >= fechainicio && x.Activo==true);
+                    var NE = context.DetalleSeguimientoActividadesNE.Where(x => x.IdUsuario_add == item.IdUsuario && x.Fecha_add >= fechainicio && x.Activo == true);
+                    var JASS = context.DetalleSeguimientoActividadesJASS.Where(x => x.IdUsuario_add == item.IdUsuario && x.Fecha_add >= fechainicio && x.Activo == true);
+                    var ATM = context.DetalleSeguimientoActividadesATM.Where(x => x.IdUsuario_add == item.IdUsuario && x.Fecha_add >= fechainicio && x.Activo == true);
+
+                    EnIndicadoresInicio i = new EnIndicadoresInicio();
+                    i.Orden = n;
+                    i.Personal = item.Persona.Nombres + " " + item.Persona.ApePaterno + " " + item.Persona.ApeMaterno;
+                    i.NroRegistrosFamilias = Familias.Count();
+                    i.FechaUltimaActualizacionFamilias = Familias.Count() == 0?"-":Convert.ToDateTime(Familias.OrderByDescending(x => x.Fecha_add).FirstOrDefault().Fecha_add).ToString("dd/MM/yyyy HH:mm:ss");
+                    i.NroRegistrosNE = NE.Count();
+                    i.FechaUltimaActualizacionNE = NE.Count() == 0 ? "-" : Convert.ToDateTime(NE.OrderByDescending(x => x.Fecha_add).FirstOrDefault().Fecha_add).ToString("dd/MM/yyyy HH:mm:ss");
+                    i.NroRegistrosJASS = JASS.Count();
+                    i.FechaUltimaActualizacionJASS = JASS.Count() == 0 ? "-" : Convert.ToDateTime(JASS.OrderByDescending(x => x.Fecha_add).FirstOrDefault().Fecha_add).ToString("dd/MM/yyyy HH:mm:ss");
+                    i.NroRegistrosATM = ATM.Count();
+                    i.FechaUltimaActualizacionATM = ATM.Count() == 0 ? "-" : Convert.ToDateTime(ATM.OrderByDescending(x => x.Fecha_add).FirstOrDefault().Fecha_add).ToString("dd/MM/yyyy HH:mm:ss");
+                    result.Add(i);
+                    n++;
+                }
+            }
+
+            return result;
+        }
     }
 }
